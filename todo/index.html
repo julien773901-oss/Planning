@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="To-do">
 <meta name="theme-color" content="#F4F7FB">
-<title>To-do de Marlène</title>
+<title>To-do d'Héloïse</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" href="icon-192.png">
@@ -197,7 +197,7 @@ function render(){
   const totToday=doneToday+open.filter(t=>t.dl&&diff(t.dl)<=0).length;
   const pct=totToday?Math.round(doneToday/totToday*100):(open.length?0:100);
   const C=2*Math.PI*34;
-  let h='<section class="hero"><div><p class="hello">'+hello()+' Marlène</p><div class="date">'+fmt(today())+'</div>'+
+  let h='<section class="hero"><div><p class="hello">'+hello()+' Héloïse</p><div class="date">'+fmt(today())+'</div>'+
     '<div class="stats"><span><b>'+open.length+'</b> à faire</span><span'+(imp.length?' class="hot"':'')+'>★ <b>'+imp.length+'</b> importante'+(imp.length>1?"s":"")+'</span>'+
     (tod?'<span><b>'+tod+'</b> pour aujourd\'hui</span>':'')+(late?'<span class="hot">⏰ <b>'+late+'</b> en retard</span>':'')+'</div></div>'+
     '<div class="ring" aria-label="'+pct+' % de la journée faite"><svg width="84" height="84" viewBox="0 0 84 84"><circle cx="42" cy="42" r="34" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="9"/>'+
