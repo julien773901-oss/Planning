@@ -1,0 +1,1316 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Logistique et transport</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..900&family=Public+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap">
+<style>
+/* Layout : une colonne de lecture (~72ch) + sommaire collant ; univers « signalisation routière » : jaune balisage, asphalte, bandes de chantier pour les encadrés clés */
+:root{
+  --bg:#fdf9ec; --paper:#ffffff; --ink:#2a2312; --muted:#6a5d3b;
+  --sun:#f4c20d; --sun-deep:#8a5a00; --cream:#fff3c4; --cream-2:#f3d97a; --line:#eadcae;
+  --asphalt:#34495a; --ok:#1f8a5b; --ok-bg:#e3f5ec; --ko:#c0392b; --ko-bg:#fde6e3;
+  --f-display:"Archivo", "Arial Narrow", system-ui, sans-serif;
+  --f-body:"Public Sans", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#16130a; --paper:#211c0f; --ink:#f4eddb; --muted:#bdb08c;
+  --sun:#f4c20d; --sun-deep:#ffd451; --cream:#2f2812; --cream-2:#4c4016; --line:#3b3219;
+  --asphalt:#9cc0d6; --ok:#5fd39b; --ok-bg:#163327; --ko:#ff8b7d; --ko-bg:#3a1a17; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#16130a; --paper:#211c0f; --ink:#f4eddb; --muted:#bdb08c;
+  --sun:#f4c20d; --sun-deep:#ffd451; --cream:#2f2812; --cream-2:#4c4016; --line:#3b3219;
+  --asphalt:#9cc0d6; --ok:#5fd39b; --ok-bg:#163327; --ko:#ff8b7d; --ko-bg:#3a1a17; color-scheme:dark }
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.65;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;padding-block:32px 80px}
+@media (max-width:900px){.wrap{grid-template-columns:minmax(0,1fr);gap:0}.toc{display:none}}
+main{min-width:0;max-width:74ch}
+h1,h2,h3,h4{font-family:var(--f-display);text-wrap:balance;line-height:1.12;color:var(--ink)}
+h1{font-size:clamp(2.3rem,6vw,3.8rem);font-weight:900;font-stretch:118%;margin:0 0 .3em;letter-spacing:-.01em}
+h1 em{font-style:normal;background:linear-gradient(transparent 58%,var(--sun) 58%,var(--sun) 92%,transparent 92%);padding:0 .08em}
+h2{font-size:clamp(1.6rem,3.6vw,2.25rem);font-weight:850;font-stretch:112%;margin:0 0 .4em}
+h3{font-size:1.3rem;font-weight:750;margin:2em 0 .5em;color:var(--sun-deep)}
+h4{font-size:1.05rem;margin:1.4em 0 .3em}
+p{margin:.6em 0}
+a{color:var(--sun-deep)}
+strong{color:var(--ink);font-weight:700}
+.eyebrow{font-family:var(--f-display);text-transform:uppercase;letter-spacing:.12em;font-size:.78rem;font-weight:800;color:var(--sun-deep)}
+.lede{font-size:1.15rem;color:var(--muted)}
+.hl{background:var(--cream);padding:0 .2em;border-radius:3px}
+
+.toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 24px);align-self:start;font-size:.92rem;max-height:calc(100vh - 48px);overflow-y:auto}
+.toc ol{list-style:none;padding:0;margin:.6em 0 0;display:grid;gap:2px}
+.toc a{display:block;padding:6px 10px;border-radius:8px;text-decoration:none;color:var(--muted)}
+.toc a:hover,.toc a:focus-visible{background:var(--cream);color:var(--ink)}
+
+.hero{padding-block:8px 28px;margin-bottom:24px;position:relative}
+.hero::after{content:"";display:block;height:10px;margin-top:24px;border-radius:3px;
+  background:repeating-linear-gradient(-45deg,var(--sun) 0 18px,var(--ink) 18px 36px)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.chip{background:var(--cream);color:var(--sun-deep);border:1px solid var(--cream-2);border-radius:999px;padding:4px 12px;font-size:.85rem;font-weight:600}
+
+section.part{padding-top:40px;margin-top:40px;border-top:2px solid var(--line)}
+.part-head{display:flex;gap:16px;align-items:flex-start;margin-bottom:8px}
+.part-num{font-family:var(--f-display);font-weight:900;font-stretch:125%;font-size:3.1rem;line-height:1;color:var(--ink);background:var(--sun);border-radius:10px;padding:4px 12px;flex:none}
+:root[data-theme="dark"] .part-num{color:#16130a}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .part-num{color:#16130a}}
+
+.box{border-radius:14px;padding:14px 18px;margin:16px 0;border:1px solid var(--line);background:var(--paper)}
+.box > :first-child{margin-top:0}.box > :last-child{margin-bottom:0}
+.box .tag{display:inline-block;font-family:var(--f-display);font-weight:800;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;padding:2px 8px;border-radius:6px;margin-bottom:6px}
+.def{background:var(--cream);border-color:var(--cream-2)}
+.def .tag{background:var(--sun);color:#2a2312}
+.ex{border-left:6px solid var(--asphalt)}
+.ex .tag{background:var(--asphalt);color:var(--paper)}
+.trap{border:1.5px dashed var(--ko)}
+.trap .tag{background:transparent;color:var(--ko);border:1.5px solid var(--ko)}
+.key{background:var(--paper);border:3px solid var(--sun);position:relative;padding-top:22px}
+.key::before{content:"";position:absolute;inset:0 0 auto 0;height:8px;border-radius:10px 10px 0 0;background:repeating-linear-gradient(-45deg,var(--sun) 0 12px,var(--ink) 12px 24px)}
+.key .tag{background:var(--ink);color:var(--bg)}
+.key ul{margin:.3em 0;padding-left:1.2em}
+.simple{font-style:italic;color:var(--muted)}
+.formula{font-family:var(--f-display);font-stretch:105%;font-weight:700;background:var(--cream);border-radius:10px;padding:10px 14px;margin:12px 0;font-size:1.02rem}
+
+.tbl{overflow-x:auto;margin:16px 0;border-radius:12px;border:1px solid var(--line)}
+table{border-collapse:collapse;width:100%;font-size:.93rem;background:var(--paper)}
+th,td{padding:9px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+th{background:var(--cream);font-family:var(--f-display);font-weight:800;color:var(--sun-deep)}
+tr:last-child td{border-bottom:none}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.total td{font-weight:700;background:var(--cream)}
+
+figure{margin:20px 0;padding:16px;background:var(--paper);border:1px solid var(--line);border-radius:14px}
+figure .scroll{overflow-x:auto}
+figcaption{font-size:.85rem;color:var(--muted);margin-top:8px}
+svg text{font-family:var(--f-body);fill:var(--ink)}
+svg .mut{fill:var(--muted)}
+svg .grid{stroke:var(--line)}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch}
+.flow .step{flex:1 1 120px;background:var(--cream);border-radius:12px;padding:10px 12px;font-size:.9rem;min-width:0}
+.flow .step b{display:block;font-family:var(--f-display);color:var(--sun-deep);font-size:.98rem}
+.flow .arrow{align-self:center;color:var(--sun-deep);font-weight:900}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px 14px;min-width:0}
+.card h4{margin:0 0 4px;color:var(--sun-deep)}
+.card p{margin:.2em 0;font-size:.93rem}
+.pm{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+.pm > div{border-radius:12px;padding:12px 14px}
+.pm .plus{background:var(--ok-bg)}.pm .minus{background:var(--ko-bg)}
+.pm h4{margin:0 0 4px}.pm .plus h4{color:var(--ok)}.pm .minus h4{color:var(--ko)}
+.pm ul{margin:0;padding-left:1.1em;font-size:.93rem}
+
+.bars{display:grid;gap:6px;font-size:.88rem;margin:8px 0}
+.bar{display:grid;grid-template-columns:110px minmax(0,1fr) 48px;gap:10px;align-items:center}
+.bar .t{height:16px;background:var(--cream);border-radius:4px;overflow:hidden}
+.bar .t i{display:block;height:100%;background:var(--sun);border-radius:4px}
+.bar .t i.dark{background:var(--asphalt)}
+.bar .v{font-variant-numeric:tabular-nums;text-align:right;color:var(--muted)}
+
+.timeline{list-style:none;padding:0;margin:14px 0;border-left:3px solid var(--sun);display:grid;gap:10px}
+.timeline li{padding-left:16px;position:relative}
+.timeline li::before{content:"";position:absolute;left:-8px;top:.55em;width:13px;height:13px;border-radius:50%;background:var(--paper);border:3px solid var(--sun)}
+.timeline b{font-family:var(--f-display);color:var(--sun-deep);margin-right:6px}
+
+.steps{counter-reset:s;list-style:none;padding:0;display:grid;gap:10px}
+.steps > li{counter-increment:s;position:relative;padding:12px 14px 12px 52px;background:var(--paper);border:1px solid var(--line);border-radius:12px}
+.steps > li::before{content:counter(s);position:absolute;left:12px;top:12px;width:28px;height:28px;border-radius:50%;background:var(--sun);color:#2a2312;font-family:var(--f-display);font-weight:900;display:grid;place-items:center}
+.answer{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:4px 18px 14px;margin:18px 0}
+.answer > h4{font-size:1.1rem;color:var(--sun-deep)}
+
+.quiz{counter-reset:q}
+.q{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:14px 0}
+.q h4{margin:0 0 10px;font-family:var(--f-body);font-weight:700}
+.q h4::before{counter-increment:q;content:"Q" counter(q) " · ";color:var(--sun-deep);font-family:var(--f-display)}
+.opts{display:grid;gap:8px}
+.opts button{font:inherit;font-size:.95rem;text-align:left;padding:10px 14px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.opts button:hover:not(:disabled){border-color:var(--sun-deep)}
+.opts button:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+.opts button.right{background:var(--ok-bg);border-color:var(--ok);font-weight:600}
+.opts button.wrong{background:var(--ko-bg);border-color:var(--ko)}
+.opts button:disabled{cursor:default}
+.expl{margin-top:10px;padding:10px 14px;border-radius:10px;background:var(--cream);font-size:.93rem}
+.expl b.v{color:var(--ok)}.expl b.x{color:var(--ko)}
+.scorebar{position:sticky;top:calc(env(safe-area-inset-top,0px) + 8px);z-index:5;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;background:var(--ink);color:var(--bg);border-radius:12px;padding:10px 16px;margin:12px 0}
+.scorebar b{font-family:var(--f-display);font-size:1.15rem;color:var(--sun)}
+.scorebar button{font:inherit;font-size:.88rem;background:var(--sun);color:#2a2312;font-weight:700;border:none;border-radius:8px;padding:6px 12px;cursor:pointer}
+.scorebar button:focus-visible{outline:3px solid var(--bg);outline-offset:2px}
+.result{display:none}
+.result.on{display:block}
+dl.glo{display:grid;grid-template-columns:minmax(130px,max-content) minmax(0,1fr);gap:6px 16px;font-size:.93rem}
+dl.glo dt{font-weight:700;color:var(--sun-deep)}
+dl.glo dd{margin:0}
+@media (max-width:520px){dl.glo{grid-template-columns:minmax(0,1fr)}dl.glo dd{margin-bottom:8px}.bar{grid-template-columns:84px minmax(0,1fr) 40px}}
+@media (prefers-reduced-motion:no-preference){.opts button{transition:background .15s,border-color .15s}}
+</style>
+<div class="wrap">
+<nav class="toc" aria-label="Sommaire">
+  <div class="eyebrow">Sommaire</div>
+  <ol>
+    <li><a href="#p0">Mode d'emploi et examen</a></li>
+    <li><a href="#p1">1. Logistique, transport, supply chain</a></li>
+    <li><a href="#p2">2. Mesurer le transport</a></li>
+    <li><a href="#p3">3. Transport, territoire et politiques</a></li>
+    <li><a href="#p4">4. La répartition modale</a></li>
+    <li><a href="#p5">5. Les 5 modes de transport</a></li>
+    <li><a href="#p6">6. Choisir un mode, les trafics</a></li>
+    <li><a href="#p7">7. Intermodalité et combiné</a></li>
+    <li><a href="#p8">8. Les prestataires et les Incoterms</a></li>
+    <li><a href="#p9">9. Coûts et tournées</a></li>
+    <li><a href="#p10">10. La gestion des stocks</a></li>
+    <li><a href="#cas1">Étude de cas n°1 corrigée</a></li>
+    <li><a href="#cas2">Étude de cas n°2 : méthode</a></li>
+    <li><a href="#glossaire">Glossaire</a></li>
+    <li><a href="#quiz">Quiz corrigé</a></li>
+  </ol>
+</nav>
+
+<main>
+<header class="hero">
+  <div class="eyebrow">Logistique et transport · CM de Pascal Jardin · L3 AEI · UPEC · 2026-2027</div>
+  <h1>Faire circuler les <em>marchandises</em>, depuis zéro</h1>
+  <p class="lede">Toute la matière du cours en une fiche : ce que sont la logistique et la supply chain, les cinq modes de transport et leur histoire, le transport combiné, les acteurs du transport international, le calcul des coûts et des tournées, la gestion des stocks, puis les deux études de cas corrigées pas à pas.</p>
+  <div class="chips"><span class="chip">Introduction + Partie I</span><span class="chip">5 modes de transport</span><span class="chip">Rail-route, conteneur, UTI</span><span class="chip">Coût de revient d'un camion</span><span class="chip">Point de commande</span><span class="chip">2 études de cas</span><span class="chip">Quiz corrigé</span></div>
+</header>
+
+<section id="p0">
+  <h2>Mode d'emploi</h2>
+  <p>Le cours répond à une question simple : <strong>comment amener le bon produit au bon endroit, au bon moment, au moindre coût ?</strong> Le transport déplace la marchandise, la logistique organise tout ce qui l'entoure (stocks, entrepôts, informations, délais).</p>
+  <figure>
+    <div class="flow">
+      <div class="step"><b>1. Comprendre</b>Logistique, supply chain, les 3 flux (partie 1 à 3).</div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>2. Connaître les modes</b>Eau, fer, route, air, conduites : histoire, atouts, limites (4 et 5).</div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>3. Choisir et combiner</b>Critères de choix, transport combiné, prestataires (6 à 8).</div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>4. Calculer</b>Coût de revient, tournées, stocks, études de cas (9, 10, cas).</div>
+    </div>
+  </figure>
+  <div class="box def"><span class="tag">Les encadrés</span>
+    <p><strong>Définition</strong> sur fond jaune pâle, <strong>Exemple</strong> avec une barre gris asphalte, <strong>Piège</strong> en pointillés rouges, et <strong>À retenir</strong> avec la bande de chantier : c'est l'essentiel à savoir par cœur.</p>
+  </div>
+  <div class="box ex"><span class="tag">Format du partiel (d'après les notes de cours)</span>
+    <p>Les notes de cours qui accompagnent les diapos décrivent un partiel de <strong>1 h 30 en 4 parties</strong> (à confirmer avec le professeur pour cette année) :</p>
+    <div class="tbl"><table>
+      <tr><th>Partie</th><th>Ce qu'on attend</th><th class="num">Points</th></tr>
+      <tr><td>Fiche de lecture</td><td>Un roman de Zola (titre à vérifier en cours)</td><td class="num">3</td></tr>
+      <tr><td>3 questions de cours</td><td>Environ 5 lignes de réponse chacune</td><td class="num">6</td></tr>
+      <tr><td>Schéma vu en cours</td><td>Un schéma montré au moins 2 ou 3 fois : lui donner un titre et le commenter en environ 7 lignes</td><td class="num">4</td></tr>
+      <tr><td>Exercice</td><td>Calcul du type études de cas, tournées ou stocks</td><td class="num">7</td></tr>
+      <tr><td>Bonus</td><td>Exercice complémentaire</td><td class="num">+2</td></tr>
+    </table></div>
+    <p>Les schémas les plus probables sont repérés dans la fiche avec la mention <span class="hl">Schéma d'examen</span>.</p>
+  </div>
+</section>
+
+<!-- =============== PARTIE 1 =============== -->
+<section class="part" id="p1">
+  <div class="part-head"><span class="part-num">1</span><div><div class="eyebrow">Introduction · I et II</div><h2>Logistique, transport et supply chain</h2></div></div>
+  <p>Le titre de l'introduction est : <em>« Les effets d'une amélioration des transports et de la logistique sur l'activité économique d'une entreprise »</em>. Avant de parler d'effets, il faut définir les mots.</p>
+
+  <h3>1.1 La logistique</h3>
+  <div class="box def"><span class="tag">Définition</span>
+    <p>La logistique est <strong>l'ensemble des méthodes, techniques et moyens qui permettent de maîtriser la circulation des flux physiques de marchandises</strong> que l'entreprise :</p>
+    <ul><li><strong>reçoit</strong> (matières premières, composants, fournitures) ;</li><li><strong>transforme ou transfère</strong> (en-cours de fabrication, semi-produits) ;</li><li><strong>expédie</strong> (produits finis, pièces détachées).</li></ul>
+    <p>Sa mission : mettre à disposition <strong>le bon produit, dans de bonnes conditions, au bon endroit, au bon moment, pour le bon client, au coût le plus juste</strong>.</p>
+  </div>
+  <p class="simple">En clair : la logistique, c'est le chef d'orchestre des marchandises. Elle décide quoi stocker, où, combien, et comment le faire arriver chez le client sans rupture ni surplus.</p>
+  <p>La difficulté vient d'un arbitrage permanent entre <strong>service au client</strong> et <strong>coût</strong> :</p>
+  <ul>
+    <li>Pour mieux servir, on peut avoir plus de machines ou constituer des stocks pendant les périodes creuses, mais cela augmente les coûts.</li>
+    <li>Pour baisser les coûts, on peut produire en longues séries (économies d'échelle), mais il faut alors financer des stocks supplémentaires.</li>
+  </ul>
+  <p>Et il faut faire mieux que les concurrents, dont les coûts bougent aussi. D'où l'importance d'une <strong>stratégie logistique cohérente</strong>.</p>
+  <div class="box ex"><span class="tag">Exemples du cours</span>
+    <p><strong>Restaurant de luxe</strong> : le client n'accepte pas d'attendre 15 minutes qu'on prenne sa commande, donc le restaurant choisit une <strong>surcapacité en serveurs</strong>. Le niveau de service impose le coût.</p>
+    <p><strong>Sociétés de SAV</strong> : certaines fondent leur stratégie sur la rapidité d'intervention et font payer ce service à son juste prix.</p>
+  </div>
+  <p>La logistique gère trois choses à la fois : des <strong>ressources matérielles</strong>, des <strong>ressources financières</strong> et de l'<strong>information</strong>. Les entreprises y consacrent en moyenne <strong>10 % de leur chiffre d'affaires</strong>, et le transport en représente une part importante et croissante. Elle concerne toutes les branches (industrie, commerce, BTP, agriculture, services), dans le privé comme dans le public. Le <strong>code-barres</strong>, né aux États-Unis, a été une révolution pour la suivre.</p>
+  <p>Elle fonctionne avec <strong>deux flèches</strong> : le flux d'informations remonte <strong>de l'aval vers l'amont</strong> (du client vers le fournisseur) pour réguler le flux de marchandises qui descend <strong>de l'amont vers l'aval</strong>. Le but : ajuster exactement l'offre à la demande, éviter à la fois <strong>les ruptures</strong> et <strong>les engorgements</strong>.</p>
+
+  <h4>Les trois grandes composantes de la logistique</h4>
+  <div class="grid3">
+    <div class="card"><h4>Approvisionnement</h4><p>Faire arriver les matières premières et composants nécessaires à la production.</p></div>
+    <div class="card"><h4>Production</h4><p>Les flux internes : dans l'usine et entre les sites de production (inter-usines).</p></div>
+    <div class="card"><h4>Distribution</h4><p>Acheminer les produits finis jusqu'aux clients (entrepôts, grossistes, magasins).</p></div>
+  </div>
+  <p>On y ajoute la <strong>logistique inverse</strong> (ou <em>reverse logistics</em>) : la gestion des <strong>retours, réparations et du recyclage</strong>, qui fait remonter les produits du client vers l'entreprise.</p>
+
+  <figure>
+    <div class="scroll"><svg viewBox="0 0 640 250" width="100%" style="min-width:520px" role="img" aria-label="Filière du fromage : approvisionnement, production, distribution">
+      <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--sun-deep)"/></marker></defs>
+      <g font-size="13" font-weight="700"><text x="20" y="22">Logistique d'approvisionnement</text><text x="250" y="22">Logistique de production</text><text x="450" y="22">Logistique de distribution</text></g>
+      <g font-size="13">
+        <rect x="20" y="50" width="130" height="30" rx="8" fill="var(--cream)"/><text x="85" y="70" text-anchor="middle">Lait</text>
+        <rect x="20" y="110" width="130" height="30" rx="8" fill="var(--cream)"/><text x="85" y="130" text-anchor="middle">Additifs alimentaires</text>
+        <rect x="20" y="170" width="130" height="30" rx="8" fill="var(--cream)"/><text x="85" y="190" text-anchor="middle">Emballage</text>
+        <rect x="250" y="50" width="130" height="30" rx="8" fill="var(--cream-2)"/><text x="315" y="70" text-anchor="middle">Pâte à fromage</text>
+        <rect x="250" y="110" width="130" height="30" rx="8" fill="var(--cream-2)"/><text x="315" y="130" text-anchor="middle">Affinage</text>
+        <rect x="250" y="170" width="130" height="30" rx="8" fill="var(--cream-2)"/><text x="315" y="190" text-anchor="middle">Fromage</text>
+        <rect x="450" y="50" width="160" height="30" rx="8" fill="var(--cream)"/><text x="530" y="70" text-anchor="middle">Entrepôts</text>
+        <rect x="450" y="110" width="70" height="30" rx="8" fill="var(--cream)"/><text x="485" y="130" text-anchor="middle">VPC</text>
+        <rect x="530" y="110" width="80" height="30" rx="8" fill="var(--cream)"/><text x="570" y="130" text-anchor="middle">Grossistes</text>
+        <rect x="530" y="170" width="80" height="30" rx="8" fill="var(--cream)"/><text x="570" y="190" text-anchor="middle">Magasins</text>
+        <rect x="450" y="215" width="160" height="28" rx="8" fill="var(--sun)"/><text x="530" y="234" text-anchor="middle" style="fill:#2a2312">Consommateurs</text>
+      </g>
+      <g stroke="var(--sun-deep)" stroke-width="2" fill="none" marker-end="url(#ar)">
+        <path d="M150 65H246"/><path d="M150 125H246"/><path d="M150 185H246"/>
+        <path d="M315 80V106"/><path d="M315 140V166"/><path d="M380 180L460 84"/>
+        <path d="M500 80L488 106"/><path d="M560 80L568 106"/><path d="M570 140V166"/><path d="M570 200L560 213"/><path d="M485 140V211"/>
+      </g>
+    </svg></div>
+    <figcaption><span class="hl">Schéma d'examen</span> Application à une filière industrielle (le fromage) : les trois logistiques s'enchaînent de la matière première au consommateur.</figcaption>
+  </figure>
+
+  <h4>Une fonction de plus en plus intégrée</h4>
+  <p>Historiquement, la logistique ne couvrait qu'un bout de la chaîne. Elle s'est étendue jusqu'à couvrir tout le cycle de vie du produit :</p>
+  <div class="tbl"><table>
+    <tr><th>Niveau d'intégration</th><th>Ce qu'il couvre</th></tr>
+    <tr><td><strong>Logistique achats et distribution</strong></td><td>Seulement la gestion des flux de matières à l'entrée et la distribution à la sortie, séparément.</td></tr>
+    <tr><td><strong>Logistique intégrée</strong></td><td>Relie les flux de matières, la production et la distribution en une seule chaîne.</td></tr>
+    <tr><td><strong>Soutien logistique intégré</strong></td><td>Remonte jusqu'à la <strong>conception</strong> du produit et descend jusqu'au <strong>SAV</strong>.</td></tr>
+    <tr><td><strong>Logistique totale</strong></td><td>Couvre tout, de la conception au <strong>retrait</strong> du produit (fin de vie, recyclage).</td></tr>
+  </table></div>
+  <p class="simple">Retenir l'image : à chaque niveau, la flèche des processus couverts s'allonge (conception → flux de matières → production → distribution → SAV → retrait).</p>
+  <p>Aujourd'hui, la logistique est une <strong>démarche de gestion globale et transversale</strong> : elle dépasse les frontières entre les fonctions classiques de l'entreprise (achats, production, commercial, finance).</p>
+
+  <h3>1.2 Le transport</h3>
+  <div class="box def"><span class="tag">Définition</span>
+    <p><em>Le Petit Larousse</em> : « l'action ou la manière de transporter, de porter d'un lieu à un autre ».</p>
+    <p>Définition du cours : une <strong>tentative, à titre onéreux, d'abolir l'espace</strong> qui freine et retarde les activités humaines. C'est l'ensemble des <strong>déplacements de personnes ou d'objets réalisés grâce à des moyens mécaniques</strong>, à l'exclusion des transports d'énergie et d'informations (immatériel).</p>
+  </div>
+  <p>Transporter suppose donc toujours un <strong>véhicule</strong> et une <strong>voie de communication</strong>. Particularité : le transport <strong>modifie la valeur du produit</strong>. Un objet n'existe que dans l'espace et le temps : le même pull vaut plus en magasin le jour où on en a besoin qu'en usine au Bangladesh. C'est pourquoi on peut voir le transport comme une <strong>industrie</strong> qui incorpore une valeur ajoutée au produit transporté.</p>
+  <p>Son organisation doit trouver le meilleur équilibre entre des objectifs parfois contradictoires : <strong>coût, délai, fiabilité, sécurité, impact environnemental</strong>.</p>
+  <div class="grid2">
+    <div class="card"><h4>Transport pour compte propre</h4><p>L'entreprise transporte <strong>ses propres marchandises</strong> avec ses propres véhicules et conducteurs. Environ <strong>25 %</strong> des tonnes-km.</p></div>
+    <div class="card"><h4>Transport pour compte d'autrui</h4><p>Le transport est réalisé par une <strong>société spécialisée contre rémunération</strong> (transport public). Environ <strong>75 %</strong> des tonnes-km.</p></div>
+  </div>
+  <p>Le transport est un <strong>maillon indispensable</strong> : il relie toutes les étapes (fournisseur → usine, usine → usine, usine → entrepôt, entrepôt → client). C'est aussi l'élément qui pèse le plus sur la <strong>qualité de service</strong>, car c'est là que se produisent retards, erreurs, pertes, casse et vols.</p>
+
+  <h3>1.3 La supply chain (chaîne d'approvisionnement)</h3>
+  <div class="box def"><span class="tag">Définition</span>
+    <p>La <strong>supply chain</strong> regroupe l'ensemble des <strong>activités, ressources et acteurs</strong> qui participent au parcours d'un produit, <strong>depuis l'achat des matières premières jusqu'à sa mise à disposition auprès du client final</strong>.</p>
+  </div>
+  <p>Sa performance dépend surtout de l'<strong>intégration et de la coordination</strong> de deux fonctions : le transport et la logistique. Elle fait circuler <strong>trois flux</strong> :</p>
+  <figure>
+    <div class="scroll"><svg viewBox="0 0 640 220" width="100%" style="min-width:520px" role="img" aria-label="Les trois flux de la supply chain">
+      <defs><marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--ink)"/></marker></defs>
+      <text x="320" y="22" text-anchor="middle" font-size="13" font-weight="700">← FLUX D'INFORMATION (aval → amont)</text>
+      <text x="320" y="40" text-anchor="middle" font-size="12" class="mut">commandes, prévisions de ventes, niveaux de stock, traçabilité</text>
+      <path d="M600 50H40" stroke="var(--asphalt)" stroke-width="3" marker-end="url(#ar2)"/>
+      <g font-size="13">
+        <rect x="20" y="75" width="104" height="40" rx="8" fill="var(--cream-2)"/><text x="72" y="100" text-anchor="middle">Fournisseurs</text>
+        <rect x="148" y="75" width="104" height="40" rx="8" fill="var(--cream-2)"/><text x="200" y="100" text-anchor="middle">Production</text>
+        <rect x="276" y="75" width="104" height="40" rx="8" fill="var(--cream-2)"/><text x="328" y="100" text-anchor="middle">Entrepôts</text>
+        <rect x="404" y="75" width="104" height="40" rx="8" fill="var(--cream-2)"/><text x="456" y="100" text-anchor="middle">Distribution</text>
+        <rect x="532" y="75" width="90" height="40" rx="8" fill="var(--sun)"/><text x="577" y="100" text-anchor="middle" style="fill:#2a2312">Clients</text>
+      </g>
+      <path d="M40 135H600" stroke="var(--sun-deep)" stroke-width="3" marker-end="url(#ar2)"/>
+      <text x="320" y="155" text-anchor="middle" font-size="13" font-weight="700">FLUX PHYSIQUE (amont → aval) →</text>
+      <text x="320" y="172" text-anchor="middle" font-size="12" class="mut">matières premières, produits semi-finis, produits finis</text>
+      <text x="320" y="200" text-anchor="middle" font-size="13" font-weight="700">← FLUX FINANCIER : paiements, factures, règlements</text>
+    </svg></div>
+    <figcaption><span class="hl">Schéma d'examen</span> Les trois flux de la supply chain. Les marchandises descendent vers le client, l'information et l'argent remontent vers les fournisseurs.</figcaption>
+  </figure>
+  <p>La <strong>vision élargie</strong> de la supply chain ajoute à la fin le <strong>SAV et les retours</strong> : Fournisseurs → Fabrication → Entrepôts → Distribution → Clients → SAV / Retour.</p>
+  <p>Les <strong>technologies numériques</strong> sont devenues centrales pour la piloter. Elles permettent d'<strong>améliorer la traçabilité</strong> des marchandises, de partager les prévisions en temps réel, d'optimiser les stocks et les tournées. Elles ne suppriment ni les flux d'information (elles les multiplient) ni systématiquement les stocks.</p>
+
+  <h4>Les acteurs de la chaîne logistique</h4>
+  <div class="grid3">
+    <div class="card"><h4>Fournisseurs</h4><p>Fournissent matières premières et composants.</p></div>
+    <div class="card"><h4>Industriels</h4><p>Fabriquent et transforment les produits.</p></div>
+    <div class="card"><h4>Transporteurs</h4><p>Déplacent physiquement la marchandise.</p></div>
+    <div class="card"><h4>Prestataires logistiques</h4><p>Entreposage, préparation de commandes, gestion des stocks pour le compte d'autrui.</p></div>
+    <div class="card"><h4>Distributeurs</h4><p>Grossistes, détaillants, e-commerçants.</p></div>
+    <div class="card"><h4>Clients</h4><p>Le consommateur final, dont la demande déclenche tout.</p></div>
+  </div>
+
+  <h3>1.4 Performance économique et responsabilité environnementale</h3>
+  <div class="pm">
+    <div class="plus"><h4>Les performances économiques</h4><ul><li>Baisse des coûts (transport, stockage)</li><li>Délais plus courts, meilleur service client</li><li>Ouverture de nouveaux marchés, mondialisation des échanges</li><li>Avantage concurrentiel pour l'entreprise</li></ul></div>
+    <div class="minus"><h4>Des exigences environnementales plus fortes</h4><ul><li>Émissions de gaz à effet de serre (surtout route et avion)</li><li>Congestion, bruit, pollution</li><li>Pression réglementaire (Kyoto, plan climat)</li><li>Report vers le fer, le fluvial, le combiné</li></ul></div>
+  </div>
+
+  <div class="box ex"><span class="tag">Exercice de réflexion corrigé : Timberland</span>
+    <p><strong>Le cas.</strong> Timberland (chaussures, New Hampshire, 291 M$ de CA) mesurait sa productivité selon la <strong>taille des expéditions</strong> : elle servait en priorité les grands magasins et délaissait les petits détaillants. Or les petits magasins représentaient une part croissante de l'activité. Comment remanier le processus d'expédition ?</p>
+    <p><strong>Pistes de réponse.</strong></p>
+    <ul>
+      <li><strong>Changer l'indicateur de performance</strong> : mesurer le taux de service (commandes livrées complètes et à l'heure) plutôt que la taille des envois.</li>
+      <li><strong>Accepter les petites commandes</strong> fréquentes : préparation par lots, picking adapté, petits colis.</li>
+      <li><strong>Grouper les envois</strong> de plusieurs petits détaillants d'une même zone (groupage, messagerie) pour garder un coût de transport raisonnable.</li>
+      <li><strong>Créer des entrepôts régionaux</strong> ou passer par un prestataire logistique pour être plus proche des petits clients.</li>
+      <li><strong>Mieux partager l'information</strong> avec les détaillants (EDI, prévisions) pour anticiper leurs besoins.</li>
+    </ul>
+    <p>La leçon : la logistique doit suivre l'<strong>évolution du marché</strong>, sinon les résultats futurs sont en danger.</p>
+  </div>
+
+  <div class="box key"><span class="tag">À retenir</span>
+    <ul>
+      <li>Logistique = maîtriser les flux physiques <strong>reçus, transformés, expédiés</strong> ; bon produit, bon endroit, bon moment, bon coût.</li>
+      <li>3 composantes : <strong>approvisionnement, production, distribution</strong> (+ logistique inverse).</li>
+      <li>Supply chain = toute la chaîne, des matières premières au client, avec <strong>3 flux : physique, information, financier</strong>.</li>
+      <li>Compte propre (≈ 25 % des t-km) / compte d'autrui (≈ 75 %).</li>
+      <li>La logistique pèse en moyenne 10 % du CA, le transport en est le premier poste.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- =============== PARTIE 2 =============== -->
+<section class="part" id="p2">
+  <div class="part-head"><span class="part-num">2</span><div><div class="eyebrow">Introduction</div><h2>Mesurer l'activité de transport</h2></div></div>
+  <h3>2.1 La mesure physique</h3>
+  <p>Pour les <strong>voyageurs</strong>, on compte « le voyageur » et le <strong>voyageur-kilomètre</strong>. Pour les <strong>marchandises</strong>, les statistiques utilisent deux unités :</p>
+  <div class="grid2">
+    <div class="card"><h4>La tonne transportée</h4><p>Le poids de marchandise chargé et transporté.</p></div>
+    <div class="card"><h4>La tonne-kilomètre (t-km)</h4><p>Le déplacement d'<strong>une tonne sur un kilomètre</strong>. Elle combine le volume et la distance.</p></div>
+  </div>
+  <div class="box ex"><span class="tag">Calcul</span><p>Un camion transporte 20 tonnes sur 300 km : 20 × 300 = <strong>6 000 t-km</strong>. Un autre transporte 5 tonnes sur 1 200 km : 5 × 1 200 = <strong>6 000 t-km</strong> aussi. Même activité en t-km, alors que les tonnages sont très différents.</p></div>
+  <p><strong>Critique :</strong> ces unités datent d'une époque dominée par l'extraction et l'industrie lourde. Additionner des tonnes de sable et de gravillons passe encore, mais additionner des tonnes de pétrole et d'appareils électroniques n'a pas de sens.</p>
+  <div class="box trap"><span class="tag">Piège</span><p>En France, la route transporte <strong>150 à 200 fois plus de tonnes</strong> que l'avion. Mais en <strong>valeur économique</strong>, le rapport n'est plus que de <strong>2 ou 3 pour 1</strong>, car l'avion transporte des produits très chers. Le tonnage seul ne dit rien de l'importance économique.</p></div>
+  <p>Pour bien mesurer, il faudrait distinguer la <strong>nature des produits</strong> (vrac, conteneurs, et pour ceux-ci compter en unités de transport intermodal) et les <strong>classes de distance</strong>.</p>
+  <h3>2.2 La mesure économique</h3>
+  <p>Les transporteurs vendent de plus en plus des <strong>prestations logistiques</strong> en plus du transport (manutention, stockage, gestion des stocks). Mais les chiffres économiques sous-estiment le poids réel du transport : ils ne comptent que ce qui est <strong>facturé</strong> (compte d'autrui). Le <strong>transport pour compte propre</strong>, presque toujours routier, occupe les routes mais n'apparaît pas dans les comptes nationaux.</p>
+  <h3>2.3 Le développement des échanges</h3>
+  <p>Le passage à une économie d'échange a entraîné la <strong>division du travail</strong> (Adam Smith). Qui dit échange dit capacité à transporter. La puissance du transport a toujours été un facteur majeur de développement.</p>
+  <p>La concentration de l'économie a des conséquences logistiques : en France, <strong>moins de 5 % des entreprises réalisent 90 % des exportations</strong>. Dans une filière contrôlée par quelques grands groupes, ceux-ci <strong>imposent leurs exigences logistiques</strong> à leurs fournisseurs.</p>
+  <div class="box ex"><span class="tag">Exemples</span>
+    <p>Un <strong>équipementier automobile</strong> doit respecter les délais de livraison imposés par le constructeur, sinon il disparaît.</p>
+    <p><strong>Renault</strong> : 9 usines de montage en Europe et 8 dans le reste du monde, approvisionnées par <strong>1 300 fournisseurs</strong>, et un réseau de <strong>2 600 points de vente</strong> dans le monde. La logistique devient une préoccupation majeure, gérée de façon centralisée et internationale.</p>
+  </div>
+  <p>Le transport est l'un des <strong>postes de coûts les plus importants</strong> de la logistique, au point que beaucoup le considèrent comme son cœur. Si l'entreprise choisit le transport terrestre, elle doit juger de l'intérêt d'un <strong>embranchement ferroviaire</strong> et arbitrer entre <strong>transporteurs</strong>, <strong>flotte propre</strong> ou <strong>location</strong> (voir partie 9).</p>
+</section>
+
+<!-- =============== PARTIE 3 =============== -->
+<section class="part" id="p3">
+  <div class="part-head"><span class="part-num">3</span><div><div class="eyebrow">Introduction</div><h2>Transport, territoire et politiques publiques</h2></div></div>
+  <h3>3.1 La politique des transports de l'Union européenne</h3>
+  <p>Sans réseau de transport intégré, il n'y aurait <strong>pas de marché unique</strong>. Chaque État reste libre de développer ses infrastructures, mais l'UE intervient quand une action commune est nécessaire pour préserver les <strong>4 libertés</strong> (circulation des biens, personnes, services, capitaux) ou éviter des discriminations entre transporteurs.</p>
+  <ul class="timeline">
+    <li><b>1957</b>Traité de Rome : la politique commune des transports est prévue, c'est l'une des plus anciennes de l'UE.</li>
+    <li><b>1985</b>Les États commencent réellement à l'appliquer.</li>
+    <li><b>1992</b>Traité de Maastricht : l'UE obtient de vraies compétences. Ouverture à la concurrence du transport routier et aérien.</li>
+    <li><b>2006</b>Libéralisation du fret ferroviaire national en France : de nouveaux opérateurs arrivent face à la SNCF.</li>
+  </ul>
+  <h3>3.2 Territoire, aménagement, développement</h3>
+  <div class="grid3">
+    <div class="card"><h4>Territoire</h4><p>Espace de vie, d'identité culturelle et affective. Quelle que soit l'approche, il implique toujours des <strong>limites</strong> (frontières).</p></div>
+    <div class="card"><h4>Développement</h4><p>Idée d'accroissement et d'amélioration. Son moteur est d'abord <strong>humain</strong>.</p></div>
+    <div class="card"><h4>Aménagement</h4><p>Modification volontaire de l'organisation de l'espace, par exemple un <strong>équipement collectif</strong> (route, aéroport, voie ferrée).</p></div>
+  </div>
+  <h4>Grandes étapes du développement territorial en France</h4>
+  <ul class="timeline">
+    <li><b>1919</b>Apparition du terme « aménagement ». Puis peu d'évolution jusqu'en 1944.</li>
+    <li><b>1944</b>Ministère de la Reconstruction (après-guerre, plan Marshall).</li>
+    <li><b>1963</b>Création de la <strong>DATAR</strong> (Délégation à l'aménagement du territoire et à l'action régionale), « administration de mission » qui pense l'avenir du territoire. Création des <strong>métropoles d'équilibre</strong>, du port de Fos-sur-Mer, de La Grande-Motte. Objectif : décentraliser les activités de Paris vers la province.</li>
+    <li><b>1982</b><strong>LOTI</strong> (loi d'orientation des transports intérieurs), la loi la plus importante du secteur : elle fixe le rôle de l'État dans les services publics de transport et affirme le droit des usagers à se déplacer dans des conditions raisonnables d'accès, de qualité et de prix. Objectif associé : chacun à moins de <strong>20 minutes d'un accès autoroutier</strong>.</li>
+    <li><b>2004</b><strong>Plan climat</strong> : respecter l'objectif du <strong>protocole de Kyoto</strong> (accord de 1997, COP3 au Japon, pour réduire les gaz à effet de serre des pays fortement émetteurs). Les prévisions annonçaient un dépassement de 10 %.</li>
+  </ul>
+  <p>Tendance de fond : on est passé de l'<strong>égalité entre territoires</strong> (aménagement par l'État) à la <strong>compétition entre territoires</strong> (marketing territorial, chacun fait valoir ses atouts), avec l'intégration croissante de la <strong>durabilité</strong>.</p>
+  <h3>3.3 La smart city</h3>
+  <div class="box def"><span class="tag">Définition</span><p>Une <strong>smart city</strong> (ville intelligente) est une ville qui, pour améliorer la qualité de vie de ses habitants et réduire son empreinte écologique, utilise les <strong>technologies de l'information et de la communication</strong> pour réorganiser ses services et optimiser ses ressources. Le concept s'est diffusé dans les années 1990.</p></div>
+  <div class="grid2">
+    <div class="card"><h4>3 conditions</h4><p>1. Une stratégie portée par les pouvoirs publics. 2. Une approche interdisciplinaire. 3. La participation active des citoyens (le citoyen est l'acteur central).</p></div>
+    <div class="card"><h4>3 domaines</h4><p>1. Transports et mobilité intelligente (trafic, électrique). 2. Environnement durable (déchets, énergie). 3. Urbanisation responsable (habitat intelligent).</p></div>
+  </div>
+  <p>Elle répond au changement climatique, au vieillissement de la population, à la croissance urbaine, aux restructurations économiques, à l'essor du commerce en ligne et à la pression sur les finances publiques.</p>
+</section>
+
+<!-- =============== PARTIE 4 =============== -->
+<section class="part" id="p4">
+  <div class="part-head"><span class="part-num">4</span><div><div class="eyebrow">Partie I · Chapitre 1 · A</div><h2>La répartition modale et son évolution</h2></div></div>
+  <p>Le transport consiste à <strong>modifier la position d'un bien ou d'une personne dans l'espace</strong> pour le rendre disponible là où on en a besoin. Il agit sur deux espaces : l'<strong>espace géographique</strong> (une distance) et l'<strong>espace-temps</strong> (un délai). La maîtrise du temps est essentielle à la performance logistique. En créant une liaison dans l'espace et le temps, le transport crée de la valeur.</p>
+  <p>Le choix d'une technique de transport dépend de <strong>3 paramètres</strong> : la <strong>nature</strong> de ce qu'on transporte, le <strong>type de liaison</strong> (courte ou longue, terrestre, maritime, aérienne) et la <strong>performance attendue</strong>, surtout le délai acceptable.</p>
+  <div class="box def"><span class="tag">Définition</span><p>La <strong>répartition modale</strong> (ou part modale) est la part de chaque mode de transport (route, fer, fluvial, maritime, aérien) dans le total des marchandises transportées, en général mesurée en tonnes-kilomètres.</p></div>
+  <figure>
+    <div class="scroll"><svg viewBox="0 0 600 310" width="100%" style="min-width:500px" role="img" aria-label="Parts modales du transport de marchandises en France depuis 1830">
+      <g class="grid" stroke-width="1">
+        <line x1="60" y1="20" x2="560" y2="20"/><line x1="60" y1="80" x2="560" y2="80"/><line x1="60" y1="140" x2="560" y2="140"/><line x1="60" y1="200" x2="560" y2="200"/><line x1="60" y1="260" x2="560" y2="260" stroke="var(--muted)"/>
+      </g>
+      <g font-size="11" class="mut" text-anchor="end"><text x="52" y="24" class="mut">80 %</text><text x="52" y="84" class="mut">60 %</text><text x="52" y="144" class="mut">40 %</text><text x="52" y="204" class="mut">20 %</text><text x="52" y="264" class="mut">0</text></g>
+      <g font-size="11" text-anchor="middle"><text x="60" y="280" class="mut">1830</text><text x="177.6" y="280" class="mut">1870</text><text x="265.9" y="280" class="mut">1900</text><text x="354.1" y="280" class="mut">1930</text><text x="442.4" y="280" class="mut">1960</text><text x="560" y="280" class="mut">2000</text></g>
+      <polyline fill="none" stroke="var(--sun-deep)" stroke-width="3" points="60,260 118.8,230 177.6,110 207,80 265.9,74 295.3,56 339.4,32 377.6,95 412.9,56 442.4,80 471.8,125 501.2,155 530.6,185 560,188"/>
+      <polyline fill="none" stroke="var(--asphalt)" stroke-width="3" points="60,95 118.8,125 148.2,155 207,194 265.9,215 324.7,230 377.6,185 412.9,215 442.4,170 471.8,125 501.2,104 530.6,86 560,62"/>
+      <polyline fill="none" stroke="var(--ko)" stroke-width="2" stroke-dasharray="6 4" points="60,206 118.8,179 177.6,200 265.9,206 324.7,224 412.9,230 471.8,236 560,251"/>
+      <polyline fill="none" stroke="var(--ok)" stroke-width="2" stroke-dasharray="2 4" points="60,176 118.8,200 177.6,230 265.9,239 412.9,239 560,245"/>
+      <g font-size="12" font-weight="700"><text x="300" y="46">Fer</text><text x="520" y="56">Route</text><text x="480" y="252" class="mut">Fluvial</text><text x="90" y="170" class="mut">Cabotage</text></g>
+      <g font-size="11"><text x="340" y="18" class="mut">apogée du fer (≈ 75 %)</text><text x="455" y="140" class="mut">croisement ≈ 1970</text></g>
+      <text x="300" y="302" text-anchor="middle" font-size="11" class="mut">Allure reprise du graphique du cours (source : A. Sauvant, notes de synthèse du SES)</text>
+    </svg></div>
+    <figcaption><span class="hl">Schéma d'examen</span> Parts modales du transport de marchandises en France depuis 1830. Les courbes donnent l'allure générale, pas des valeurs exactes.</figcaption>
+  </figure>
+  <div class="box ex"><span class="tag">Modèle de commentaire du graphique (7 lignes)</span>
+    <p><strong>Titre :</strong> Évolution des parts modales du transport de marchandises en France depuis 1830.</p>
+    <p><strong>Commentaire :</strong> Au XIX<sup>e</sup> siècle, le chemin de fer, né de la révolution industrielle, remplace la route et la voie d'eau et atteint son apogée dans les années 1920 avec environ 75 à 80 % des marchandises. À partir de 1950, sa part baisse continûment, tandis que la route, portée par le camion, le réseau routier et le flux tendu, dépasse le fer vers 1970 et transporte aujourd'hui environ 85 % des marchandises. Le fluvial et le cabotage déclinent fortement, même si le fluvial repart légèrement. Ces mutations reflètent les progrès techniques (moteur, infrastructures) et l'évolution de l'économie (fin de l'industrie lourde, produits à plus forte valeur).</p>
+  </div>
+  <h4>Pourquoi le rail a-t-il décliné ? 3 facteurs</h4>
+  <ol>
+    <li>La mise en place d'un <strong>réseau routier</strong> dense et performant (choix politiques de désenclavement des territoires).</li>
+    <li>La <strong>disparition des industries traditionnelles</strong> (fer, charbon, sidérurgie), grosses clientes du rail.</li>
+    <li>Le <strong>développement du transport routier</strong>, plus flexible, qui fait du <strong>porte-à-porte</strong> dans un monde qui travaille en <strong>flux tendus</strong>.</li>
+  </ol>
+  <p>La répartition dépend aussi de la marchandise et de la distance : le fer pèse <strong>30 à 50 %</strong> pour la métallurgie et la chimie, mais <strong>moins de 10 %</strong> pour les biens de consommation. Plus la distance est longue et les volumes massifs, plus le fer est compétitif.</p>
+
+  <h3>4.1 Exemple de démarche : la grande épopée de « la petite reine »</h3>
+  <p>Pour présenter chaque mode, le cours suit la même démarche : <strong>l'histoire</strong> (les grandes étapes), puis <strong>les atouts</strong>, puis une <strong>analyse graphique</strong>. Exemple avec le vélo, qu'on surnomme « la petite reine » :</p>
+  <ul class="timeline">
+    <li><b>1493</b>Première esquisse de bicyclette, attribuée à Gian Giacomo Caprotti, élève de Léonard de Vinci.</li>
+    <li><b>1817</b>Invention de la <strong>draisienne</strong> par un Allemand (Karl Drais) : cadre et roues en bois cerclées de fer, une direction, mais ni transmission ni frein.</li>
+    <li><b>1871</b>Le <strong>grand-bi</strong> (Ariel) : rapide grâce à sa grande roue avant, mais peu sûr. Cadre en acier, pneus en caoutchouc plein, frein arrière à patins, pédales sur la roue avant.</li>
+    <li><b>1888</b>« Rouler gonflé » : le <strong>pneumatique</strong> (John Boyd Dunlop) rend le vélo confortable.</li>
+  </ul>
+  <p>Atouts du vélo : peu coûteux, non polluant, bon pour la santé, efficace en ville sur courte distance.</p>
+  <figure>
+    <div class="bars">
+      <div class="bar"><span>Strasbourg</span><span class="t"><i style="width:100%"></i></span><span class="v">20 %</span></div>
+      <div class="bar"><span>Grenoble</span><span class="t"><i style="width:90%"></i></span><span class="v">18 %</span></div>
+      <div class="bar"><span>Bordeaux</span><span class="t"><i style="width:55%"></i></span><span class="v">11 %</span></div>
+      <div class="bar"><span>Paris</span><span class="t"><i style="width:50%"></i></span><span class="v">10 %</span></div>
+      <div class="bar"><span>Rennes</span><span class="t"><i style="width:45%"></i></span><span class="v">9 %</span></div>
+      <div class="bar"><span>Nantes</span><span class="t"><i style="width:40%"></i></span><span class="v">8 %</span></div>
+      <div class="bar"><span>Toulouse</span><span class="t"><i style="width:35%"></i></span><span class="v">7 %</span></div>
+      <div class="bar"><span>Lyon</span><span class="t"><i style="width:30%"></i></span><span class="v">6 %</span></div>
+    </div>
+    <figcaption>Part des déplacements domicile-travail à vélo dans les principales villes françaises (valeurs lues sur le graphique du cours, source INSEE).</figcaption>
+  </figure>
+</section>
+
+<!-- =============== PARTIE 5 =============== -->
+<section class="part" id="p5">
+  <div class="part-head"><span class="part-num">5</span><div><div class="eyebrow">Partie I · Chapitre 1 · B</div><h2>Les 5 modes de transport</h2></div></div>
+  <div class="box def"><span class="tag">Définition</span><p>Un <strong>mode de transport</strong> est l'association indissociable de plusieurs éléments : une <strong>partie mobile</strong> (le véhicule, avec en général un élément humain, le conducteur), une <strong>voie de communication</strong> et des <strong>infrastructures</strong> (gares, ports, aéroports, terminaux). C'est le <strong>milieu</strong> dans lequel le véhicule circule (eau, rail, route, air) qui détermine le mode.</p></div>
+  <div class="box ex"><span class="tag">Exemple</span><p>Transport ferroviaire = locomotive et wagons (véhicule) + voie ferrée (voie) + gares et terminaux (infrastructures) + conducteur. Ces différences entre modes influencent les <strong>coûts, délais, capacités, la flexibilité et l'impact environnemental</strong>.</p></div>
+  <p>On distingue <strong>5 modes</strong> : la <strong>voie d'eau</strong> (fluvial et maritime), le <strong>ferroviaire</strong>, le <strong>routier</strong>, l'<strong>aérien</strong> et les <strong>conduites</strong>.</p>
+
+  <h3>5.1 Le transport par voie d'eau</h3>
+  <p>C'est le <strong>plus ancien mode organisé</strong> de transport. Différence fondamentale avec la terre : l'homme n'est maître <strong>ni du tracé ni des caractéristiques</strong> de la voie.</p>
+  <ul class="timeline">
+    <li><b>Moyen Âge</b>Les routes sont peu développées : les fleuves sont des corridors naturels entre zones de production et marchés.</li>
+    <li><b>Renaissance</b>Amélioration des voies navigables. L'<strong>écluse</strong> (vers 1480, attribuée à Léonard de Vinci) permet de creuser des canaux hors des plaines.</li>
+    <li><b>XIX<sup>e</sup> siècle</b>Expansion sans précédent avec la révolution industrielle.</li>
+    <li><b>XX<sup>e</sup> siècle</b>Le rail puis le camion réduisent la place de la navigation intérieure.</li>
+    <li><b>Aujourd'hui</b>La transition écologique redonne un rôle central au fluvial et au maritime.</li>
+  </ul>
+  <div class="grid2">
+    <div class="card"><h4>Le transport fluvial</h4><p>Sur fleuves, rivières, canaux, lacs. Adapté aux <strong>trafics massifiés</strong> de produits pondéreux (lourds, peu chers) sur de faibles distances (en France ≈ <strong>105 km</strong> en moyenne). Bateaux : péniche, chaland, automoteur (800 à 3 500 t). Le réseau français est peu dense : seuls la Seine, l'Yonne, le Rhin et la Saône accueillent le grand gabarit loin des embouchures. Le fluvial pèse <strong>moins de 5 %</strong> du trafic intérieur français contre plus de 40 % aux Pays-Bas.</p></div>
+    <div class="card"><h4>Le transport maritime</h4><p>Sur mers et océans : <strong>pilier de la mondialisation</strong>. L'infrastructure est la plus légère (la mer est fournie par la nature ; il faut seulement des ports). Les canaux de <strong>Suez</strong> et de <strong>Panama</strong> relient les océans Atlantique, Pacifique et Indien. Navires spécialisés : vraquier (céréales, minerais, charbon), pétrolier, chimiquier, porte-conteneurs.</p></div>
+  </div>
+  <p>Le maritime transporte surtout des <strong>matières premières</strong> (pétrole, charbon, céréales). Les marchandises générales à plus forte valeur voyagent en <strong>conteneurs</strong>, moins de 20 % du tonnage total. La <strong>conteneurisation</strong> a automatisé les ports, accéléré le chargement, évité les ruptures de charge et mieux protégé la marchandise, mais exige de gros investissements.</p>
+  <div class="grid2">
+    <figure style="margin:0">
+      <div class="bars">
+        <div class="bar"><span>2000</span><span class="t"><i style="width:50%"></i></span><span class="v">6</span></div>
+        <div class="bar"><span>2004</span><span class="t"><i style="width:59%"></i></span><span class="v">7,1</span></div>
+        <div class="bar"><span>2008</span><span class="t"><i style="width:68%"></i></span><span class="v">8,2</span></div>
+        <div class="bar"><span>2012</span><span class="t"><i style="width:77%"></i></span><span class="v">9,2</span></div>
+        <div class="bar"><span>2016</span><span class="t"><i style="width:84%"></i></span><span class="v">10,1</span></div>
+        <div class="bar"><span>2020</span><span class="t"><i style="width:89%"></i></span><span class="v">10,7</span></div>
+        <div class="bar"><span>2024</span><span class="t"><i style="width:100%"></i></span><span class="v">12</span></div>
+      </div>
+      <figcaption>Trafic maritime mondial, en milliards de tonnes (UNCTAD) : il a doublé en 24 ans.</figcaption>
+    </figure>
+    <figure style="margin:0">
+      <div class="bars">
+        <div class="bar"><span>Pays-Bas</span><span class="t"><i class="dark" style="width:100%"></i></span><span class="v">43 %</span></div>
+        <div class="bar"><span>Roumanie</span><span class="t"><i class="dark" style="width:42%"></i></span><span class="v">18 %</span></div>
+        <div class="bar"><span>Bulgarie</span><span class="t"><i class="dark" style="width:35%"></i></span><span class="v">15 %</span></div>
+        <div class="bar"><span>Belgique</span><span class="t"><i class="dark" style="width:28%"></i></span><span class="v">12 %</span></div>
+        <div class="bar"><span>Allemagne</span><span class="t"><i class="dark" style="width:19%"></i></span><span class="v">8 %</span></div>
+        <div class="bar"><span>Hongrie</span><span class="t"><i class="dark" style="width:12%"></i></span><span class="v">5 %</span></div>
+        <div class="bar"><span>France</span><span class="t"><i class="dark" style="width:7%"></i></span><span class="v">3 %</span></div>
+      </div>
+      <figcaption>Part modale du fluvial dans le transport intérieur (Eurostat, CCNR ; valeurs lues sur le graphique).</figcaption>
+    </figure>
+  </div>
+  <div class="pm">
+    <div class="plus"><h4>Avantages</h4><ul><li>Tarif le plus faible (moins cher que route et fer)</li><li>Très grandes capacités, idéal pour le vrac</li><li>Bon bilan écologique par rapport à la route</li><li>Accès mondial (maritime)</li></ul></div>
+    <div class="minus"><h4>Limites</h4><ul><li>Lenteur, délais parfois incompatibles</li><li>Dépend de la nature (débit, tracé, météo)</li><li>Si l'entreprise n'est pas près d'un port, les trajets terminaux le rendent peu compétitif</li><li>Ruptures de charge aux ports</li></ul></div>
+  </div>
+
+  <h3>5.2 Le transport ferroviaire</h3>
+  <p>Contrairement à la route et à la voie d'eau, le chemin de fer est <strong>directement issu de la révolution industrielle du XIX<sup>e</sup> siècle</strong>. Il naît des besoins des <strong>mines</strong> anglaises et allemandes (l'idée : guider les roues par un rail métallique pour économiser l'énergie de traction). Les premières lignes sont <strong>anglaises</strong>.</p>
+  <ul class="timeline">
+    <li><b>Milieu XIX<sup>e</sup> → 1914</b>Expansion spectaculaire : le fer domine voyageurs et marchandises, il concurrence même la voie d'eau pour les produits lourds.</li>
+    <li><b>Années 1900</b>Électrification, d'abord des lignes urbaines, puis des lignes à fort trafic. Le diesel arrive ensuite. Le fer est le seul mode à utiliser massivement l'électricité.</li>
+    <li><b>Après 1918</b>Concurrence de la voie d'eau (moins chère) puis du camion (plus souple, qui ne paie pas ses infrastructures).</li>
+    <li><b>1981</b>Mise en service du <strong>TGV</strong> en France.</li>
+    <li><b>2006</b>Ouverture du fret ferroviaire national à la concurrence.</li>
+  </ul>
+  <p>Le fer a <strong>transformé les territoires</strong> : en France, le réseau en étoile autour de Paris a renforcé le poids de la capitale ; il a réduit les distances perçues et favorisé les échanges internationaux.</p>
+  <p>Pour répondre à la concurrence de la route, le rail a développé deux solutions :</p>
+  <div class="grid2">
+    <div class="card"><h4>Les embranchements particuliers</h4><p>Une voie privée relie le terrain d'un gros client au réseau général. Si le fournisseur et le client sont tous deux embranchés, on obtient du <strong>porte-à-porte sans rupture de charge</strong>.</p></div>
+    <div class="card"><h4>Le transport combiné rail-route</h4><p>La route fait les trajets courts du début et de la fin, le fer fait le long trajet principal. Exemple : la semi-remorque <strong>Kangourou</strong> chargée sur un wagon spécial (voir partie 7).</p></div>
+  </div>
+  <p>Le fer se place aujourd'hui <strong>2<sup>e</sup> derrière la route</strong> (environ 33 milliards de t-km en France). Il transporte surtout des produits métallurgiques, agricoles, alimentaires, combustibles et pétroliers. Offre : wagons isolés, rames, trains complets.</p>
+  <figure>
+    <div class="bars">
+      <div class="bar"><span>Suisse</span><span class="t"><i style="width:100%"></i></span><span class="v">40 %</span></div>
+      <div class="bar"><span>Autriche</span><span class="t"><i style="width:82%"></i></span><span class="v">33 %</span></div>
+      <div class="bar"><span>Pologne</span><span class="t"><i style="width:62%"></i></span><span class="v">25 %</span></div>
+      <div class="bar"><span>Allemagne</span><span class="t"><i style="width:50%"></i></span><span class="v">20 %</span></div>
+      <div class="bar"><span>France</span><span class="t"><i style="width:27%"></i></span><span class="v">11 %</span></div>
+      <div class="bar"><span>Espagne</span><span class="t"><i style="width:12%"></i></span><span class="v">5 %</span></div>
+    </div>
+    <figcaption>Part modale du rail dans le fret en Europe (Eurostat ; valeurs lues sur le graphique du cours). Les pays alpins utilisent beaucoup le rail pour traverser les montagnes.</figcaption>
+  </figure>
+  <div class="pm">
+    <div class="plus"><h4>Avantages</h4><ul><li>Charges lourdes et convois très longs (faible perte d'énergie grâce au guidage)</li><li>Sur longue distance, souvent plus rapide que la route (pas d'obstacles)</li><li>Relativement peu coûteux pour de gros volumes</li><li>Très bon bilan énergétique et environnemental</li></ul></div>
+    <div class="minus"><h4>Limites</h4><ul><li>Pas de vrai porte-à-porte sans embranchement (ruptures de charge)</li><li>Il faut des volumes massifs pour être rentable</li><li>Peu flexible (horaires, sillons), freinage des longs convois</li><li>Moins adapté au flux tendu</li></ul></div>
+  </div>
+
+  <h3>5.3 Le transport routier</h3>
+  <div class="box def"><span class="tag">Définition</span><p>Le transport routier est l'ensemble des déplacements de personnes ou de marchandises réalisés avec des <strong>véhicules circulant sur des infrastructures routières</strong>. C'est aujourd'hui le <strong>principal mode terrestre</strong>.</p></div>
+  <ul class="timeline">
+    <li><b>Antiquité</b>Les Gaulois avaient déjà des voies pour leurs chariots ; les <strong>Romains</strong> créent le premier grand réseau routier européen.</li>
+    <li><b>Après Rome</b>Les routes sont en partie abandonnées. Avant la révolution industrielle, elles servent l'économie locale agricole et la défense des États.</li>
+    <li><b>XVIII<sup>e</sup> siècle</b>Le commerce et l'État modernisent les routes.</li>
+    <li><b>Fin XIX<sup>e</sup></b>Le <strong>moteur à explosion</strong>, le vélo, l'automobile et le pneumatique relancent la route.</li>
+    <li><b>XX<sup>e</sup> siècle</b>Le <strong>camion</strong> révolutionne le transport de marchandises. Après 1950, la motorisation se banalise.</li>
+  </ul>
+  <p>Son succès repose sur <strong>3 caractéristiques</strong> :</p>
+  <div class="grid3">
+    <div class="card"><h4>Quasi-ubiquité</h4><p>Le réseau atteint presque n'importe quelle destination <strong>sans changer de véhicule</strong>.</p></div>
+    <div class="card"><h4>Intimité</h4><p>On choisit librement ses compagnons de voyage.</p></div>
+    <div class="card"><h4>Disponibilité</h4><p>Aucune contrainte d'horaire : le véhicule est disponible immédiatement.</p></div>
+  </div>
+  <p>La France, <strong>carrefour de l'Europe occidentale</strong>, renforce le rôle de la route. Le secteur pèse lourd dans l'économie, et l'<strong>e-commerce</strong> et la livraison rapide l'ont encore renforcé. La route transporte de plus en plus de produits à <strong>forte valeur ajoutée</strong> et reste le mode du <strong>flux tendu (zéro stock)</strong>. Le marché est en <strong>surcapacité</strong> : beaucoup de petites entreprises, une concurrence très vive, des prix qui ont baissé d'environ <strong>30 % depuis 1985</strong>. Il est donc facile pour un industriel de <strong>sous-traiter</strong> son transport. Les camions existent en nombreux modèles : citerne, benne, frigorifique, plateau, fourgon.</p>
+  <p>La route transporte environ <strong>85 à 89 %</strong> des marchandises en France (environ 270 à 297 milliards de t-km par an entre 2019 et 2024, d'après les graphiques du cours).</p>
+  <div class="pm">
+    <div class="plus"><h4>Avantages</h4><ul><li><strong>Porte-à-porte</strong> sans rupture de charge</li><li>Flexibilité, rapidité sur courte et moyenne distance</li><li>Peu de manutention, donc moins de casse</li><li>Adapté à toutes les marchandises et au juste-à-temps</li><li>Prix compétitifs</li></ul></div>
+    <div class="minus"><h4>Limites et défis</h4><ul><li><strong>Congestion</strong>, surtout récurrente près des villes (domicile-travail), aussi saisonnière (vacances)</li><li>Pollution, émissions de CO₂, bruit</li><li>Insécurité routière</li><li>Capacité limitée par camion (40 t, 44 t en combiné)</li></ul></div>
+  </div>
+  <p>Les poids lourds réduisent la capacité des routes : ils représentent environ <strong>15 %</strong> du trafic sur autoroute et 8 à 10 % sur les autres axes. Les gestionnaires cherchent à faire passer plus de trafic sans construire de nouvelles routes (modulation des péages, par exemple).</p>
+
+  <h3>5.4 Le transport aérien</h3>
+  <ul class="timeline">
+    <li><b>1783</b>Les frères <strong>Montgolfier</strong> : premier vol d'un objet plus léger que l'air (montgolfière).</li>
+    <li><b>1890</b><strong>Clément Ader</strong> fait décoller son Éole, premier engin plus lourd que l'air à quitter le sol en Europe.</li>
+    <li><b>1903</b>Premiers vols motorisés des <strong>frères Wright</strong>, acte fondateur de l'aviation moderne.</li>
+    <li><b>1909</b><strong>Louis Blériot</strong> traverse la Manche.</li>
+    <li><b>Entre-deux-guerres</b>Premières compagnies aériennes commerciales.</li>
+    <li><b>Après 1945</b>Expansion mondiale de l'aviation civile.</li>
+    <li><b>Années 1970</b>Les <strong>gros-porteurs</strong> (Boeing 747). Depuis les années 1980 : libéralisation, low cost, hubs.</li>
+  </ul>
+  <p>Les réseaux aériens sont faits de <strong>lignes</strong> (liaison abstraite entre deux villes + itinéraire concret surveillé) et d'<strong>aéroports</strong>. L'implantation d'un aéroport est un compromis entre <strong>3 impératifs</strong> : la <strong>proximité de la ville</strong>, les <strong>contraintes d'urbanisme</strong> (grandes surfaces non constructibles autour) et l'<strong>environnement</strong> (bruit). Exemples : Le Bourget, rattrapé par la banlieue, a été remplacé ; Orly a un couvre-feu nocturne.</p>
+  <p>L'activité aérienne est <strong>surtout tournée vers les voyageurs</strong>, mais le fret est stratégique : avions cargo de plus de <strong>100 tonnes</strong> sur plus de <strong>10 000 km</strong>, palettisation et conteneurisation, tri automatique et codes-barres au sol. Long-courrier = vol de plus de 4 h, moyen-courrier = 1 à 4 h.</p>
+  <p>Le fret aérien est faible en tonnage mais concerne des produits à <strong>très forte valeur ajoutée</strong> : électronique (≈ 35 % du fret aérien mondial), produits pharmaceutiques, pièces détachées urgentes, luxe. Il est <strong>2,5 à 4 fois plus cher que le maritime</strong>, mais l'écart se réduit si on compte les opérations terminales et le coût des stocks. Entre train et avion, le partage se fait vers <strong>500 km</strong> en France, seuil qui monte avec le TGV.</p>
+  <div class="pm">
+    <div class="plus"><h4>Avantages</h4><ul><li>Rapidité exceptionnelle</li><li>Régularité et fiabilité</li><li>Accessibilité mondiale</li><li>Sécurité pour les produits fragiles ou de valeur</li></ul></div>
+    <div class="minus"><h4>Limites</h4><ul><li>Coût nettement supérieur au maritime et au ferroviaire</li><li>Capacité limitée</li><li>Forts enjeux environnementaux (CO₂, bruit)</li></ul></div>
+  </div>
+
+  <h3>5.5 Les autres types : les conduites</h3>
+  <p>Les <strong>conduites</strong> sont le seul mode qui ne transporte <strong>que des marchandises</strong>, et même <strong>une seule marchandise par réseau</strong> : <strong>oléoducs</strong> (pétrole), gazoducs, lignes à haute tension (électricité). Le cours y rattache des transports spécialisés comme les télécommunications et le trafic postal.</p>
+
+  <figure>
+    <div class="bars">
+      <div class="bar"><span>Maritime</span><span class="t"><i style="width:100%"></i></span><span class="v">45 %</span></div>
+      <div class="bar"><span>Aérien</span><span class="t"><i style="width:78%"></i></span><span class="v">35 %</span></div>
+      <div class="bar"><span>Routier</span><span class="t"><i style="width:27%"></i></span><span class="v">12 %</span></div>
+      <div class="bar"><span>Ferroviaire</span><span class="t"><i style="width:11%"></i></span><span class="v">5 %</span></div>
+      <div class="bar"><span>Fluvial</span><span class="t"><i style="width:7%"></i></span><span class="v">3 %</span></div>
+    </div>
+    <figcaption><span class="hl">Schéma d'examen</span> Valeur des échanges mondiaux par mode (valeurs lues sur le graphique du cours). L'avion transporte très peu de tonnes mais plus d'un tiers de la valeur.</figcaption>
+  </figure>
+
+  <h3>5.6 Les 5 modes en un tableau</h3>
+  <div class="tbl"><table>
+    <tr><th>Mode</th><th>Coût</th><th>Vitesse</th><th>Capacité</th><th>Porte-à-porte</th><th>Environnement</th><th>Marchandises types</th></tr>
+    <tr><td><strong>Maritime</strong></td><td>Très faible</td><td>Lent</td><td>Énorme</td><td>Non</td><td>Bon par tonne</td><td>Vrac, pétrole, conteneurs</td></tr>
+    <tr><td><strong>Fluvial</strong></td><td>Très faible</td><td>Lent</td><td>Grande</td><td>Non</td><td>Très bon</td><td>Pondéreux (sable, céréales)</td></tr>
+    <tr><td><strong>Ferroviaire</strong></td><td>Faible</td><td>Moyen</td><td>Grande</td><td>Seulement si embranché</td><td>Très bon</td><td>Métallurgie, chimie, combiné</td></tr>
+    <tr><td><strong>Routier</strong></td><td>Moyen</td><td>Rapide (courte et moyenne distance)</td><td>Petite (≈ 25 t utiles)</td><td><strong>Oui</strong></td><td>Mauvais</td><td>Tout, surtout biens de consommation</td></tr>
+    <tr><td><strong>Aérien</strong></td><td>Très élevé</td><td>Très rapide</td><td>Limitée</td><td>Non</td><td>Très mauvais</td><td>Électronique, pharmacie, urgent, luxe</td></tr>
+    <tr><td><strong>Conduites</strong></td><td>Faible à l'usage</td><td>Continu</td><td>Grande</td><td>Non</td><td>Bon</td><td>Un seul produit (pétrole, gaz, électricité)</td></tr>
+  </table></div>
+  <div class="box key"><span class="tag">À retenir</span>
+    <ul>
+      <li>Mode = véhicule + voie + infrastructures ; le <strong>milieu</strong> détermine le mode.</li>
+      <li><strong>Eau</strong> : le plus ancien, le moins cher, lent ; maritime = pilier de la mondialisation, conteneur.</li>
+      <li><strong>Fer</strong> : né de la révolution industrielle, apogée vers 1920, déclin face au camion ; embranchements et combiné.</li>
+      <li><strong>Route</strong> : ≈ 85 % des marchandises ; ubiquité, intimité, disponibilité ; porte-à-porte et flux tendu ; congestion et pollution.</li>
+      <li><strong>Air</strong> : rapide, fiable, cher ; peu de tonnes mais beaucoup de valeur.</li>
+      <li><strong>Conduites</strong> : une seule marchandise par réseau.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- =============== PARTIE 6 =============== -->
+<section class="part" id="p6">
+  <div class="part-head"><span class="part-num">6</span><div><div class="eyebrow">Partie I · Chapitre 1</div><h2>Choisir un mode et la typologie des trafics</h2></div></div>
+  <h3>6.1 Les critères de choix</h3>
+  <div class="grid3">
+    <div class="card"><h4>Délai</h4><p>Combien de temps a-t-on ?</p></div>
+    <div class="card"><h4>Coût</h4><p>Prix du transport + opérations terminales + stock.</p></div>
+    <div class="card"><h4>Risques</h4><p>Casse, vol, perte, retard.</p></div>
+    <div class="card"><h4>Fréquence</h4><p>Combien de départs par semaine ?</p></div>
+    <div class="card"><h4>Environnement</h4><p>Émissions, image de l'entreprise.</p></div>
+    <div class="card"><h4>Contraintes du produit</h4><p>Température, fragilité, urgence, dangerosité.</p></div>
+  </div>
+  <p>Les contraintes du produit peuvent réduire le choix à une ou deux solutions (un vaccin à −70 °C ne prendra pas la péniche). Et on choisit à la fois un <strong>mode</strong> et un <strong>prestataire</strong> : la fiabilité dépend souvent plus du transporteur que du mode. D'où la phrase du cours : <em>le choix du mode est souvent moins déterminant que celui du transporteur</em>.</p>
+  <div class="box def"><span class="tag">La règle du porte-à-porte</span><p>On compare les solutions <strong>de porte à porte</strong>, de l'usine de l'exportateur à l'entrepôt du destinataire, en coûts, délais et risques, et pas seulement sur le prix du trajet principal. À chaque mode et fréquence correspond une <strong>taille de lot</strong>, donc un <strong>stock moyen</strong> : le <strong>coût du stock</strong> entre dans la comparaison.</p></div>
+  <div class="box ex"><span class="tag">Exemple</span><p>Envoyer des montres au Japon : le bateau coûte moins cher à la tonne, mais pendant 5 semaines de mer la marchandise est immobilisée (stock en transit, capital bloqué) et il faut un pré-acheminement routier jusqu'au Havre. L'avion coûte plus cher mais réduit le stock et le risque. Pour des produits chers et légers, l'avion peut gagner au total.</p></div>
+
+  <h3>6.2 La typologie des trafics</h3>
+  <p>Selon la place du transport dans la chaîne logistique, les modes ne se concurrencent pas sur les mêmes marchés. Sur un marché donné, la concurrence se limite souvent à 2 ou 3 modes.</p>
+  <div class="tbl"><table>
+    <tr><th>Type de trafic</th><th>Caractéristiques</th><th>Modes adaptés</th></tr>
+    <tr><td><strong>Approvisionnement</strong> des usines en matières premières</td><td>Gros volumes et tonnages, lots importants et réguliers, souvent un seul expéditeur et un seul destinataire</td><td>Fer, voie d'eau, maritime</td></tr>
+    <tr><td><strong>Inter-usines</strong> (semi-finis, sous-ensembles, approvisionnement des entrepôts)</td><td>Envois réguliers de <strong>3 à 23 tonnes</strong> (camion plein), plusieurs expéditeurs, des lots de plusieurs entreprises peuvent voyager ensemble</td><td>Rail et route</td></tr>
+    <tr><td><strong>Distribution et livraison</strong> usine → clients</td><td>Très grande variété, de quelques kilos à plusieurs tonnes</td><td>Route et fer en national ; aérien à l'international pour certains produits</td></tr>
+  </table></div>
+  <p>Dans l'<strong>économie de masse</strong>, on transportait surtout des produits pondéreux à faible valeur (fer, maritime). Dans l'<strong>économie de marché</strong> actuelle, les flux sont plus <strong>différenciés, plus chers et plus fréquents</strong>, ce qui demande plus de livraisons et favorise la route et les combinaisons de modes.</p>
+  <div class="box key"><span class="tag">À retenir</span><p>Le choix d'un mode est un <strong>arbitrage</strong> entre critères économiques, techniques, logistiques et environnementaux, évalué <strong>de porte à porte</strong>, stock compris. On choisit aussi le transporteur.</p></div>
+</section>
+
+<!-- =============== PARTIE 7 =============== -->
+<section class="part" id="p7">
+  <div class="part-head"><span class="part-num">7</span><div><div class="eyebrow">Partie I · Chapitre 1 · C</div><h2>L'intermodalité et le transport combiné</h2></div></div>
+  <p>Les transformations de l'industrie ont produit deux innovations : des <strong>contenants compatibles avec plusieurs modes</strong> (le conteneur) et des <strong>entreprises spécialisées dans l'organisation de plusieurs transports</strong> à la suite. Le conteneur, venu des États-Unis vers l'Europe dans les années 1960, a lancé une véritable industrialisation du transport : le trajet devient une <strong>chaîne</strong> dont chaque maillon est un mode.</p>
+  <h3>7.1 Quatre mots à ne pas confondre</h3>
+  <div class="tbl"><table>
+    <tr><th>Terme</th><th>Définition</th><th>Exemple</th></tr>
+    <tr><td><strong>Unimodal</strong></td><td>Un seul mode d'un bout à l'autre.</td><td>Un camion Lyon → Lille.</td></tr>
+    <tr><td><strong>Multimodal</strong></td><td>Au moins <strong>deux modes différents</strong>, avec ou sans changement de contenant.</td><td>Des cartons déchargés d'un camion puis rechargés dans un avion.</td></tr>
+    <tr><td><strong>Intermodal</strong></td><td>Deux modes ou plus, mais dans la <strong>même unité de chargement</strong>, <strong>sans rupture de charge</strong> (on ne touche pas à la marchandise elle-même).</td><td>Un conteneur qui passe du bateau au train puis au camion.</td></tr>
+    <tr><td><strong>Combiné</strong></td><td>Un transport <strong>intermodal</strong> dont le trajet principal se fait par <strong>rail, voie navigable ou mer</strong>, et les trajets initiaux et terminaux, <strong>les plus courts possible, par la route</strong>. Souvent sous un <strong>seul contrat</strong>, assurance comprise.</td><td>Une caisse mobile Paris → Avignon par le train, avec 20 km de camion à chaque bout.</td></tr>
+  </table></div>
+  <div class="box trap"><span class="tag">Piège</span><p>Tout transport combiné est intermodal, tout intermodal est multimodal, mais l'inverse est faux. La clé de l'intermodal est l'<strong>absence de rupture de charge</strong> grâce à l'<strong>UTI</strong> (unité de transport intermodal : conteneur, caisse mobile, semi-remorque).</p></div>
+
+  <h3>7.2 Le schéma rail-route en 3 temps</h3>
+  <figure>
+    <div class="scroll"><svg viewBox="0 0 640 200" width="100%" style="min-width:540px" role="img" aria-label="Schéma du transport combiné rail-route en trois temps">
+      <g font-size="12">
+        <rect x="10" y="60" width="80" height="46" rx="8" fill="var(--cream-2)"/><text x="50" y="80" text-anchor="middle">Usine /</text><text x="50" y="96" text-anchor="middle">entrepôt</text>
+        <rect x="150" y="60" width="90" height="46" rx="8" fill="var(--cream)"/><text x="195" y="80" text-anchor="middle">Terminal</text><text x="195" y="96" text-anchor="middle">de départ</text>
+        <rect x="400" y="60" width="90" height="46" rx="8" fill="var(--cream)"/><text x="445" y="80" text-anchor="middle">Terminal</text><text x="445" y="96" text-anchor="middle">d'arrivée</text>
+        <rect x="550" y="60" width="80" height="46" rx="8" fill="var(--sun)"/><text x="590" y="88" text-anchor="middle" style="fill:#2a2312">Client</text>
+      </g>
+      <line x1="90" y1="83" x2="150" y2="83" stroke="var(--asphalt)" stroke-width="5"/>
+      <line x1="240" y1="83" x2="400" y2="83" stroke="var(--sun-deep)" stroke-width="7" stroke-dasharray="14 6"/>
+      <line x1="490" y1="83" x2="550" y2="83" stroke="var(--asphalt)" stroke-width="5"/>
+      <g font-size="12" text-anchor="middle" font-weight="700">
+        <text x="120" y="45">① Route</text><text x="320" y="45">② Rail</text><text x="520" y="45">③ Route</text>
+      </g>
+      <g font-size="11" text-anchor="middle">
+        <text x="120" y="130" class="mut">trajet le plus</text><text x="120" y="144" class="mut">court possible</text>
+        <text x="320" y="130" class="mut">trajet principal, le plus long</text><text x="320" y="144" class="mut">UTI sur wagon, chargée par portique ou grue</text>
+        <text x="520" y="130" class="mut">livraison au client</text><text x="520" y="144" class="mut">prévenu de l'arrivée</text>
+        <text x="195" y="175" class="mut">transbordement</text><text x="445" y="175" class="mut">transbordement</text>
+      </g>
+    </svg></div>
+    <figcaption><span class="hl">Schéma d'examen</span> Le transport combiné rail-route : la même UTI fait tout le trajet, seule elle change de véhicule.</figcaption>
+  </figure>
+  <ol class="steps">
+    <li><strong>Chargement et pré-acheminement routier</strong> : la marchandise est chargée dans l'UTI (conteneur sur châssis routier) à l'usine, puis conduite par la route au terminal de transbordement. Trajet le plus court possible.</li>
+    <li><strong>Trajet ferroviaire</strong> : au terminal, des <strong>portiques de manutention</strong> ou des grues spécialisées posent l'UTI sur un wagon. Le train fait le trajet le plus long jusqu'au terminal de destination.</li>
+    <li><strong>Post-acheminement routier</strong> : l'UTI est reposée sur un châssis routier et livrée au client, préalablement avisé.</li>
+  </ol>
+  <p>Ce schéma demande plus de manutention que le tout-route. Le tout-route reste pertinent sur <strong>courte distance</strong> ; sur longue distance, le <strong>combiné</strong> devient intéressant. En maritime, c'est pareil : le conteneur arrivé au port est mis sur un train, puis sur un camion pour la fin du parcours.</p>
+
+  <h3>7.3 Accompagné ou non accompagné</h3>
+  <div class="grid2">
+    <div class="card"><h4>Non accompagné (le plus répandu)</h4><p>Seule l'<strong>unité de chargement</strong> voyage (conteneur, caisse mobile, semi-remorque). Le chauffeur et le tracteur restent sur place. Demande des terminaux et une organisation importantes.</p></div>
+    <div class="card"><h4>Accompagné (« route roulante »)</h4><p>Le <strong>camion entier</strong> monte par une rampe sur un wagon <strong>surbaissé</strong> (chargement horizontal). Le chauffeur voyage dans une voiture spéciale et reprend son camion à l'arrivée.</p></div>
+  </div>
+  <div class="pm">
+    <div class="plus"><h4>Route roulante : avantages</h4><ul><li>Le temps de train compte comme <strong>temps de repos</strong> du chauffeur dans plusieurs pays</li><li>Chargement et déchargement rapides</li><li>Aucun équipement particulier pour le transporteur</li><li>Grand succès pour traverser les Alpes ; adapté aux distances de 100 à 200 km avec rotations rapides</li></ul></div>
+    <div class="minus"><h4>Route roulante : inconvénients</h4><ul><li>Temps morts importants : charger un train complet prend une demi-journée, le premier camion attend longtemps</li><li>On transporte aussi le poids du tracteur</li></ul></div>
+  </div>
+
+  <h3>7.4 Les techniques de combiné</h3>
+  <div class="grid2">
+    <div class="card"><h4>Conteneurisation</h4><p>Le conteneur standard passe d'un mode à l'autre (mer, fer, route).</p></div>
+    <div class="card"><h4>Transroulage (ro-ro)</h4><p>Le tracteur routier entre avec sa remorque dans le navire par une rampe (<em>roll on / roll off</em>), comme sur un ferry.</p></div>
+    <div class="card"><h4>Ferroutage</h4><p>Rail-route avec 3 techniques : camion complet sur wagon, remorque seule sans tracteur (Kangourou), ou caisse mobile.</p></div>
+    <div class="card"><h4>Rail-route bimodal</h4><p>On remplace les roues de la remorque par des essieux ferroviaires. Utile pour de petits trafics, sans construire de terminal.</p></div>
+  </div>
+  <div class="box def"><span class="tag">Plateforme logistique</span><p>Zone délimitée où plusieurs opérateurs exercent toutes les activités de transport, logistique et distribution, en national et en international. Elle doit être bien équipée pour éviter les <strong>goulots d'étranglement</strong> lors des ruptures de charge, et informatisée pour fluidifier l'information et permettre le flux tendu. Types : <strong>multimodale</strong>, <strong>portuaire</strong>, <strong>aéroportuaire</strong>.</p></div>
+
+  <h3>7.5 Bilan socio-économique du combiné</h3>
+  <p>Le combiné est pris entre deux logiques : celle des <strong>pouvoirs publics</strong> (aménagement, environnement, croissance) et celle du <strong>marché</strong> (concurrence féroce entre entreprises et entre modes).</p>
+  <div class="pm">
+    <div class="plus"><h4>Avantages</h4><ul><li><strong>Macro</strong> (collectivité) : environnement, souplesse de la route + fiabilité du rail, désengorgement des routes, sécurité routière, massification des flux</li><li><strong>Micro</strong> (transporteurs) : ils gardent la maîtrise et le contact client, économisent carburant et entretien, grandissent sans investir autant, gèrent mieux les chauffeurs, et ont droit à <strong>44 tonnes au lieu de 40</strong> autour des chantiers de combiné</li></ul></div>
+    <div class="minus"><h4>Inconvénients et freins</h4><ul><li>Terminaux près des villes : un train d'environ <strong>35 UTI</strong> génère 35 camions × 2 (aller-retour) aux heures de pointe</li><li>Risques de retard et de grèves</li><li>Coût des transbordements</li><li><strong>Déséquilibre des flux</strong> : remonter des caisses vides du sud vers le nord coûte cher</li><li>Réseaux européens hétérogènes ; le train est lent (≈ 37 km/h de moyenne contre 69 km/h pour la route)</li></ul></div>
+  </div>
+  <p>Conditions de développement : soutien des autorités nationales et européennes, <strong>confiance entre rail et route</strong>, tarification correcte et respect de la réglementation routière. C'est la <strong>productivité</strong> qui conditionnera son succès.</p>
+  <div class="box key"><span class="tag">À retenir</span>
+    <ul><li>Multimodal ⊃ intermodal ⊃ combiné. Intermodal = même UTI, pas de rupture de charge.</li><li>Combiné = trajet principal rail / eau / mer + route la plus courte possible au début et à la fin.</li><li>Accompagné (route roulante) / non accompagné (le plus courant).</li><li>Techniques : conteneur, transroulage, ferroutage, rail-route bimodal.</li></ul>
+  </div>
+</section>
+
+<!-- =============== PARTIE 8 =============== -->
+<section class="part" id="p8">
+  <div class="part-head"><span class="part-num">8</span><div><div class="eyebrow">Partie I · Chapitre 1 · D</div><h2>Les acteurs, les prestataires et les Incoterms</h2></div></div>
+  <p>À l'international, tout se complique : éloignement, nombreux documents et informations, risques plus grands. De nombreuses sociétés interviennent, avec des rôles et des responsabilités différents. Dans le transport combiné, on retient <strong>3 acteurs essentiels</strong> : le <strong>chargeur</strong> (celui qui expédie la marchandise), le <strong>transporteur</strong> et le <strong>transitaire</strong>, qui coordonne les deux autres.</p>
+  <h3>8.1 Obligation de moyens ou de résultat : la distinction clé</h3>
+  <div class="grid2">
+    <div class="card"><h4>Mandataire (transitaire simple)</h4><p>Il <strong>exécute les ordres</strong> de son client, qui lui impose les prestataires. <strong>Obligation de moyens</strong> : il n'est responsable que de <strong>ses propres fautes</strong>, pas de celles du transporteur.</p></div>
+    <div class="card"><h4>Commissionnaire de transport</h4><p>Il <strong>choisit librement</strong> l'itinéraire, le mode et les transporteurs pour le compte du client. <strong>Obligation de résultat</strong> : il répond de la bonne fin du transport et des <strong>fautes de ses sous-traitants</strong>.</p></div>
+  </div>
+  <div class="box ex"><span class="tag">Exemple</span><p>Une palette est volée chez le transporteur. Si l'entreprise a passé par un <strong>commissionnaire</strong>, elle se retourne contre lui : il doit l'indemniser, puis il se retourne lui-même contre le transporteur. Si elle a passé par un simple <strong>mandataire</strong> à qui elle avait imposé ce transporteur, elle doit agir directement contre le transporteur.</p></div>
+  <h3>8.2 Les prestataires du transport international</h3>
+  <div class="tbl"><table>
+    <tr><th>Prestataire</th><th>Rôle</th><th>Responsabilité</th></tr>
+    <tr><td><strong>Commissionnaire de transport</strong></td><td>Organisateur de la chaîne : choisit itinéraire, mode et transporteurs, contrôle l'exécution, fait les formalités. Commerçant qui agit <strong>en son nom</strong> pour le compte d'un commettant et fait exécuter par d'autres.</td><td>Obligation de <strong>résultat</strong>, garant des pertes et des fautes de ses substitués.</td></tr>
+    <tr><td><strong>Transitaire portuaire</strong></td><td>Opérations physiques et administratives pour assurer la liaison entre 2 modes. Dans les ports, aéroports, frontières.</td><td>Obligation de <strong>moyens</strong>, n'est pas responsable des fautes du transporteur.</td></tr>
+    <tr><td><strong>Commissionnaire en douane</strong> (aujourd'hui « représentant en douane enregistré »)</td><td>Agréé par la douane pour faire les formalités douanières pour autrui. Déclare la marchandise en son nom. Son recours n'est pas obligatoire : l'importateur peut déclarer lui-même.</td><td>Personnellement responsable envers la douane des <strong>droits, taxes et infractions</strong>.</td></tr>
+    <tr><td><strong>Agent maritime / consignataire</strong></td><td>Représente un ou plusieurs <strong>armateurs</strong> dans les ports : prospecte, trouve le fret, négocie, signe les documents, encaisse le fret.</td><td>Agit pour le compte de l'armateur.</td></tr>
+    <tr><td><strong>Aconier</strong> (manutentionnaire portuaire)</td><td>Chargement et déchargement des navires. Les dockers avaient le monopole de ce travail jusqu'à la réforme de 1992-1994.</td><td>Responsable des opérations de manutention.</td></tr>
+  </table></div>
+  <p>En pratique, les métiers de commissionnaire de transport, transitaire et commissionnaire en douane sont souvent exercés par <strong>la même société</strong>, qu'on appelle couramment « transitaire ». L'importateur ou l'exportateur a deux options : <strong>tout confier à un commissionnaire</strong>, ou <strong>gérer lui-même</strong> une partie du processus pour obtenir de meilleurs tarifs.</p>
+
+  <h3>8.3 Les Incoterms</h3>
+  <div class="box def"><span class="tag">Définition</span><p>Les <strong>Incoterms</strong> (<em>International Commercial Terms</em>) sont des règles définies par la <strong>Chambre de commerce internationale (CCI)</strong> depuis <strong>1936</strong> et révisées régulièrement (version actuelle : <strong>Incoterms 2020</strong>). Ils répartissent entre vendeur et acheteur les <strong>frais</strong>, les <strong>risques</strong>, les <strong>documents</strong> et les <strong>formalités</strong> (transport, assurance, manutention, douane). Il en existe <strong>11</strong>.</p></div>
+  <ul>
+    <li>Ils fixent <strong>qui paie quoi</strong> et <strong>à quel moment le risque passe</strong> du vendeur à l'acheteur.</li>
+    <li>Ils précisent quels documents établir et par qui.</li>
+    <li>Leur emploi est <strong>facultatif</strong>, mais très conseillé car reconnu dans le monde entier.</li>
+    <li>Ils ne concernent que le <strong>vendeur et l'acheteur</strong>, même s'ils renvoient à d'autres contrats (transport, assurance).</li>
+    <li>Ils <strong>ne règlent pas le transfert de propriété</strong>. Les usages locaux priment sur eux.</li>
+  </ul>
+  <div class="tbl"><table>
+    <tr><th>Groupe</th><th>Incoterms</th><th>Idée</th></tr>
+    <tr><td><strong>Tous modes</strong> (7)</td><td>EXW, FCA, CPT, CIP, DAP, DPU, DDP</td><td>Du minimum pour le vendeur (EXW, à l'usine) au maximum (DDP, rendu droits acquittés chez l'acheteur).</td></tr>
+    <tr><td><strong>Maritime et fluvial</strong> (4)</td><td>FAS, FOB, CFR, CIF</td><td>Le risque passe au port d'embarquement (le long du navire ou à bord).</td></tr>
+  </table></div>
+  <div class="box ex"><span class="tag">Les deux extrêmes</span><p><strong>EXW</strong> (<em>Ex Works</em>, à l'usine) : le vendeur met la marchandise à disposition chez lui, l'acheteur fait tout le reste. <strong>DDP</strong> (<em>Delivered Duty Paid</em>, rendu droits acquittés) : le vendeur livre chez l'acheteur et paie tout, y compris le dédouanement à l'import, les droits et taxes. L'étude de cas n°2 demande justement une valeur DDP.</p></div>
+</section>
+
+<!-- =============== PARTIE 9 =============== -->
+<section class="part" id="p9">
+  <div class="part-head"><span class="part-num">9</span><div><div class="eyebrow">Gestion des transports</div><h2>Le coût du transport et les tournées de livraison</h2></div></div>
+  <h3>9.1 Acheter, louer ou sous-traiter ?</h3>
+  <p>Face à un besoin de transport, l'industriel a <strong>3 solutions</strong> : <strong>acheter</strong> des véhicules, les <strong>louer</strong> et les exploiter, ou <strong>sous-traiter</strong> à des transporteurs. Au-delà du coût, il compare :</p>
+  <ul><li>l'<strong>immobilisation du capital</strong> investi dans les camions ;</li><li>le <strong>remplacement</strong> des véhicules en panne ;</li><li>les problèmes de <strong>gestion</strong> et la <strong>responsabilité</strong> des marchandises transportées.</li></ul>
+  <p>Ces critères poussent vers la <strong>sous-traitance</strong>, même si certaines entreprises craignent de perdre la maîtrise du transport. En France, les parcs propres assurent <strong>62 % du transport routier en tonnes</strong>, mais seulement <strong>34 % en tonnes-km</strong> : ils font surtout de courts trajets. Au-delà de <strong>150 km</strong>, on fait très souvent appel à un transporteur.</p>
+  <p>Avec une flotte propre, l'industriel doit faire un métier qu'il connaît mal : gérer le parc (coûts, renouvellement, entretien), comparer ses coûts aux prix des sous-traitants, et l'exploiter (tournées, suivi des chauffeurs).</p>
+
+  <h3>9.2 Les 4 catégories de coûts d'un véhicule</h3>
+  <div class="tbl"><table>
+    <tr><th>Catégorie</th><th>Ce que c'est</th><th>Exemples</th></tr>
+    <tr><td><strong>Coûts fixes</strong></td><td>Payés que le camion roule ou non</td><td>Assurance, taxes, frais financiers, amortissement</td></tr>
+    <tr><td><strong>Coûts variables</strong></td><td>Dépendent du nombre de km parcourus</td><td>Carburant, pneus, entretien, réparations, péages</td></tr>
+    <tr><td><strong>Coûts de personnel et de conduite</strong></td><td>Surtout fixes</td><td>Salaire, heures supplémentaires, primes, frais de déplacement</td></tr>
+    <tr><td><strong>Frais généraux</strong></td><td>Frais administratifs du service transport + une quote-part des frais de la société</td><td>Bureaux, exploitation, comptabilité</td></tr>
+  </table></div>
+  <div class="formula">Coût d'exploitation = frais fixes + (frais variables par km × kilomètres)</div>
+  <div class="box ex"><span class="tag">Exemple du cours, résolu</span>
+    <p>Un camion de 10 tonnes de charge utile coûte <strong>250 000 € par an</strong> de frais fixes et <strong>1,60 € par km</strong>. Il fait <strong>2 circuits par jour</strong> de <strong>250 km</strong> chacun, <strong>230 jours</strong> par an. Combien coûte une tournée ?</p>
+    <ol class="steps">
+      <li>Nombre de tournées par an : 2 × 230 = <strong>460 tournées</strong>.</li>
+      <li>Part des frais fixes par tournée : 250 000 ÷ 460 = <strong>543,48 €</strong>.</li>
+      <li>Frais variables d'une tournée : 250 km × 1,60 € = <strong>400 €</strong>.</li>
+      <li>Coût d'une tournée : 543,48 + 400 = <strong>943,48 €</strong>, soit environ <strong>94,35 € par tonne</strong> livrée si le camion est plein (÷ 10 t).</li>
+    </ol>
+    <p>On peut ensuite comparer ce coût au prix demandé par un transporteur ou un loueur. (Si les frais fixes étaient de 25 000 € par an, la méthode est identique : 54,35 + 400 = 454,35 € par tournée.)</p>
+  </div>
+
+  <h3>9.3 Organiser les tournées de livraison</h3>
+  <p>On livre soit <strong>en direct</strong> (usine → client), soit via un ou plusieurs <strong>dépôts</strong> qui reçoivent les produits par wagons ou camions complets, les stockent puis les livrent en chargements complets ou en <strong>tournées</strong>. Les tournées servent aussi au <strong>ramassage</strong> (collecte de composants chez plusieurs fournisseurs en juste-à-temps).</p>
+  <h4>Le temps d'une tournée</h4>
+  <ol>
+    <li>Manutention et chargement au dépôt (O) ;</li>
+    <li>Trajet d'approche jusqu'au 1<sup>er</sup> client ;</li>
+    <li>Déchargement ;</li>
+    <li>Trajet jusqu'au client suivant (à répéter pour chaque client) ;</li>
+    <li>Retour au dépôt.</li>
+  </ol>
+  <h4>Le circuit d'une commande</h4>
+  <div class="flow">
+    <div class="step"><b>J</b>Les commandes arrivent</div><div class="arrow" aria-hidden="true">→</div>
+    <div class="step"><b>Enregistrement</b>Saisie des commandes</div><div class="arrow" aria-hidden="true">→</div>
+    <div class="step"><b>Tri</b>Par date de livraison</div><div class="arrow" aria-hidden="true">→</div>
+    <div class="step"><b>Bons</b>Édition des bons de livraison</div><div class="arrow" aria-hidden="true">→</div>
+    <div class="step"><b>Tournées</b>Le responsable transport les définit</div><div class="arrow" aria-hidden="true">→</div>
+    <div class="step"><b>Départ</b>Le camion livre</div>
+  </div>
+  <div class="grid2">
+    <div class="card"><h4>Tournée fixe</h4><p>Même circuit chaque semaine (lundi : le 93, mardi : le 94…). Simple, mais <strong>rigide</strong> et ne garantit pas un remplissage optimal du camion.</p></div>
+    <div class="card"><h4>Tournée variable</h4><p>Les tournées sont recomposées <strong>chaque jour selon la demande</strong> (quantités, adresses, véhicules disponibles). On affecte plus de camions aux zones les plus chargées.</p></div>
+  </div>
+
+  <h3>9.4 La méthode des écartements (ou des gains)</h3>
+  <p>L'intuition ne garantit pas le coût minimum, et le nombre de combinaisons est trop grand pour un calcul à la main. Les logiciels d'optimisation utilisent souvent la <strong>méthode des écartements</strong> (connue aussi sous le nom de méthode des gains de Clarke et Wright). Elle cherche à <strong>minimiser la distance</strong> (ou la durée) totale.</p>
+  <div class="box def"><span class="tag">Le principe</span>
+    <p>Un dépôt O et deux clients A et B. Deux façons de les livrer :</p>
+    <ul><li><strong>Schéma 1</strong>, deux allers-retours : 2 × OA + 2 × OB.</li><li><strong>Schéma 2</strong>, une seule tournée O → A → B → O : OA + AB + OB.</li></ul>
+    <p>La différence entre les deux, c'est le <strong>gain</strong> (ou <strong>écartement</strong>) obtenu en mettant A et B dans la même tournée :</p>
+    <div class="formula">Écartement(A, B) = OA + OB − AB</div>
+    <p>Minimiser la longueur totale revient à <strong>maximiser la somme des écartements</strong>. Attention à la <strong>capacité du camion</strong>.</p>
+  </div>
+  <h4>La procédure</h4>
+  <ol class="steps">
+    <li>Calculer l'écartement de <strong>tous les couples</strong> de clients par rapport au dépôt.</li>
+    <li>Les <strong>classer par ordre décroissant</strong>.</li>
+    <li>Prendre les couples dans l'ordre. Écarter ceux qui feraient <strong>passer deux fois par un même point</strong> (un client ne peut avoir que 2 voisins) ou <strong>fermer une boucle</strong> avant la fin. S'arrêter selon les contraintes (tonnage, temps).</li>
+    <li><strong>Relier les deux extrémités</strong> de la chaîne obtenue au dépôt.</li>
+  </ol>
+  <figure>
+    <div class="grid2" style="margin:0;align-items:center">
+      <div class="scroll"><svg viewBox="0 0 300 220" width="100%" role="img" aria-label="Tournée O A B C">
+        <g stroke="var(--sun-deep)" stroke-width="3" fill="none"><path d="M150 190L60 90"/><path d="M60 90L150 40"/><path d="M150 40L240 100"/><path d="M240 100L150 190"/></g>
+        <g stroke="var(--muted)" stroke-width="1.5" stroke-dasharray="4 4"><path d="M150 190L150 40"/><path d="M60 90L240 100"/></g>
+        <g font-size="12" class="mut"><text x="88" y="150" class="mut">10</text><text x="92" y="58" class="mut">6</text><text x="200" y="62" class="mut">9</text><text x="200" y="158" class="mut">8</text><text x="156" y="120" class="mut">12</text><text x="110" y="88" class="mut">14</text></g>
+        <g><circle cx="150" cy="190" r="14" fill="var(--sun)"/><text x="150" y="195" text-anchor="middle" font-weight="700" style="fill:#2a2312">O</text>
+        <circle cx="60" cy="90" r="13" fill="var(--paper)" stroke="var(--ink)"/><text x="60" y="95" text-anchor="middle" font-weight="700">A</text>
+        <circle cx="150" cy="40" r="13" fill="var(--paper)" stroke="var(--ink)"/><text x="150" y="45" text-anchor="middle" font-weight="700">B</text>
+        <circle cx="240" cy="100" r="13" fill="var(--paper)" stroke="var(--ink)"/><text x="240" y="105" text-anchor="middle" font-weight="700">C</text></g>
+      </svg></div>
+      <div class="tbl" style="margin:0"><table>
+        <tr><th>Couple</th><th class="num">Calcul</th><th class="num">Écartement</th></tr>
+        <tr><td>A-B</td><td class="num">10 + 12 − 6</td><td class="num"><strong>16</strong></td></tr>
+        <tr><td>B-C</td><td class="num">12 + 8 − 9</td><td class="num"><strong>11</strong></td></tr>
+        <tr><td>A-C</td><td class="num">10 + 8 − 14</td><td class="num">4</td></tr>
+      </table></div>
+    </div>
+    <figcaption>Exemple d'entraînement (distances en km) : OA = 10, OB = 12, OC = 8, AB = 6, BC = 9, AC = 14.</figcaption>
+  </figure>
+  <div class="box ex"><span class="tag">Exemple résolu</span>
+    <ol>
+      <li>Classement : A-B (16), B-C (11), A-C (4).</li>
+      <li>On retient <strong>A-B</strong>, puis <strong>B-C</strong> : la chaîne est A-B-C.</li>
+      <li><strong>A-C</strong> fermerait la boucle sans passer par le dépôt : on l'écarte.</li>
+      <li>On relie les extrémités A et C au dépôt : tournée <strong>O → A → B → C → O</strong> = 10 + 6 + 9 + 8 = <strong>33 km</strong>.</li>
+    </ol>
+    <p>Sans regroupement (3 allers-retours) : 2 × (10 + 12 + 8) = 60 km. Gain = 60 − 33 = <strong>27 km</strong> = 16 + 11, la somme des écartements retenus.</p>
+  </div>
+  <div class="box trap"><span class="tag">Contraintes</span><p>Chaque contrainte ajoutée <strong>dégrade</strong> la solution. Dans l'exercice fait en cours, la tournée unique faisait 125 km pour 10 tonnes ; avec un camion limité à 5 tonnes, il a fallu <strong>2 voyages</strong> (4,9 t sur 67 km, puis 4,2 t sur 72 km), soit <strong>139 km au lieu de 125</strong>. Une contrainte horaire (certains clients à livrer avant midi) dégrade encore le résultat. La méthode donne aussi de meilleurs résultats si l'on choisit à chaque étape le couple qui maximise la <strong>somme des écartements</strong> encore possibles, pas seulement le plus grand écartement.</p></div>
+</section>
+
+<!-- =============== PARTIE 10 =============== -->
+<section class="part" id="p10">
+  <div class="part-head"><span class="part-num">10</span><div><div class="eyebrow">La logistique et les stocks</div><h2>La gestion des stocks</h2></div></div>
+  <p>Les stocks représentent <strong>20 à 80 % de l'actif</strong> du bilan selon les produits. Ils permettent de livrer le client plus vite que le temps de réapprovisionnement. Bien les gérer, c'est remplir cette fonction <strong>au meilleur coût</strong>. Comme il y a des centaines ou des milliers de références, on définit des <strong>règles</strong> par groupe d'articles au comportement semblable.</p>
+  <div class="grid2">
+    <div class="card"><h4>Quand commander ?</h4><p>Soit à <strong>date fixe</strong> (par exemple chaque semaine), soit quand le stock passe sous un <strong>seuil</strong> (stock d'alerte ou <strong>point de commande</strong>).</p></div>
+    <div class="card"><h4>Combien commander ?</h4><p>Si on commande à un seuil : toujours la <strong>même quantité</strong>. Si on commande à date fixe : une <strong>quantité variable</strong>. L'un des deux (temps ou quantité) doit varier pour suivre la demande.</p></div>
+  </div>
+
+  <h3>10.1 Le système à point de commande</h3>
+  <p><strong>Quantité fixe, périodicité variable.</strong> On commande dès que le stock descend au point de commande. Il faut suivre le stock <strong>en permanence</strong> (une fiche de stock par article suffit).</p>
+  <div class="formula">Point de commande = demande moyenne pendant le délai d'obtention + stock de sécurité</div>
+  <figure>
+    <div class="scroll"><svg viewBox="0 0 600 240" width="100%" style="min-width:480px" role="img" aria-label="Courbe en dents de scie du stock avec point de commande et stock de sécurité">
+      <line x1="50" y1="200" x2="580" y2="200" stroke="var(--muted)"/><line x1="50" y1="20" x2="50" y2="200" stroke="var(--muted)"/>
+      <line x1="50" y1="110" x2="580" y2="110" stroke="var(--sun-deep)" stroke-width="2" stroke-dasharray="6 4"/>
+      <line x1="50" y1="170" x2="580" y2="170" stroke="var(--ko)" stroke-width="2" stroke-dasharray="3 4"/>
+      <polyline fill="none" stroke="var(--asphalt)" stroke-width="3" points="50,40 170,110 230,145 230,45 340,110 400,148 400,48 510,110 570,150"/>
+      <g stroke="var(--ink)" stroke-width="1.5"><line x1="170" y1="110" x2="170" y2="200" stroke-dasharray="2 3"/><line x1="230" y1="145" x2="230" y2="200" stroke-dasharray="2 3"/></g>
+      <path d="M170 188H228" stroke="var(--ink)" stroke-width="1.5"/>
+      <g font-size="11"><text x="168" y="216" class="mut">commande</text><text x="225" y="230" class="mut">livraison</text><text x="176" y="184" class="mut">délai</text>
+      <text x="440" y="104" font-weight="700">point de commande</text><text x="440" y="186" class="mut">stock de sécurité</text><text x="8" y="28" class="mut">stock</text><text x="545" y="216" class="mut">temps</text></g>
+    </svg></div>
+    <figcaption>Le stock baisse avec la consommation. Quand il touche le point de commande, on commande ; la livraison arrive après le délai d'obtention, avant d'entamer le stock de sécurité.</figcaption>
+  </figure>
+  <p>Point de commande trop <strong>haut</strong> : stock moyen et coût de possession élevés. Trop <strong>bas</strong> : risque de <strong>rupture</strong>. Ce système convient quand la <strong>demande varie beaucoup</strong>, pour les articles chers ou vitaux qu'il faut protéger des ruptures, avec une production souple ou un fournisseur qui a du stock.</p>
+
+  <h3>10.2 Le système à recomplètement périodique</h3>
+  <p><strong>Périodicité fixe, quantité variable.</strong> Tous les T (chaque mois par exemple), on regarde le stock et on commande de quoi le ramener à un <strong>niveau de recomplètement</strong>.</p>
+  <div class="formula">Niveau de recomplètement = demande moyenne pendant (une période + le délai d'obtention) + stock de sécurité</div>
+  <p>Avantage : on peut <strong>grouper les commandes</strong> par fournisseur, ce qui réduit les frais administratifs et de transport. Inconvénient : le système est « <strong>aveugle</strong> » entre deux contrôles, donc on augmente le stock de sécurité. Il convient pour une demande et un délai <strong>peu variables</strong>, et pour des articles de <strong>faible valeur</strong>.</p>
+
+  <h3>10.3 Les deux systèmes mixtes</h3>
+  <div class="grid2">
+    <div class="card"><h4>Point de commande périodique</h4><p>On ne commande qu'à <strong>date fixe</strong> ET seulement si le stock est <strong>sous le point de commande</strong>.</p></div>
+    <div class="card"><h4>Recomplètement périodique avec seuil</h4><p>À la fin de chaque période, on commande seulement si le stock est sous un <strong>seuil</strong>. Cela évite les toutes petites commandes quand la demande a été faible.</p></div>
+  </div>
+  <div class="tbl"><table>
+    <tr><th>Système</th><th>Quand ?</th><th>Combien ?</th></tr>
+    <tr><td>Point de commande</td><td>Dès que le stock atteint le point de commande</td><td>Quantité fixe</td></tr>
+    <tr><td>Recomplètement périodique</td><td>À date fixe</td><td>Quantité variable (jusqu'au niveau de recomplètement)</td></tr>
+    <tr><td>Point de commande périodique</td><td>À date fixe, si stock &lt; point de commande</td><td>Quantité fixe</td></tr>
+    <tr><td>Recomplètement périodique avec seuil</td><td>À date fixe, si stock &lt; seuil</td><td>Quantité variable</td></tr>
+  </table></div>
+
+  <div class="box ex"><span class="tag">Exercice du cours, résolu</span>
+    <p>Un article est consommé à raison de <strong>390 pièces en 13 semaines</strong> (semaine de 5 jours). Le délai d'approvisionnement est de <strong>3 semaines</strong>.</p>
+    <ol class="steps">
+      <li><strong>Consommation</strong> : 390 ÷ 13 = <strong>30 pièces par semaine</strong>, soit 30 ÷ 5 = <strong>6 pièces par jour</strong>.</li>
+      <li><strong>Point de commande de base</strong> : 30 × 3 semaines = <strong>90 pièces</strong>. Quand il en reste 90, on commande, et la livraison arrive quand le stock tombe à zéro.</li>
+      <li><strong>Avec 2 jours de délai administratif en plus</strong> : 3 semaines = 15 jours ouvrés, + 2 jours = 17 jours. 6 × 17 = <strong>102 pièces</strong>. Le stock supplémentaire immobilisé est 102 − 90 = 12 pièces.</li>
+      <li><strong>Avec un stock de sécurité de 3 jours</strong> : 6 × 3 = 18 pièces. Nouveau point de commande = 102 + 18 = <strong>120 pièces</strong>.</li>
+    </ol>
+  </div>
+  <div class="box key"><span class="tag">À retenir</span><ul><li>2 questions : <strong>quand</strong> et <strong>combien</strong> commander.</li><li>Point de commande = demande pendant le délai + stock de sécurité (quantité fixe, date variable).</li><li>Recomplètement = date fixe, quantité variable, possibilité de grouper.</li><li>Trop de stock = coût de possession ; trop peu = rupture.</li></ul></div>
+</section>
+
+<!-- =============== CAS 1 =============== -->
+<section class="part" id="cas1">
+  <div class="part-head"><span class="part-num">C1</span><div><div class="eyebrow">Étude de cas n°1 · Transport routier de marchandises</div><h2>ETUDIANT EXPRESS : Orly → Barcelone</h2></div></div>
+  <div class="box def"><span class="tag">L'énoncé en bref</span>
+    <p>Tu es gestionnaire de transport chez <strong>SARL ETUDIANT EXPRESS</strong>, transporteur public routier « toutes distances » installé à <strong>Boisseuil</strong> (15 km au sud de Limoges). Le client <strong>ABC</strong> (Nanterre) demande un <strong>lot complet Orly → Barcelone</strong> le mardi 14 octobre. Ton camion vide est à <strong>Troyes</strong>. Pour le retour, tu as trouvé sur une <strong>bourse de fret</strong> un chargement du commissionnaire <strong>DEF</strong> : <strong>Perpignan → Brive</strong>, à livrer le vendredi 17. Puis le camion rentre au dépôt.</p>
+  </div>
+  <figure>
+    <div class="flow">
+      <div class="step"><b>Troyes → Orly</b>160 km à vide</div><div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>Orly → Barcelone</b>1 050 km, chargé (ABC)</div><div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>Barcelone → Perpignan</b>200 km à vide</div><div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>Perpignan → Brive</b>400 km, chargé (DEF)</div><div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>Brive → Boisseuil</b>90 km à vide</div>
+    </div>
+    <figcaption>Le parcours complet du camion : 1 900 km dont 450 km à vide.</figcaption>
+  </figure>
+
+  <div class="answer"><h4>Question 1. Les avantages du transport routier</h4>
+    <ul>
+      <li><strong>Porte-à-porte</strong> : grâce à la quasi-ubiquité du réseau, le camion va de l'expéditeur au destinataire sans changer de véhicule, donc <strong>sans rupture de charge</strong>.</li>
+      <li><strong>Souplesse et disponibilité</strong> : pas d'horaire imposé, départ dès que la marchandise est prête ; idéal pour le <strong>flux tendu</strong>.</li>
+      <li><strong>Rapidité</strong> sur courte et moyenne distance (jusqu'à environ 1 000 km), délais fiables.</li>
+      <li><strong>Peu de manutentions</strong>, donc moins de casse et de vols.</li>
+      <li><strong>Adapté à toutes les marchandises</strong> grâce à des véhicules spécialisés (frigorifique, citerne, plateau).</li>
+      <li><strong>Prix compétitifs</strong> grâce à la forte concurrence, et <strong>suivi</strong> simple de l'envoi.</li>
+    </ul>
+  </div>
+
+  <div class="answer"><h4>Question 2. Pourquoi ABC a choisi ETUDIANT EXPRESS</h4>
+    <ul>
+      <li><strong>Il a le droit de faire ce transport</strong> : c'est une entreprise de transport public routier « toutes distances », titulaire de la licence communautaire qui permet le transport international dans l'UE.</li>
+      <li><strong>Un lot complet</strong> : le camion entier est réservé à ABC, il va directement d'Orly à Barcelone, sans groupage ni transbordement. C'est plus rapide et plus sûr.</li>
+      <li><strong>Un véhicule disponible au bon moment</strong> : l'ensemble routier vide est à Troyes, à 160 km d'Orly, donc il peut charger le mardi 14.</li>
+      <li><strong>Un prix compétitif</strong> : le transporteur a trouvé un fret de retour (Perpignan → Brive) sur une bourse de fret. Il réduit les kilomètres à vide et peut donc proposer un meilleur prix à ABC (c'est ce que montre la question 5).</li>
+      <li><strong>La route est le mode le plus adapté</strong> : distance d'environ 1 000 km, livraison en un jour et demi, pas de rupture de charge, alors que le rail ou le combiné imposeraient des terminaux et des délais.</li>
+    </ul>
+  </div>
+
+  <div class="answer"><h4>Question 3. L'itinéraire Orly → Barcelone (annexe 1)</h4>
+    <p>On additionne les tronçons de la carte (km et péages) pour chaque itinéraire possible. Les tronçons Orly → première barrière (50 km) et Parets → Barcelone (23 km) n'ont pas de péage indiqué.</p>
+    <div class="tbl"><table>
+      <tr><th>Itinéraire</th><th>Tronçons</th><th class="num">Km</th><th class="num">Péages</th></tr>
+      <tr><td><strong>A20 via Limoges</strong> (Vierzon, Brive, Toulouse)</td><td>50 + 447 (49 €) + 167 (42 €) + 213 (49 €) + 150 (22 €) + 23</td><td class="num"><strong>1 050</strong></td><td class="num"><strong>162 €</strong></td></tr>
+      <tr><td>A75 via Clermont-Ferrand et le viaduc de Millau</td><td>50 + 360 (100 €) + 231 (26 €) + 226 (28 €) + 150 (22 €) + 23</td><td class="num">1 040</td><td class="num">176 €</td></tr>
+      <tr><td>A6 / A7 via Lyon et Montpellier</td><td>50 + 470 (83 €) + 269 (60 €) + 163 (39 €) + 150 (22 €) + 23</td><td class="num">1 125</td><td class="num">204 €</td></tr>
+      <tr><td>A10 via Tours et Bordeaux</td><td>50 + 189 (56 €) + 342 (79 €) + 226 (47 €) + 213 (49 €) + 150 (22 €) + 23</td><td class="num">1 193</td><td class="num">253 €</td></tr>
+    </table></div>
+    <p><strong>Réponse :</strong> on retient l'itinéraire par l'<strong>A20 via Limoges, Brive et Toulouse</strong> : <strong>1 050 km</strong> (c'est la distance donnée à l'annexe 2) et <strong>162 €</strong> de péages, le moins cher de tous, car l'A20 entre Vierzon et Brive est gratuite.</p>
+    <div class="box trap"><span class="tag">À bien argumenter</span><p>Sur la carte, l'A75 semble 10 km plus courte, mais elle coûte 14 € de péage de plus et traverse le <strong>Massif central</strong> (fortes pentes, cols, neige l'hiver) : un poids lourd y consomme plus et roule moins vite. L'A20 est donc le meilleur compromis distance-coût, et elle passe près du dépôt de Boisseuil, ce qui facilite l'exploitation.</p></div>
+  </div>
+
+  <div class="answer"><h4>Question 4. Le coût de revient global des deux transports (annexe 2)</h4>
+    <p><strong>Étape 1, la distance totale</strong> (les trajets à vide comptent) : 160 + 1 050 + 200 + 400 + 90 = <strong>1 900 km</strong>.</p>
+    <p><strong>Étape 2, les frais de déplacement du chauffeur.</strong> À l'étranger, les indemnités sont majorées de 18 % : repas Espagne = 13,06 × 1,18 = 15,41 € ; nuit Espagne = 28,71 × 1,18 = 33,88 €.</p>
+    <div class="tbl"><table>
+      <tr><th>Frais</th><th class="num">Calcul</th><th class="num">Montant</th></tr>
+      <tr><td>4 repas en France</td><td class="num">4 × 13,06</td><td class="num">52,24 €</td></tr>
+      <tr><td>2 nuits en France</td><td class="num">2 × 28,71</td><td class="num">57,42 €</td></tr>
+      <tr><td>2 repas en Espagne</td><td class="num">2 × 15,41</td><td class="num">30,82 €</td></tr>
+      <tr><td>1 nuit en Espagne</td><td class="num">1 × 33,88</td><td class="num">33,88 €</td></tr>
+      <tr class="total"><td>Total frais de déplacement</td><td class="num"></td><td class="num">174,36 €</td></tr>
+    </table></div>
+    <p><strong>Étape 3, le tableau du coût de revient.</strong></p>
+    <div class="tbl"><table>
+      <tr><th>Poste</th><th>Type</th><th class="num">Calcul</th><th class="num">Montant HT</th></tr>
+      <tr><td>Carburant</td><td>Variable</td><td class="num">1 900 × 35/100 = 665 l × 1,30</td><td class="num">864,50 €</td></tr>
+      <tr><td>Pneumatiques</td><td>Variable</td><td class="num">1 900 × 0,031</td><td class="num">58,90 €</td></tr>
+      <tr><td>Entretien, réparations</td><td>Variable</td><td class="num">1 900 × 0,074</td><td class="num">140,60 €</td></tr>
+      <tr><td>Péages</td><td>Variable</td><td class="num">forfait de l'annexe</td><td class="num">302,00 €</td></tr>
+      <tr><td>Personnel</td><td>Conduite</td><td class="num">30 h × 23</td><td class="num">690,00 €</td></tr>
+      <tr><td>Frais de déplacement</td><td>Conduite</td><td class="num">étape 2</td><td class="num">174,36 €</td></tr>
+      <tr><td>Charges fixes</td><td>Fixe</td><td class="num">4 jours × 180</td><td class="num">720,00 €</td></tr>
+      <tr class="total"><td>Coût de revient global</td><td></td><td class="num"></td><td class="num">2 950,36 €</td></tr>
+    </table></div>
+  </div>
+
+  <div class="answer"><h4>Question 5. Le prix de vente HT pour ABC</h4>
+    <ol class="steps">
+      <li><strong>Marge</strong> : 12 % × 2 950,36 = <strong>354,04 €</strong>.</li>
+      <li><strong>Chiffre d'affaires total à obtenir</strong> sur les deux transports : 2 950,36 + 354,04 = <strong>3 304,40 €</strong> (ou 2 950,36 × 1,12).</li>
+      <li><strong>Ce que paie déjà DEF</strong> pour le retour : 470 € HT.</li>
+      <li><strong>Prix à facturer à ABC</strong> : 3 304,40 − 470 = 2 834,40, arrondi à <strong>2 834 € HT</strong>.</li>
+    </ol>
+    <p class="simple">Logique : le fret de retour paie une partie des coûts, donc ABC paie moins que si le camion était revenu à vide. C'est l'intérêt de la bourse de fret.</p>
+  </div>
+
+  <div class="answer"><h4>Question 6. La TVA</h4>
+    <p><strong>Oui</strong>, le prix est soumis à la TVA, et c'est la <strong>TVA française (20 %)</strong> qui s'applique.</p>
+    <p><strong>Justification :</strong> c'est un transport de biens <strong>entre deux pays de l'UE</strong>, pour un client <strong>professionnel</strong> (assujetti à la TVA). Pour une prestation de services entre professionnels, la règle générale est que la TVA est due dans le pays où le <strong>client (preneur) est établi</strong> (art. 259 du CGI, art. 44 de la directive TVA). ABC est établi à Nanterre, en France. ETUDIANT EXPRESS étant aussi français, il facture la TVA française : 2 834 × 1,20 = <strong>3 400,80 € TTC</strong>.</p>
+    <p class="simple">Ce n'est pas une exportation hors UE (qui serait exonérée) : l'Espagne fait partie du marché unique.</p>
+  </div>
+
+  <div class="answer"><h4>Question 7. Un transport à l'intérieur de l'Espagne ?</h4>
+    <p><strong>Oui</strong>, sous conditions. Un transporteur établi dans un pays de l'UE et titulaire de la <strong>licence communautaire</strong> peut faire un transport national dans un autre État membre, à titre temporaire. Cette opération s'appelle le <strong>cabotage</strong> routier.</p>
+    <p>Règles (règlement CE 1072/2009 modifié par le paquet mobilité) : le cabotage doit suivre un transport international chargé (ici Orly → Barcelone) ; au maximum <strong>3 opérations de cabotage en 7 jours</strong> après le déchargement ; puis une pause de <strong>4 jours</strong> avant de pouvoir refaire du cabotage dans ce pays avec le même véhicule.</p>
+  </div>
+  <div class="box key"><span class="tag">À retenir du cas n°1</span><ul><li>Toujours compter les <strong>kilomètres à vide</strong> dans le coût de revient.</li><li>Coût de revient = variables (carburant, pneus, entretien, péages) + personnel et déplacements + fixes.</li><li>Prix au client = coût × (1 + marge) − recette du fret de retour.</li><li>TVA d'un transport intra-UE entre professionnels : pays du client. Transport national par un étranger : <strong>cabotage</strong>.</li></ul></div>
+</section>
+
+<!-- =============== CAS 2 =============== -->
+<section class="part" id="cas2">
+  <div class="part-head"><span class="part-num">C2</span><div><div class="eyebrow">Étude de cas n°2 · Approvisionnement et importation</div><h2>SAS et l'équipe de France de tennis de table</h2></div></div>
+  <div class="box def"><span class="tag">L'énoncé en bref</span>
+    <p><strong>SAS</strong> (Sport Attitude Sélection), centrale d'achats, est fournisseur officiel de l'équipe de France de tennis de table (maillots, shorts, chaussettes, survêtements). Elle achète en France et à l'étranger, fait personnaliser les vêtements par son sous-traitant <strong>FEE</strong> (flocage), et confie ses transports internationaux au commissionnaire <strong>TIC</strong>. Tu travailles chez TIC : les équipements doivent arriver à temps pour l'ouverture de la compétition au Japon.</p>
+    <p>Le parcours : maillots fabriqués au <strong>Maroc</strong> (Tanger) → camion <strong>FM TRANSPORTS</strong> → <strong>Besançon</strong> (dédouanement, flocage, stockage) → <strong>Tokyo</strong> par bateau (Le Havre) ou par avion (Roissy).</p>
+  </div>
+  <div class="box trap"><span class="tag">Les annexes chiffrées</span><p>Le PDF de l'étude de cas contient l'énoncé et les questions, mais pas les annexes avec les chiffres (dimensions des cartons, prix, tarifs, calendrier des navires). Voici donc la <strong>méthode complète</strong> pour chaque question, avec les formules et les dates données en cours. Il suffira de remplacer par les chiffres des annexes.</p></div>
+
+  <h3>A. L'approvisionnement au Maroc</h3>
+  <div class="answer"><h4>A.1.1 Combien de cartons sur une palette ?</h4>
+    <ol class="steps">
+      <li><strong>Au sol</strong> : combien de cartons tiennent sur une couche ? Diviser chaque côté de la palette par un côté du carton, garder la partie entière, et tester les deux orientations. Palette européenne : 1,20 m × 0,80 m.</li>
+      <li><strong>En hauteur</strong> : nombre de couches = (hauteur maximale autorisée − hauteur de la palette vide, environ 0,15 m) ÷ hauteur du carton, partie entière.</li>
+      <li>Cartons par palette = cartons par couche × nombre de couches.</li>
+      <li>Caractéristiques de la palette : <strong>poids</strong> = poids des cartons + poids de la palette vide (environ 25 kg) ; <strong>nombre de maillots</strong> = cartons × maillots par carton ; <strong>dimensions</strong> = 1,20 × 0,80 × hauteur totale.</li>
+    </ol>
+    <div class="box ex"><span class="tag">Exemple chiffré d'entraînement</span><p>Cartons de 0,40 × 0,40 × 0,50 m (soit 0,08 m³, le format utilisé en cours) sur palette 1,20 × 0,80, hauteur maximale 1,65 m. Au sol : (1,20 ÷ 0,40) × (0,80 ÷ 0,40) = 3 × 2 = 6 cartons. En hauteur : (1,65 − 0,15) ÷ 0,50 = 3 couches. Total : <strong>18 cartons par palette</strong>. Avec 40 maillots par carton : 720 maillots par palette.</p></div>
+  </div>
+  <div class="answer"><h4>A.1.2 Nombre de palettes et de camions</h4>
+    <p>Palettes = nombre total de maillots ÷ maillots par palette, <strong>arrondi au supérieur</strong> (on ne coupe pas une palette). Une semi-remorque standard (13,60 m × 2,45 m) prend <strong>33 palettes européennes</strong> au sol, dans la limite de sa charge utile (environ 24 à 25 t). Camions = palettes ÷ 33, arrondi au supérieur, en vérifiant aussi le poids.</p>
+  </div>
+  <div class="answer"><h4>A.2.1 Le calendrier Tanger → Besançon</h4>
+    <p>On part de la date d'arrivée voulue et on <strong>remonte le temps</strong> (rétro-planning), opération par opération : enlèvement chez le fournisseur et chargement, dédouanement export au Maroc, passage du détroit (ferry Tanger Med → Algeciras, le camion monte à bord : transroulage), trajet routier en Espagne et en France (en tenant compte des temps de conduite et de repos et des interdictions de circuler le week-end), arrivée et dédouanement import à Besançon. Présenter sous forme de calendrier jour par jour.</p>
+  </div>
+  <div class="answer"><h4>A.2.2 Les instructions à FM TRANSPORTS</h4>
+    <div class="grid3">
+      <div class="card"><h4>Le délai</h4><p>Indiquer une <strong>date de livraison impérative</strong> sur la lettre de voiture <strong>CMR</strong> (la convention sur le transport international routier, dont le Maroc et la France sont parties) ; demander un double équipage si nécessaire ; exiger un suivi (tracking) et une alerte en cas de retard.</p></div>
+      <div class="card"><h4>La sécurité</h4><p>Camion bâché ou fourgon <strong>fermé et plombé</strong> (scellés notés sur la CMR) ; arrêts uniquement sur des <strong>parkings sécurisés</strong> ; pas de transbordement ; vérification du nombre de colis au chargement ; assurance « ad valorem » si la valeur dépasse les limites légales.</p></div>
+      <div class="card"><h4>Les intérêts du destinataire</h4><p>À la livraison, <strong>compter les colis</strong> avant de signer ; en cas de manquant ou de dommage, écrire des <strong>réserves précises</strong> sur la CMR, contresignées par le chauffeur. Pour les dommages non apparents, réserves écrites sous 7 jours (dimanches et fériés exclus).</p></div>
+    </div>
+  </div>
+  <div class="answer"><h4>A.3 Valeur de la marchandise rendue à Besançon non dédouanée</h4>
+    <div class="formula">Valeur rendue non dédouanée = prix d'achat (ex. EXW ou FCA Tanger) + frais jusqu'à Besançon (transport, ferry, assurance, formalités export)</div>
+    <p>Cela correspond à une valeur de type <strong>DAP Besançon</strong> : livrée, mais sans les droits et la TVA à l'import.</p>
+  </div>
+
+  <h3>B. Le transit à Besançon</h3>
+  <div class="answer"><h4>B.1 Le litige : des cartons manquants</h4>
+    <ol class="steps">
+      <li><strong>Les faits</strong> : à l'arrivée, le nombre de cartons livrés est inférieur au nombre chargé à Tanger (comparer la CMR, la liste de colisage et le décompte à l'arrivée).</li>
+      <li><strong>Les obligations et responsabilités</strong> :
+        <ul>
+          <li><strong>FM TRANSPORTS</strong> (transporteur) : il a une obligation de résultat, livrer la totalité des colis. Il est <strong>présumé responsable</strong> des pertes entre la prise en charge et la livraison (CMR), sauf preuve d'un cas d'exonération. Son indemnisation est limitée à <strong>8,33 DTS par kg</strong> de poids brut manquant, sauf déclaration de valeur.</li>
+          <li><strong>TIC</strong> (commissionnaire de transport) : il a choisi le transporteur, donc obligation de résultat. Il est <strong>garant des fautes de FM TRANSPORTS</strong> envers SAS.</li>
+          <li><strong>SAS</strong> (donneur d'ordre) : doit avoir fourni des informations exactes (nombre de colis, emballage adapté).</li>
+        </ul>
+      </li>
+      <li><strong>Les mesures vis-à-vis du donneur d'ordre (SAS)</strong> : l'informer immédiatement ; faire porter des réserves précises sur la CMR ; faire constater les manquants ; adresser une <strong>lettre de réclamation</strong> au transporteur (et déclarer le sinistre à l'assurance) ; surtout, <strong>relancer une commande ou un envoi urgent</strong> des maillots manquants pour que l'équipe de France soit équipée à temps. Le délai pour agir contre le transporteur sous CMR est en principe d'<strong>un an</strong>.</li>
+    </ol>
+  </div>
+  <div class="answer"><h4>B.2 Le dédouanement à l'import</h4>
+    <ol class="steps">
+      <li><strong>Valeur en douane</strong> = valeur de la marchandise + frais de transport et d'assurance <strong>jusqu'à l'entrée dans l'UE</strong> (ici le port d'Algeciras). Les frais après la frontière n'y entrent pas.</li>
+      <li><strong>Droits de douane</strong> = valeur en douane × taux du tarif douanier. Point important : grâce à l'<strong>accord d'association UE-Maroc</strong>, des maillots d'origine marocaine peuvent entrer à <strong>0 % de droits</strong>, à condition de prouver l'origine (certificat EUR.1 ou déclaration d'origine). Sinon, on applique le taux de l'annexe.</li>
+      <li><strong>TVA à l'import</strong> = 20 % × (valeur en douane + droits de douane + frais jusqu'au premier lieu de destination en France, Besançon).</li>
+      <li><strong>Valeur DDP Besançon</strong> = valeur rendue non dédouanée (A.3) + droits de douane + TVA import (+ frais de dédouanement). <strong>Valeur unitaire DDP</strong> = valeur DDP ÷ nombre de maillots.</li>
+    </ol>
+  </div>
+
+  <h3>C. L'expédition vers le Japon</h3>
+  <div class="answer"><h4>C.1 Par voie maritime : les dates (données du cours)</h4>
+    <p>La marchandise doit être à Tokyo <strong>le 16 mai au plus tard</strong>. Le seul navire possible part du <strong>Havre le 7 avril</strong> et arrive à <strong>Tokyo le 14 mai</strong>.</p>
+    <p>On remonte depuis le 7 avril : présentation de la marchandise pour l'embarquement <strong>2 jours</strong> avant, transit au Havre <strong>2 jours</strong>, transport routier Besançon → Le Havre <strong>1 jour</strong>. Soit <strong>5 jours</strong> de battement : la marchandise doit <strong>quitter Besançon le 2 avril</strong>.</p>
+    <div class="flow">
+      <div class="step"><b>2 avril</b>Départ de Besançon</div><div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>2 → 7 avril</b>Route (1 j), transit au port (2 j), présentation à l'embarquement (2 j)</div><div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>7 avril</b>Départ du Havre</div><div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>14 mai</b>Arrivée à Tokyo</div><div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>16 mai</b>Date limite</div>
+    </div>
+  </div>
+  <div class="answer"><h4>C.1.3 Le coût de stockage</h4>
+    <p>Pour chaque catégorie d'article : <strong>durée de stockage</strong> = date de départ de Besançon − date d'arrivée de l'article à Besançon (en jours). Puis :</p>
+    <div class="formula">Coût de stockage = volume stocké (m³) × nombre de jours × tarif par m³ et par jour</div>
+    <p>Le volume d'un carton de 0,40 × 0,40 × 0,50 m est <strong>0,08 m³</strong>. Volume stocké = nombre de cartons × 0,08. Présenter un tableau : article, nombre de cartons, volume, date d'arrivée, nombre de jours, coût à Besançon, puis le stockage à Tokyo (du 14 mai jusqu'à la remise au client).</p>
+  </div>
+  <div class="answer"><h4>C.1.4 à C.1.6 Pré-acheminement, fret maritime, coût total</h4>
+    <ul>
+      <li><strong>Pré-acheminement</strong> Besançon → Le Havre : tarif routier selon l'annexe (au camion, à la palette ou au poids).</li>
+      <li><strong>Fret maritime</strong> : on paie à l'<strong>unité payante</strong>, la règle « 1 tonne = 1 m³ ». On compare le poids en tonnes et le volume en m³, et on retient le <strong>plus grand</strong> des deux. Fret = unités payantes × tarif, + surcharges (BAF pour le carburant, CAF pour le change, frais de manutention portuaire THC). Pour des vêtements, légers et volumineux, c'est en général le volume qui compte.</li>
+      <li><strong>Coût total maritime</strong> = stockage + pré-acheminement + fret maritime + frais au départ et à l'arrivée.</li>
+    </ul>
+  </div>
+  <div class="answer"><h4>C.2 Par voie aérienne</h4>
+    <ul>
+      <li><strong>Date de départ de Roissy</strong> : date limite à Tokyo − durée du vol et des formalités (selon l'annexe). La marchandise peut partir beaucoup plus tard qu'en maritime, donc le stockage est plus long à Besançon mais il n'y a presque pas de stock en transit.</li>
+      <li><strong>Poids taxable</strong> en aérien : on compare le poids réel et le <strong>poids volumétrique</strong>, avec la règle IATA <strong>1 m³ = 167 kg</strong> (soit 1 kg pour 6 dm³), et on retient le plus grand.</li>
+      <li><strong>Fret aérien</strong> = poids taxable × tarif au kg (souvent dégressif par tranche de poids) + surcharges (carburant, sûreté).</li>
+      <li><strong>Coût total aérien</strong> = stockage + pré-acheminement Besançon → Roissy + fret aérien + frais.</li>
+    </ul>
+    <div class="box ex"><span class="tag">Exemple chiffré d'entraînement</span><p>100 cartons de 0,08 m³ et 12 kg chacun. Poids réel : 1 200 kg. Volume : 8 m³, soit un poids volumétrique de 8 × 167 = 1 336 kg. On paie sur <strong>1 336 kg</strong>. En maritime, 1,2 t contre 8 m³ : on paie <strong>8 unités payantes</strong>.</p></div>
+  </div>
+  <div class="answer"><h4>C.3 Le choix motivé</h4>
+    <p><strong>Prix facturé par SAS</strong> = coût d'achat DDP + flocage + coût de l'expédition choisie + marge de SAS (selon l'annexe), pour chaque hypothèse.</p>
+    <p><strong>Pour argumenter</strong>, comparer de porte à porte :</p>
+    <div class="pm">
+      <div class="plus"><h4>Maritime</h4><ul><li>Moins cher au transport</li><li>Meilleur bilan carbone</li><li>Mais 37 jours de mer, un seul navire possible et une marge de seulement 2 jours avant la date limite : le moindre retard est fatal</li></ul></div>
+      <div class="minus"><h4>Aérien</h4><ul><li>Plus cher, mais rapide et fiable</li><li>Départ plus tardif : plus de temps pour régler le litige des cartons manquants et finir le flocage</li><li>Moins de risque pour un événement à date fixe</li></ul></div>
+    </div>
+    <p>Pour un <strong>événement à date fixe</strong> comme l'ouverture d'une compétition, où un retard serait catastrophique pour l'image de SAS et de la Fédération, l'<strong>aérien</strong> se défend bien si l'écart de coût reste raisonnable par rapport à la valeur des marchandises. La conclusion dépend des chiffres : c'est la comparaison des deux prix facturés qui tranche.</p>
+  </div>
+</section>
+
+<!-- =============== GLOSSAIRE =============== -->
+<section class="part" id="glossaire">
+  <div class="part-head"><span class="part-num">Aa</span><div><div class="eyebrow">Vocabulaire</div><h2>Glossaire</h2></div></div>
+  <dl class="glo">
+    <dt>Aconier</dt><dd>Entreprise de manutention qui charge et décharge les navires dans les ports.</dd>
+    <dt>Agent maritime</dt><dd>Représentant d'un armateur dans un port (trouve le fret, signe, encaisse).</dd>
+    <dt>Armateur</dt><dd>Entreprise qui exploite des navires (compagnie maritime).</dd>
+    <dt>Bourse de fret</dt><dd>Plateforme où transporteurs et chargeurs publient des offres de chargements et de camions disponibles. Sert à éviter les retours à vide.</dd>
+    <dt>Cabotage</dt><dd>Transport national effectué dans un pays par un transporteur étranger (route), ou transport maritime le long des côtes d'un même pays.</dd>
+    <dt>Chargeur</dt><dd>L'entreprise qui confie sa marchandise à transporter (l'expéditeur).</dd>
+    <dt>CMR</dt><dd>Convention relative au contrat de transport international de marchandises par route (1956), et la lettre de voiture qui l'accompagne.</dd>
+    <dt>Commissionnaire de transport</dt><dd>Organisateur qui choisit les transporteurs ; obligation de résultat, garant de ses substitués.</dd>
+    <dt>Commissionnaire en douane</dt><dd>Professionnel agréé qui fait les formalités douanières pour autrui (représentant en douane enregistré).</dd>
+    <dt>Compte propre / compte d'autrui</dt><dd>Transport de ses propres marchandises / transport public rémunéré par une société spécialisée.</dd>
+    <dt>Conteneur</dt><dd>Grande boîte métallique normalisée (20 ou 40 pieds) qui passe d'un mode à l'autre.</dd>
+    <dt>DDP</dt><dd>Incoterm « rendu droits acquittés » : le vendeur paie tout jusqu'à chez l'acheteur, droits et taxes compris.</dd>
+    <dt>Embranchement particulier</dt><dd>Voie ferrée privée reliant une usine au réseau ferré général.</dd>
+    <dt>Ferroutage</dt><dd>Transport combiné rail-route (camion, remorque ou caisse mobile sur wagon).</dd>
+    <dt>Flux tendu</dt><dd>Organisation qui cherche à produire et livrer juste à temps, avec le moins de stock possible.</dd>
+    <dt>Incoterms</dt><dd>11 règles de la CCI qui répartissent frais, risques et formalités entre vendeur et acheteur.</dd>
+    <dt>Intermodal</dt><dd>Plusieurs modes, même unité de chargement, sans rupture de charge.</dd>
+    <dt>Logistique inverse</dt><dd>Gestion des retours, réparations et du recyclage (reverse logistics).</dd>
+    <dt>Lot complet</dt><dd>Un chargement qui occupe tout le camion, pour un seul client, livré en direct.</dd>
+    <dt>Mandataire</dt><dd>Intermédiaire qui exécute les ordres de son client ; obligation de moyens.</dd>
+    <dt>Multimodal</dt><dd>Au moins deux modes de transport différents.</dd>
+    <dt>Point de commande</dt><dd>Niveau de stock qui déclenche une commande : demande pendant le délai + stock de sécurité.</dd>
+    <dt>Pondéreux</dt><dd>Marchandise lourde, en vrac et de faible valeur (sable, charbon, céréales).</dd>
+    <dt>Pré / post-acheminement</dt><dd>Trajets courts avant et après le transport principal (souvent par la route).</dd>
+    <dt>Répartition modale</dt><dd>Part de chaque mode dans le total des marchandises transportées.</dd>
+    <dt>Route roulante</dt><dd>Transport combiné accompagné : le camion entier et son chauffeur prennent le train.</dd>
+    <dt>Rupture de charge</dt><dd>Moment où la marchandise est déchargée d'un véhicule pour être rechargée dans un autre.</dd>
+    <dt>Stock de sécurité</dt><dd>Stock gardé en réserve pour faire face aux aléas de la demande et du délai.</dd>
+    <dt>Supply chain</dt><dd>Chaîne d'approvisionnement, des matières premières au client final, avec ses 3 flux.</dd>
+    <dt>Tonne-kilomètre</dt><dd>Unité : déplacement d'une tonne sur un kilomètre.</dd>
+    <dt>Transitaire</dt><dd>Intermédiaire qui assure le passage de la marchandise d'un mode à l'autre (ports, aéroports, frontières).</dd>
+    <dt>Transroulage (ro-ro)</dt><dd>Le camion ou la remorque entre dans le navire en roulant.</dd>
+    <dt>UTI</dt><dd>Unité de transport intermodal : conteneur, caisse mobile, semi-remorque.</dd>
+    <dt>Unité payante</dt><dd>En maritime, base de facturation : 1 tonne ou 1 m³, on retient le plus grand.</dd>
+  </dl>
+</section>
+
+<section class="part" id="quiz">
+  <div class="part-head"><span class="part-num">?</span><div><div class="eyebrow">Entraînement</div><h2>Quiz corrigé</h2></div></div>
+  <p>Les questions suivent l'ordre de la fiche, des définitions jusqu'aux études de cas. Clique sur une réponse : la bonne s'affiche en vert avec l'explication.</p>
+  <div class="scorebar" role="status" aria-live="polite"><span>Score : <b id="score">0</b> / <span id="total">0</span> · <span id="done">0</span> répondues</span><button type="button" id="reset">Recommencer</button></div>
+  <div class="quiz" id="quizbox"></div>
+  <div class="box key result" id="result"><span class="tag">Ton résultat</span><p id="resultText"></p></div>
+</section>
+</main>
+</div>
+
+<script>
+const Q=[
+ {q:"La logistique, c'est la maîtrise des flux physiques de marchandises que l'entreprise :",o:["Vend uniquement","Reçoit, transforme ou transfère, et expédie","Fabrique uniquement","Achète uniquement"],a:1,e:"Elle couvre l'entrée (matières premières, composants), l'intérieur (en-cours, semi-produits) et la sortie (produits finis, pièces détachées)."},
+ {q:"Quelle est la mission de la logistique ?",o:["Produire le plus possible","Mettre à disposition le bon produit, au bon endroit, au bon moment, au bon client, au coût le plus juste","Supprimer tous les stocks","Vendre au prix le plus élevé"],a:1,e:"Tout l'enjeu est de concilier service au client et coût, en faisant mieux que les concurrents."},
+ {q:"Pourquoi un restaurant de luxe a-t-il « trop » de serveurs ?",o:["Par erreur de gestion","Parce que le niveau de service attendu (aucune attente) impose une surcapacité","Parce que les serveurs coûtent peu","Pour réduire les coûts"],a:1,e:"C'est l'exemple du cours : la stratégie de service détermine le niveau de coût accepté."},
+ {q:"En moyenne, combien les entreprises consacrent-elles à la logistique ?",o:["1 % du CA","10 % du CA","50 % du CA","80 % du CA"],a:1,e:"Environ 10 % du chiffre d'affaires, et le transport en est le premier poste."},
+ {q:"Laquelle de ces activités relève de la logistique ?",o:["La gestion de la paie","La comptabilité générale","La gestion des stocks","Le recrutement"],a:2,e:"Question du test de connaissances du cours. Les stocks sont au cœur de la logistique."},
+ {q:"La logistique inverse concerne :",o:["Les importations","La gestion financière","Les retours, réparations et le recyclage","Les exportations"],a:2,e:"Reverse logistics : les produits remontent du client vers l'entreprise."},
+ {q:"Les 3 grandes composantes de la logistique sont :",o:["Achat, vente, finance","Approvisionnement, production, distribution","Route, fer, air","Stock, entrepôt, camion"],a:1,e:"Dans l'exemple du fromage : lait et emballages (appro), affinage (production), entrepôts et magasins (distribution)."},
+ {q:"La supply chain regroupe :",o:["Uniquement les flux physiques","Les flux physiques, informationnels et financiers","Les flux de production exclusivement","Uniquement les transports"],a:1,e:"Question du test de connaissances. Le flux physique descend vers le client, l'information et l'argent remontent."},
+ {q:"Le flux d'information correspond notamment :",o:["Aux matières premières","Aux produits finis","Aux commandes et aux prévisions de ventes","Aux paiements"],a:2,e:"Il circule de l'aval vers l'amont pour réguler les flux de marchandises. Les paiements, c'est le flux financier."},
+ {q:"La transformation numérique permet notamment :",o:["D'améliorer la traçabilité des marchandises","De supprimer les flux d'information","De supprimer systématiquement les stocks","De supprimer le transport"],a:0,e:"Question du test de connaissances. Le numérique multiplie l'information au lieu de la supprimer."},
+ {q:"Quel niveau d'intégration logistique va de la conception jusqu'au retrait du produit ?",o:["Logistique achats et distribution","Logistique intégrée","Soutien logistique intégré","Logistique totale"],a:3,e:"Le soutien logistique intégré va de la conception au SAV ; la logistique totale va jusqu'au retrait (fin de vie)."},
+ {q:"Dans le transport pour compte d'autrui :",o:["L'entreprise transporte ses propres marchandises","Le transport est réalisé par une société spécialisée contre rémunération","Le transport est assuré par le client","Le transport est gratuit"],a:1,e:"Question du test. Le compte d'autrui pèse environ 75 % des tonnes-km, le compte propre environ 25 %."},
+ {q:"Selon la définition du cours, le transport :",o:["Inclut le transport d'énergie et d'informations","Est une tentative, à titre onéreux, d'abolir l'espace, par des moyens mécaniques","Ne crée aucune valeur","Ne concerne que les marchandises"],a:1,e:"Il exclut l'énergie et l'immatériel, et il ajoute de la valeur au produit en le rendant disponible là où il est demandé."},
+ {q:"Un camion transporte 15 tonnes sur 400 km. Combien de tonnes-km ?",o:["415","6 000","26,7","60 000"],a:1,e:"15 × 400 = 6 000 t-km. La t-km combine le poids et la distance."},
+ {q:"La route transporte 150 à 200 fois plus de tonnes que l'avion en France. En valeur économique, le rapport est plutôt :",o:["Le même","De 2 ou 3 pour 1","De 1 000 pour 1","Inversé : l'avion fait 200 fois plus"],a:1,e:"C'est la critique des unités pondérales : l'avion transporte peu de tonnes, mais des produits très chers."},
+ {q:"Pourquoi le transport pour compte propre est-il mal mesuré ?",o:["Parce qu'il est interdit","Parce qu'il n'est pas facturé, donc n'apparaît pas dans les comptes nationaux","Parce qu'il est toujours aérien","Parce qu'il est très rare"],a:1,e:"Les chiffres économiques ne comptent que ce qui donne lieu à facturation (compte d'autrui)."},
+ {q:"En France, quelle part des entreprises réalise 90 % des exportations ?",o:["Moins de 5 %","25 %","50 %","90 %"],a:0,e:"Cette concentration permet aux grands groupes d'imposer leurs exigences logistiques (exemple de l'équipementier automobile)."},
+ {q:"La DATAR, créée en 1963, est :",o:["Une compagnie aérienne","L'administration de mission chargée de l'aménagement du territoire","Une loi sur les transports","Un port"],a:1,e:"Elle a créé les métropoles d'équilibre et des infrastructures comme le port de Fos-sur-Mer, pour décentraliser les activités de Paris."},
+ {q:"La LOTI de 1982 est :",o:["La loi d'orientation des transports intérieurs","Un Incoterm","Un accord de Kyoto","Un type de wagon"],a:0,e:"La loi la plus importante du secteur : elle affirme le droit des usagers à se déplacer dans des conditions raisonnables d'accès, de qualité et de prix."},
+ {q:"Lequel de ces éléments N'est PAS une des 3 conditions d'une smart city ?",o:["Une stratégie des pouvoirs publics","Une approche interdisciplinaire","La participation active des citoyens","La construction d'un aéroport"],a:3,e:"Les 3 domaines où elle doit innover sont la mobilité intelligente, l'environnement durable et l'urbanisation responsable."},
+ {q:"Les 3 paramètres qui déterminent la technique de transport sont :",o:["La couleur, le poids, le prix","La nature de l'objet transporté, le type de liaison, la performance attendue (délai)","Le pays, la langue, la monnaie","Le transporteur, l'assureur, le banquier"],a:1,e:"Ce qu'on transporte, sur quelle liaison (courte, longue, terrestre, maritime, aérienne), et en combien de temps."},
+ {q:"À quelle époque le fer a-t-il atteint son apogée dans le transport de marchandises en France ?",o:["Vers 1830","Dans les années 1920","Dans les années 1970","Aujourd'hui"],a:1,e:"Environ 75 à 80 % des marchandises. Sa part baisse ensuite, surtout après 1950."},
+ {q:"Vers quelle époque la route dépasse-t-elle le fer ?",o:["1900","1930","Les années 1970","2010"],a:2,e:"Aujourd'hui, la route transporte environ 85 % des marchandises en France."},
+ {q:"Lequel de ces facteurs N'explique PAS le déclin du rail ?",o:["Le développement du réseau routier","La disparition des industries traditionnelles (fer, charbon)","Le développement du transport routier","L'invention du TGV"],a:3,e:"Les 3 facteurs du cours : réseau routier, perte de l'industrie lourde, essor du camion. Le TGV est au contraire une modernisation du rail."},
+ {q:"Un mode de transport est l'association de :",o:["Un véhicule, une voie de communication et des infrastructures","Un chargeur et un client","Un prix et un délai","Un conteneur et une palette"],a:0,e:"C'est le milieu (eau, rail, route, air) dans lequel circule le véhicule qui détermine le mode."},
+ {q:"Quel est le plus ancien mode organisé de transport de marchandises ?",o:["La route","Le chemin de fer","La voie d'eau","L'avion"],a:2,e:"Au Moyen Âge, les fleuves étaient les corridors naturels du commerce."},
+ {q:"Quelle invention, vers 1480, a permis de creuser des canaux hors des plaines ?",o:["La machine à vapeur","L'écluse","Le conteneur","La roue"],a:1,e:"Elle est attribuée à Léonard de Vinci."},
+ {q:"Quelle est la part du fluvial dans le transport intérieur de marchandises en France ?",o:["Moins de 5 %","Environ 30 %","Environ 50 %","Plus de 80 %"],a:0,e:"Contre plus de 40 % aux Pays-Bas. Le réseau français à grand gabarit est peu dense."},
+ {q:"Quels canaux ont permis de relier les océans Atlantique, Pacifique et Indien ?",o:["Le canal du Midi et le canal de Bourgogne","Suez et Panama","La Manche et le Bosphore","Le Rhin et le Danube"],a:1,e:"Ils ont permis le développement de la navigation maritime à l'échelle mondiale."},
+ {q:"Qu'a permis la conteneurisation dans le maritime ?",o:["De supprimer les ports","D'automatiser les ports, d'accélérer les chargements et d'éviter les ruptures de charge","D'augmenter la casse","De réduire les investissements des compagnies"],a:1,e:"Elle protège mieux la marchandise, mais demande de gros investissements."},
+ {q:"Le chemin de fer est né :",o:["Dans l'Antiquité","Au Moyen Âge","De la révolution industrielle du XIXe siècle, des besoins des mines anglaises","Après 1945"],a:2,e:"Les premières lignes sont anglaises. La France met en service le TGV en 1981."},
+ {q:"Qu'est-ce qu'un embranchement particulier ?",o:["Un carrefour routier","Une voie ferrée privée reliant le site d'un client au réseau général","Un type d'avion","Une écluse"],a:1,e:"Si fournisseur et client sont embranchés, on obtient un porte-à-porte ferroviaire sans rupture de charge."},
+ {q:"Les 3 caractéristiques qui expliquent le succès de la route sont :",o:["Lenteur, capacité, prix","Quasi-ubiquité, intimité, disponibilité","Électricité, guidage, convoi","Vitesse, altitude, régularité"],a:1,e:"On va presque partout sans changer de véhicule, on choisit ses compagnons, et on part quand on veut."},
+ {q:"Depuis 1985, les prix du transport routier de marchandises ont :",o:["Augmenté de 30 %","Baissé d'environ 30 %","Doublé","Été fixés par l'État"],a:1,e:"Le marché est en surcapacité, avec beaucoup de petites entreprises en concurrence. C'est pourquoi il est facile de sous-traiter."},
+ {q:"Quelle congestion pénalise le plus le transport routier de marchandises ?",o:["La congestion saisonnière des vacances","La congestion récurrente domicile-travail près des agglomérations","La congestion en montagne","Aucune"],a:1,e:"Elle se produit tous les jours, à proximité des villes, là où les camions livrent."},
+ {q:"Qui a réalisé les premiers vols motorisés en 1903 ?",o:["Les frères Montgolfier","Louis Blériot","Les frères Wright","Clément Ader"],a:2,e:"Les Montgolfier (1783) font voler un engin plus léger que l'air ; Blériot traverse la Manche en 1909."},
+ {q:"Les 3 impératifs à concilier pour implanter un aéroport sont :",o:["Proximité de la ville, contraintes d'urbanisme, environnement (bruit)","Prix, couleur, taille","Mer, montagne, forêt","Douane, police, banque"],a:0,e:"Exemples : Le Bourget rattrapé par la banlieue, couvre-feu nocturne à Orly."},
+ {q:"Le fret aérien coûte environ combien de fois plus cher que le maritime ?",o:["Le même prix","1,1 fois","2,5 à 4 fois","100 fois"],a:2,e:"L'écart se réduit quand on ajoute les opérations terminales et le coût des stocks (approche porte à porte)."},
+ {q:"Quel produit est le premier type de fret aérien mondial selon le graphique du cours ?",o:["Le charbon","Les produits électroniques","Les céréales","Le sable"],a:1,e:"Environ 35 %. Viennent ensuite pharmacie, pièces détachées, luxe : des produits à forte valeur."},
+ {q:"Le transport par conduites :",o:["Transporte voyageurs et marchandises","Ne transporte que des marchandises, et une seule par réseau","Est le plus utilisé pour les vêtements","Utilise des conteneurs"],a:1,e:"Oléoducs, gazoducs, lignes à haute tension."},
+ {q:"Comment doit-on comparer deux solutions de transport ?",o:["Uniquement sur le prix du trajet principal","De porte à porte, en coûts, délais et risques, stock compris","Uniquement sur la vitesse","Selon la couleur du camion"],a:1,e:"À chaque mode correspond une taille de lot et donc un stock moyen, dont le coût entre dans la comparaison."},
+ {q:"Les trafics inter-usines représentent des envois réguliers de :",o:["Quelques kilos","3 à 23 tonnes (camion plein)","Plus de 10 000 tonnes","Un seul colis"],a:1,e:"Rail et route s'y concurrencent. L'approvisionnement en matières premières, lui, demande fer, eau ou mer."},
+ {q:"Un transport intermodal se caractérise par :",o:["Un seul mode de bout en bout","Plusieurs modes, dans la même unité de chargement, sans rupture de charge","Une rupture de charge à chaque changement de mode","L'usage obligatoire de l'avion"],a:1,e:"Le multimodal utilise au moins 2 modes, avec ou sans rupture de charge. L'intermodal garde la même UTI."},
+ {q:"Dans le transport combiné, le trajet principal se fait par :",o:["La route","Le rail, la voie navigable ou la mer","L'avion","Les conduites"],a:1,e:"La route ne fait que les trajets initiaux et terminaux, les plus courts possible."},
+ {q:"Que signifie UTI ?",o:["Usine de transport international","Unité de transport intermodal","Union des transporteurs indépendants","Unité de taxe à l'importation"],a:1,e:"Conteneur, caisse mobile ou semi-remorque : c'est elle qui passe d'un mode à l'autre."},
+ {q:"Dans la route roulante (transport accompagné) :",o:["Seul le conteneur voyage","Le camion entier et son chauffeur prennent le train sur un wagon surbaissé","La marchandise est déchargée à chaque gare","Le camion est mis sur un bateau"],a:1,e:"Avantage : le temps de train compte comme repos pour le chauffeur. Inconvénient : des temps morts au chargement."},
+ {q:"Le transroulage (ro-ro) consiste à :",o:["Remplacer les roues du camion par des essieux ferroviaires","Faire entrer le camion ou la remorque dans le navire en roulant","Transporter du pétrole par oléoduc","Charger un conteneur par grue"],a:1,e:"Roll on / roll off, comme sur un ferry. Le rail-route bimodal, lui, remplace les roues par des essieux ferroviaires."},
+ {q:"Quel avantage réglementaire a un transporteur routier autour d'un chantier de transport combiné ?",o:["Il peut rouler à 130 km/h","Il peut charger 44 tonnes au lieu de 40","Il ne paie aucune taxe","Il n'a pas besoin de permis"],a:1,e:"C'est un des avantages microéconomiques du combiné pour les entrepreneurs routiers."},
+ {q:"Lequel est un inconvénient du transport combiné ?",o:["Il pollue plus que la route","Le déséquilibre des flux : il faut remonter des caisses vides","Il supprime toute manutention","Il est plus rapide que la route sur 50 km"],a:1,e:"Autres limites : retards, grèves, coût des transbordements, trafic de camions autour des terminaux, lenteur du train (≈ 37 km/h)."},
+ {q:"Un commissionnaire de transport :",o:["N'a qu'une obligation de moyens","Choisit les transporteurs, a une obligation de résultat et répond des fautes de ses sous-traitants","Ne s'occupe que de la douane","Est toujours un armateur"],a:1,e:"Le mandataire, à qui le client impose les prestataires, n'a qu'une obligation de moyens et ne répond que de ses propres fautes."},
+ {q:"Le commissionnaire en douane :",o:["Est obligatoire pour toute importation","Est agréé pour faire les formalités douanières pour autrui et répond envers la douane des droits, taxes et infractions","Charge les navires","Représente l'armateur"],a:1,e:"Son recours n'est pas obligatoire : l'importateur peut déclarer lui-même sa marchandise."},
+ {q:"Qui charge et décharge les navires dans les ports ?",o:["L'agent maritime","L'aconier","Le commissionnaire en douane","Le chargeur"],a:1,e:"L'agent maritime, lui, représente l'armateur (trouve le fret, signe les documents, encaisse le fret)."},
+ {q:"Les Incoterms :",o:["Règlent le transfert de propriété","Répartissent frais, risques et formalités entre vendeur et acheteur","Sont obligatoires","Sont définis par l'Union européenne"],a:1,e:"Ils sont définis par la CCI depuis 1936 (version actuelle 2020), sont facultatifs, au nombre de 11, et ne règlent pas le transfert de propriété."},
+ {q:"Quel Incoterm impose le maximum d'obligations au vendeur ?",o:["EXW","FOB","DDP","FCA"],a:2,e:"Delivered Duty Paid : le vendeur livre chez l'acheteur, droits et taxes à l'import payés. EXW est l'inverse."},
+ {q:"En France, les parcs propres assurent 62 % du transport routier en tonnes mais seulement 34 % en tonnes-km. Pourquoi ?",o:["Parce qu'ils font surtout des trajets courts","Parce qu'ils roulent à vide","Parce qu'ils sont interdits sur autoroute","Parce qu'ils transportent des produits légers"],a:0,e:"Beaucoup de tonnes, peu de kilomètres. Au-delà de 150 km, on fait souvent appel à un transporteur."},
+ {q:"Le carburant et les pneus sont des coûts :",o:["Fixes","Variables","De personnel","De frais généraux"],a:1,e:"Ils dépendent du nombre de km. L'assurance, les taxes et l'amortissement sont des coûts fixes."},
+ {q:"Écartement (gain) entre deux clients A et B livrés depuis un dépôt O :",o:["OA + OB + AB","OA + OB − AB","2 × OA + 2 × OB","AB − OA"],a:1,e:"C'est la distance économisée en livrant A et B dans la même tournée. On classe les couples par écartement décroissant."},
+ {q:"OA = 20 km, OB = 15 km, AB = 9 km. Quel est l'écartement A-B ?",o:["44 km","26 km","35 km","6 km"],a:1,e:"20 + 15 − 9 = 26 km gagnés en faisant O → A → B → O (44 km) au lieu de deux allers-retours (70 km)."},
+ {q:"Une tournée fixe :",o:["Est recomposée chaque jour selon la demande","Reprend le même circuit selon le jour de la semaine (lundi le 93, mardi le 94…)","Optimise toujours le remplissage","N'existe plus"],a:1,e:"Simple mais rigide. La tournée variable s'adapte chaque jour aux quantités et aux adresses."},
+ {q:"Point de commande = ?",o:["Demande moyenne pendant le délai d'obtention + stock de sécurité","Stock maximum − stock minimum","Quantité commandée × prix","Demande annuelle ÷ 12"],a:0,e:"Quand le stock atteint ce niveau, on commande : la livraison arrive avant qu'on entame le stock de sécurité."},
+ {q:"Consommation : 6 pièces par jour. Délai : 17 jours. Stock de sécurité : 18 pièces. Point de commande ?",o:["102","120","90","23"],a:1,e:"6 × 17 = 102, + 18 = 120 pièces. C'est l'exercice du cours."},
+ {q:"Le système à recomplètement périodique :",o:["Commande une quantité fixe dès qu'un seuil est atteint","Commande à date fixe de quoi revenir à un niveau de recomplètement","Ne commande jamais","Exige un suivi permanent du stock"],a:1,e:"Il permet de grouper les commandes, mais il est « aveugle » entre deux contrôles. Il convient aux demandes peu variables."},
+ {q:"Cas n°1 : quelle distance totale faut-il prendre pour le coût de revient ?",o:["1 050 km (Orly-Barcelone)","1 450 km (trajets chargés seulement)","1 900 km, trajets à vide compris","400 km"],a:2,e:"160 + 1 050 + 200 + 400 + 90 = 1 900 km. Les kilomètres à vide coûtent aussi du carburant et de l'usure."},
+ {q:"Cas n°1 : combien coûte le carburant ?",o:["864,50 €","665 €","1 365 €","455 €"],a:0,e:"1 900 × 35/100 = 665 litres × 1,30 € = 864,50 €."},
+ {q:"Cas n°1 : comment calcule-t-on un repas pris en Espagne ?",o:["13,06 €","13,06 × 1,18 = 15,41 €","13,06 + 18 = 31,06 €","13,06 × 0,82"],a:1,e:"Les indemnités à l'étranger sont majorées de 18 %. Une nuit en Espagne : 28,71 × 1,18 = 33,88 €."},
+ {q:"Cas n°1 : le coût de revient global est de 2 950,36 €, marge 12 %, DEF paie 470 €. Prix HT pour ABC ?",o:["3 304 €","2 834 €","2 950 €","3 774 €"],a:1,e:"2 950,36 × 1,12 = 3 304,40 ; − 470 = 2 834,40, arrondi à 2 834 € HT."},
+ {q:"Cas n°1 : quelle TVA ETUDIANT EXPRESS facture-t-il à ABC ?",o:["Aucune, c'est une exportation","La TVA espagnole","La TVA française, car le client professionnel est établi en France","La TVA marocaine"],a:2,e:"Pour un service entre professionnels dans l'UE, la TVA est due dans le pays du preneur. 2 834 × 1,2 = 3 400,80 € TTC."},
+ {q:"Cas n°1 : un camion français qui fait un transport Barcelone → Madrid après sa livraison réalise :",o:["Un ferroutage","Du cabotage","Un transit","Un transroulage"],a:1,e:"Autorisé avec la licence communautaire : jusqu'à 3 opérations en 7 jours après le transport international."},
+ {q:"Cas n°1 : pourquoi retenir l'A20 via Limoges ?",o:["Parce qu'elle a le moins de péages (162 €) pour une distance quasi minimale (1 050 km)","Parce qu'elle est la plus longue","Parce qu'elle passe par Lyon","Parce qu'elle est interdite aux camions"],a:0,e:"L'A20 est gratuite entre Vierzon et Brive. L'A75, à peine plus courte, coûte plus cher et passe par le Massif central."},
+ {q:"Cas n°2 : des cartons manquent à l'arrivée à Besançon. Qui SAS peut-elle attaquer en premier ?",o:["Personne","TIC, le commissionnaire, garant de ses sous-traitants","Uniquement le fournisseur marocain","La douane"],a:1,e:"TIC a choisi FM TRANSPORTS, il a une obligation de résultat. Il se retournera ensuite contre le transporteur, présumé responsable sous la CMR."},
+ {q:"Cas n°2 : en maritime, comment calcule-t-on l'unité payante ?",o:["Toujours au poids","Toujours au volume","On compare tonnes et m³ (1 t = 1 m³) et on retient le plus grand","Au nombre de cartons"],a:2,e:"En aérien, la règle est différente : 1 m³ = 167 kg, et on retient le plus grand entre poids réel et poids volumétrique."},
+ {q:"Cas n°2 : le navire part du Havre le 7 avril. Il faut 2 jours de présentation, 2 jours de transit au port et 1 jour de route. Quand partir de Besançon ?",o:["Le 7 avril","Le 5 avril","Le 2 avril","Le 14 mai"],a:2,e:"7 avril − 5 jours = 2 avril. Arrivée à Tokyo le 14 mai pour une date limite au 16 mai."}
+];
+const box=document.getElementById('quizbox');
+let score=0,done=0;
+document.getElementById('total').textContent=Q.length;
+function render(){
+  box.innerHTML='';score=0;done=0;update();
+  document.getElementById('result').classList.remove('on');
+  Q.forEach(item=>{
+    if(!item.orig)item.orig={o:item.o.slice(),a:item.a};
+    const idx=item.orig.o.map((_,k)=>k);
+    for(let k=idx.length-1;k>0;k--){const r=Math.floor(Math.random()*(k+1));[idx[k],idx[r]]=[idx[r],idx[k]];}
+    item.o=idx.map(k=>item.orig.o[k]);item.a=idx.indexOf(item.orig.a);
+  });
+  Q.forEach((item,i)=>{
+    const d=document.createElement('div');d.className='q';
+    const h=document.createElement('h4');h.textContent=item.q;d.appendChild(h);
+    const opts=document.createElement('div');opts.className='opts';
+    item.o.forEach((t,j)=>{
+      const b=document.createElement('button');b.type='button';
+      b.textContent=String.fromCharCode(65+j)+'. '+t;
+      b.addEventListener('click',()=>answer(i,j,opts,d));
+      opts.appendChild(b);
+    });
+    d.appendChild(opts);box.appendChild(d);
+  });
+}
+function answer(i,j,opts,d){
+  const item=Q[i];const btns=opts.querySelectorAll('button');
+  btns.forEach(b=>b.disabled=true);
+  btns[item.a].classList.add('right');
+  const ok=j===item.a;
+  if(!ok)btns[j].classList.add('wrong');else score++;
+  done++;
+  const ex=document.createElement('div');ex.className='expl';
+  ex.innerHTML=(ok?'<b class="v">Bonne réponse.</b> ':'<b class="x">Pas tout à fait.</b> La bonne réponse est '+String.fromCharCode(65+item.a)+'. ');
+  ex.appendChild(document.createTextNode(item.e));
+  d.appendChild(ex);update();
+  if(done===Q.length){
+    const r=document.getElementById('result');const t=document.getElementById('resultText');
+    const pct=score/Q.length;
+    t.textContent=score+' / '+Q.length+'. '+(pct>=.85?'Excellent, tu maîtrises le cours. Relis juste les explications de tes erreurs.':pct>=.6?'Bonne base. Relis les encadrés « À retenir » des parties où tu as fait des erreurs, puis recommence.':'Pas de panique, c\'est normal en partant de zéro. Relis une partie à la fois, puis refais le quiz.');
+    r.classList.add('on');
+  }
+}
+function update(){document.getElementById('score').textContent=score;document.getElementById('done').textContent=done}
+document.getElementById('reset').addEventListener('click',()=>{render();document.getElementById('quiz').scrollIntoView({behavior:'smooth'})});
+render();
+</script>

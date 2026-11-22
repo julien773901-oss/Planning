@@ -1,0 +1,594 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Logistique : essentiel examen</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..900&family=Public+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap">
+<style>
+/* Layout : une colonne de lecture (~72ch) + sommaire collant ; univers « signalisation routière » : jaune balisage, asphalte, bandes de chantier pour les encadrés clés */
+:root{
+  --bg:#fdf9ec; --paper:#ffffff; --ink:#2a2312; --muted:#6a5d3b;
+  --sun:#f4c20d; --sun-deep:#8a5a00; --cream:#fff3c4; --cream-2:#f3d97a; --line:#eadcae;
+  --asphalt:#34495a; --ok:#1f8a5b; --ok-bg:#e3f5ec; --ko:#c0392b; --ko-bg:#fde6e3;
+  --f-display:"Archivo", "Arial Narrow", system-ui, sans-serif;
+  --f-body:"Public Sans", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#16130a; --paper:#211c0f; --ink:#f4eddb; --muted:#bdb08c;
+  --sun:#f4c20d; --sun-deep:#ffd451; --cream:#2f2812; --cream-2:#4c4016; --line:#3b3219;
+  --asphalt:#9cc0d6; --ok:#5fd39b; --ok-bg:#163327; --ko:#ff8b7d; --ko-bg:#3a1a17; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#16130a; --paper:#211c0f; --ink:#f4eddb; --muted:#bdb08c;
+  --sun:#f4c20d; --sun-deep:#ffd451; --cream:#2f2812; --cream-2:#4c4016; --line:#3b3219;
+  --asphalt:#9cc0d6; --ok:#5fd39b; --ok-bg:#163327; --ko:#ff8b7d; --ko-bg:#3a1a17; color-scheme:dark }
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.65;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;padding-block:32px 80px}
+@media (max-width:900px){.wrap{grid-template-columns:minmax(0,1fr);gap:0}.toc{display:none}}
+main{min-width:0;max-width:74ch}
+h1,h2,h3,h4{font-family:var(--f-display);text-wrap:balance;line-height:1.12;color:var(--ink)}
+h1{font-size:clamp(2.3rem,6vw,3.8rem);font-weight:900;font-stretch:118%;margin:0 0 .3em;letter-spacing:-.01em}
+h1 em{font-style:normal;background:linear-gradient(transparent 58%,var(--sun) 58%,var(--sun) 92%,transparent 92%);padding:0 .08em}
+h2{font-size:clamp(1.6rem,3.6vw,2.25rem);font-weight:850;font-stretch:112%;margin:0 0 .4em}
+h3{font-size:1.3rem;font-weight:750;margin:2em 0 .5em;color:var(--sun-deep)}
+h4{font-size:1.05rem;margin:1.4em 0 .3em}
+p{margin:.6em 0}
+a{color:var(--sun-deep)}
+strong{color:var(--ink);font-weight:700}
+.eyebrow{font-family:var(--f-display);text-transform:uppercase;letter-spacing:.12em;font-size:.78rem;font-weight:800;color:var(--sun-deep)}
+.lede{font-size:1.15rem;color:var(--muted)}
+.hl{background:var(--cream);padding:0 .2em;border-radius:3px}
+
+.toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 24px);align-self:start;font-size:.92rem;max-height:calc(100vh - 48px);overflow-y:auto}
+.toc ol{list-style:none;padding:0;margin:.6em 0 0;display:grid;gap:2px}
+.toc a{display:block;padding:6px 10px;border-radius:8px;text-decoration:none;color:var(--muted)}
+.toc a:hover,.toc a:focus-visible{background:var(--cream);color:var(--ink)}
+
+.hero{padding-block:8px 28px;margin-bottom:24px;position:relative}
+.hero::after{content:"";display:block;height:10px;margin-top:24px;border-radius:3px;
+  background:repeating-linear-gradient(-45deg,var(--sun) 0 18px,var(--ink) 18px 36px)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.chip{background:var(--cream);color:var(--sun-deep);border:1px solid var(--cream-2);border-radius:999px;padding:4px 12px;font-size:.85rem;font-weight:600}
+
+section.part{padding-top:40px;margin-top:40px;border-top:2px solid var(--line)}
+.part-head{display:flex;gap:16px;align-items:flex-start;margin-bottom:8px}
+.part-num{font-family:var(--f-display);font-weight:900;font-stretch:125%;font-size:3.1rem;line-height:1;color:var(--ink);background:var(--sun);border-radius:10px;padding:4px 12px;flex:none}
+:root[data-theme="dark"] .part-num{color:#16130a}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .part-num{color:#16130a}}
+
+.box{border-radius:14px;padding:14px 18px;margin:16px 0;border:1px solid var(--line);background:var(--paper)}
+.box > :first-child{margin-top:0}.box > :last-child{margin-bottom:0}
+.box .tag{display:inline-block;font-family:var(--f-display);font-weight:800;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;padding:2px 8px;border-radius:6px;margin-bottom:6px}
+.def{background:var(--cream);border-color:var(--cream-2)}
+.def .tag{background:var(--sun);color:#2a2312}
+.ex{border-left:6px solid var(--asphalt)}
+.ex .tag{background:var(--asphalt);color:var(--paper)}
+.trap{border:1.5px dashed var(--ko)}
+.trap .tag{background:transparent;color:var(--ko);border:1.5px solid var(--ko)}
+.key{background:var(--paper);border:3px solid var(--sun);position:relative;padding-top:22px}
+.key::before{content:"";position:absolute;inset:0 0 auto 0;height:8px;border-radius:10px 10px 0 0;background:repeating-linear-gradient(-45deg,var(--sun) 0 12px,var(--ink) 12px 24px)}
+.key .tag{background:var(--ink);color:var(--bg)}
+.key ul{margin:.3em 0;padding-left:1.2em}
+.simple{font-style:italic;color:var(--muted)}
+.formula{font-family:var(--f-display);font-stretch:105%;font-weight:700;background:var(--cream);border-radius:10px;padding:10px 14px;margin:12px 0;font-size:1.02rem}
+
+.tbl{overflow-x:auto;margin:16px 0;border-radius:12px;border:1px solid var(--line)}
+table{border-collapse:collapse;width:100%;font-size:.93rem;background:var(--paper)}
+th,td{padding:9px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+th{background:var(--cream);font-family:var(--f-display);font-weight:800;color:var(--sun-deep)}
+tr:last-child td{border-bottom:none}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.total td{font-weight:700;background:var(--cream)}
+
+figure{margin:20px 0;padding:16px;background:var(--paper);border:1px solid var(--line);border-radius:14px}
+figure .scroll{overflow-x:auto}
+figcaption{font-size:.85rem;color:var(--muted);margin-top:8px}
+svg text{font-family:var(--f-body);fill:var(--ink)}
+svg .mut{fill:var(--muted)}
+svg .grid{stroke:var(--line)}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch}
+.flow .step{flex:1 1 120px;background:var(--cream);border-radius:12px;padding:10px 12px;font-size:.9rem;min-width:0}
+.flow .step b{display:block;font-family:var(--f-display);color:var(--sun-deep);font-size:.98rem}
+.flow .arrow{align-self:center;color:var(--sun-deep);font-weight:900}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px 14px;min-width:0}
+.card h4{margin:0 0 4px;color:var(--sun-deep)}
+.card p{margin:.2em 0;font-size:.93rem}
+.pm{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+.pm > div{border-radius:12px;padding:12px 14px}
+.pm .plus{background:var(--ok-bg)}.pm .minus{background:var(--ko-bg)}
+.pm h4{margin:0 0 4px}.pm .plus h4{color:var(--ok)}.pm .minus h4{color:var(--ko)}
+.pm ul{margin:0;padding-left:1.1em;font-size:.93rem}
+
+.bars{display:grid;gap:6px;font-size:.88rem;margin:8px 0}
+.bar{display:grid;grid-template-columns:110px minmax(0,1fr) 48px;gap:10px;align-items:center}
+.bar .t{height:16px;background:var(--cream);border-radius:4px;overflow:hidden}
+.bar .t i{display:block;height:100%;background:var(--sun);border-radius:4px}
+.bar .t i.dark{background:var(--asphalt)}
+.bar .v{font-variant-numeric:tabular-nums;text-align:right;color:var(--muted)}
+
+.timeline{list-style:none;padding:0;margin:14px 0;border-left:3px solid var(--sun);display:grid;gap:10px}
+.timeline li{padding-left:16px;position:relative}
+.timeline li::before{content:"";position:absolute;left:-8px;top:.55em;width:13px;height:13px;border-radius:50%;background:var(--paper);border:3px solid var(--sun)}
+.timeline b{font-family:var(--f-display);color:var(--sun-deep);margin-right:6px}
+
+.steps{counter-reset:s;list-style:none;padding:0;display:grid;gap:10px}
+.steps > li{counter-increment:s;position:relative;padding:12px 14px 12px 52px;background:var(--paper);border:1px solid var(--line);border-radius:12px}
+.steps > li::before{content:counter(s);position:absolute;left:12px;top:12px;width:28px;height:28px;border-radius:50%;background:var(--sun);color:#2a2312;font-family:var(--f-display);font-weight:900;display:grid;place-items:center}
+.answer{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:4px 18px 14px;margin:18px 0}
+.answer > h4{font-size:1.1rem;color:var(--sun-deep)}
+
+.quiz{counter-reset:q}
+.q{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:14px 0}
+.q h4{margin:0 0 10px;font-family:var(--f-body);font-weight:700}
+.q h4::before{counter-increment:q;content:"Q" counter(q) " · ";color:var(--sun-deep);font-family:var(--f-display)}
+.opts{display:grid;gap:8px}
+.opts button{font:inherit;font-size:.95rem;text-align:left;padding:10px 14px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.opts button:hover:not(:disabled){border-color:var(--sun-deep)}
+.opts button:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+.opts button.right{background:var(--ok-bg);border-color:var(--ok);font-weight:600}
+.opts button.wrong{background:var(--ko-bg);border-color:var(--ko)}
+.opts button:disabled{cursor:default}
+.expl{margin-top:10px;padding:10px 14px;border-radius:10px;background:var(--cream);font-size:.93rem}
+.expl b.v{color:var(--ok)}.expl b.x{color:var(--ko)}
+.scorebar{position:sticky;top:calc(env(safe-area-inset-top,0px) + 8px);z-index:5;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;background:var(--ink);color:var(--bg);border-radius:12px;padding:10px 16px;margin:12px 0}
+.scorebar b{font-family:var(--f-display);font-size:1.15rem;color:var(--sun)}
+.scorebar button{font:inherit;font-size:.88rem;background:var(--sun);color:#2a2312;font-weight:700;border:none;border-radius:8px;padding:6px 12px;cursor:pointer}
+.scorebar button:focus-visible{outline:3px solid var(--bg);outline-offset:2px}
+.result{display:none}
+.result.on{display:block}
+dl.glo{display:grid;grid-template-columns:minmax(130px,max-content) minmax(0,1fr);gap:6px 16px;font-size:.93rem}
+dl.glo dt{font-weight:700;color:var(--sun-deep)}
+dl.glo dd{margin:0}
+@media (max-width:520px){dl.glo{grid-template-columns:minmax(0,1fr)}dl.glo dd{margin-bottom:8px}.bar{grid-template-columns:84px minmax(0,1fr) 40px}}
+@media (prefers-reduced-motion:no-preference){.opts button{transition:background .15s,border-color .15s}}
+ol.top{margin:.3em 0;padding-left:1.4em;display:grid;gap:4px}
+details.qa{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:10px 16px;margin:10px 0}
+details.qa summary{cursor:pointer;font-weight:700;font-family:var(--f-display);color:var(--sun-deep)}
+details.qa[open] summary{margin-bottom:6px}
+@media print{.q{padding:8px 12px;margin:6px 0}.opts{gap:3px}.opts button{padding:3px 10px;font-size:.88rem}.expl{margin-top:5px;padding:5px 10px}.toc,.scorebar,#reset{display:none}.wrap{display:block}section.part{break-inside:auto}figure,.box,.q,details.qa{break-inside:avoid}}
+</style>
+<div class="wrap">
+<nav class="toc" aria-label="Sommaire">
+  <div class="eyebrow">Sommaire</div>
+  <ol>
+    <li><a href="#p0">Le partiel et le top 10</a></li>
+    <li><a href="#p1">1. Les définitions clés</a></li>
+    <li><a href="#p2">2. Les 5 modes</a></li>
+    <li><a href="#p3">3. Intermodal et combiné</a></li>
+    <li><a href="#p4">4. Les acteurs et les Incoterms</a></li>
+    <li><a href="#p5">5. Les 4 calculs à savoir faire</a></li>
+    <li><a href="#p6">6. Questions de cours probables</a></li>
+    <li><a href="#quiz">Quiz corrigé</a></li>
+  </ol>
+</nav>
+
+<main>
+<header class="hero">
+  <div class="eyebrow">Logistique et transport · CM de Pascal Jardin · L3 · UPEC · Version « essentiel examen »</div>
+  <h1>Ce qui <em>tombe</em> au partiel</h1>
+  <p class="lede">Seulement le cœur du cours : les définitions qu'on te demandera, les schémas à commenter, les quatre calculs de l'exercice et des réponses modèles aux questions de cours. Pour le détail et l'histoire des modes, garde la grande fiche à côté.</p>
+  <div class="chips"><span class="chip">3 flux de la supply chain</span><span class="chip">Parts modales depuis 1830</span><span class="chip">Rail-route en 3 temps</span><span class="chip">Commissionnaire / mandataire</span><span class="chip">Coût d'une tournée</span><span class="chip">Écartements</span><span class="chip">Point de commande</span></div>
+</header>
+
+<section id="p0">
+  <h2>Le partiel en un coup d'œil</h2>
+  <p>D'après les notes du cours, le partiel dure <strong>1 h 30</strong> et suit toujours le même moule (à confirmer avec le professeur cette année). C'est ce moule qui dicte ce qu'il faut savoir par cœur.</p>
+  <div class="tbl"><table>
+    <tr><th>Partie</th><th>Ce qu'on attend</th><th class="num">Points</th><th>Où réviser ici</th></tr>
+    <tr><td>Fiche de lecture</td><td>Le roman de Zola vu en cours</td><td class="num">3</td><td>Hors cours (ton livre)</td></tr>
+    <tr><td>3 questions de cours</td><td>Environ 5 lignes chacune</td><td class="num">6</td><td>Parties 1 à 4 et réponses modèles (6)</td></tr>
+    <tr><td>Schéma</td><td>Lui donner un titre et le commenter en 7 lignes</td><td class="num">4</td><td>Les encadrés <span class="hl">Schéma d'examen</span></td></tr>
+    <tr><td>Exercice</td><td>Coût, tournée ou stock</td><td class="num">7</td><td>Partie 5</td></tr>
+    <tr><td>Bonus</td><td>Exercice complémentaire</td><td class="num">+2</td><td>Partie 5</td></tr>
+  </table></div>
+
+  <div class="box key"><span class="tag">Le top 10 à savoir par cœur</span>
+    <ol class="top">
+      <li><strong>Définition de la logistique</strong> : maîtriser les flux physiques reçus, transformés, expédiés ; bon produit, bon endroit, bon moment, bon coût.</li>
+      <li><strong>Supply chain et ses 3 flux</strong> : physique (amont → aval), information et financier (aval → amont).</li>
+      <li><strong>3 composantes</strong> : approvisionnement, production, distribution (+ logistique inverse).</li>
+      <li><strong>Compte propre (≈ 25 % des t-km) / compte d'autrui (≈ 75 %)</strong>, et la tonne-kilomètre.</li>
+      <li><strong>Le graphique des parts modales</strong> : apogée du fer vers 1920, croisement route/fer vers 1970, route ≈ 85 % aujourd'hui, et les 3 causes du déclin du rail.</li>
+      <li><strong>Avantages et limites de chaque mode</strong>, surtout la route (ubiquité, intimité, disponibilité).</li>
+      <li><strong>Multimodal ⊃ intermodal ⊃ combiné</strong>, l'UTI, et le schéma rail-route en 3 temps.</li>
+      <li><strong>Commissionnaire (obligation de résultat) / mandataire (obligation de moyens)</strong>.</li>
+      <li><strong>Coût d'une tournée</strong> = part des frais fixes + km × coût variable ; et la <strong>méthode des écartements</strong>.</li>
+      <li><strong>Point de commande</strong> = demande pendant le délai + stock de sécurité.</li>
+    </ol>
+  </div>
+  <p class="simple">Pourquoi ces dix-là : ce sont les notions reprises plusieurs fois dans le cours, celles du test de connaissances, celles qui ont un schéma « montré 2 ou 3 fois » et celles des exercices corrigés en classe. C'est une estimation, pas une garantie : si le prof a insisté sur autre chose, ajoute-le.</p>
+</section>
+
+<!-- ============ 1 ============ -->
+<section class="part" id="p1">
+  <div class="part-head"><span class="part-num">1</span><div><div class="eyebrow">Questions de cours · très probable</div><h2>Les définitions clés</h2></div></div>
+
+  <div class="box def"><span class="tag">Logistique</span>
+    <p>Ensemble des <strong>méthodes, techniques et moyens</strong> qui permettent de <strong>maîtriser la circulation des flux physiques</strong> de marchandises que l'entreprise <strong>reçoit</strong> (matières premières, composants), <strong>transforme ou transfère</strong> (en-cours) et <strong>expédie</strong> (produits finis).</p>
+    <p>Mission : le <strong>bon produit</strong>, dans de bonnes conditions, au <strong>bon endroit</strong>, au <strong>bon moment</strong>, pour le bon client, au <strong>coût le plus juste</strong>.</p>
+  </div>
+  <p>Tout le problème est un <strong>arbitrage entre service au client et coût</strong>. Exemple du cours : un restaurant de luxe a « trop » de serveurs parce que son client refuse d'attendre. Les entreprises consacrent en moyenne <strong>10 % de leur CA</strong> à la logistique, et le transport en est le premier poste.</p>
+
+  <div class="grid3">
+    <div class="card"><h4>Approvisionnement</h4><p>Faire arriver matières premières et composants.</p></div>
+    <div class="card"><h4>Production</h4><p>Flux internes à l'usine et entre usines.</p></div>
+    <div class="card"><h4>Distribution</h4><p>Acheminer les produits finis jusqu'aux clients.</p></div>
+  </div>
+  <p>+ la <strong>logistique inverse</strong> (<em>reverse logistics</em>) : retours, réparations, recyclage.</p>
+    <figure>
+    <div class="scroll"><svg viewBox="0 0 640 250" width="100%" style="min-width:520px" role="img" aria-label="Filière du fromage : approvisionnement, production, distribution">
+      <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--sun-deep)"/></marker></defs>
+      <g font-size="13" font-weight="700"><text x="20" y="22">Logistique d'approvisionnement</text><text x="250" y="22">Logistique de production</text><text x="450" y="22">Logistique de distribution</text></g>
+      <g font-size="13">
+        <rect x="20" y="50" width="130" height="30" rx="8" fill="var(--cream)"/><text x="85" y="70" text-anchor="middle">Lait</text>
+        <rect x="20" y="110" width="130" height="30" rx="8" fill="var(--cream)"/><text x="85" y="130" text-anchor="middle">Additifs alimentaires</text>
+        <rect x="20" y="170" width="130" height="30" rx="8" fill="var(--cream)"/><text x="85" y="190" text-anchor="middle">Emballage</text>
+        <rect x="250" y="50" width="130" height="30" rx="8" fill="var(--cream-2)"/><text x="315" y="70" text-anchor="middle">Pâte à fromage</text>
+        <rect x="250" y="110" width="130" height="30" rx="8" fill="var(--cream-2)"/><text x="315" y="130" text-anchor="middle">Affinage</text>
+        <rect x="250" y="170" width="130" height="30" rx="8" fill="var(--cream-2)"/><text x="315" y="190" text-anchor="middle">Fromage</text>
+        <rect x="450" y="50" width="160" height="30" rx="8" fill="var(--cream)"/><text x="530" y="70" text-anchor="middle">Entrepôts</text>
+        <rect x="450" y="110" width="70" height="30" rx="8" fill="var(--cream)"/><text x="485" y="130" text-anchor="middle">VPC</text>
+        <rect x="530" y="110" width="80" height="30" rx="8" fill="var(--cream)"/><text x="570" y="130" text-anchor="middle">Grossistes</text>
+        <rect x="530" y="170" width="80" height="30" rx="8" fill="var(--cream)"/><text x="570" y="190" text-anchor="middle">Magasins</text>
+        <rect x="450" y="215" width="160" height="28" rx="8" fill="var(--sun)"/><text x="530" y="234" text-anchor="middle" style="fill:#2a2312">Consommateurs</text>
+      </g>
+      <g stroke="var(--sun-deep)" stroke-width="2" fill="none" marker-end="url(#ar)">
+        <path d="M150 65H246"/><path d="M150 125H246"/><path d="M150 185H246"/>
+        <path d="M315 80V106"/><path d="M315 140V166"/><path d="M380 180L460 84"/>
+        <path d="M500 80L488 106"/><path d="M560 80L568 106"/><path d="M570 140V166"/><path d="M570 200L560 213"/><path d="M485 140V211"/>
+      </g>
+    </svg></div>
+    <figcaption><span class="hl">Schéma d'examen</span> Application à une filière industrielle (le fromage) : les trois logistiques s'enchaînent de la matière première au consommateur.</figcaption>
+  </figure>
+
+  <div class="box def"><span class="tag">Transport</span>
+    <p>Une tentative, <strong>à titre onéreux</strong>, d'<strong>abolir l'espace</strong> qui freine les activités humaines : déplacements de personnes ou d'objets grâce à des <strong>moyens mécaniques</strong>, à l'exclusion de l'énergie et de l'information. Il faut toujours <strong>un véhicule et une voie</strong>.</p>
+  </div>
+  <p>Idée forte : <strong>le transport crée de la valeur</strong>. Le même pull vaut plus en magasin le jour où on en a besoin qu'à l'usine au Bangladesh.</p>
+  <div class="grid2">
+    <div class="card"><h4>Compte propre</h4><p>L'entreprise transporte ses propres marchandises avec ses camions. <strong>≈ 25 % des t-km.</strong></p></div>
+    <div class="card"><h4>Compte d'autrui</h4><p>Une société spécialisée transporte contre rémunération. <strong>≈ 75 % des t-km.</strong></p></div>
+  </div>
+  <div class="formula">Tonne-kilomètre = tonnes × km &nbsp;·&nbsp; 20 t sur 300 km = 6 000 t-km</div>
+  <div class="box trap"><span class="tag">Piège</span>
+    <p>Le tonnage ne dit rien de la valeur : la route transporte 150 à 200 fois plus de tonnes que l'avion, mais en valeur le rapport n'est que de <strong>2 ou 3 pour 1</strong>.</p>
+  </div>
+
+  <div class="box def"><span class="tag">Supply chain</span>
+    <p>Ensemble des activités, ressources et acteurs qui participent au parcours d'un produit, <strong>des matières premières jusqu'au client final</strong>. Sa performance dépend de la coordination entre <strong>transport et logistique</strong>.</p>
+  </div>
+    <figure>
+    <div class="scroll"><svg viewBox="0 0 640 220" width="100%" style="min-width:520px" role="img" aria-label="Les trois flux de la supply chain">
+      <defs><marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--ink)"/></marker></defs>
+      <text x="320" y="22" text-anchor="middle" font-size="13" font-weight="700">← FLUX D'INFORMATION (aval → amont)</text>
+      <text x="320" y="40" text-anchor="middle" font-size="12" class="mut">commandes, prévisions de ventes, niveaux de stock, traçabilité</text>
+      <path d="M600 50H40" stroke="var(--asphalt)" stroke-width="3" marker-end="url(#ar2)"/>
+      <g font-size="13">
+        <rect x="20" y="75" width="104" height="40" rx="8" fill="var(--cream-2)"/><text x="72" y="100" text-anchor="middle">Fournisseurs</text>
+        <rect x="148" y="75" width="104" height="40" rx="8" fill="var(--cream-2)"/><text x="200" y="100" text-anchor="middle">Production</text>
+        <rect x="276" y="75" width="104" height="40" rx="8" fill="var(--cream-2)"/><text x="328" y="100" text-anchor="middle">Entrepôts</text>
+        <rect x="404" y="75" width="104" height="40" rx="8" fill="var(--cream-2)"/><text x="456" y="100" text-anchor="middle">Distribution</text>
+        <rect x="532" y="75" width="90" height="40" rx="8" fill="var(--sun)"/><text x="577" y="100" text-anchor="middle" style="fill:#2a2312">Clients</text>
+      </g>
+      <path d="M40 135H600" stroke="var(--sun-deep)" stroke-width="3" marker-end="url(#ar2)"/>
+      <text x="320" y="155" text-anchor="middle" font-size="13" font-weight="700">FLUX PHYSIQUE (amont → aval) →</text>
+      <text x="320" y="172" text-anchor="middle" font-size="12" class="mut">matières premières, produits semi-finis, produits finis</text>
+      <text x="320" y="200" text-anchor="middle" font-size="13" font-weight="700">← FLUX FINANCIER : paiements, factures, règlements</text>
+    </svg></div>
+    <figcaption><span class="hl">Schéma d'examen</span> Les trois flux de la supply chain. Les marchandises descendent vers le client, l'information et l'argent remontent vers les fournisseurs.</figcaption>
+  </figure>
+  <div class="box ex"><span class="tag">Commentaire modèle (7 lignes)</span>
+    <p><strong>Titre :</strong> Les trois flux de la supply chain.</p>
+    <p>Le schéma présente la chaîne qui relie fournisseurs, production, entrepôts, distribution et clients. Le <strong>flux physique</strong> (matières premières, semi-finis, produits finis) descend de l'amont vers l'aval. En sens inverse remontent le <strong>flux d'information</strong> (commandes, prévisions, niveaux de stock), qui déclenche et régule la production, et le <strong>flux financier</strong> (factures, paiements). La logistique consiste à synchroniser ces flux pour ajuster l'offre à la demande sans rupture ni surstock. Le numérique améliore la traçabilité et le partage des prévisions en temps réel.</p>
+  </div>
+</section>
+
+<!-- ============ 2 ============ -->
+<section class="part" id="p2">
+  <div class="part-head"><span class="part-num">2</span><div><div class="eyebrow">Question de cours + schéma · très probable</div><h2>Les 5 modes de transport</h2></div></div>
+  <div class="box def"><span class="tag">Mode de transport</span>
+    <p>Association d'un <strong>véhicule</strong> (et de son conducteur), d'une <strong>voie de communication</strong> et d'<strong>infrastructures</strong> (gares, ports, aéroports). C'est le <strong>milieu</strong> (eau, rail, route, air) qui détermine le mode.</p>
+  </div>
+  <div class="tbl"><table>
+    <tr><th>Mode</th><th>Atouts</th><th>Limites</th><th>Pour quoi ?</th></tr>
+    <tr><td><strong>Maritime / fluvial</strong></td><td>Le moins cher, énormes capacités, bon bilan écologique ; maritime = pilier de la mondialisation</td><td>Lent, dépend de la nature, ruptures de charge aux ports</td><td>Vrac, pondéreux, conteneurs</td></tr>
+    <tr><td><strong>Ferroviaire</strong></td><td>Charges lourdes, longue distance, très bon bilan énergétique</td><td>Pas de porte-à-porte sans embranchement, volumes massifs nécessaires, peu flexible</td><td>Métallurgie, chimie, combiné</td></tr>
+    <tr><td><strong>Routier</strong></td><td>Porte-à-porte, flexible, rapide en courte et moyenne distance, juste-à-temps</td><td>Congestion, pollution, insécurité, 40 t max (44 t en combiné)</td><td>Tout, surtout biens de consommation</td></tr>
+    <tr><td><strong>Aérien</strong></td><td>Très rapide, fiable, accès mondial, sûr pour la valeur</td><td>Très cher, capacité limitée, CO₂ et bruit</td><td>Électronique, pharmacie, urgent, luxe</td></tr>
+    <tr><td><strong>Conduites</strong></td><td>Continu, peu cher à l'usage</td><td>Un seul produit par réseau</td><td>Pétrole, gaz, électricité</td></tr>
+  </table></div>
+  <div class="box key"><span class="tag">La route, les 3 caractéristiques de son succès</span>
+    <ul><li><strong>Quasi-ubiquité</strong> : on va presque partout sans changer de véhicule.</li><li><strong>Intimité</strong> : on choisit ses compagnons de voyage.</li><li><strong>Disponibilité</strong> : aucune contrainte d'horaire.</li></ul>
+    <p>Elle transporte <strong>≈ 85 % des marchandises</strong> en France ; c'est le mode du <strong>flux tendu</strong>. Marché en surcapacité : prix en baisse d'environ 30 % depuis 1985.</p>
+  </div>
+
+    <figure>
+    <div class="scroll"><svg viewBox="0 0 600 310" width="100%" style="min-width:500px" role="img" aria-label="Parts modales du transport de marchandises en France depuis 1830">
+      <g class="grid" stroke-width="1">
+        <line x1="60" y1="20" x2="560" y2="20"/><line x1="60" y1="80" x2="560" y2="80"/><line x1="60" y1="140" x2="560" y2="140"/><line x1="60" y1="200" x2="560" y2="200"/><line x1="60" y1="260" x2="560" y2="260" stroke="var(--muted)"/>
+      </g>
+      <g font-size="11" class="mut" text-anchor="end"><text x="52" y="24" class="mut">80 %</text><text x="52" y="84" class="mut">60 %</text><text x="52" y="144" class="mut">40 %</text><text x="52" y="204" class="mut">20 %</text><text x="52" y="264" class="mut">0</text></g>
+      <g font-size="11" text-anchor="middle"><text x="60" y="280" class="mut">1830</text><text x="177.6" y="280" class="mut">1870</text><text x="265.9" y="280" class="mut">1900</text><text x="354.1" y="280" class="mut">1930</text><text x="442.4" y="280" class="mut">1960</text><text x="560" y="280" class="mut">2000</text></g>
+      <polyline fill="none" stroke="var(--sun-deep)" stroke-width="3" points="60,260 118.8,230 177.6,110 207,80 265.9,74 295.3,56 339.4,32 377.6,95 412.9,56 442.4,80 471.8,125 501.2,155 530.6,185 560,188"/>
+      <polyline fill="none" stroke="var(--asphalt)" stroke-width="3" points="60,95 118.8,125 148.2,155 207,194 265.9,215 324.7,230 377.6,185 412.9,215 442.4,170 471.8,125 501.2,104 530.6,86 560,62"/>
+      <polyline fill="none" stroke="var(--ko)" stroke-width="2" stroke-dasharray="6 4" points="60,206 118.8,179 177.6,200 265.9,206 324.7,224 412.9,230 471.8,236 560,251"/>
+      <polyline fill="none" stroke="var(--ok)" stroke-width="2" stroke-dasharray="2 4" points="60,176 118.8,200 177.6,230 265.9,239 412.9,239 560,245"/>
+      <g font-size="12" font-weight="700"><text x="300" y="46">Fer</text><text x="520" y="56">Route</text><text x="480" y="252" class="mut">Fluvial</text><text x="90" y="170" class="mut">Cabotage</text></g>
+      <g font-size="11"><text x="340" y="18" class="mut">apogée du fer (≈ 75 %)</text><text x="455" y="140" class="mut">croisement ≈ 1970</text></g>
+      <text x="300" y="302" text-anchor="middle" font-size="11" class="mut">Allure reprise du graphique du cours (source : A. Sauvant, notes de synthèse du SES)</text>
+    </svg></div>
+    <figcaption><span class="hl">Schéma d'examen</span> Parts modales du transport de marchandises en France depuis 1830. Les courbes donnent l'allure générale, pas des valeurs exactes.</figcaption>
+  </figure>
+  <div class="box ex"><span class="tag">Commentaire modèle (7 lignes)</span>
+    <p><strong>Titre :</strong> Évolution des parts modales du transport de marchandises en France depuis 1830.</p>
+    <p>Au XIXe siècle, le chemin de fer, né de la révolution industrielle, remplace la route et la voie d'eau et atteint son <strong>apogée dans les années 1920</strong> avec environ 75 à 80 % des marchandises. Après 1950 sa part baisse continûment, tandis que la route, portée par le camion et le flux tendu, <strong>dépasse le fer vers 1970</strong> et transporte aujourd'hui <strong>environ 85 %</strong> des marchandises. Le fluvial et le cabotage déclinent fortement. Ces mutations reflètent les progrès techniques et la fin de l'industrie lourde au profit de produits à plus forte valeur.</p>
+  </div>
+  <div class="box key"><span class="tag">Pourquoi le rail a décliné : 3 facteurs</span>
+    <ol><li>Un <strong>réseau routier</strong> dense et performant (choix politique de désenclavement).</li><li>La <strong>disparition des industries traditionnelles</strong> (charbon, sidérurgie), grosses clientes du rail.</li><li>Le <strong>transport routier</strong>, plus flexible, qui fait du porte-à-porte dans une économie en flux tendus.</li></ol>
+  </div>
+    <figure>
+    <div class="bars">
+      <div class="bar"><span>Maritime</span><span class="t"><i style="width:100%"></i></span><span class="v">45 %</span></div>
+      <div class="bar"><span>Aérien</span><span class="t"><i style="width:78%"></i></span><span class="v">35 %</span></div>
+      <div class="bar"><span>Routier</span><span class="t"><i style="width:27%"></i></span><span class="v">12 %</span></div>
+      <div class="bar"><span>Ferroviaire</span><span class="t"><i style="width:11%"></i></span><span class="v">5 %</span></div>
+      <div class="bar"><span>Fluvial</span><span class="t"><i style="width:7%"></i></span><span class="v">3 %</span></div>
+    </div>
+    <figcaption><span class="hl">Schéma d'examen</span> Valeur des échanges mondiaux par mode (valeurs lues sur le graphique du cours). L'avion transporte très peu de tonnes mais plus d'un tiers de la valeur.</figcaption>
+  </figure>
+</section>
+
+<!-- ============ 3 ============ -->
+<section class="part" id="p3">
+  <div class="part-head"><span class="part-num">3</span><div><div class="eyebrow">Question de cours + schéma · très probable</div><h2>Intermodalité et transport combiné</h2></div></div>
+  <div class="tbl"><table>
+    <tr><th>Terme</th><th>Définition</th><th>Exemple</th></tr>
+    <tr><td><strong>Unimodal</strong></td><td>Un seul mode de bout en bout</td><td>Camion Lyon → Lille</td></tr>
+    <tr><td><strong>Multimodal</strong></td><td>Au moins deux modes, avec ou sans changement de contenant</td><td>Cartons passés du camion à l'avion</td></tr>
+    <tr><td><strong>Intermodal</strong></td><td>Plusieurs modes, <strong>même unité de chargement (UTI), sans rupture de charge</strong></td><td>Conteneur bateau → train → camion</td></tr>
+    <tr><td><strong>Combiné</strong></td><td>Intermodal dont le <strong>trajet principal</strong> est par rail, fleuve ou mer, et les trajets de début et de fin, <strong>les plus courts possible</strong>, par la route</td><td>Caisse mobile Paris → Avignon en train, 20 km de camion à chaque bout</td></tr>
+  </table></div>
+  <div class="box trap"><span class="tag">Piège</span>
+    <p>Tout combiné est intermodal, tout intermodal est multimodal, <strong>l'inverse est faux</strong>. L'UTI (unité de transport intermodal) = conteneur, caisse mobile ou semi-remorque.</p>
+  </div>
+    <figure>
+    <div class="scroll"><svg viewBox="0 0 640 200" width="100%" style="min-width:540px" role="img" aria-label="Schéma du transport combiné rail-route en trois temps">
+      <g font-size="12">
+        <rect x="10" y="60" width="80" height="46" rx="8" fill="var(--cream-2)"/><text x="50" y="80" text-anchor="middle">Usine /</text><text x="50" y="96" text-anchor="middle">entrepôt</text>
+        <rect x="150" y="60" width="90" height="46" rx="8" fill="var(--cream)"/><text x="195" y="80" text-anchor="middle">Terminal</text><text x="195" y="96" text-anchor="middle">de départ</text>
+        <rect x="400" y="60" width="90" height="46" rx="8" fill="var(--cream)"/><text x="445" y="80" text-anchor="middle">Terminal</text><text x="445" y="96" text-anchor="middle">d'arrivée</text>
+        <rect x="550" y="60" width="80" height="46" rx="8" fill="var(--sun)"/><text x="590" y="88" text-anchor="middle" style="fill:#2a2312">Client</text>
+      </g>
+      <line x1="90" y1="83" x2="150" y2="83" stroke="var(--asphalt)" stroke-width="5"/>
+      <line x1="240" y1="83" x2="400" y2="83" stroke="var(--sun-deep)" stroke-width="7" stroke-dasharray="14 6"/>
+      <line x1="490" y1="83" x2="550" y2="83" stroke="var(--asphalt)" stroke-width="5"/>
+      <g font-size="12" text-anchor="middle" font-weight="700">
+        <text x="120" y="45">① Route</text><text x="320" y="45">② Rail</text><text x="520" y="45">③ Route</text>
+      </g>
+      <g font-size="11" text-anchor="middle">
+        <text x="120" y="130" class="mut">trajet le plus</text><text x="120" y="144" class="mut">court possible</text>
+        <text x="320" y="130" class="mut">trajet principal, le plus long</text><text x="320" y="144" class="mut">UTI sur wagon, chargée par portique ou grue</text>
+        <text x="520" y="130" class="mut">livraison au client</text><text x="520" y="144" class="mut">prévenu de l'arrivée</text>
+        <text x="195" y="175" class="mut">transbordement</text><text x="445" y="175" class="mut">transbordement</text>
+      </g>
+    </svg></div>
+    <figcaption><span class="hl">Schéma d'examen</span> Le transport combiné rail-route : la même UTI fait tout le trajet, seule elle change de véhicule.</figcaption>
+  </figure>
+  <div class="box ex"><span class="tag">Commentaire modèle (7 lignes)</span>
+    <p><strong>Titre :</strong> Le transport combiné rail-route en trois temps.</p>
+    <p>① <strong>Pré-acheminement routier</strong> : la marchandise est chargée dans une UTI à l'usine et conduite au terminal, sur le trajet le plus court possible. ② <strong>Trajet ferroviaire</strong> : des portiques posent l'UTI sur un wagon et le train fait la partie la plus longue. ③ <strong>Post-acheminement routier</strong> : l'UTI est reposée sur un châssis et livrée au client prévenu. On garde la souplesse de la route et la massification du rail, sans rupture de charge, mais avec plus de manutention : le combiné n'est rentable que sur longue distance.</p>
+  </div>
+  <div class="grid2">
+    <div class="card"><h4>Non accompagné (le plus courant)</h4><p>Seule l'UTI voyage ; chauffeur et tracteur restent sur place.</p></div>
+    <div class="card"><h4>Accompagné : la route roulante</h4><p>Le camion entier et le chauffeur prennent le train (traversée des Alpes). Temps de train = temps de repos, mais on transporte aussi le tracteur.</p></div>
+  </div>
+  <div class="pm">
+    <div class="plus"><h4>Atouts du combiné</h4><ul><li>Environnement, désengorgement des routes</li><li>Souplesse de la route + fiabilité du rail</li><li>44 t autorisées au lieu de 40</li></ul></div>
+    <div class="minus"><h4>Freins</h4><ul><li>Coût des transbordements</li><li>Retards, grèves, train lent</li><li>Déséquilibre des flux (retours à vide)</li></ul></div>
+  </div>
+</section>
+
+<!-- ============ 4 ============ -->
+<section class="part" id="p4">
+  <div class="part-head"><span class="part-num">4</span><div><div class="eyebrow">Question de cours · probable</div><h2>Les acteurs et les Incoterms</h2></div></div>
+  <div class="grid2">
+    <div class="card"><h4>Mandataire (transitaire)</h4><p>Exécute les ordres du client, qui lui impose les prestataires. <strong>Obligation de moyens</strong> : il ne répond que de ses propres fautes.</p></div>
+    <div class="card"><h4>Commissionnaire de transport</h4><p>Choisit librement mode, itinéraire et transporteurs. <strong>Obligation de résultat</strong> : il répond de la bonne fin du transport et des fautes de ses sous-traitants.</p></div>
+  </div>
+  <div class="box ex"><span class="tag">Exemple à citer</span>
+    <p>Une palette est volée chez le transporteur. Avec un <strong>commissionnaire</strong>, on se retourne contre lui, il indemnise puis se retourne contre le transporteur. Avec un <strong>mandataire</strong> à qui on avait imposé ce transporteur, on doit agir directement contre le transporteur.</p>
+  </div>
+  <p>Autres acteurs : le <strong>chargeur</strong> (l'expéditeur), le <strong>commissionnaire en douane</strong> (fait les formalités douanières pour autrui, responsable envers la douane), l'<strong>agent maritime</strong> (représente l'armateur au port), l'<strong>aconier</strong> (charge et décharge les navires).</p>
+  <div class="box def"><span class="tag">Incoterms</span>
+    <p>Règles de la <strong>Chambre de commerce internationale</strong> (version <strong>2020</strong>, 11 termes) qui répartissent entre vendeur et acheteur les <strong>frais, les risques et les formalités</strong>. Ils <strong>ne règlent pas le transfert de propriété</strong>.</p>
+    <p><strong>EXW</strong> (à l'usine) = minimum pour le vendeur. <strong>DDP</strong> (rendu droits acquittés) = maximum : le vendeur paie tout jusque chez l'acheteur, droits et TVA compris. 4 Incoterms sont réservés au maritime : <strong>FAS, FOB, CFR, CIF</strong>.</p>
+  </div>
+</section>
+
+<!-- ============ 5 ============ -->
+<section class="part" id="p5">
+  <div class="part-head"><span class="part-num">5</span><div><div class="eyebrow">Exercice · 7 points + bonus</div><h2>Les 4 calculs à savoir faire</h2></div></div>
+
+  <h3>Calcul 1 · Le coût d'une tournée</h3>
+  <div class="formula">Coût d'une tournée = (frais fixes annuels ÷ nombre de tournées par an) + (km × coût variable par km)</div>
+  <p>Frais fixes : assurance, taxes, amortissement, (salaires). Frais variables : carburant, pneus, entretien, péages.</p>
+  <div class="box ex"><span class="tag">Exemple du cours</span>
+    <p>Camion de 10 t, 250 000 € de frais fixes par an, 1,60 €/km, 2 circuits de 250 km par jour, 230 jours.</p>
+    <ol class="steps">
+      <li>Tournées par an : 2 × 230 = <strong>460</strong>.</li>
+      <li>Fixes par tournée : 250 000 ÷ 460 = <strong>543,48 €</strong>.</li>
+      <li>Variables : 250 × 1,60 = <strong>400 €</strong>.</li>
+      <li>Coût d'une tournée : <strong>943,48 €</strong>, soit ≈ 94,35 € par tonne si le camion est plein.</li>
+    </ol>
+  </div>
+  <div class="box key"><span class="tag">Variante « étude de cas n°1 » : le prix au client</span>
+    <ul>
+      <li>Compter <strong>tous les km, y compris à vide</strong> (cas Orly → Barcelone : 1 900 km dont 450 à vide).</li>
+      <li>Coût de revient = variables (carburant, pneus, entretien, péages) + personnel et frais de déplacement + fixes (par jour).</li>
+      <li><strong>Prix au client = coût de revient × (1 + marge) − recette du fret de retour.</strong> Cas n°1 : 2 950,36 × 1,12 − 470 = <strong>2 834 € HT</strong>.</li>
+      <li>TVA d'un transport intra-UE entre professionnels : celle du <strong>pays du client</strong>. Transport national fait par un étranger = <strong>cabotage</strong> (3 opérations max en 7 jours).</li>
+    </ul>
+  </div>
+
+  <h3>Calcul 2 · La méthode des écartements (tournées)</h3>
+  <div class="formula">Écartement(A, B) = OA + OB − AB &nbsp;·&nbsp; on garde les plus grands écartements</div>
+    <figure>
+    <div class="grid2" style="margin:0;align-items:center">
+      <div class="scroll"><svg viewBox="0 0 300 220" width="100%" role="img" aria-label="Tournée O A B C">
+        <g stroke="var(--sun-deep)" stroke-width="3" fill="none"><path d="M150 190L60 90"/><path d="M60 90L150 40"/><path d="M150 40L240 100"/><path d="M240 100L150 190"/></g>
+        <g stroke="var(--muted)" stroke-width="1.5" stroke-dasharray="4 4"><path d="M150 190L150 40"/><path d="M60 90L240 100"/></g>
+        <g font-size="12" class="mut"><text x="88" y="150" class="mut">10</text><text x="92" y="58" class="mut">6</text><text x="200" y="62" class="mut">9</text><text x="200" y="158" class="mut">8</text><text x="156" y="120" class="mut">12</text><text x="110" y="88" class="mut">14</text></g>
+        <g><circle cx="150" cy="190" r="14" fill="var(--sun)"/><text x="150" y="195" text-anchor="middle" font-weight="700" style="fill:#2a2312">O</text>
+        <circle cx="60" cy="90" r="13" fill="var(--paper)" stroke="var(--ink)"/><text x="60" y="95" text-anchor="middle" font-weight="700">A</text>
+        <circle cx="150" cy="40" r="13" fill="var(--paper)" stroke="var(--ink)"/><text x="150" y="45" text-anchor="middle" font-weight="700">B</text>
+        <circle cx="240" cy="100" r="13" fill="var(--paper)" stroke="var(--ink)"/><text x="240" y="105" text-anchor="middle" font-weight="700">C</text></g>
+      </svg></div>
+      <div class="tbl" style="margin:0"><table>
+        <tr><th>Couple</th><th class="num">Calcul</th><th class="num">Écartement</th></tr>
+        <tr><td>A-B</td><td class="num">10 + 12 − 6</td><td class="num"><strong>16</strong></td></tr>
+        <tr><td>B-C</td><td class="num">12 + 8 − 9</td><td class="num"><strong>11</strong></td></tr>
+        <tr><td>A-C</td><td class="num">10 + 8 − 14</td><td class="num">4</td></tr>
+      </table></div>
+    </div>
+    <figcaption>Exemple d'entraînement (distances en km) : OA = 10, OB = 12, OC = 8, AB = 6, BC = 9, AC = 14.</figcaption>
+  </figure>
+  <ol class="steps">
+    <li>Calculer l'écartement de chaque couple : A-B = 10 + 12 − 6 = <strong>16</strong> ; B-C = 12 + 8 − 9 = <strong>11</strong> ; A-C = 10 + 8 − 14 = <strong>4</strong>.</li>
+    <li>Classer par ordre décroissant : A-B, B-C, A-C.</li>
+    <li>Prendre les couples dans l'ordre : A-B puis B-C donne la chaîne A-B-C. A-C fermerait la boucle : on l'écarte. Un client a au plus 2 voisins, et on vérifie la <strong>capacité du camion</strong>.</li>
+    <li>Relier les extrémités au dépôt : O → A → B → C → O = 10 + 6 + 9 + 8 = <strong>33 km</strong>, contre 60 km en 3 allers-retours. Gain = 27 km = 16 + 11.</li>
+  </ol>
+
+  <h3>Calcul 3 · Le point de commande (stocks)</h3>
+  <div class="formula">Point de commande = consommation pendant le délai d'obtention + stock de sécurité</div>
+    <figure>
+    <div class="scroll"><svg viewBox="0 0 600 240" width="100%" style="min-width:480px" role="img" aria-label="Courbe en dents de scie du stock avec point de commande et stock de sécurité">
+      <line x1="50" y1="200" x2="580" y2="200" stroke="var(--muted)"/><line x1="50" y1="20" x2="50" y2="200" stroke="var(--muted)"/>
+      <line x1="50" y1="110" x2="580" y2="110" stroke="var(--sun-deep)" stroke-width="2" stroke-dasharray="6 4"/>
+      <line x1="50" y1="170" x2="580" y2="170" stroke="var(--ko)" stroke-width="2" stroke-dasharray="3 4"/>
+      <polyline fill="none" stroke="var(--asphalt)" stroke-width="3" points="50,40 170,110 230,145 230,45 340,110 400,148 400,48 510,110 570,150"/>
+      <g stroke="var(--ink)" stroke-width="1.5"><line x1="170" y1="110" x2="170" y2="200" stroke-dasharray="2 3"/><line x1="230" y1="145" x2="230" y2="200" stroke-dasharray="2 3"/></g>
+      <path d="M170 188H228" stroke="var(--ink)" stroke-width="1.5"/>
+      <g font-size="11"><text x="168" y="216" class="mut">commande</text><text x="225" y="230" class="mut">livraison</text><text x="176" y="184" class="mut">délai</text>
+      <text x="440" y="104" font-weight="700">point de commande</text><text x="440" y="186" class="mut">stock de sécurité</text><text x="8" y="28" class="mut">stock</text><text x="545" y="216" class="mut">temps</text></g>
+    </svg></div>
+    <figcaption>Le stock baisse avec la consommation. Quand il touche le point de commande, on commande ; la livraison arrive après le délai d'obtention, avant d'entamer le stock de sécurité.</figcaption>
+  </figure>
+  <div class="box ex"><span class="tag">Exercice du cours</span>
+    <p>390 pièces en 13 semaines (5 jours par semaine), délai de 3 semaines.</p>
+    <ol class="steps">
+      <li>Consommation : 390 ÷ 13 = <strong>30 / semaine</strong>, soit <strong>6 / jour</strong>.</li>
+      <li>Point de commande de base : 30 × 3 = <strong>90 pièces</strong>.</li>
+      <li>+ 2 jours de délai administratif : 15 + 2 = 17 jours × 6 = <strong>102 pièces</strong> (12 de plus immobilisées).</li>
+      <li>+ stock de sécurité de 3 jours (6 × 3 = 18) : <strong>120 pièces</strong>.</li>
+    </ol>
+  </div>
+  <div class="tbl"><table>
+    <tr><th>Système</th><th>Quand ?</th><th>Combien ?</th></tr>
+    <tr><td><strong>Point de commande</strong></td><td>Dès que le stock atteint le seuil</td><td>Quantité fixe</td></tr>
+    <tr><td><strong>Recomplètement périodique</strong></td><td>À date fixe</td><td>Quantité variable (jusqu'au niveau de recomplètement)</td></tr>
+  </table></div>
+  <p>Point de commande trop haut : coût de possession élevé. Trop bas : rupture. Le recomplètement permet de <strong>grouper les commandes</strong> par fournisseur, mais il est « aveugle » entre deux contrôles.</p>
+
+  <h3>Calcul 4 · Ce qu'on paie en maritime et en aérien</h3>
+  <div class="grid2">
+    <div class="card"><h4>Maritime : l'unité payante</h4><p><strong>1 tonne = 1 m³</strong> : on compare poids (t) et volume (m³), on paie sur le plus grand.</p></div>
+    <div class="card"><h4>Aérien : le poids taxable</h4><p><strong>1 m³ = 167 kg</strong> : on compare poids réel et poids volumétrique, on paie sur le plus grand.</p></div>
+  </div>
+  <div class="box ex"><span class="tag">Exemple</span>
+    <p>100 cartons de 0,08 m³ et 12 kg. Poids réel 1 200 kg ; volume 8 m³. Aérien : 8 × 167 = 1 336 kg &gt; 1 200, on paie <strong>1 336 kg</strong>. Maritime : 1,2 t contre 8 m³, on paie <strong>8 unités</strong>.</p>
+  </div>
+  <div class="box trap"><span class="tag">Règle d'or pour choisir un mode</span>
+    <p>On compare <strong>de porte à porte</strong> (pré-acheminement, opérations terminales, <strong>coût du stock</strong> immobilisé), pas seulement le prix du trajet principal. Pour un produit cher, léger ou un événement à date fixe, l'avion peut gagner.</p>
+  </div>
+</section>
+
+<!-- ============ 6 ============ -->
+<section class="part" id="p6">
+  <div class="part-head"><span class="part-num">6</span><div><div class="eyebrow">Entraînement · 5 lignes par réponse</div><h2>Questions de cours probables</h2></div></div>
+  <p>Essaie de répondre de tête, puis ouvre la réponse modèle.</p>
+  <details class="qa"><summary>Définissez la logistique et ses composantes.</summary>
+    <p>La logistique est l'ensemble des méthodes, techniques et moyens qui permettent de maîtriser les flux physiques de marchandises que l'entreprise reçoit, transforme et expédie. Sa mission : mettre à disposition le bon produit, au bon endroit, au bon moment, au coût le plus juste. Elle comprend l'approvisionnement, la production et la distribution, auxquels s'ajoute la logistique inverse (retours, recyclage). Elle arbitre en permanence entre qualité de service et coût et représente environ 10 % du CA des entreprises.</p></details>
+  <details class="qa"><summary>Qu'est-ce que la supply chain ? Quels flux y circulent ?</summary>
+    <p>La supply chain regroupe les activités, ressources et acteurs qui participent au parcours d'un produit, des matières premières jusqu'au client final. Trois flux y circulent : le flux physique, de l'amont vers l'aval ; le flux d'information (commandes, prévisions, stocks), de l'aval vers l'amont, qui régule la production ; le flux financier (factures, paiements), lui aussi vers l'amont. Sa performance dépend de la coordination entre transport et logistique.</p></details>
+  <details class="qa"><summary>Distinguez transport pour compte propre et pour compte d'autrui.</summary>
+    <p>En compte propre, l'entreprise transporte ses propres marchandises avec ses véhicules et ses chauffeurs ; cela représente environ 25 % des tonnes-km, surtout sur de courtes distances. En compte d'autrui, une entreprise spécialisée réalise le transport contre rémunération (transport public), environ 75 % des tonnes-km. Le compte propre est mal mesuré car il n'est pas facturé. La sous-traitance évite d'immobiliser du capital et de gérer un parc.</p></details>
+  <details class="qa"><summary>Pourquoi la part du rail a-t-elle décliné au profit de la route ?</summary>
+    <p>Dominant jusqu'aux années 1920 (75 à 80 % des marchandises), le rail a été dépassé par la route vers 1970. Trois facteurs l'expliquent : la construction d'un réseau routier dense et performant ; la disparition des industries lourdes (charbon, sidérurgie), grandes clientes du fer ; l'essor du camion, flexible et capable de faire du porte-à-porte dans une économie en flux tendus. Aujourd'hui la route transporte environ 85 % des marchandises en France.</p></details>
+  <details class="qa"><summary>Quels sont les avantages et les limites du transport routier ?</summary>
+    <p>Son succès repose sur la quasi-ubiquité, l'intimité et la disponibilité. Il assure le porte-à-porte sans rupture de charge, il est flexible, rapide sur courte et moyenne distance, adapté au juste-à-temps, et ses prix sont compétitifs grâce à un marché en surcapacité. Ses limites : la congestion, surtout près des villes, la pollution et le CO₂, l'insécurité routière et une capacité limitée (40 t, 44 t en combiné).</p></details>
+  <details class="qa"><summary>Différenciez multimodal, intermodal et combiné.</summary>
+    <p>Le multimodal utilise au moins deux modes, avec ou sans changement de contenant. L'intermodal utilise plusieurs modes mais dans la même unité de chargement (UTI : conteneur, caisse mobile, semi-remorque), donc sans rupture de charge. Le combiné est un intermodal dont le trajet principal se fait par rail, voie d'eau ou mer, et les trajets initial et final, les plus courts possible, par la route. Tout combiné est intermodal, tout intermodal est multimodal.</p></details>
+  <details class="qa"><summary>Commissionnaire de transport ou mandataire : quelle différence ?</summary>
+    <p>Le commissionnaire de transport organise la chaîne en son nom pour le compte de son client : il choisit librement le mode, l'itinéraire et les transporteurs. Il a une obligation de résultat et répond des fautes de ses sous-traitants. Le mandataire (transitaire) exécute les ordres de son client, qui lui impose les prestataires : il n'a qu'une obligation de moyens et ne répond que de ses propres fautes. En cas de perte, on agit contre le commissionnaire, mais directement contre le transporteur si l'on est passé par un mandataire.</p></details>
+  <details class="qa"><summary>Quels critères pour choisir un mode de transport ?</summary>
+    <p>Le choix arbitre entre le délai, le coût (transport, opérations terminales et coût du stock immobilisé), les risques (casse, vol, retard), la fréquence des départs, les contraintes du produit (température, fragilité, dangerosité, urgence) et l'environnement. On compare les solutions de porte à porte. Le choix du transporteur est souvent plus déterminant que celui du mode, car la fiabilité dépend de lui.</p></details>
+</section>
+
+<!-- ============ QUIZ ============ -->
+<section class="part" id="quiz">
+  <div class="part-head"><span class="part-num">?</span><div><div class="eyebrow">Entraînement</div><h2>Quiz corrigé</h2></div></div>
+  <p>20 questions sur l'essentiel. Clique sur une réponse : la bonne s'affiche en vert avec l'explication.</p>
+  <div class="scorebar"><span>Score : <b id="score">0</b> / <span id="done">0</span> répondues sur <span id="total">0</span></span><button id="reset" type="button">Recommencer</button></div>
+  <div class="quiz" id="qbox"></div>
+  <div class="box key result" id="result"><span class="tag">Résultat</span><p id="resultText"></p></div>
+</section>
+</main>
+</div>
+<script>
+const Q=[
+ {q:"La logistique, c'est la maîtrise des flux physiques de marchandises que l'entreprise :",o:["Vend uniquement","Reçoit, transforme ou transfère, et expédie","Fabrique uniquement","Achète uniquement"],a:1,e:"Entrée (matières premières), intérieur (en-cours) et sortie (produits finis)."},
+ {q:"Les 3 grandes composantes de la logistique sont :",o:["Achat, vente, finance","Route, fer, air","Approvisionnement, production, distribution","Stock, entrepôt, camion"],a:2,e:"On y ajoute la logistique inverse (retours, réparations, recyclage)."},
+ {q:"La supply chain fait circuler :",o:["Uniquement des flux physiques","Des flux physiques, d'information et financiers","Uniquement des flux de production","Uniquement des transports"],a:1,e:"Le physique descend vers le client ; l'information et l'argent remontent vers les fournisseurs."},
+ {q:"Dans quel sens circule le flux d'information ?",o:["De l'aval vers l'amont (du client vers le fournisseur)","De l'amont vers l'aval","Il ne circule pas","Uniquement entre transporteurs"],a:0,e:"Commandes et prévisions remontent pour réguler les flux de marchandises."},
+ {q:"Le transport pour compte d'autrui représente environ :",o:["25 % des t-km","75 % des t-km","5 % des t-km","100 % des t-km"],a:1,e:"Le compte propre pèse environ 25 % des t-km, surtout sur courtes distances."},
+ {q:"Un camion transporte 12 tonnes sur 500 km. Combien de tonnes-km ?",o:["512","6 000","41,7","60 000"],a:1,e:"12 × 500 = 6 000 t-km."},
+ {q:"Vers quelle époque le fer atteint-il son apogée en France ?",o:["Vers 1830","Années 1920","Années 1970","Années 2000"],a:1,e:"Environ 75 à 80 % des marchandises, puis déclin surtout après 1950."},
+ {q:"Vers quelle date la route dépasse-t-elle le fer ?",o:["1900","1930","Vers 1970","2010"],a:2,e:"Aujourd'hui la route transporte environ 85 % des marchandises en France."},
+ {q:"Lequel N'est PAS un facteur du déclin du rail ?",o:["Le réseau routier dense","La fin des industries lourdes","La flexibilité du camion en flux tendu","La mise en service du TGV"],a:3,e:"Les 3 facteurs du cours : réseau routier, fin de l'industrie lourde, essor du camion."},
+ {q:"Les 3 caractéristiques du succès de la route sont :",o:["Quasi-ubiquité, intimité, disponibilité","Lenteur, capacité, prix","Guidage, électricité, convoi","Altitude, vitesse, régularité"],a:0,e:"On va partout sans changer de véhicule, on choisit ses compagnons, on part quand on veut."},
+ {q:"Quel mode transporte peu de tonnes mais plus d'un tiers de la valeur des échanges mondiaux ?",o:["Le fluvial","Le ferroviaire","L'aérien","Les conduites"],a:2,e:"Électronique, pharmacie, luxe : produits légers et chers."},
+ {q:"Un conteneur passe du bateau au train puis au camion sans qu'on touche la marchandise. C'est du transport :",o:["Unimodal","Intermodal","Uniquement multimodal avec rupture de charge","Pour compte propre"],a:1,e:"Même UTI, plusieurs modes, pas de rupture de charge."},
+ {q:"Dans le combiné rail-route, le trajet le plus long se fait :",o:["Par la route","Par le rail","Par avion","À parts égales"],a:1,e:"La route ne fait que les trajets de début et de fin, les plus courts possible."},
+ {q:"La « route roulante », c'est :",o:["Du combiné accompagné : le camion entier et son chauffeur prennent le train","Un camion sur autoroute","Un conteneur seul sur wagon","Un ferry"],a:0,e:"Très utilisée pour traverser les Alpes."},
+ {q:"Le commissionnaire de transport a une obligation :",o:["De moyens","De résultat","Aucune","Seulement envers la douane"],a:1,e:"Il choisit les transporteurs, donc il répond de leurs fautes. Le mandataire n'a qu'une obligation de moyens."},
+ {q:"Les Incoterms règlent :",o:["Le transfert de propriété","La répartition des frais, risques et formalités entre vendeur et acheteur","Le prix de vente","Le contrat de travail du chauffeur"],a:1,e:"Ils viennent de la CCI (version 2020, 11 termes) et ne règlent pas la propriété."},
+ {q:"Frais fixes 250 000 €/an, 460 tournées/an, 250 km par tournée à 1,60 €/km. Coût d'une tournée ?",o:["400 €","543,48 €","943,48 €","1 086,96 €"],a:2,e:"250 000 ÷ 460 = 543,48 € de fixes + 250 × 1,60 = 400 € de variables."},
+ {q:"OA = 10, OB = 12, AB = 6. Écartement de A et B ?",o:["28","16","4","22"],a:1,e:"OA + OB − AB = 10 + 12 − 6 = 16 km gagnés en livrant A et B dans la même tournée."},
+ {q:"Consommation 8 pièces/jour, délai 10 jours, stock de sécurité 20 pièces. Point de commande ?",o:["80","100","38","28"],a:1,e:"8 × 10 = 80 pendant le délai, + 20 de sécurité = 100."},
+ {q:"En aérien, 6 m³ pesant 800 kg : sur quel poids paie-t-on (1 m³ = 167 kg) ?",o:["800 kg","1 002 kg","6 kg","167 kg"],a:1,e:"6 × 167 = 1 002 kg de poids volumétrique, plus grand que 800 kg : on paie 1 002 kg."}
+];
+
+(function(){let s=7;const r=()=>{s=(s*9301+49297)%233280;return s/233280};Q.forEach(it=>{const idx=it.o.map((_,k)=>k);for(let k=idx.length-1;k>0;k--){const m=Math.floor(r()*(k+1));[idx[k],idx[m]]=[idx[m],idx[k]]}it.o=idx.map(k=>it.o[k]);it.a=idx.indexOf(it.a)})})();
+let score=0,done=0;
+function render(){
+  score=0;done=0;const box=document.getElementById('qbox');box.innerHTML='';
+  document.getElementById('total').textContent=Q.length;
+  document.getElementById('result').classList.remove('on');
+  Q.forEach((item,i)=>{
+    const d=document.createElement('div');d.className='q';
+    const h=document.createElement('h4');h.textContent=item.q;d.appendChild(h);
+    const opts=document.createElement('div');opts.className='opts';
+    item.o.forEach((t,j)=>{const b=document.createElement('button');b.type='button';b.textContent=String.fromCharCode(65+j)+'. '+t;b.addEventListener('click',()=>answer(i,j,opts,d));opts.appendChild(b)});
+    d.appendChild(opts);box.appendChild(d);
+  });update();
+}
+function answer(i,j,opts,d){
+  const item=Q[i];const btns=opts.querySelectorAll('button');
+  btns.forEach(b=>b.disabled=true);btns[item.a].classList.add('right');
+  const ok=j===item.a;if(!ok)btns[j].classList.add('wrong');else score++;done++;
+  const ex=document.createElement('div');ex.className='expl';
+  ex.innerHTML=(ok?'<b class="v">Bonne réponse.</b> ':'<b class="x">Pas tout à fait.</b> La bonne réponse est '+String.fromCharCode(65+item.a)+'. ');
+  ex.appendChild(document.createTextNode(item.e));d.appendChild(ex);update();
+  if(done===Q.length){const pct=score/Q.length;
+    document.getElementById('resultText').textContent=score+' / '+Q.length+'. '+(pct>=.85?'Tu es prête pour le partiel. Relis juste tes erreurs.':pct>=.6?'Bonne base. Relis les encadrés « À retenir » des parties où tu as fait des erreurs, puis recommence.':'Relis le top 10 et les quatre calculs, puis refais le quiz.');
+    document.getElementById('result').classList.add('on');}
+}
+function update(){document.getElementById('score').textContent=score;document.getElementById('done').textContent=done}
+window.showAllAnswers=function(){render();document.querySelectorAll('.q').forEach((d,i)=>{const opts=d.querySelector('.opts');const b=opts.querySelectorAll('button');b.forEach(x=>x.disabled=true);b[Q[i].a].classList.add('right');const ex=document.createElement('div');ex.className='expl';ex.innerHTML='<b class="v">Réponse '+String.fromCharCode(65+Q[i].a)+'.</b> ';ex.appendChild(document.createTextNode(Q[i].e));d.appendChild(ex)});};
+document.getElementById('reset').addEventListener('click',()=>{render();document.getElementById('quiz').scrollIntoView({behavior:'smooth'})});
+render();
+</script>

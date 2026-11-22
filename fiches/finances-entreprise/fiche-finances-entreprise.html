@@ -1,0 +1,1343 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Finances d'entreprise</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Public+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap">
+<style>
+/* Univers « gris » : bandeau dégradé gris perle → gris acier, encadrés gris clair, accent ardoise pour les exemples */
+:root{
+  --bg:#f5f5f6; --paper:#ffffff; --ink:#1f2125; --muted:#5d6068;
+  --acc:#9a9ea6; --acc-deep:#3d4048; --hot:#7c8089; --cream:#ececee; --cream-2:#d3d5d9; --line:#e1e2e5;
+  --teal:#3f5566; --teal-bg:#e6ebef; --ok:#1f7a50; --ok-bg:#e1f2e8; --ko:#b3262d; --ko-bg:#fbe3e2;
+  --a1:#d9dbdf; --a2:#b4b8bf; --a3:#eef0f2; --a4:#8e949d;
+  --f-display:"Bricolage Grotesque", "Arial Black", system-ui, sans-serif;
+  --f-body:"Public Sans", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#141518; --paper:#1d1f23; --ink:#eceef1; --muted:#a8acb4;
+  --acc:#80858e; --acc-deep:#d4d7dc; --hot:#9ca1aa; --cream:#2a2d32; --cream-2:#454950; --line:#33363c;
+  --teal:#a9c1d3; --teal-bg:#22303a; --ok:#5fd39b; --ok-bg:#163327; --ko:#ff8b7d; --ko-bg:#3a1a17;
+  --a1:#3a3e45; --a2:#5a5f68; --a3:#2a2d32; --a4:#7d838d; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#141518; --paper:#1d1f23; --ink:#eceef1; --muted:#a8acb4;
+  --acc:#80858e; --acc-deep:#d4d7dc; --hot:#9ca1aa; --cream:#2a2d32; --cream-2:#454950; --line:#33363c;
+  --teal:#a9c1d3; --teal-bg:#22303a; --ok:#5fd39b; --ok-bg:#163327; --ko:#ff8b7d; --ko-bg:#3a1a17;
+  --a1:#3a3e45; --a2:#5a5f68; --a3:#2a2d32; --a4:#7d838d; color-scheme:dark }
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.65;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;padding-block:28px 80px}
+@media (max-width:900px){.wrap{grid-template-columns:minmax(0,1fr);gap:0}.toc{display:none}}
+main{min-width:0;max-width:78ch}
+h1,h2,h3,h4{font-family:var(--f-display);text-wrap:balance;line-height:1.1;color:var(--ink)}
+h1{font-size:clamp(2.3rem,6.4vw,3.9rem);font-weight:800;margin:0 0 .3em;letter-spacing:-.02em;color:#1f2125}
+h2{font-size:clamp(1.6rem,3.6vw,2.3rem);font-weight:800;margin:0 0 .4em;letter-spacing:-.01em}
+h3{font-size:1.32rem;font-weight:750;margin:2em 0 .5em;color:var(--acc-deep)}
+h4{font-size:1.06rem;margin:1.4em 0 .3em}
+p{margin:.6em 0}
+a{color:var(--acc-deep)}
+strong{font-weight:700}
+.eyebrow{font-family:var(--f-display);text-transform:uppercase;letter-spacing:.12em;font-size:.78rem;font-weight:800;color:var(--muted)}
+.hl{background:var(--cream);padding:0 .2em;border-radius:3px}
+.en{font-style:italic;color:var(--muted)}
+
+.toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 24px);align-self:start;font-size:.92rem;max-height:calc(100vh - 48px);overflow-y:auto}
+.toc ol{list-style:none;padding:0;margin:.6em 0 0;display:grid;gap:2px}
+.toc a{display:block;padding:6px 10px;border-radius:8px;text-decoration:none;color:var(--muted)}
+.toc a:hover,.toc a:focus-visible{background:var(--cream);color:var(--ink)}
+
+.hero{background:linear-gradient(130deg,#f1f2f4 0%,#d9dbdf 50%,#b9bcc2 100%);color:#1f2125;border-radius:22px;padding:28px 26px 26px;margin-bottom:28px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,#ffffff 0%,rgba(255,255,255,0) 70%);opacity:.7;pointer-events:none}
+.hero > *{position:relative;z-index:1}
+.hero .eyebrow{color:#4a4d55}
+.hero .lede{font-size:1.12rem;color:#2c2f35;max-width:62ch}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.chip{background:rgba(255,255,255,.65);color:#2c2f35;border:1px solid rgba(61,64,72,.2);border-radius:999px;padding:4px 12px;font-size:.85rem;font-weight:600}
+
+section.part{padding-top:40px;margin-top:40px;border-top:3px solid var(--line)}
+.part-head{display:flex;gap:16px;align-items:flex-start;margin-bottom:8px}
+.part-num{font-family:var(--f-display);font-weight:800;font-size:3rem;line-height:1;color:#2a2c31;background:linear-gradient(135deg,#eceef0,#c5c8cd);border-radius:14px;padding:6px 14px;flex:none;box-shadow:0 4px 0 #a3a7ad}
+
+.box{border-radius:14px;padding:14px 18px;margin:16px 0;border:1px solid var(--line);background:var(--paper)}
+.box > :first-child{margin-top:0}.box > :last-child{margin-bottom:0}
+.box .tag{display:inline-block;font-family:var(--f-display);font-weight:800;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;padding:2px 8px;border-radius:6px;margin-bottom:6px}
+.def{background:var(--cream);border-color:var(--cream-2)}
+.def .tag{background:var(--acc-deep);color:var(--paper)}
+.ex{border-left:6px solid var(--teal);background:var(--paper)}
+.ex .tag{background:var(--teal);color:var(--paper)}
+.trap{border:1.5px dashed var(--ko)}
+.trap .tag{background:transparent;color:var(--ko);border:1.5px solid var(--ko)}
+.key{border:3px solid var(--acc);position:relative;padding-top:22px}
+.key::before{content:"";position:absolute;inset:0 0 auto 0;height:9px;border-radius:10px 10px 0 0;background:linear-gradient(90deg,#e4e6e9,#b9bcc2,#8e939b)}
+.key .tag{background:var(--ink);color:var(--bg)}
+.key ul{margin:.3em 0;padding-left:1.2em}
+.exam{background:linear-gradient(135deg,var(--cream),var(--paper));border:2px solid var(--acc)}
+.exam .tag{background:var(--hot);color:#fff}
+.simple{font-style:italic;color:var(--muted)}
+.formula{font-family:var(--f-display);font-weight:700;background:var(--cream);border-left:5px solid var(--acc-deep);border-radius:10px;padding:10px 14px;margin:12px 0;font-size:1.04rem;overflow-x:auto}
+.formula small{font-family:var(--f-body);font-weight:400;color:var(--muted);display:block;font-size:.85rem}
+
+.tbl{overflow-x:auto;margin:16px 0;border-radius:12px;border:1px solid var(--line)}
+table{border-collapse:collapse;width:100%;font-size:.93rem;background:var(--paper)}
+th,td{padding:8px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+th{background:var(--cream);font-family:var(--f-display);font-weight:800;color:var(--acc-deep)}
+tr:last-child td{border-bottom:none}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.total td{font-weight:700;background:var(--cream)}
+tr.sub td{font-weight:700}
+td.neg{color:var(--ko)} td.pos{color:var(--ok)}
+td.ind{padding-left:28px}
+
+figure{margin:20px 0;padding:16px;background:var(--paper);border:1px solid var(--line);border-radius:14px}
+figure svg{display:block;width:100%;height:auto;max-width:600px;margin:0 auto}
+figcaption{font-size:.86rem;color:var(--muted);margin-top:8px}
+svg text{font-family:var(--f-body);fill:var(--ink);font-size:13px}
+svg .mut{fill:var(--muted)}
+svg .b{font-weight:700}
+svg .big{font-family:var(--f-display);font-weight:800;font-size:15px}
+svg .r1{fill:var(--a1);stroke:var(--a4);stroke-width:1}
+svg .r2{fill:var(--a2);stroke:var(--a4);stroke-width:1}
+svg .r3{fill:var(--a3);stroke:var(--a4);stroke-width:1}
+svg .r4{fill:var(--teal-bg);stroke:var(--teal);stroke-width:1.2}
+svg .ln{stroke:var(--ink);stroke-width:1.5;fill:none}
+svg .lnm{stroke:var(--muted);stroke-width:1.2;fill:none;stroke-dasharray:4 4}
+svg .arw{fill:var(--ink)}
+
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch}
+.flow .step{flex:1 1 130px;background:var(--cream);border-radius:12px;padding:10px 12px;font-size:.9rem;min-width:0}
+.flow .step b{display:block;font-family:var(--f-display);color:var(--acc-deep);font-size:1rem}
+.flow .arrow{align-self:center;color:var(--acc);font-weight:900;font-size:1.2rem}
+.cascade{display:grid;gap:6px;margin:16px 0}
+.cascade .lvl{display:grid;grid-template-columns:minmax(0,1fr);background:var(--paper);border:1px solid var(--line);border-left:6px solid var(--acc-deep);border-radius:10px;padding:8px 12px;font-size:.92rem}
+.cascade .lvl b{font-family:var(--f-display);font-size:1rem}
+.cascade .lvl span{color:var(--muted)}
+.cascade .lvl.l2{margin-left:4%;border-left-color:#555960}.cascade .lvl.l3{margin-left:8%;border-left-color:#6d7179}
+.cascade .lvl.l4{margin-left:12%;border-left-color:#858a92}.cascade .lvl.l5{margin-left:16%;border-left-color:#9da1a9}
+.cascade .lvl.l6{margin-left:20%;border-left-color:#b2b6bc}.cascade .lvl.side{border-left-color:var(--teal);border-style:dashed}
+@media (max-width:520px){.cascade .lvl{margin-left:0 !important}}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px 14px;min-width:0}
+.card h4{margin:0 0 4px;color:var(--acc-deep)}
+.card p{margin:.2em 0;font-size:.93rem}
+.pm{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+.pm > div{border-radius:12px;padding:12px 14px}
+.pm .plus{background:var(--ok-bg)}.pm .minus{background:var(--ko-bg)}
+.pm h4{margin:0 0 4px}.pm .plus h4{color:var(--ok)}.pm .minus h4{color:var(--ko)}
+.pm ul{margin:0;padding-left:1.1em;font-size:.93rem}
+.steps{counter-reset:s;list-style:none;padding:0;display:grid;gap:10px}
+.steps > li{counter-increment:s;position:relative;padding:12px 14px 12px 52px;background:var(--paper);border:1px solid var(--line);border-radius:12px}
+.steps > li::before{content:counter(s);position:absolute;left:12px;top:12px;width:28px;height:28px;border-radius:50%;background:var(--acc-deep);color:var(--paper);font-family:var(--f-display);font-weight:800;display:grid;place-items:center}
+details.sol{background:var(--paper);border:1px solid var(--line);border-radius:14px;margin:14px 0;padding:0 16px}
+details.sol > summary{cursor:pointer;padding:12px 0;font-family:var(--f-display);font-weight:800;color:var(--acc-deep);list-style:none}
+details.sol > summary::-webkit-details-marker{display:none}
+details.sol > summary::before{content:"▸ ";display:inline-block;transition:transform .15s}
+details.sol[open] > summary::before{transform:rotate(90deg)}
+details.sol[open]{padding-bottom:14px}
+.enonce{background:var(--cream);border-radius:12px;padding:12px 16px;margin:12px 0}
+.enonce > :first-child{margin-top:0}.enonce > :last-child{margin-bottom:0}
+
+.quiz{counter-reset:q}
+.q{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:14px 0}
+.q h4{margin:0 0 10px;font-family:var(--f-body);font-weight:700;line-height:1.45}
+.q h4::before{counter-increment:q;content:"Q" counter(q) " · ";color:var(--acc-deep);font-family:var(--f-display)}
+.q .theme{display:inline-block;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--teal);margin-bottom:4px}
+.opts{display:grid;gap:7px}
+.opts button{font:inherit;font-size:.94rem;text-align:left;padding:9px 14px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer;line-height:1.45}
+.opts button:hover:not(:disabled){border-color:var(--acc-deep)}
+.opts button:focus-visible{outline:3px solid var(--acc-deep);outline-offset:2px}
+.opts button.right{background:var(--ok-bg);border-color:var(--ok);font-weight:600}
+.opts button.wrong{background:var(--ko-bg);border-color:var(--ko)}
+.opts button:disabled{cursor:default}
+.expl{margin-top:10px;padding:10px 14px;border-radius:10px;background:var(--cream);font-size:.93rem}
+.expl b.v{color:var(--ok)}.expl b.x{color:var(--ko)}
+.scorebar{position:sticky;top:calc(env(safe-area-inset-top,0px) + 8px);z-index:5;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;background:linear-gradient(120deg,#e6e7ea,#b9bcc2);color:#1f2125;border-radius:12px;padding:10px 16px;margin:16px 0}
+.scorebar b{font-family:var(--f-display);font-size:1.2rem}
+.scorebar button{font:inherit;font-size:.88rem;background:#fff;color:#2c2f35;font-weight:700;border:none;border-radius:8px;padding:6px 12px;cursor:pointer}
+.scorebar button:focus-visible{outline:3px solid #2c2f35;outline-offset:2px}
+.result{display:none}
+.result.on{display:block}
+dl.glo{display:grid;grid-template-columns:minmax(150px,max-content) minmax(0,1fr);gap:6px 16px;font-size:.93rem}
+dl.glo dt{font-weight:700;color:var(--acc-deep)}
+dl.glo dd{margin:0}
+@media (max-width:520px){dl.glo{grid-template-columns:minmax(0,1fr)}dl.glo dd{margin-bottom:8px}.hero{padding:22px 18px}.part-num{font-size:2.3rem}body{font-size:16px}}
+@media (prefers-reduced-motion:no-preference){.opts button{transition:background .15s,border-color .15s}}
+@media print{.toc,.scorebar{display:none}.wrap{display:block}details.sol{display:block}}
+</style>
+<div class="wrap">
+<nav class="toc" aria-label="Sommaire">
+  <div class="eyebrow">Sommaire</div>
+  <ol>
+    <li><a href="#p0">Mode d'emploi et examen</a></li>
+    <li><a href="#p1">1. Bilan et compte de résultat</a></li>
+    <li><a href="#p2">2. Les SIG</a></li>
+    <li><a href="#p3">3. CAF, ratios, effet de levier</a></li>
+    <li><a href="#p4">4. Bilan fonctionnel</a></li>
+    <li><a href="#p5">5. Évaluation des entreprises</a></li>
+    <li><a href="#p6">6. Décisions d'investissement</a></li>
+    <li><a href="#p7">7. Modes de financement</a></li>
+    <li><a href="#p8">8. Marché des changes</a></li>
+    <li><a href="#formulaire">Formulaire à apprendre</a></li>
+    <li><a href="#glossaire">Glossaire FR / EN</a></li>
+    <li><a href="#quiz">QCM d'entraînement</a></li>
+  </ol>
+</nav>
+
+<main>
+<header class="hero">
+  <div class="eyebrow">Finances d'entreprise · CM Dr Issam Beya · L3 Commerce International · UPEC · S5</div>
+  <h1>Comprendre les finances d'une entreprise, depuis zéro</h1>
+  <p class="lede">Lire un bilan, calculer ce que l'entreprise gagne vraiment, savoir si elle peut s'endetter, si elle est équilibrée, combien elle vaut et si un projet est rentable. Tout le cours (chapitres 1 à 8), expliqué pas à pas avec les exemples du prof, tous les exercices des TD corrigés et un QCM pour t'entraîner.</p>
+  <div class="chips"><span class="chip">Bilan, compte de résultat</span><span class="chip">SIG : VA, EBE…</span><span class="chip">CAF, ratios</span><span class="chip">Effet de levier</span><span class="chip">FRNG, BFR, trésorerie</span><span class="chip">Gordon-Shapiro, PER</span><span class="chip">VAN, IP, TRI</span><span class="chip">Emprunts, change</span></div>
+</header>
+
+<section id="p0">
+  <h2>Mode d'emploi</h2>
+  <p>La finance d'entreprise répond à des questions très concrètes. Le cours avance comme une enquête : on part des <strong>documents comptables</strong> (la « photo » et le « film » de l'entreprise), on les découpe pour comprendre <strong>d'où vient le résultat</strong>, puis on regarde si l'entreprise est <strong>solide</strong>, <strong>combien elle vaut</strong>, et comment elle <strong>investit</strong> et se <strong>finance</strong>.</p>
+  <figure>
+    <div class="flow">
+      <div class="step"><b>1. Les documents</b>Bilan (la photo) et compte de résultat (le film de l'année).</div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>2-3. La performance</b>SIG, CAF, ratios, effet de levier : d'où vient le résultat ?</div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>4. L'équilibre</b>Bilan fonctionnel : FRNG, BFR, trésorerie.</div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>5-8. Les décisions</b>Valeur de l'entreprise, investir, se financer, changer des devises.</div>
+    </div>
+  </figure>
+  <div class="box exam"><span class="tag">Format de l'examen (d'après tes notes de cours)</span>
+    <ul>
+      <li><strong>Durée : 2 heures.</strong></li>
+      <li><strong>2 exercices</strong> sur 5 points chacun (10 points), <strong>une question de cours</strong> sur 5 points et un <strong>QCM</strong> sur 5 points.</li>
+      <li>Le prof a indiqué qu'il n'y aurait <strong>pas d'exercice de calcul sur le chapitre 1, les SIG ou le chapitre 8</strong> (change) : ces chapitres tombent plutôt en question de cours ou en QCM. Les exercices peuvent porter sur la <strong>CAF et le levier, le bilan fonctionnel, l'évaluation, l'investissement et le financement</strong>.</li>
+      <li>Questions de cours probables : « Quelle différence entre bilan comptable et bilan fonctionnel ? », « Qu'est-ce que le Forex ? », « Comment améliorer la trésorerie ? ».</li>
+    </ul>
+  </div>
+  <div class="box def"><span class="tag">Les encadrés</span>
+    <p><strong>Définition</strong> sur fond gris clair, <strong>Exemple</strong> avec une barre ardoise, <strong>Piège</strong> en pointillés rouges, <strong>À retenir</strong> avec le bandeau dégradé, <strong>Examen</strong> pour ce qui peut tomber. Les corrigés d'exercices sont repliés : <strong>essaie d'abord seule</strong>, puis clique sur « Voir le corrigé ».</p>
+  </div>
+</section>
+
+<!-- ============ CHAPITRE 1 ============ -->
+<section class="part" id="p1">
+  <div class="part-head"><span class="part-num">1</span><div><div class="eyebrow">Chapitre 1 · États financiers</div><h2>Le bilan et le compte de résultat</h2></div></div>
+  <p>Chaque année, toute entreprise doit produire deux documents de synthèse. Tout le reste du cours se calcule à partir d'eux, donc il faut vraiment savoir les lire.</p>
+
+  <h3>A. Le bilan : la photo du patrimoine</h3>
+  <div class="box def"><span class="tag">Définition</span>
+    <p>Le <strong>bilan</strong> (<span class="en">balance sheet</span>) est une <strong>photographie</strong> du patrimoine de l'entreprise <strong>à un moment donné</strong> : en général le 31/12/N, la <strong>date de clôture</strong> (ou date d'inventaire). La période de 12 mois entre deux clôtures s'appelle l'<strong>exercice comptable</strong>.</p>
+    <p>Le mot vient du latin <em>bi</em> (deux) et <em>lanx</em> (plateau) : une balance à deux plateaux, toujours en équilibre.</p>
+  </div>
+  <p>C'est un document <strong>statique</strong> : il montre la situation un jour précis, mais ne permet pas de suivre ce qui s'est passé pendant l'année. Pour voir le « film », il faut le compte de résultat (ou un tableau de trésorerie).</p>
+  <div class="formula">Patrimoine = Biens + Créances − Dettes</div>
+  <div class="box ex"><span class="tag">Exemple</span>
+    <p>M. Durand possède un appartement estimé à 400 000 € et doit encore 100 000 € à sa banque. Son patrimoine vaut 400 000 − 100 000 = <strong>300 000 €</strong>.</p>
+  </div>
+
+  <h4>L'architecture du bilan</h4>
+  <figure>
+    <svg viewBox="0 0 600 330" role="img" aria-label="Schéma du bilan : actif à gauche, passif à droite">
+      <text x="150" y="20" text-anchor="middle" class="big">ACTIF = ce que l'entreprise possède</text>
+      <text x="450" y="20" text-anchor="middle" class="big">PASSIF = ce qu'elle doit</text>
+      <text x="150" y="38" text-anchor="middle" class="mut">les « emplois »</text>
+      <text x="450" y="38" text-anchor="middle" class="mut">les « ressources »</text>
+      <rect x="20" y="50" width="260" height="140" rx="8" class="r2"/>
+      <text x="150" y="76" text-anchor="middle" class="b">Actif immobilisé</text>
+      <text x="150" y="98" text-anchor="middle">incorporel : marque, brevet, logiciel,</text>
+      <text x="150" y="114" text-anchor="middle">fonds commercial</text>
+      <text x="150" y="136" text-anchor="middle">corporel : terrain, bâtiment, machine</text>
+      <text x="150" y="158" text-anchor="middle">financier : titres de participation,</text>
+      <text x="150" y="174" text-anchor="middle">prêts, dépôts de garantie</text>
+      <rect x="20" y="196" width="260" height="110" rx="8" class="r1"/>
+      <text x="150" y="222" text-anchor="middle" class="b">Actif circulant</text>
+      <text x="150" y="244" text-anchor="middle">stocks</text>
+      <text x="150" y="262" text-anchor="middle">créances clients</text>
+      <text x="150" y="280" text-anchor="middle">VMP, disponibilités (banque, caisse)</text>
+      <rect x="320" y="50" width="260" height="120" rx="8" class="r2"/>
+      <text x="450" y="76" text-anchor="middle" class="b">Capitaux propres</text>
+      <text x="450" y="98" text-anchor="middle">capital (apports des associés)</text>
+      <text x="450" y="118" text-anchor="middle">réserves (bénéfices gardés)</text>
+      <text x="450" y="138" text-anchor="middle">résultat de l'exercice</text>
+      <rect x="320" y="176" width="260" height="34" rx="8" class="r3"/>
+      <text x="450" y="198" text-anchor="middle" class="b">Provisions</text>
+      <rect x="320" y="216" width="260" height="90" rx="8" class="r1"/>
+      <text x="450" y="240" text-anchor="middle" class="b">Dettes</text>
+      <text x="450" y="262" text-anchor="middle">financières (emprunts)</text>
+      <text x="450" y="280" text-anchor="middle">d'exploitation (fournisseurs)</text>
+      <text x="450" y="298" text-anchor="middle">fiscales et sociales</text>
+      <text x="150" y="326" text-anchor="middle" class="mut">↓ du moins liquide au plus liquide</text>
+      <text x="450" y="326" text-anchor="middle" class="mut">↓ du moins exigible au plus exigible</text>
+    </svg>
+    <figcaption>Total actif = total passif, toujours. Ce que l'entreprise possède a forcément été financé par quelqu'un : les associés (capitaux propres) ou des créanciers (dettes).</figcaption>
+  </figure>
+  <div class="grid2">
+    <div class="card"><h4>Classement de l'actif</h4><p>Par <strong>liquidité croissante</strong> : d'abord ce qui se transforme le plus difficilement en argent (terrain), à la fin l'argent lui-même (banque, caisse). Les créances sont plus liquides que les stocks.</p></div>
+    <div class="card"><h4>Classement du passif</h4><p>Par <strong>exigibilité croissante</strong> : d'abord ce qu'on ne rembourse jamais (capital), à la fin ce qu'il faut payer vite (fournisseurs, État, découvert).</p></div>
+  </div>
+  <div class="box def"><span class="tag">Les postes du passif en une ligne</span>
+    <ul>
+      <li><strong>Capital</strong> : apports des associés, en <strong>numéraire</strong> (argent) ou en <strong>nature</strong> (un local, un véhicule). L'apport en industrie (travail) n'entre pas dans le capital.</li>
+      <li><strong>Réserves</strong> : bénéfices des années passées <strong>non distribués</strong> en dividendes. S'il y a des réserves, l'entreprise a déjà fait des bénéfices.</li>
+      <li><strong>Provisions</strong> : sommes mises de côté pour un risque probable (un procès, par exemple).</li>
+      <li><strong>Dettes financières</strong> (emprunts bancaires), <strong>d'exploitation</strong> (fournisseurs), <strong>fiscales et sociales</strong> (impôts, cotisations).</li>
+    </ul>
+  </div>
+  <div class="box ex"><span class="tag">Action ou obligation ?</span>
+    <p>Une <strong>action</strong> est un titre de <strong>propriété</strong> : tu possèdes un morceau de l'entreprise, tu touches peut-être des dividendes, tu peux perdre ta mise. Une <strong>obligation</strong> est un titre de <strong>créance</strong> : tu as prêté de l'argent, tu touches des intérêts (le coupon) et tu es remboursée à la fin. L'obligation est moins risquée, mais rapporte en général moins.</p>
+  </div>
+
+  <h3>B. Le compte de résultat : le film de l'année</h3>
+  <div class="box def"><span class="tag">Définition</span>
+    <p>Le <strong>compte de résultat</strong> (<span class="en">income statement</span>) récapitule tous les <strong>produits</strong> (ce qui enrichit l'entreprise) et toutes les <strong>charges</strong> (ce qui l'appauvrit) de l'exercice. C'est un document <strong>dynamique</strong> : il explique comment s'est formé le résultat qu'on retrouve au passif du bilan.</p>
+  </div>
+  <div class="formula">Résultat = Total des produits − Total des charges<small>Positif : bénéfice. Négatif : perte (déficit).</small></div>
+  <p>Les charges et les produits sont rangés en trois familles :</p>
+  <div class="tbl"><table>
+    <tr><th></th><th>Charges (−)</th><th>Produits (+)</th></tr>
+    <tr><td><strong>Exploitation</strong><br><span class="simple">l'activité normale</span></td><td>achats, loyers, salaires, cotisations, publicité, essence, impôts et taxes, dotations aux amortissements</td><td>ventes de marchandises, production vendue, subventions d'exploitation</td></tr>
+    <tr><td><strong>Financier</strong><br><span class="simple">l'argent placé ou emprunté</span></td><td>intérêts d'emprunt, pertes de change</td><td>intérêts reçus, dividendes reçus, escomptes obtenus, gains de change</td></tr>
+    <tr><td><strong>Exceptionnel</strong><br><span class="simple">hors du cours normal</span></td><td>dons versés, amendes, pénalités, valeur des actifs vendus</td><td>prix de vente d'une machine, dons reçus</td></tr>
+  </table></div>
+
+  <h4>Le plan comptable : 7 classes de comptes</h4>
+  <div class="grid2">
+    <div class="card"><h4>Comptes de situation → bilan</h4><p>Classe 1 : capitaux<br>Classe 2 : immobilisations<br>Classe 3 : stocks<br>Classe 4 : tiers (clients, fournisseurs, État)<br>Classe 5 : financiers (banque, caisse)</p></div>
+    <div class="card"><h4>Comptes de gestion → compte de résultat</h4><p>Classe 6 : charges<br>Classe 7 : produits</p></div>
+  </div>
+  <div class="box trap"><span class="tag">Piège : immobilisation ou charge ?</span>
+    <p>Une <strong>immobilisation</strong> est un bien acheté pour <strong>durer</strong> dans l'entreprise (un ordinateur, un véhicule) : elle va au <strong>bilan</strong> (classe 2). Une <strong>charge</strong> est consommée dans l'année (loyer, salaire, essence) : elle va au <strong>compte de résultat</strong> (classe 6).</p>
+    <p>Et certaines opérations ne vont <strong>dans aucun des deux comptes de gestion</strong> : obtenir un emprunt (c'est une dette, au bilan), payer un fournisseur (on règle une dette, ce n'est pas une nouvelle charge).</p>
+  </div>
+  <div class="box key"><span class="tag">À retenir</span>
+    <ul>
+      <li><strong>Bilan</strong> = statique, une photo du patrimoine. Actif (emplois) = Passif (ressources).</li>
+      <li><strong>Compte de résultat</strong> = dynamique, l'activité de l'année. Produits − Charges = Résultat.</li>
+      <li>Le résultat apparaît <strong>dans les deux</strong> : calculé dans le compte de résultat, reporté dans les capitaux propres du bilan.</li>
+      <li>Endettement : <strong>dettes financières ÷ capitaux propres</strong>. Sous 100 % : peu endettée. Au-dessus de 100 % : dépend beaucoup des banques.</li>
+    </ul>
+  </div>
+
+  <h3>Exercice corrigé : l'entreprise ABC (application du cours)</h3>
+  <div class="enonce">
+    <p>ABC fabrique des <strong>robes sur mesure</strong> vendues à des particuliers et revend des <strong>chapeaux</strong> achetés à un fournisseur. Éléments au 31/12/N :</p>
+    <div class="tbl"><table>
+      <tr><td>Achats de tissu</td><td class="num">6 000</td><td>Banque</td><td class="num">4 500</td></tr>
+      <tr><td>Capital</td><td class="num">30 000</td><td>Véhicule</td><td class="num">12 700</td></tr>
+      <tr><td>Emprunt</td><td class="num">15 000</td><td>Fonds commercial</td><td class="num">3 000</td></tr>
+      <tr><td>Charges d'intérêts</td><td class="num">800</td><td>Ventes de chapeaux</td><td class="num">3 200</td></tr>
+      <tr><td>Achats de fil</td><td class="num">200</td><td>Essence</td><td class="num">900</td></tr>
+      <tr><td>Machines à coudre</td><td class="num">20 200</td><td>Taxe sur les véhicules de société</td><td class="num">200</td></tr>
+      <tr><td>Achats de chapeaux</td><td class="num">900</td><td>Publicité</td><td class="num">1 200</td></tr>
+      <tr><td>Vente de robes</td><td class="num">24 000</td><td>Frais postaux</td><td class="num">300</td></tr>
+      <tr><td>Dettes fournisseurs</td><td class="num">500</td><td>Stock de tissu</td><td class="num">1 000</td></tr>
+      <tr><td>Salaires</td><td class="num">15 000</td><td>Cotisations sociales</td><td class="num">7 000</td></tr>
+      <tr><td>Loyer du local</td><td class="num">800</td><td>Caisse</td><td class="num">400</td></tr>
+      <tr><td>Réserves</td><td class="num">2 200</td><td>Escomptes obtenus</td><td class="num">200</td></tr>
+    </table></div>
+    <p>Questions : 1. Activités ? 2. Éléments du compte de résultat ? 3. Compte de résultat et bilan. 4. Pourquoi pas de poste client ? 5. Trésorerie ? 6. Apports des associés ? 7. Bénéfices passés ? 8. Fonds commercial ? 9. Endettement ?</p>
+  </div>
+  <details class="sol"><summary>Voir le corrigé</summary>
+    <p><strong>1. Deux activités.</strong> Une activité <strong>industrielle</strong> (elle transforme du tissu et du fil en robes) et une activité <strong>commerciale</strong> (elle achète et revend des chapeaux tels quels, c'est du négoce).</p>
+    <p><strong>2-3. On trie chaque ligne :</strong> charge, produit, ou poste du bilan.</p>
+    <div class="tbl"><table>
+      <tr><th>Charges</th><th class="num">€</th><th>Produits</th><th class="num">€</th></tr>
+      <tr><td colspan="4"><strong>Exploitation</strong></td></tr>
+      <tr><td>Achats de tissu</td><td class="num">6 000</td><td>Vente de robes</td><td class="num">24 000</td></tr>
+      <tr><td>Achats de fil</td><td class="num">200</td><td>Ventes de chapeaux</td><td class="num">3 200</td></tr>
+      <tr><td>Achats de chapeaux</td><td class="num">900</td><td></td><td></td></tr>
+      <tr><td>Salaires</td><td class="num">15 000</td><td></td><td></td></tr>
+      <tr><td>Cotisations sociales</td><td class="num">7 000</td><td></td><td></td></tr>
+      <tr><td>Loyer, essence, taxe véhicules, publicité, frais postaux</td><td class="num">3 400</td><td></td><td></td></tr>
+      <tr class="sub"><td>Total charges d'exploitation</td><td class="num">32 500</td><td>Total produits d'exploitation</td><td class="num">27 200</td></tr>
+      <tr><td colspan="4"><strong>Financier</strong></td></tr>
+      <tr><td>Charges d'intérêts</td><td class="num">800</td><td>Escomptes obtenus</td><td class="num">200</td></tr>
+      <tr class="total"><td>Total charges</td><td class="num">33 300</td><td>Total produits</td><td class="num">27 400</td></tr>
+      <tr class="total"><td colspan="2"></td><td>Résultat = 27 400 − 33 300</td><td class="num neg">− 5 900</td></tr>
+    </table></div>
+    <p>L'escompte obtenu est un <strong>produit financier</strong> : c'est une réduction accordée à ABC parce qu'elle a payé son fournisseur en avance.</p>
+    <div class="tbl"><table>
+      <tr><th>Actif</th><th class="num">€</th><th>Passif</th><th class="num">€</th></tr>
+      <tr><td>Fonds commercial (incorporel)</td><td class="num">3 000</td><td>Capital</td><td class="num">30 000</td></tr>
+      <tr><td>Machines à coudre</td><td class="num">20 200</td><td>Réserves</td><td class="num">2 200</td></tr>
+      <tr><td>Véhicule</td><td class="num">12 700</td><td>Résultat de l'exercice</td><td class="num neg">− 5 900</td></tr>
+      <tr class="sub"><td>Actif immobilisé</td><td class="num">35 900</td><td>Capitaux propres</td><td class="num">26 300</td></tr>
+      <tr><td>Stock de tissu</td><td class="num">1 000</td><td>Emprunt</td><td class="num">15 000</td></tr>
+      <tr><td>Banque</td><td class="num">4 500</td><td>Dettes fournisseurs</td><td class="num">500</td></tr>
+      <tr><td>Caisse</td><td class="num">400</td><td></td><td></td></tr>
+      <tr class="total"><td>Total actif</td><td class="num">41 800</td><td>Total passif</td><td class="num">41 800</td></tr>
+    </table></div>
+    <p>Le bilan s'équilibre : bonne nouvelle, c'est la preuve que le résultat de − 5 900 est juste.</p>
+    <p><strong>4. Pas de poste client</strong> car ABC vend à des particuliers qui paient <strong>comptant</strong> : elle ne leur accorde aucun délai, donc personne ne lui doit d'argent.</p>
+    <p><strong>5. Trésorerie :</strong> oui, banque + caisse = 4 500 + 400 = <strong>4 900 €</strong>, positive.</p>
+    <p><strong>6. Apports des associés</strong> = le capital, <strong>30 000 €</strong> (aucune augmentation de capital depuis la création).</p>
+    <p><strong>7. Bénéfices passés :</strong> oui, puisqu'il y a <strong>2 200 € de réserves</strong>, c'est-à-dire des bénéfices gardés dans l'entreprise.</p>
+    <p><strong>8. Le fonds commercial</strong> est la partie <strong>immatérielle</strong> du fonds de commerce : la clientèle, la réputation, ce qui permet de faire des bénéfices futurs. À ne pas confondre avec le <strong>fonds de commerce</strong>, qui regroupe tout ce qui sert à exploiter le commerce (clientèle + matériel + nom + droit au bail).</p>
+    <p><strong>9. Endettement :</strong> dettes financières ÷ capitaux propres = 15 000 ÷ 26 300 ≈ <strong>57 %</strong>. Moins de 100 % : ABC est <strong>peu endettée</strong>. Le vrai problème, c'est la perte de l'année.</p>
+  </details>
+
+  <h3>Exercice corrigé : la société Sorrel (TD chapitre 1, exercice 1)</h3>
+  <div class="enonce">
+    <p>Du 1/07/N au 31/12/N : achats de marchandises 260 000 ; prime d'assurance 5 500 ; salaires 51 000 ; cotisations sociales 20 400 ; redevances crédit-bail 7 800 ; intérêts d'emprunt 6 900 ; obtention d'un nouvel emprunt 150 000 ; règlement des fournisseurs 45 000 ; frais de transport 2 500 ; télécommunications 8 900 ; vente de marchandises 325 000 ; loyer du magasin 39 000 ; achat d'un micro-ordinateur 1 200 ; don à une association 700.</p>
+    <p>1. Différence entre immobilisation et charge ? 2. Établir le compte de résultat.</p>
+  </div>
+  <details class="sol"><summary>Voir le corrigé</summary>
+    <p><strong>1.</strong> L'immobilisation reste durablement dans l'entreprise (bilan, classe 2), la charge est consommée dans l'exercice (compte de résultat, classe 6).</p>
+    <p><strong>2.</strong> On écarte d'abord ce qui n'est <strong>pas</strong> du résultat : l'emprunt de 150 000 (une dette), le règlement fournisseurs de 45 000 (paiement d'une dette existante) et le micro-ordinateur de 1 200 (une immobilisation).</p>
+    <div class="tbl"><table>
+      <tr><th>Charges</th><th class="num">€</th><th>Produits</th><th class="num">€</th></tr>
+      <tr><td>Achats de marchandises</td><td class="num">260 000</td><td>Ventes de marchandises</td><td class="num">325 000</td></tr>
+      <tr><td>Assurance 5 500 + crédit-bail 7 800 + transport 2 500 + télécoms 8 900 + loyer 39 000</td><td class="num">63 700</td><td></td><td></td></tr>
+      <tr><td>Salaires + cotisations sociales</td><td class="num">71 400</td><td></td><td></td></tr>
+      <tr class="sub"><td>Charges d'exploitation</td><td class="num">395 100</td><td>Produits d'exploitation</td><td class="num">325 000</td></tr>
+      <tr><td>Charges financières (intérêts)</td><td class="num">6 900</td><td></td><td></td></tr>
+      <tr><td>Charges exceptionnelles (don)</td><td class="num">700</td><td></td><td></td></tr>
+      <tr class="total"><td>Total charges</td><td class="num">402 700</td><td>Total produits</td><td class="num">325 000</td></tr>
+      <tr class="total"><td colspan="2"></td><td>Résultat</td><td class="num neg">− 77 700</td></tr>
+    </table></div>
+    <p>Sorrel est en <strong>perte de 77 700 €</strong> sur ces six mois : ses ventes ne couvrent même pas ses charges d'exploitation.</p>
+  </details>
+
+  <h3>Exercice corrigé : l'entreprise VERTUS (TD chapitre 1, exercice 2)</h3>
+  <div class="enonce">
+    <p>À partir de la <strong>balance</strong> (le tableau qui liste tous les comptes de l'entreprise, de la classe 1 à la classe 7, avec leur solde), établir le compte de résultat et le bilan au 31/12/N puis analyser. Soldes : capital 1 000 000 (créditeur) ; emprunts 200 000 ; terrains 220 000 ; constructions 400 000 ; matériels industriels 320 000 ; matériels de transport 150 000 ; matériels de bureau 50 000 ; mobilier 20 000 ; prêts 10 000 ; fournisseurs 120 000 (créditeur) ; clients 160 000 ; banque 25 000 ; caisse 5 000 ; achats de marchandises 2 700 000 ; achats d'approvisionnements 1 200 000 ; services extérieurs 325 000 ; impôts 300 000 ; charges de personnel 1 450 000 ; charges financières 90 000 ; charges exceptionnelles 110 000 ; ventes 6 000 000 ; produits financiers 100 000 ; produits exceptionnels 115 000.</p>
+  </div>
+  <details class="sol"><summary>Voir le corrigé</summary>
+    <p><strong>Méthode :</strong> les comptes 6 (charges) et 7 (produits) vont au compte de résultat ; les comptes 1 à 5 vont au bilan.</p>
+    <div class="tbl"><table>
+      <tr><th>Compte de résultat</th><th class="num">Charges</th><th class="num">Produits</th><th class="num">Solde</th></tr>
+      <tr><td>Exploitation : achats 3 900 000, services 325 000, impôts 300 000, personnel 1 450 000 / ventes 6 000 000</td><td class="num">5 975 000</td><td class="num">6 000 000</td><td class="num pos">+ 25 000</td></tr>
+      <tr><td>Financier</td><td class="num">90 000</td><td class="num">100 000</td><td class="num pos">+ 10 000</td></tr>
+      <tr><td>Exceptionnel</td><td class="num">110 000</td><td class="num">115 000</td><td class="num pos">+ 5 000</td></tr>
+      <tr class="total"><td>Résultat net</td><td class="num">6 175 000</td><td class="num">6 215 000</td><td class="num pos">+ 40 000</td></tr>
+    </table></div>
+    <div class="tbl"><table>
+      <tr><th>Actif</th><th class="num">€</th><th>Passif</th><th class="num">€</th></tr>
+      <tr><td>Terrains, constructions, matériels, mobilier</td><td class="num">1 160 000</td><td>Capital</td><td class="num">1 000 000</td></tr>
+      <tr><td>Prêts (immobilisation financière)</td><td class="num">10 000</td><td>Résultat</td><td class="num">40 000</td></tr>
+      <tr class="sub"><td>Actif immobilisé</td><td class="num">1 170 000</td><td>Capitaux propres</td><td class="num">1 040 000</td></tr>
+      <tr><td>Clients</td><td class="num">160 000</td><td>Emprunts</td><td class="num">200 000</td></tr>
+      <tr><td>Banque + caisse</td><td class="num">30 000</td><td>Fournisseurs</td><td class="num">120 000</td></tr>
+      <tr class="total"><td>Total</td><td class="num">1 360 000</td><td>Total</td><td class="num">1 360 000</td></tr>
+    </table></div>
+    <p><strong>Analyse.</strong> VERTUS a une activité commerciale et industrielle. Elle est <strong>bénéficiaire mais très peu rentable</strong> : 40 000 ÷ 6 000 000 = <strong>0,67 %</strong> de marge nette, à cause de charges d'exploitation très lourdes. Elle est <strong>peu endettée</strong> (200 000 ÷ 1 040 000 ≈ 19 %), donc elle pourrait emprunter si besoin. Point de vigilance : sa trésorerie (30 000) est faible face aux 120 000 dus aux fournisseurs. Pistes : réduire les coûts ou augmenter les prix, négocier des délais fournisseurs, accélérer les encaissements clients.</p>
+  </details>
+</section>
+
+<!-- ============ CHAPITRE 2 ============ -->
+<section class="part" id="p2">
+  <div class="part-head"><span class="part-num">2</span><div><div class="eyebrow">Chapitre 2 · Soldes intermédiaires de gestion</div><h2>Les SIG : découper le résultat en étapes</h2></div></div>
+  <p>Le compte de résultat donne <strong>un seul chiffre</strong> final. Mais une perte peut venir d'une mauvaise activité, d'un emprunt trop cher ou d'un événement exceptionnel. Les SIG découpent le résultat en <strong>9 soldes successifs</strong>, en cascade, pour voir à quelle étape l'entreprise gagne ou perd de l'argent.</p>
+  <div class="box def"><span class="tag">Définition</span>
+    <p>Les <strong>soldes intermédiaires de gestion</strong> sont un calcul progressif du résultat net, proposé par le Plan comptable général. Ils analysent les flux d'exploitation, financiers et exceptionnels. L'idéal est de les calculer sur <strong>3 ans</strong> pour comparer et faire des recommandations.</p>
+  </div>
+
+  <div class="cascade" role="list" aria-label="Cascade des SIG">
+    <div class="lvl" role="listitem"><b>① Marge commerciale</b><span>Ventes de marchandises − coût d'achat des marchandises vendues</span></div>
+    <div class="lvl" role="listitem"><b>② Production de l'exercice</b><span>Production vendue + stockée + immobilisée</span></div>
+    <div class="lvl l2" role="listitem"><b>③ Valeur ajoutée (VA)</b><span>① + ② − consommations en provenance des tiers</span></div>
+    <div class="lvl l3" role="listitem"><b>④ Excédent brut d'exploitation (EBE)</b><span>VA + subventions d'exploitation − impôts et taxes − charges de personnel</span></div>
+    <div class="lvl l4" role="listitem"><b>⑤ Résultat d'exploitation (RE)</b><span>EBE + reprises et transferts + autres produits − dotations − autres charges</span></div>
+    <div class="lvl l5" role="listitem"><b>⑥ Résultat courant avant impôts (RCAI)</b><span>RE + produits financiers − charges financières</span></div>
+    <div class="lvl side" role="listitem"><b>⑦ Résultat exceptionnel</b><span>Produits exceptionnels − charges exceptionnelles (calculé à part, hors cascade)</span></div>
+    <div class="lvl l6" role="listitem"><b>⑧ Résultat de l'exercice</b><span>RCAI + résultat exceptionnel − participation des salariés − impôt sur les bénéfices</span></div>
+    <div class="lvl side" role="listitem"><b>⑨ Plus ou moins-value de cession</b><span>Prix de cession − valeur comptable des actifs cédés (information à part)</span></div>
+  </div>
+
+  <h3>Les 9 soldes un par un, avec l'exemple ABC du cours</h3>
+  <h4>① La marge commerciale</h4>
+  <p>Elle mesure ce que rapporte l'activité de <strong>négoce</strong> (acheter pour revendre sans transformer). Elle concerne les entreprises commerciales, et les industrielles qui ont aussi une activité commerciale.</p>
+  <div class="formula">Marge commerciale = Ventes de marchandises − Coût d'achat des marchandises vendues
+  <small>Coût d'achat des marchandises vendues = Achats de marchandises + (Stock initial − Stock final)</small></div>
+  <div class="box ex"><span class="tag">Exemple ABC</span>
+    <p>Ventes de marchandises 216 000 ; achats 120 000 ; stock initial 0 ; stock final 20 000.</p>
+    <p>Coût d'achat des marchandises vendues = 120 000 + (0 − 20 000) = <strong>100 000</strong>. On a acheté 120 000 mais 20 000 dorment encore en stock : seules 100 000 ont été vendues.</p>
+    <p>Marge commerciale = 216 000 − 100 000 = <strong>116 000 €</strong>.</p>
+  </div>
+  <div class="box trap"><span class="tag">Piège : le signe de la variation de stock</span>
+    <p>La variation se calcule <strong>stock initial − stock final</strong>. Si le stock a augmenté (SF > SI), la variation est négative et diminue le coût d'achat. Dans les comptes de résultat, elle est notée entre parenthèses quand elle est négative : (113 100) veut dire − 113 100.</p>
+  </div>
+
+  <h4>② La production de l'exercice</h4>
+  <p>Elle mesure toute l'activité de production des entreprises industrielles et de services.</p>
+  <div class="formula">Production de l'exercice = Production vendue + Production stockée + Production immobilisée</div>
+  <p class="simple">Vendue : les produits finis vendus. Stockée : la variation du stock de produits finis (fabriqués mais pas encore vendus). Immobilisée : ce que l'entreprise fabrique pour elle-même (une machine qu'elle construit pour son propre usage).</p>
+  <div class="box ex"><span class="tag">Exemple ABC</span><p>1 200 000 + 200 000 + 100 000 = <strong>1 500 000 €</strong>.</p></div>
+
+  <h4>③ La valeur ajoutée (VA)</h4>
+  <p>C'est la <strong>richesse créée</strong> par l'entreprise : ce qu'elle produit, moins ce qu'elle a dû acheter à d'autres pour le produire. Au niveau d'un pays, la somme des VA donne le PIB : la VA mesure le « poids » de l'entreprise dans l'économie.</p>
+  <div class="formula">VA = Marge commerciale + Production de l'exercice − Consommations en provenance des tiers
+  <small>Consommations des tiers = achats de matières premières + variation des stocks de matières + autres achats et charges externes (loyers, sous-traitance, publicité, transport, assurance, télécoms…)</small></div>
+  <div class="box ex"><span class="tag">Exemple ABC</span><p>Consommations des tiers 600 000. VA = 116 000 + 1 500 000 − 600 000 = <strong>1 016 000 €</strong>.</p></div>
+  <p>La VA se <strong>partage</strong> entre les salariés (salaires), l'État (impôts), les prêteurs (intérêts), les actionnaires (dividendes) et l'entreprise elle-même (ce qu'elle garde).</p>
+
+  <h4>④ L'excédent brut d'exploitation (EBE)</h4>
+  <p>C'est la ressource que l'entreprise tire de son exploitation, <strong>avant</strong> les amortissements (politique d'investissement et fiscalité) et <strong>avant</strong> les intérêts (mode de financement). C'est donc le meilleur indicateur de la <strong>rentabilité économique pure</strong>. C'est la part de la VA qui revient à l'entreprise et aux apporteurs de capitaux, une fois payés les salariés et l'État.</p>
+  <div class="formula">EBE = VA + Subventions d'exploitation − Impôts et taxes − Charges de personnel</div>
+  <div class="box ex"><span class="tag">Exemple ABC</span><p>1 016 000 + 30 000 − 40 000 − 200 000 = <strong>806 000 €</strong>. S'il est négatif, on parle d'<strong>insuffisance brute d'exploitation</strong> (IBE).</p></div>
+
+  <h4>⑤ Le résultat d'exploitation (RE)</h4>
+  <p>Le résultat de l'activité normale, hors éléments financiers et exceptionnels. Il tient compte cette fois de l'usure des équipements (amortissements).</p>
+  <div class="formula">RE = EBE + Reprises et transferts de charges + Autres produits − Dotations aux amortissements, dépréciations et provisions − Autres charges</div>
+  <div class="box ex"><span class="tag">Exemple ABC</span><p>806 000 + 45 000 + 15 000 − 125 000 − 35 000 = <strong>706 000 €</strong>.</p></div>
+  <div class="box def"><span class="tag">L'amortissement, c'est quoi ?</span>
+    <p>Une machine de 100 000 € utilisée 5 ans s'use. Au lieu de compter 100 000 € de charge la première année, on étale : <strong>20 000 € de dotation</strong> par an (amortissement linéaire, taux 20 %). C'est une charge <strong>calculée</strong>, aucun argent ne sort.</p>
+    <div class="tbl"><table>
+      <tr><th>Année</th><th class="num">Annuité</th><th class="num">Cumul</th><th class="num">Valeur nette comptable</th></tr>
+      <tr><td>1</td><td class="num">20 000</td><td class="num">20 000</td><td class="num">80 000</td></tr>
+      <tr><td>2</td><td class="num">20 000</td><td class="num">40 000</td><td class="num">60 000</td></tr>
+      <tr><td>3</td><td class="num">20 000</td><td class="num">60 000</td><td class="num">40 000</td></tr>
+      <tr><td>4</td><td class="num">20 000</td><td class="num">80 000</td><td class="num">20 000</td></tr>
+      <tr><td>5</td><td class="num">20 000</td><td class="num">100 000</td><td class="num">0</td></tr>
+    </table></div>
+  </div>
+
+  <h4>⑥ Le résultat financier et le RCAI</h4>
+  <div class="formula">Résultat financier = Produits financiers − Charges financières<small>ABC : 60 000 − 50 000 = 10 000 €</small></div>
+  <div class="formula">RCAI = Résultat d'exploitation + Résultat financier<small>ABC : 706 000 + 10 000 = 716 000 €</small></div>
+  <p>Le RCAI montre l'effet de la <strong>politique financière</strong> (emprunts, placements) sur le résultat de l'activité courante.</p>
+
+  <h4>⑦ Le résultat exceptionnel</h4>
+  <div class="formula">Résultat exceptionnel = Produits exceptionnels − Charges exceptionnelles<small>ABC : 70 000 − 90 000 = − 20 000 €</small></div>
+
+  <h4>⑧ Le résultat de l'exercice</h4>
+  <div class="formula">Résultat de l'exercice = RCAI + Résultat exceptionnel − Participation des salariés − Impôt sur les bénéfices
+  <small>ABC : 716 000 − 20 000 − 35 000 − 165 000 = 496 000 €</small></div>
+  <p>C'est le solde final. L'assemblée générale décide d'en distribuer une partie en <strong>dividendes</strong> ; le reste est mis en réserve (autofinancement).</p>
+
+  <h4>⑨ La plus ou moins-value de cession</h4>
+  <div class="formula">Plus ou moins-value = Prix de cession − Valeur comptable de l'actif cédé<small>ABC : machine vendue 15 000, valeur nette comptable 10 000 → plus-value de 5 000 €</small></div>
+  <p>Elle renseigne sur le <strong>désinvestissement</strong> : l'entreprise vend-elle ses équipements avec profit ?</p>
+
+  <div class="box key"><span class="tag">À retenir : quel SIG pour quelle question ?</span>
+    <div class="tbl"><table>
+      <tr><th>Je veux mesurer…</th><th>SIG</th></tr>
+      <tr><td>la ressource dégagée par l'activité commerciale</td><td>Marge commerciale</td></tr>
+      <tr><td>l'ensemble de l'activité de production</td><td>Production de l'exercice</td></tr>
+      <tr><td>la richesse créée, le poids économique de l'entreprise</td><td>Valeur ajoutée</td></tr>
+      <tr><td>la rentabilité économique, le surplus monétaire potentiel de l'exploitation</td><td>EBE</td></tr>
+      <tr><td>la performance industrielle et commerciale (hors politique financière)</td><td>Résultat d'exploitation</td></tr>
+      <tr><td>la performance des activités d'exploitation <em>et</em> financières</td><td>RCAI</td></tr>
+      <tr><td>le résultat des opérations non courantes</td><td>Résultat exceptionnel</td></tr>
+      <tr><td>le bénéfice ou la perte</td><td>Résultat de l'exercice</td></tr>
+      <tr><td>analyser l'activité</td><td>Marge commerciale et production (et le CA)</td></tr>
+      <tr><td>analyser le résultat</td><td>RE, RCAI, résultat exceptionnel, résultat de l'exercice</td></tr>
+    </table></div>
+    <p>Ce tableau est exactement le <strong>TD SIG, exercice 1</strong>.</p>
+  </div>
+  <div class="box trap"><span class="tag">Piège classique du QCM SIG</span>
+    <p>Une entreprise embauche un commercial : salaire 25 000, charges sociales 12 500, frais de déplacement 2 500. La <strong>VA baisse seulement de 2 500</strong> (les frais de déplacement sont une charge externe, une consommation des tiers). Le salaire et les charges sociales ne touchent pas la VA, ils viennent <strong>après</strong>, dans le calcul de l'EBE. L'<strong>EBE baisse donc de 40 000</strong> (25 000 + 12 500 + 2 500).</p>
+  </div>
+
+  <h3>Étude de cas corrigée : ALTANUEVA (TD SIG)</h3>
+  <div class="enonce">
+    <p>À partir des comptes de résultat N et N−1 d'ALTANUEVA, calculer les SIG et interpréter leur évolution. Principales données (en €) :</p>
+    <div class="tbl"><table>
+      <tr><th></th><th class="num">N</th><th class="num">N−1</th></tr>
+      <tr><td>Ventes de marchandises</td><td class="num">8 044 750</td><td class="num">887 840</td></tr>
+      <tr><td>Achats de marchandises / variation de stock</td><td class="num">7 720 000 / 0</td><td class="num">905 860 / (113 100)</td></tr>
+      <tr><td>Production vendue / stockée / immobilisée</td><td class="num">77 993 910 / 1 774 270 / 62 115</td><td class="num">83 277 515 / 210 235 / 49 980</td></tr>
+      <tr><td>Achats de matières / variation de stock</td><td class="num">32 065 000 / 485 200</td><td class="num">34 925 000 / (275 000)</td></tr>
+      <tr><td>Autres achats et charges externes</td><td class="num">22 036 000</td><td class="num">21 220 000</td></tr>
+      <tr><td>Subventions d'exploitation</td><td class="num">34 025</td><td class="num">37 000</td></tr>
+      <tr><td>Impôts et taxes</td><td class="num">2 171 000</td><td class="num">1 885 000</td></tr>
+      <tr><td>Salaires + charges sociales</td><td class="num">13 690 000 + 6 147 600</td><td class="num">12 877 000 + 5 980 000</td></tr>
+      <tr><td>Reprises et transferts / autres produits</td><td class="num">510 000 / 1 402 310</td><td class="num">340 938 / 111 885</td></tr>
+      <tr><td>Dotations (immobilisations + actif circulant) / autres charges</td><td class="num">6 930 500 + 157 500 / 511 100</td><td class="num">6 706 000 + 435 200 / 72 645</td></tr>
+      <tr><td>Total produits / charges financiers</td><td class="num">1 947 090 / 2 168 780</td><td class="num">1 818 132 / 1 628 860</td></tr>
+      <tr><td>Total produits / charges exceptionnels</td><td class="num">3 293 060 / 2 708 940</td><td class="num">4 443 300 / 1 186 182</td></tr>
+      <tr><td>Participation / impôt sur les bénéfices</td><td class="num">0 / (10 944)</td><td class="num">134 800 / 1 147 000</td></tr>
+      <tr><td>Produits / valeur comptable des cessions d'actif</td><td class="num">193 900 / 0</td><td class="num">114 950 / 143 182</td></tr>
+    </table></div>
+  </div>
+  <details class="sol"><summary>Voir le corrigé</summary>
+    <div class="tbl"><table>
+      <tr><th>SIG</th><th class="num">N</th><th class="num">N−1</th><th class="num">Évolution</th></tr>
+      <tr><td>Marge commerciale</td><td class="num">324 750</td><td class="num">95 080</td><td class="num pos">+ 242 %</td></tr>
+      <tr><td>Production de l'exercice</td><td class="num">79 830 295</td><td class="num">83 537 730</td><td class="num neg">− 4,4 %</td></tr>
+      <tr><td>Consommations des tiers</td><td class="num">54 586 200</td><td class="num">55 870 000</td><td class="num">− 2,3 %</td></tr>
+      <tr class="sub"><td>Valeur ajoutée</td><td class="num">25 568 845</td><td class="num">27 762 810</td><td class="num neg">− 7,9 %</td></tr>
+      <tr class="sub"><td>EBE</td><td class="num">3 594 270</td><td class="num">7 057 810</td><td class="num neg">− 49 %</td></tr>
+      <tr class="sub"><td>Résultat d'exploitation</td><td class="num neg">− 2 092 520</td><td class="num">296 788</td><td class="num neg">devient négatif</td></tr>
+      <tr><td>Résultat financier</td><td class="num neg">− 221 690</td><td class="num">189 272</td><td class="num neg">devient négatif</td></tr>
+      <tr class="sub"><td>RCAI</td><td class="num neg">− 2 314 210</td><td class="num">486 060</td><td class="num neg">devient négatif</td></tr>
+      <tr><td>Résultat exceptionnel</td><td class="num">584 120</td><td class="num">3 257 118</td><td class="num neg">− 82 %</td></tr>
+      <tr class="total"><td>Résultat de l'exercice</td><td class="num neg">− 1 719 146</td><td class="num">2 461 378</td><td class="num neg">perte</td></tr>
+      <tr><td>Plus ou moins-value de cession</td><td class="num">+ 193 900</td><td class="num">− 28 232</td><td></td></tr>
+    </table></div>
+    <h4>Le détail des calculs (N)</h4>
+    <ul>
+      <li>Marge commerciale = 8 044 750 − 7 720 000 = 324 750.</li>
+      <li>Production = 77 993 910 + 1 774 270 + 62 115 = 79 830 295.</li>
+      <li>Consommations des tiers = 32 065 000 + 485 200 + 22 036 000 = 54 586 200.</li>
+      <li>VA = 324 750 + 79 830 295 − 54 586 200 = 25 568 845.</li>
+      <li>EBE = 25 568 845 + 34 025 − 2 171 000 − 19 837 600 = 3 594 270.</li>
+      <li>RE = 3 594 270 + 510 000 + 1 402 310 − 7 088 000 − 511 100 = − 2 092 520 (c'est bien Total produits d'exploitation 89 821 380 − Total charges d'exploitation 91 913 900 : bonne vérification).</li>
+      <li>RCAI = − 2 092 520 + (1 947 090 − 2 168 780) = − 2 314 210.</li>
+      <li>Résultat = − 2 314 210 + 584 120 − 0 + 10 944 = − 1 719 146 (l'impôt est négatif : c'est un produit, un report en arrière des déficits).</li>
+    </ul>
+    <h4>Interprétation</h4>
+    <p>ALTANUEVA est surtout <strong>industrielle</strong> (la production pèse 80 millions, le négoce seulement 0,3). Le chiffre d'affaires progresse un peu (+ 2,2 %), mais la <strong>production baisse de 4,4 %</strong> et la <strong>valeur ajoutée de 7,9 %</strong> : le taux de VA passe de 33 % à 29,7 % du CA, l'entreprise crée moins de richesse.</p>
+    <p>Dans le même temps, les <strong>charges de personnel augmentent de 5,2 %</strong>. Comme elles se paient sur une VA qui diminue, l'<strong>EBE est divisé par deux</strong> (taux de marge brute de 8,4 % à 4,2 %). Avec des dotations aux amortissements toujours élevées, le <strong>résultat d'exploitation devient négatif</strong> : l'activité normale perd de l'argent.</p>
+    <p>Le <strong>résultat financier</strong> se dégrade aussi (pertes de change et provisions financières). Le résultat exceptionnel, encore positif, ne suffit plus à compenser comme en N−1 : on passe d'un <strong>bénéfice de 2,46 M€ à une perte de 1,72 M€</strong>.</p>
+    <p><strong>Recommandations :</strong> maîtriser la masse salariale et les consommations externes, relancer la production, surveiller le risque de change (couverture).</p>
+  </details>
+</section>
+
+<!-- ============ CHAPITRE 3 ============ -->
+<section class="part" id="p3">
+  <div class="part-head"><span class="part-num">3</span><div><div class="eyebrow">Chapitre 3 · CAF et effet de levier financier</div><h2>La CAF, les ratios et l'effet de levier</h2></div></div>
+
+  <h3>A. À quoi sert la CAF ?</h3>
+  <div class="box def"><span class="tag">Définition</span>
+    <p>La <strong>capacité d'autofinancement</strong> (CAF, ou <span class="en">cash-flow</span>) est l'ensemble des <strong>ressources internes</strong> que l'entreprise a dégagées pendant l'exercice grâce à son activité. C'est l'argent « fabriqué » par l'entreprise elle-même, sans banque ni actionnaire. C'est l'<strong>indicateur de son indépendance financière</strong>.</p>
+  </div>
+  <p class="simple">Pourquoi pas simplement le résultat ? Parce que le résultat contient des charges qui ne font sortir aucun euro (les amortissements) et des produits qui n'en font entrer aucun (les reprises). La CAF ne garde que les flux qui touchent vraiment la trésorerie (ou qui la toucheront).</p>
+  <div class="tbl"><table>
+    <tr><th></th><th>Font bouger l'argent → <strong>dans la CAF</strong></th><th>Simples calculs → <strong>hors CAF</strong></th></tr>
+    <tr><td><strong>Produits</strong></td><td><strong>Encaissables</strong> : chiffre d'affaires, autres produits, revenus financiers (intérêts, dividendes reçus), gains de change, produits exceptionnels sur opérations de gestion, transferts de charges</td><td><strong>Non encaissables (calculés)</strong> : reprises sur amortissements, dépréciations et provisions ; quote-part des subventions d'investissement virée au résultat</td></tr>
+    <tr><td><strong>Charges</strong></td><td><strong>Décaissables</strong> : achats, charges externes, impôts et taxes, personnel, intérêts, charges exceptionnelles de gestion, participation, impôt sur les bénéfices</td><td><strong>Non décaissables (calculées)</strong> : dotations aux amortissements, dépréciations et provisions (DAP) ; valeur comptable des éléments d'actif cédés (VCEAC)</td></tr>
+  </table></div>
+  <div class="formula">CAF = Produits encaissables − Charges décaissables</div>
+  <div class="box trap"><span class="tag">Piège : la CAF se calcule « hors cessions »</span>
+    <p>Quand l'entreprise vend une machine, le <strong>prix de cession</strong> (PCEA, produit exceptionnel sur opération en capital) fait bien entrer de l'argent, mais il est <strong>exclu</strong> de la CAF : vendre ses équipements, ce n'est pas l'activité courante. La <strong>valeur comptable</strong> de la machine vendue (VCEAC) est, elle, une charge calculée, exclue aussi.</p>
+  </div>
+
+  <h3>B. Les deux méthodes de calcul</h3>
+  <div class="grid2">
+    <div class="card"><h4>Méthode soustractive (part de l'EBE)</h4>
+      <p>Excédent brut d'exploitation<br>+ Transferts de charges<br>+ Autres produits<br>− Autres charges<br>+ Produits financiers encaissables<br>− Charges financières décaissables<br>+ Produits exceptionnels sur opérations de gestion<br>− Charges exceptionnelles sur opérations de gestion<br>− Participation des salariés<br>− Impôt sur les sociétés<br><strong>= CAF</strong></p></div>
+    <div class="card"><h4>Méthode additive (part du résultat net)</h4>
+      <p>Résultat de l'exercice<br>+ Dotations d'exploitation, financières, exceptionnelles<br>− Reprises d'exploitation, financières, exceptionnelles<br>− Produits de cession d'éléments d'actif<br>+ Valeur comptable des éléments d'actif cédés<br><strong>= CAF</strong></p>
+      <p class="simple">Logique : on part du résultat et on « annule » tout ce qui n'était qu'un calcul.</p></div>
+  </div>
+  <div class="box ex"><span class="tag">Exemple chiffré : les deux méthodes donnent le même résultat (en k€)</span>
+    <p>EBE 200 ; autres produits 10 ; autres charges 5 ; dotations d'exploitation 50 ; produits financiers 8 (dont reprise 2) ; charges financières 12 (dont dotation 3) ; produits exceptionnels : gestion 4, cession d'une machine 20 ; charges exceptionnelles : gestion 3, valeur comptable de la machine 15 ; participation 6 ; impôt 40.</p>
+    <p><strong>Soustractive :</strong> 200 + 10 − 5 + (8 − 2) − (12 − 3) + 4 − 3 − 6 − 40 = <strong>157</strong>.</p>
+    <p><strong>Additive :</strong> d'abord le résultat net. RE = 200 + 10 − 5 − 50 = 155 ; résultat financier = 8 − 12 = − 4 ; RCAI = 151 ; exceptionnel = (4 + 20) − (3 + 15) = 6 ; résultat net = 151 + 6 − 6 − 40 = 111.<br>CAF = 111 + 50 + 3 − 2 − 20 + 15 = <strong>157</strong>. ✓</p>
+  </div>
+
+  <h3>C. Autofinancement et capacité d'endettement</h3>
+  <div class="formula">Autofinancement = CAF − Dividendes</div>
+  <p>La CAF sert d'abord à <strong>rémunérer les associés</strong> (dividendes). Ce qui reste, l'<strong>autofinancement</strong>, permet à l'entreprise de financer elle-même ses investissements, de rembourser ses emprunts et d'augmenter son fonds de roulement.</p>
+  <div class="formula">Capacité de remboursement = Dettes financières à long terme ÷ CAF<small>Tant que ce ratio est inférieur à 4, l'entreprise n'a pas atteint sa capacité d'endettement. Autrement dit, ses dettes financières ne doivent pas dépasser 4 fois sa CAF.</small></div>
+  <div class="box ex"><span class="tag">Exemple du cours : ABC demande un crédit</span>
+    <p>CAF 150 000 ; dettes financières actuelles 200 000 ; dividendes 20 000. ABC demande un crédit de 800 000 €. La banque va-t-elle accepter ?</p>
+    <ol class="steps">
+      <li>Capacité maximale d'endettement = 4 × CAF = 4 × 150 000 = <strong>600 000 €</strong>.</li>
+      <li>Autofinancement = 150 000 − 20 000 = <strong>130 000 €</strong>.</li>
+      <li>Ratio = 200 000 ÷ 150 000 = <strong>1,33</strong> &lt; 4 : la capacité n'est pas encore atteinte.</li>
+      <li>Marge restante = 600 000 − 200 000 = <strong>400 000 €</strong>. La demande de 800 000 € dépasse cette marge : <strong>elle sera refusée</strong>. ABC peut emprunter au plus 400 000 €.</li>
+    </ol>
+  </div>
+
+  <h3>D. L'analyse par les ratios</h3>
+  <p>Un ratio est un rapport entre deux chiffres, exprimé en %. Il permet de comparer une entreprise d'une année sur l'autre, ou avec ses concurrentes. Rappel : <strong>CA = ventes de marchandises + production vendue</strong>.</p>
+  <div class="tbl"><table>
+    <tr><th>Ratio</th><th>Formule</th><th>Ce qu'il mesure</th></tr>
+    <tr><td colspan="3"><strong>Activité</strong></td></tr>
+    <tr><td>Taux de croissance du CA</td><td>(CA HT N − CA HT N−1) ÷ CA HT N−1</td><td>la croissance annuelle</td></tr>
+    <tr><td>Taux de marge commerciale</td><td>Marge commerciale ÷ Ventes de marchandises</td><td>la marge du commerçant pour 100 € de ventes</td></tr>
+    <tr><td>Taux de VA</td><td>VA ÷ CA HT</td><td>l'intégration de l'entreprise (plus il est bas, plus elle dépend des tiers)</td></tr>
+    <tr><td colspan="3"><strong>Profitabilité</strong> (par rapport au CA)</td></tr>
+    <tr><td>Taux de marge d'exploitation brute</td><td>EBE ÷ CA HT</td><td>hors politiques financière et d'investissement</td></tr>
+    <tr><td>Taux de marge d'exploitation nette</td><td>Résultat d'exploitation ÷ CA HT</td><td>hors politique financière</td></tr>
+    <tr><td>Taux de marge nette</td><td>Résultat net ÷ CA HT</td><td>profitabilité nette finale</td></tr>
+    <tr><td colspan="3"><strong>Rentabilité</strong> (par rapport aux capitaux investis)</td></tr>
+    <tr><td>Rentabilité financière (ROE)</td><td>Résultat net ÷ Capitaux propres</td><td>ce que rapporte l'argent des actionnaires</td></tr>
+    <tr><td>Rentabilité globale (ROA)</td><td>Résultat net ÷ Total des actifs nets</td><td>ce que rapportent tous les actifs</td></tr>
+    <tr><td>Rentabilité économique (Re)</td><td>Résultat d'exploitation ÷ Ressources stables (ou actif économique)</td><td>ce que rapporte l'outil économique, quel que soit son financement</td></tr>
+    <tr><td colspan="3"><strong>Frais financiers</strong></td></tr>
+    <tr><td>Poids des frais financiers</td><td>Intérêts payés ÷ CA HT</td><td>l'indépendance vis-à-vis des prêteurs</td></tr>
+  </table></div>
+  <div class="grid2">
+    <div class="card"><h4>&lt; 3 %</h4><p>L'entreprise n'est pas dépendante de ses prêteurs.</p></div>
+    <div class="card"><h4>Entre 3 et 5 %</h4><p>Relativement dépendante des banques, autonomie financière pas assurée.</p></div>
+    <div class="card"><h4>&gt; 5 %</h4><p>Elle a atteint sa capacité d'endettement.</p></div>
+  </div>
+  <div class="box trap"><span class="tag">Piège : profitabilité ≠ rentabilité</span>
+    <p><strong>Profitabilité</strong> : on divise par le <strong>chiffre d'affaires</strong> (combien je garde sur 100 € de ventes). <strong>Rentabilité</strong> : on divise par les <strong>capitaux investis</strong> (combien rapporte 100 € placés dans l'entreprise).</p>
+  </div>
+
+  <h3>E. L'effet de levier financier</h3>
+  <p>Question : est-ce une bonne idée de <strong>s'endetter</strong> pour investir ? Ça dépend d'une comparaison simple : ce que rapporte l'investissement (Re) contre ce que coûte la dette (i).</p>
+  <div class="formula">RF = [ Re + (Re − i) × D / CP ] × (1 − T)
+  <small>RF : rentabilité financière · Re : rentabilité économique · i : coût de la dette (intérêts ÷ dettes) · D/CP : dettes financières ÷ capitaux propres (le « bras » du levier) · T : taux d'impôt</small></div>
+  <div class="box ex"><span class="tag">L'intuition</span>
+    <p>Tu empruntes à 5 % pour investir dans un projet qui rapporte 10 %. Sur chaque euro emprunté, tu gagnes 10 centimes, tu en reverses 5 à la banque : il te reste 5 centimes en plus <strong>pour toi</strong>. Plus tu empruntes, plus ta rentabilité grimpe. Mais si le projet ne rapporte que 3 %, chaque euro emprunté te fait perdre 2 centimes.</p>
+  </div>
+  <figure>
+    <svg viewBox="0 0 600 300" role="img" aria-label="Rentabilité financière en fonction de l'endettement selon les trois cas de levier">
+      <line x1="70" y1="250" x2="560" y2="250" class="ln"/>
+      <line x1="70" y1="250" x2="70" y2="30" class="ln"/>
+      <text x="560" y="272" text-anchor="end" class="mut">Endettement D / CP →</text>
+      <text x="78" y="26" class="mut">RF</text>
+      <text x="62" y="254" text-anchor="end" class="mut">0 %</text>
+      <text x="62" y="146" text-anchor="end" class="mut">10 %</text>
+      <text x="62" y="58" text-anchor="end" class="mut">18 %</text>
+      <line x1="70" y1="142" x2="540" y2="142" class="lnm"/>
+      <line x1="70" y1="142" x2="540" y2="54" stroke="var(--ok)" stroke-width="3"/>
+      <line x1="70" y1="142" x2="540" y2="142" stroke="var(--acc-deep)" stroke-width="3"/>
+      <line x1="70" y1="142" x2="540" y2="230" stroke="var(--ko)" stroke-width="3"/>
+      <text x="110" y="80" class="b" style="fill:var(--ok)">Levier positif : i &lt; Re (RF monte)</text>
+      <text x="420" y="134" class="b">Levier nul : i = Re</text>
+      <text x="110" y="200" class="b" style="fill:var(--ko)">Levier négatif : i &gt; Re (RF baisse)</text>
+      <text x="70" y="290" class="mut">Exemple sans impôt, Re = 10 %, D/CP de 0 à 2 (i = 6 %, 10 % ou 14 %)</text>
+    </svg>
+    <figcaption>Plus l'entreprise s'endette, plus l'écart (Re − i) est amplifié, dans un sens comme dans l'autre. C'est pour ça qu'on parle de « levier ».</figcaption>
+  </figure>
+  <div class="tbl"><table>
+    <tr><th>Cas</th><th>Condition</th><th>Conséquence</th></tr>
+    <tr><td style="color:var(--ok)"><strong>Levier positif</strong></td><td>i &lt; Re</td><td>La rentabilité des capitaux propres <strong>augmente</strong> avec l'endettement. S'endetter crée de la richesse pour les actionnaires.</td></tr>
+    <tr><td><strong>Levier nul</strong></td><td>i = Re</td><td>L'endettement est <strong>neutre</strong> : RF = Re (avant impôt), quel que soit le niveau de dette.</td></tr>
+    <tr><td style="color:var(--ko)"><strong>Levier négatif</strong> (effet massue)</td><td>i &gt; Re</td><td>Le coût de la dette n'est pas couvert. Plus on s'endette, plus la rentabilité financière <strong>baisse</strong>. L'endettement détruit de la richesse.</td></tr>
+  </table></div>
+  <div class="box ex"><span class="tag">Exemple du cours : trois projets, dette à 10 %</span>
+    <p>Projet A : Re = 10 % → i = Re : <strong>levier nul</strong>, s'endetter ne change rien.<br>
+    Projet B : Re = 5 % → i &gt; Re : <strong>levier négatif</strong>, la dette détruit de la valeur, à éviter.<br>
+    Projet C : Re = 15 % → i &lt; Re : <strong>levier positif</strong>, l'endettement maximise la rentabilité, on peut conseiller d'emprunter.</p>
+  </div>
+
+  <h3>Exercices corrigés (TD CAF et ratios)</h3>
+  <h4>Exercice 1 : l'entreprise Jakès, classer pour la CAF</h4>
+  <div class="enonce"><p>Pour chaque élément, dire s'il s'agit d'une charge décaissable, d'une charge calculée, d'un produit encaissable ou d'un produit calculé.</p></div>
+  <details class="sol"><summary>Voir le corrigé</summary>
+    <div class="tbl"><table>
+      <tr><th>Élément</th><th>Catégorie</th><th>Pourquoi</th></tr>
+      <tr><td>A. Impôt sur les bénéfices</td><td>Charge décaissable</td><td>on le paie réellement</td></tr>
+      <tr><td>B. Intérêts et charges assimilées</td><td>Charge décaissable</td><td>versés à la banque</td></tr>
+      <tr><td>C. Produits des cessions d'éléments d'actif</td><td>Produit encaissable, mais <strong>exclu</strong> de la CAF</td><td>opération en capital : la CAF se calcule hors cessions</td></tr>
+      <tr><td>D. Transferts de charges</td><td>Produit encaissable</td><td>ajouté dans la méthode soustractive</td></tr>
+      <tr><td>E. Dotations aux amortissements des immobilisations</td><td>Charge calculée</td><td>aucune sortie d'argent</td></tr>
+      <tr><td>F. Valeurs comptables des éléments d'actif cédés</td><td>Charge calculée</td><td>simple sortie comptable du bien</td></tr>
+      <tr><td>G. Gains de change</td><td>Produit encaissable</td><td>entrée d'argent réelle</td></tr>
+      <tr><td>H. Pertes sur créances irrécouvrables</td><td>Charge décaissable</td><td>perte définitive (l'argent n'entrera jamais)</td></tr>
+      <tr><td>I. Dotations aux dépréciations des actifs circulants</td><td>Charge calculée</td><td>simple estimation de risque</td></tr>
+      <tr><td>J. Participation des salariés</td><td>Charge décaissable</td><td>versée aux salariés</td></tr>
+      <tr><td>K. Quote-part des subventions d'investissement virée au résultat</td><td>Produit calculé</td><td>la subvention a été encaissée avant, ici on ne fait que l'étaler</td></tr>
+      <tr><td>L. Produits nets sur cessions de VMP</td><td>Produit encaissable</td><td>les valeurs mobilières de placement relèvent de la trésorerie, pas des immobilisations</td></tr>
+    </table></div>
+  </details>
+
+  <h4>Exercice 2 : choisir entre l'entreprise A et l'entreprise B (application du cours)</h4>
+  <div class="enonce">
+    <div class="tbl"><table>
+      <tr><th></th><th class="num">A</th><th class="num">B</th></tr>
+      <tr><td>Résultat d'exploitation</td><td class="num">15 000</td><td class="num">15 000</td></tr>
+      <tr><td>Intérêts</td><td class="num">0</td><td class="num">3 600</td></tr>
+      <tr><td>RCAI</td><td class="num">15 000</td><td class="num">11 400</td></tr>
+      <tr><td>Impôt sur les bénéfices</td><td class="num">5 000</td><td class="num">3 800</td></tr>
+      <tr><td>Résultat net</td><td class="num">10 000</td><td class="num">7 600</td></tr>
+      <tr><td>Capitaux propres</td><td class="num">100 000</td><td class="num">60 000</td></tr>
+      <tr><td>Dettes financières</td><td class="num">0</td><td class="num">40 000</td></tr>
+      <tr><td>Actifs économiques</td><td class="num">100 000</td><td class="num">100 000</td></tr>
+    </table></div>
+    <p>1. Calculer Re, RF et i pour chaque entreprise. 2. Apprécier l'effet de levier et comparer.</p>
+  </div>
+  <details class="sol"><summary>Voir le corrigé</summary>
+    <div class="tbl"><table>
+      <tr><th></th><th>A</th><th>B</th></tr>
+      <tr><td>Re = RE ÷ actif économique</td><td>15 000 ÷ 100 000 = <strong>15 %</strong></td><td>15 000 ÷ 100 000 = <strong>15 %</strong></td></tr>
+      <tr><td>i = intérêts ÷ dettes</td><td>pas de dette</td><td>3 600 ÷ 40 000 = <strong>9 %</strong></td></tr>
+      <tr><td>RF = RN ÷ capitaux propres</td><td>10 000 ÷ 100 000 = <strong>10 %</strong></td><td>7 600 ÷ 60 000 = <strong>12,67 %</strong></td></tr>
+    </table></div>
+    <p><strong>Vérification avec la formule</strong> (T = 5 000 ÷ 15 000 = 1/3) : RF(B) = [15 % + (15 % − 9 %) × 40 000/60 000] × (1 − 1/3) = [15 % + 4 %] × 2/3 = <strong>12,67 %</strong>. ✓</p>
+    <p><strong>Interprétation :</strong> les deux entreprises ont le même outil économique et la même rentabilité économique. Mais B s'est endettée à 9 %, moins cher que ce que rapportent ses actifs (15 %) : l'effet de levier est <strong>positif</strong>. Ses actionnaires gagnent 12,67 % au lieu de 10 % chez A. Pour un investisseur qui achète des parts, <strong>B est la cible la plus intéressante</strong>, tant que le coût de la dette reste sous 15 %. Contrepartie : B est plus risquée, car elle doit payer ses intérêts même dans une mauvaise année.</p>
+  </details>
+</section>
+
+<!-- ============ CHAPITRE 4 ============ -->
+<section class="part" id="p4">
+  <div class="part-head"><span class="part-num">4</span><div><div class="eyebrow">Chapitre 4 · Analyse fonctionnelle et équilibre financier</div><h2>Le bilan fonctionnel : FRNG, BFR, trésorerie</h2></div></div>
+  <p>Le bilan comptable dit ce que l'entreprise <strong>possède</strong> et ce qu'elle <strong>doit</strong>, au sens juridique. Le bilan fonctionnel le réorganise pour répondre à une autre question : <strong>l'entreprise est-elle financièrement équilibrée ?</strong> Ses investissements durables sont-ils financés par de l'argent durable ?</p>
+
+  <h3>I. Généralités : trois cycles, trois fonctions</h3>
+  <div class="grid2">
+    <div class="card"><h4>Cycle d'investissement</h4><p>Les immobilisations incorporelles, corporelles et financières. Cycle <strong>long</strong>.</p></div>
+    <div class="card"><h4>Cycle de financement</h4><p>Les capitaux propres et les dettes financières. Cycle <strong>long</strong>.</p></div>
+    <div class="card"><h4>Cycle d'exploitation</h4><p>Tout le reste : stocks, clients, fournisseurs. Cycle <strong>court</strong>.</p></div>
+  </div>
+  <div class="box exam"><span class="tag">Question de cours probable : bilan comptable ou fonctionnel ?</span>
+    <div class="tbl"><table>
+      <tr><th>Critère</th><th>Bilan comptable</th><th>Bilan fonctionnel</th></tr>
+      <tr><td>Obligation</td><td>Obligatoire, publié</td><td>Facultatif, outil interne d'analyse</td></tr>
+      <tr><td>Optique</td><td><strong>Juridique</strong> : patrimoine (ce qu'on possède)</td><td><strong>Économique</strong> : ce qu'on utilise pour fonctionner</td></tr>
+      <tr><td>Valeur de l'actif</td><td>Valeurs <strong>nettes</strong> (après amortissements)</td><td>Valeurs <strong>brutes</strong> (d'origine)</td></tr>
+      <tr><td>Amortissements et dépréciations</td><td>Déduits de l'actif</td><td>Ajoutés aux ressources propres</td></tr>
+      <tr><td>Classement</td><td>Liquidité et exigibilité</td><td>Par fonction : investissement, financement, exploitation</td></tr>
+      <tr><td>Crédit-bail</td><td>Absent (l'entreprise n'est pas propriétaire)</td><td>Réintégré comme un bien acheté à crédit</td></tr>
+    </table></div>
+  </div>
+
+  <h3>II. La structure du bilan fonctionnel</h3>
+  <figure>
+    <svg viewBox="0 0 600 330" role="img" aria-label="Les quatre grandes masses du bilan fonctionnel et la trésorerie">
+      <text x="150" y="20" text-anchor="middle" class="big">EMPLOIS (actif brut)</text>
+      <text x="450" y="20" text-anchor="middle" class="big">RESSOURCES</text>
+      <rect x="20" y="32" width="260" height="130" rx="8" class="r2"/>
+      <text x="150" y="80" text-anchor="middle" class="b">Emplois stables</text>
+      <text x="150" y="102" text-anchor="middle">immobilisations brutes</text>
+      <text x="150" y="120" text-anchor="middle">+ biens en crédit-bail</text>
+      <rect x="320" y="32" width="260" height="170" rx="8" class="r2"/>
+      <text x="450" y="70" text-anchor="middle" class="b">Ressources stables</text>
+      <text x="450" y="94" text-anchor="middle">capitaux propres + provisions</text>
+      <text x="450" y="112" text-anchor="middle">+ amortissements et dépréciations</text>
+      <text x="450" y="130" text-anchor="middle">+ dettes financières</text>
+      <text x="450" y="148" text-anchor="middle">(hors concours bancaires courants)</text>
+      <rect x="20" y="168" width="260" height="62" rx="8" class="r1"/>
+      <text x="150" y="194" text-anchor="middle" class="b">Actif circulant d'exploitation</text>
+      <text x="150" y="214" text-anchor="middle">stocks + créances clients (ACE)</text>
+      <rect x="20" y="236" width="260" height="40" rx="8" class="r3"/>
+      <text x="150" y="261" text-anchor="middle">Actif circulant hors exploitation (ACHE)</text>
+      <rect x="20" y="282" width="260" height="40" rx="8" class="r4"/>
+      <text x="150" y="307" text-anchor="middle" class="b">Trésorerie active (Ta)</text>
+      <rect x="320" y="208" width="260" height="46" rx="8" class="r1"/>
+      <text x="450" y="228" text-anchor="middle" class="b">Passif circulant d'exploitation</text>
+      <text x="450" y="246" text-anchor="middle">fournisseurs, dettes fiscales et sociales</text>
+      <rect x="320" y="260" width="260" height="30" rx="8" class="r3"/>
+      <text x="450" y="280" text-anchor="middle">Passif circulant hors exploitation</text>
+      <rect x="320" y="294" width="260" height="28" rx="8" class="r4"/>
+      <text x="450" y="313" text-anchor="middle" class="b">Trésorerie passive (Tp)</text>
+      <line x1="285" y1="165" x2="315" y2="205" class="lnm"/>
+      <text x="300" y="186" text-anchor="middle" class="b" style="font-size:12px">FRNG</text>
+    </svg>
+    <figcaption>Le haut du bilan (cycle long) détermine le FRNG ; le milieu (cycle court) le BFR ; le bas, la trésorerie.</figcaption>
+  </figure>
+  <div class="box def"><span class="tag">Vocabulaire</span>
+    <p><strong>ACE</strong> actif circulant d'exploitation (stocks, créances clients) · <strong>ACHE</strong> actif circulant hors exploitation (créances diverses, par exemple sur la vente d'une immobilisation) · <strong>PCE</strong> passif circulant d'exploitation (fournisseurs, dettes fiscales et sociales) · <strong>PCHE</strong> passif circulant hors exploitation (dettes sur immobilisations, impôt sur les sociétés…) · <strong>Ta</strong> trésorerie active (disponibilités, VMP) · <strong>Tp</strong> trésorerie passive (découverts, concours bancaires courants).</p>
+  </div>
+  <h4>Les retraitements</h4>
+  <ol class="steps">
+    <li><strong>Actif en valeur brute.</strong> On remet chaque actif à sa valeur d'origine, et on ajoute le cumul des amortissements et dépréciations dans les <strong>ressources propres</strong> (en ressources stables). Le bilan reste équilibré.</li>
+    <li><strong>Crédit-bail</strong> (<span class="en">leasing</span> : une location avec option d'achat). Le bien n'appartient pas à l'entreprise, donc il n'est pas au bilan comptable. Mais elle s'en sert : on fait <strong>comme si elle l'avait acheté avec un emprunt</strong>.
+      <ul><li>valeur d'origine (Vo) → emplois stables ;</li><li>cumul des amortissements fictifs → ressources propres ;</li><li>valeur nette (VNC = Vo − cumul des amortissements) → dettes financières.</li></ul>
+      Résultat : les ressources stables augmentent exactement de Vo, comme les emplois stables.</li>
+  </ol>
+
+  <h3>III. Les trois grandeurs de l'équilibre financier</h3>
+  <h4>1. Le fonds de roulement net global (FRNG)</h4>
+  <div class="formula">FRNG = Ressources stables − Emplois stables</div>
+  <p>C'est l'argent durable qui <strong>reste</strong> une fois tous les investissements financés. La règle d'or : <strong>les emplois stables doivent être financés par des ressources stables</strong>. Un FRNG positif est une nécessité : c'est une marge de sécurité contre les aléas (baisse des ventes, clients qui paient en retard). Les banques exigent souvent un FRNG minimum avant de prêter.</p>
+  <h4>2. Le besoin en fonds de roulement (BFR)</h4>
+  <p>Pour vendre, l'entreprise doit d'abord acheter et stocker, puis elle attend que ses clients paient. Pendant ce temps, elle profite seulement du délai que lui laissent ses fournisseurs. Ce <strong>décalage</strong> entre décaissements et encaissements crée un besoin d'argent : c'est le BFR.</p>
+  <figure>
+    <svg viewBox="0 0 600 170" role="img" aria-label="Chronologie du besoin de financement du cycle d'exploitation">
+      <line x1="30" y1="90" x2="570" y2="90" class="ln"/>
+      <polygon points="570,90 560,85 560,95" class="arw"/>
+      <text x="570" y="110" text-anchor="end" class="mut">temps</text>
+      <rect x="30" y="58" width="170" height="26" rx="6" class="r1"/><text x="115" y="76" text-anchor="middle">stock de marchandises</text>
+      <rect x="200" y="58" width="190" height="26" rx="6" class="r1"/><text x="295" y="76" text-anchor="middle">crédit clients</text>
+      <rect x="30" y="98" width="150" height="26" rx="6" class="r4"/><text x="105" y="116" text-anchor="middle">crédit fournisseurs</text>
+      <rect x="180" y="128" width="210" height="28" rx="6" class="r2"/><text x="285" y="147" text-anchor="middle" class="b">besoin de financement</text>
+      <text x="30" y="46" class="mut">achat</text><text x="204" y="46" class="mut">vente</text><text x="180" y="20" text-anchor="middle" class="mut">paiement fournisseur ↓</text><text x="390" y="46" text-anchor="middle" class="mut">encaissement client</text><line x1="180" y1="26" x2="180" y2="126" class="lnm"/><line x1="390" y1="52" x2="390" y2="126" class="lnm"/>
+    </svg>
+    <figcaption>Entre le jour où l'entreprise paie son fournisseur et le jour où son client la paie, elle doit avancer l'argent.</figcaption>
+  </figure>
+  <div class="formula">BFRE = ACE − PCE = (Stocks + Créances d'exploitation) − Dettes d'exploitation</div>
+  <div class="formula">BFRHE = ACHE − PCHE = Créances hors exploitation − Dettes hors exploitation</div>
+  <div class="formula">BFR = BFRE + BFRHE</div>
+  <p>Un BFR <strong>négatif</strong> est une <strong>ressource</strong> : c'est le cas de la grande distribution, dont les clients paient tout de suite à la caisse alors qu'elle paie ses fournisseurs à 60 jours.</p>
+  <h4>3. La trésorerie nette (TN)</h4>
+  <div class="formula">TN = FRNG − BFR = Trésorerie active − Trésorerie passive<small>Les deux calculs doivent donner le même chiffre : c'est ta vérification.</small></div>
+  <div class="box key"><span class="tag">À retenir : les 3 conditions de l'équilibre</span>
+    <ul>
+      <li><strong>1.</strong> FRNG positif : les investissements sont financés par des ressources durables.</li>
+      <li><strong>2.</strong> FRNG supérieur au BFR : le fonds de roulement couvre aussi le besoin de l'exploitation.</li>
+      <li><strong>3.</strong> Alors la trésorerie est positive. Si FRNG &lt; BFR, la trésorerie est négative : l'entreprise vit à découvert.</li>
+      <li><strong>Pour redresser la trésorerie</strong>, on agit sur l'un des deux termes :<br>– <strong>augmenter le FRNG</strong> : augmentation de capital, nouvel emprunt à long terme, mise en réserve des bénéfices, vente d'immobilisations inutiles ;<br>– <strong>diminuer le BFR</strong> : réduire les stocks, raccourcir les délais clients, obtenir des délais fournisseurs plus longs.</li>
+    </ul>
+  </div>
+  <div class="tbl"><table>
+    <tr><th>Français</th><th>Anglais</th></tr>
+    <tr><td>Fonds de roulement net global (FRNG)</td><td><span class="en">Working capital (WC)</span></td></tr>
+    <tr><td>Besoin en fonds de roulement (BFR)</td><td><span class="en">Working capital requirement (WCR)</span></td></tr>
+    <tr><td>Trésorerie nette</td><td><span class="en">Net cash</span></td></tr>
+  </table></div>
+
+  <h3>Exercice corrigé : la société RIVAL (TD bilan fonctionnel, exercice 1)</h3>
+  <div class="enonce">
+    <p>Bilan au 31/12/15 en k€ :</p>
+    <div class="tbl"><table>
+      <tr><th>Actif</th><th class="num">Amort. &amp; prov.</th><th class="num">Net</th><th>Passif</th><th class="num">k€</th></tr>
+      <tr><td>Immobilisations incorporelles</td><td class="num">100</td><td class="num">460</td><td>Capital</td><td class="num">700</td></tr>
+      <tr><td>Immobilisations corporelles</td><td class="num">200</td><td class="num">1 000</td><td>Réserves</td><td class="num">200</td></tr>
+      <tr><td>Immobilisations financières</td><td class="num">20</td><td class="num">220</td><td>Résultat de l'exercice</td><td class="num">100</td></tr>
+      <tr><td>Stocks</td><td class="num">10</td><td class="num">260</td><td>Provisions pour risques et charges</td><td class="num">100</td></tr>
+      <tr><td>Créances d'exploitation</td><td class="num">20</td><td class="num">280</td><td>Dettes financières</td><td class="num">700</td></tr>
+      <tr><td>Créances hors exploitation</td><td class="num"></td><td class="num">50</td><td>Dettes d'exploitation</td><td class="num">400</td></tr>
+      <tr><td>Disponibilités</td><td class="num"></td><td class="num">30</td><td>Dettes hors exploitation</td><td class="num">100</td></tr>
+      <tr class="total"><td>Total</td><td></td><td class="num">2 300</td><td>Total</td><td class="num">2 300</td></tr>
+    </table></div>
+    <p>Le 1er juillet 2014, RIVAL a pris en crédit-bail une machine d'une valeur de 600 k€ (redevance semestrielle 60 k€).</p>
+    <p>1. Distinguer bilan comptable et bilan fonctionnel. 2. Établir le bilan fonctionnel et le bilan condensé. 3. Calculer et interpréter FRNG, BFRE, BFRHE et TN.</p>
+  </div>
+  <details class="sol"><summary>Voir le corrigé</summary>
+    <p><strong>1.</strong> Voir le tableau « bilan comptable ou fonctionnel » plus haut : obligatoire contre facultatif, juridique contre économique, valeurs nettes contre valeurs brutes, crédit-bail absent contre réintégré.</p>
+    <p><strong>2. Étape 1 : les valeurs brutes</strong> = net + amortissements : incorporelles 560, corporelles 1 200, financières 240, stocks 270, créances d'exploitation 300. Total des amortissements et provisions à remonter en ressources propres : 100 + 200 + 20 + 10 + 20 = <strong>350</strong>.</p>
+    <p><strong>Étape 2 : le crédit-bail.</strong> On ajoute 600 en emplois stables. En ressources, ces 600 se partagent entre amortissements fictifs (ressources propres) et VNC (dettes financières). La durée d'amortissement n'est pas donnée ; avec une hypothèse de 5 ans, 18 mois se sont écoulés au 31/12/15 : cumul = 600 × 20 % × 1,5 = 180, VNC = 420. Quelle que soit la durée, le total ajouté aux ressources stables vaut toujours <strong>600</strong>, donc le FRNG ne change pas.</p>
+    <div class="tbl"><table>
+      <tr><th>Emplois</th><th class="num">k€</th><th>Ressources</th><th class="num">k€</th></tr>
+      <tr><td>Immobilisations brutes (560 + 1 200 + 240)</td><td class="num">2 000</td><td>Capitaux propres (700 + 200 + 100)</td><td class="num">1 000</td></tr>
+      <tr><td>Machine en crédit-bail</td><td class="num">600</td><td>Provisions pour risques et charges</td><td class="num">100</td></tr>
+      <tr><td></td><td></td><td>Amortissements et dépréciations (350 + 180)</td><td class="num">530</td></tr>
+      <tr><td></td><td></td><td>Dettes financières (700 + 420)</td><td class="num">1 120</td></tr>
+      <tr class="sub"><td>Emplois stables</td><td class="num">2 600</td><td>Ressources stables</td><td class="num">2 750</td></tr>
+      <tr><td>Stocks + créances d'exploitation (270 + 300)</td><td class="num">570</td><td>Dettes d'exploitation</td><td class="num">400</td></tr>
+      <tr><td>Créances hors exploitation</td><td class="num">50</td><td>Dettes hors exploitation</td><td class="num">100</td></tr>
+      <tr><td>Trésorerie active</td><td class="num">30</td><td>Trésorerie passive</td><td class="num">0</td></tr>
+      <tr class="total"><td>Total</td><td class="num">3 250</td><td>Total</td><td class="num">3 250</td></tr>
+    </table></div>
+    <p><strong>Bilan condensé</strong> (en grandes masses) : emplois stables 2 600 / ressources stables 2 750 ; ACE 570 / PCE 400 ; ACHE 50 / PCHE 100 ; Ta 30 / Tp 0.</p>
+    <p><strong>3. Les grandeurs :</strong></p>
+    <ul>
+      <li>FRNG = 2 750 − 2 600 = <strong>+ 150</strong> : les investissements sont entièrement financés par des ressources durables, et il reste 150 de marge.</li>
+      <li>BFRE = 570 − 400 = <strong>+ 170</strong> : l'exploitation a besoin de 170 de financement (stocks et clients non couverts par les fournisseurs).</li>
+      <li>BFRHE = 50 − 100 = <strong>− 50</strong> : une ressource hors exploitation.</li>
+      <li>BFR = 170 − 50 = <strong>120</strong>.</li>
+      <li>TN = 150 − 120 = <strong>+ 30</strong>, et Ta − Tp = 30 − 0 = 30. ✓</li>
+    </ul>
+    <p><strong>Interprétation :</strong> RIVAL est <strong>équilibrée</strong>. Son FRNG est positif et suffit à couvrir le BFR ; l'excédent de 30 alimente une trésorerie positive. Les trois conditions sont remplies.</p>
+  </details>
+
+  <h3>Exercice corrigé : l'entreprise ACP (TD bilan fonctionnel, exercice 2)</h3>
+  <div class="enonce">
+    <div class="tbl"><table>
+      <tr><th></th><th>Calcul</th><th class="num">N</th><th class="num">N−1</th><th class="num">Variation</th></tr>
+      <tr><td>FRNG</td><td>1 505 000 − 1 313 000</td><td class="num">192 000</td><td class="num">340 000</td><td class="num">− 148 000</td></tr>
+      <tr><td>BFRE</td><td>418 000 − 115 000</td><td class="num">303 000</td><td class="num">270 000</td><td class="num">+ 33 000</td></tr>
+      <tr><td>BFRHE</td><td>46 000 − 108 000</td><td class="num">− 62 000</td><td class="num">− 60 000</td><td class="num">− 2 000</td></tr>
+      <tr><td>BFR</td><td>303 000 − 62 000</td><td class="num">241 000</td><td class="num">210 000</td><td class="num">+ 31 000</td></tr>
+      <tr><td>TN</td><td>16 000 − 65 000 = 192 000 − 241 000</td><td class="num">− 49 000</td><td class="num">130 000</td><td class="num">− 179 000</td></tr>
+    </table></div>
+    <p>Commenter les résultats.</p>
+  </div>
+  <details class="sol"><summary>Voir le corrigé</summary>
+    <p><strong>Diagnostic.</strong> Le FRNG d'ACP est positif : ses ressources stables financent bien ses emplois stables. Mais il est <strong>insuffisant pour couvrir le BFR</strong>, et plus précisément le BFRE : la trésorerie est donc <strong>déficitaire de 49 000 €</strong>.</p>
+    <p><strong>Évolution.</strong> Le FRNG a chuté de <strong>44 %</strong> entre N−1 et N (de 340 000 à 192 000), alors que le BFR a augmenté de <strong>15 %</strong>, à cause d'une hausse du BFRE de 12,2 % (le BFRHE a peu bougé). Ce double mouvement crée un besoin de financement que l'entreprise a couvert par des <strong>crédits de trésorerie</strong> (découverts, escompte d'effets) : la trésorerie passe de + 130 000 € à − 49 000 €.</p>
+    <p><strong>Solutions.</strong> Augmenter le FRNG (augmentation de capital, emprunt à long terme) et/ou diminuer le BFRE (mieux gérer les stocks, raccourcir les délais clients, négocier des délais fournisseurs plus longs).</p>
+  </details>
+</section>
+
+<!-- ============ CHAPITRE 5 ============ -->
+<section class="part" id="p5">
+  <div class="part-head"><span class="part-num">5</span><div><div class="eyebrow">Chapitre 5 · Évaluation financière des entreprises</div><h2>Combien vaut une entreprise ?</h2></div></div>
+  <p>On évalue une entreprise pour fixer un <strong>prix de vente ou de rachat</strong>, un <strong>prix d'introduction en Bourse</strong>, ou pour mesurer le patrimoine des associés. Il n'existe pas de « vraie » valeur unique : on applique <strong>3 ou 4 méthodes</strong> différentes et on obtient une <strong>fourchette</strong> de valeurs acceptables.</p>
+  <div class="grid2">
+    <div class="card"><h4>Le fonds de commerce</h4><p>Un élément de l'actif : clientèle, matériel d'exploitation, nom commercial, droit au bail (le droit d'utiliser le local). Quand on achète un fonds de commerce, on achète l'outil, pas la société.</p></div>
+    <div class="card"><h4>Les titres de la société</h4><p>Les actions ou parts représentent <strong>tout</strong> le patrimoine : tous les actifs (fonds de commerce, stocks, créances, trésorerie) <strong>moins toutes les dettes</strong>. Patrimoine = biens + créances − dettes.</p></div>
+  </div>
+
+  <h3>1. La valeur de rendement (méthode des multiples)</h3>
+  <p>On valorise la société d'après ce qu'elle rapporte, en multipliant un indicateur par un <strong>coefficient</strong>. Pour le résultat net, il est en général compris entre 6 et 8. Une étude du syndicat Synextrans sur 128 cessions de PME du Grand Ouest donne les multiples médians :</p>
+  <div class="tbl"><table>
+    <tr><th>Indicateur</th><th class="num">Multiple</th></tr>
+    <tr><td>Résultat net</td><td class="num">× 6</td></tr>
+    <tr><td>Capitaux propres</td><td class="num">× 2</td></tr>
+    <tr><td>Excédent brut d'exploitation</td><td class="num">× 3</td></tr>
+    <tr><td>Capacité d'autofinancement</td><td class="num">× 4</td></tr>
+  </table></div>
+  <p class="simple">Les slides donnent aussi des multiples par pays et par secteur (Allemagne, États-Unis) appliqués à l'EBIT (= résultat d'exploitation), à l'EBITDA (= EBE) ou au chiffre d'affaires. Exemple : une PME informatique allemande de 6 à 25 salariés vaut environ 7,3 fois son EBIT ; dans l'artisanat, seulement 2,7 fois.</p>
+  <div class="box ex"><span class="tag">Exemple du cours : ABC</span>
+    <p>Capitaux propres 400 k€ ; EBE 250 k€ ; résultat net 120 k€ ; CAF 195 k€.</p>
+    <p>V1 = 400 × 2 = 800 · V2 = 250 × 3 = 750 · V3 = 120 × 6 = 720 · V4 = 195 × 4 = 780</p>
+    <p>Valeur moyenne = (800 + 750 + 720 + 780) ÷ 4 = <strong>762,5 k€</strong>. Fourchette : de 720 à 800 k€.</p>
+  </div>
+
+  <h3>2. La méthode patrimoniale</h3>
+  <p>On valorise la société d'après ce qu'elle <strong>possède</strong> moins ce qu'elle <strong>doit</strong>.</p>
+  <div class="formula">Actif net = Actif − Passif exigible (toutes les dettes)</div>
+  <p>Si on corrige certains actifs à leur valeur réelle (réévaluation d'un terrain, dépréciation d'un stock, valeur du fonds de commerce), on obtient l'<strong>actif net corrigé</strong> (ANC), aussi appelé actif net économique.</p>
+  <div class="box ex"><span class="tag">Exemple du cours</span>
+    <p>Actif immobilisé 250 000 ; créances 50 000 ; disponibilités 15 000 ; dettes financières 150 000 ; sociales 55 000 ; fiscales 45 000.</p>
+    <p>Actif net = (250 000 + 50 000 + 15 000) − (150 000 + 55 000 + 45 000) = 315 000 − 250 000 = <strong>65 000 €</strong>.</p>
+  </div>
+  <div class="box trap"><span class="tag">Piège</span><p>L'actif net comptable n'est pas la valeur boursière. La <strong>capitalisation boursière</strong> = nombre d'actions × cours de l'action : elle reflète ce que le marché anticipe pour l'avenir, pas le patrimoine d'aujourd'hui.</p></div>
+
+  <h3>3. Le goodwill</h3>
+  <p>Deux entreprises avec le même patrimoine ne valent pas forcément la même chose : l'une peut avoir un savoir-faire, une marque connue, un meilleur emplacement, des brevets, une bonne gestion. Ce <strong>supplément de rentabilité</strong> difficile à chiffrer s'appelle le <strong>goodwill</strong> (ou survaleur).</p>
+  <div class="formula">Valeur de l'entreprise V = ANC + Goodwill</div>
+  <div class="box ex"><span class="tag">Exemple du cours</span><p>ANC 5 000 k€, goodwill 7 652 k€ → V = 5 000 + 7 652 = <strong>12 652 k€</strong> (valeur patrimoniale + goodwill).</p></div>
+
+  <h3>4. Les méthodes boursières</h3>
+  <h4>a) Le modèle de Gordon et Shapiro</h4>
+  <p>Une action vaut la somme de tous les dividendes futurs qu'elle rapportera, ramenés à aujourd'hui. Si le dividende grandit chaque année à un taux constant g, la formule se simplifie :</p>
+  <div class="formula">V = D ÷ (K − g)<small>D : dividende (de la prochaine année) · K : coût du capital, le taux de rentabilité exigé par les actionnaires · g : taux de croissance constant du dividende. Valable seulement si K &gt; g.</small></div>
+  <div class="box ex"><span class="tag">Exemple du cours</span>
+    <p>D = 10 € ; K = 15 % ; g = 5 % ; 2 000 actions.</p>
+    <p>Valeur de l'action = 10 ÷ (0,15 − 0,05) = 10 ÷ 0,10 = <strong>100 €</strong>.<br>Valeur de l'entreprise (capitalisation) = 100 × 2 000 = <strong>200 000 €</strong>.</p>
+  </div>
+  <p><strong>Limite du modèle :</strong> le dividende ne peut pas grandir indéfiniment plus vite que l'économie et que son secteur. Si g s'approche de K, la valeur explose : le modèle ne marche plus.</p>
+  <h4>b) Le PER (Price Earning Ratio)</h4>
+  <div class="formula">PER = Cours de l'action ÷ Bénéfice net par action (BNPA)<small>Donc : Cours = BNPA × PER</small></div>
+  <p>Le PER dit combien de fois son bénéfice annuel on paie une action. Un PER de 10 veut dire que l'action vaut 10 fois le bénéfice estimé de l'année : il faudrait 10 ans de bénéfices pour « rembourser » le prix. Un <strong>PER élevé</strong> signifie que le marché anticipe une forte croissance (action chère mais prometteuse) ; un <strong>PER faible</strong>, peu de croissance attendue ou un risque (action bon marché, peut-être sous-évaluée).</p>
+  <div class="formula">PER relatif = PER du titre ÷ PER moyen du marché<small>Exemple du cours : 20 ÷ 16 = 1,25 → le marché prévoit pour ce titre une croissance plus forte que la moyenne.</small></div>
+  <p class="simple">Astuce : 1 ÷ PER donne le taux de rendement exigé par le marché (bénéfice rapporté au prix).</p>
+
+  <h3>Exercices corrigés (TD évaluation des entreprises)</h3>
+  <h4>Exercice 1 : la société Hélouis</h4>
+  <div class="enonce">
+    <p>Bilan simplifié : immobilisations corporelles 400 000 ; immobilisations financières 160 000 ; actif circulant 570 000 ; charges à répartir 90 000 (total 1 220 000). Capitaux propres 800 000 ; dettes 420 000.</p>
+    <p>Les immobilisations corporelles sont sous-estimées de 25 %. 8 000 actions de nominal 100 €. Taux d'IS : 33,33 %.</p>
+    <p>1. Calculer l'actif net. 2. Calculer l'actif net corrigé et la valeur de l'action.</p>
+  </div>
+  <details class="sol"><summary>Voir le corrigé</summary>
+    <p><strong>1. Actif net.</strong> Les charges à répartir sont des <strong>non-valeurs</strong> : ce sont des charges étalées, pas des biens qu'on pourrait revendre. On les retire de l'actif.<br>Actif net = 1 220 000 − 90 000 − 420 000 = <strong>710 000 €</strong>.</p>
+    <p><strong>2. Actif net corrigé.</strong> Les immobilisations corporelles valent en réalité 400 000 × 1,25 = 500 000 : <strong>plus-value de 100 000</strong>. Si on les vendait, cette plus-value serait imposée à 33,33 % : on ne garde que 100 000 × (1 − 1/3) ≈ 66 667.<br>ANC = 710 000 + 66 667 = <strong>776 667 €</strong>.<br>Valeur de l'action = 776 667 ÷ 8 000 ≈ <strong>97,08 €</strong> (sous le nominal de 100 €).</p>
+    <p class="simple">Si le prof ne tient pas compte de l'impôt latent : ANC = 810 000 € et action = 101,25 €. Écris ton hypothèse sur la copie.</p>
+  </details>
+  <h4>Exercice 2 : l'action Lemoine</h4>
+  <div class="enonce"><p>PER = 19, cours = 380 €, 250 000 actions. 1. BNPA ? 2. Taux requis par le marché ? 3. Capitalisation boursière ? 4. Diamono, même secteur, a un PER de 24 : laquelle acheter ?</p></div>
+  <details class="sol"><summary>Voir le corrigé</summary>
+    <ol class="steps">
+      <li>BNPA = cours ÷ PER = 380 ÷ 19 = <strong>20 €</strong>.</li>
+      <li>Taux requis = 1 ÷ PER = 1 ÷ 19 ≈ <strong>5,26 %</strong> (le marché accepte un rendement de 5,26 % en bénéfice).</li>
+      <li>Capitalisation = 380 × 250 000 = <strong>95 000 000 €</strong>.</li>
+      <li>Avec un PER de 19, on paie 19 fois le bénéfice chez Lemoine contre 24 fois chez Diamono. Sur cette seule information, <strong>Lemoine est moins chère, on l'achète</strong> (sauf si la croissance attendue de Diamono justifie son PER plus élevé).</li>
+    </ol>
+  </details>
+  <h4>Exercice 3 : le secteur des jeux vidéo</h4>
+  <div class="enonce">
+    <div class="tbl"><table>
+      <tr><th></th><th class="num">AFG</th><th class="num">BHI</th><th class="num">CJK</th><th class="num">DLM</th><th class="num">ENO</th></tr>
+      <tr><td>Cours</td><td class="num">80</td><td class="num">40</td><td class="num">18</td><td class="num">15</td><td class="num">27</td></tr>
+      <tr><td>BNPA</td><td class="num">5</td><td class="num">2</td><td class="num">1,5</td><td class="num">0,6</td><td class="num">1,8</td></tr>
+      <tr><td>Dividendes</td><td class="num">3,2</td><td class="num">1</td><td class="num">1</td><td class="num">0,3</td><td class="num">0,6</td></tr>
+    </table></div>
+    <p>1. PER du secteur (moyenne des PER) ? 2. Société la plus sous-évaluée ?</p>
+  </div>
+  <details class="sol"><summary>Voir le corrigé</summary>
+    <p>PER = cours ÷ BNPA : AFG 16 · BHI 20 · CJK 12 · DLM 25 · ENO 15.</p>
+    <p><strong>1.</strong> PER du secteur = (16 + 20 + 12 + 25 + 15) ÷ 5 = 88 ÷ 5 = <strong>17,6</strong>.</p>
+    <p><strong>2.</strong> La plus sous-évaluée est celle qui a le <strong>PER le plus bas</strong> par rapport au secteur : <strong>CJK</strong> (12, soit un PER relatif de 0,68). DLM (25) paraît au contraire la plus chère.</p>
+  </details>
+  <h4>Exercice 4 : la société CPE</h4>
+  <div class="enonce"><p>10 000 actions. PER du secteur : 14. BNPA anticipé : 6 €. Taux de distribution : 40 %. Croissance des bénéfices : 6 % par an. Taux sans risque 4 %, taux d'actualisation du marché 9 %. 1. Valeur de l'action par le PER ? 2. Cours par Gordon-Shapiro ?</p></div>
+  <details class="sol"><summary>Voir le corrigé</summary>
+    <p><strong>1.</strong> Valeur = BNPA × PER = 6 × 14 = <strong>84 €</strong>.</p>
+    <p><strong>2.</strong> Dividende = BNPA × taux de distribution = 6 × 40 % = 2,40 €. On prend K = 9 % (taux exigé par le marché) et g = 6 %.<br>V = 2,40 ÷ (0,09 − 0,06) = 2,40 ÷ 0,03 = <strong>80 €</strong>.</p>
+    <p>La fourchette de valeur est donc de 80 à 84 € par action. Le taux sans risque et les flux de trésorerie servent à d'autres méthodes non demandées ici.</p>
+  </details>
+  <h4>Exercice 5 : la société Begmeil</h4>
+  <div class="enonce"><p>PER du secteur : 12. 15 000 actions, BNPA futur 7 €, coût du capital 10 %, distribution 60 %, croissance du bénéfice 6 %. 1. Valeur par le PER ? 2. Valeur par Gordon-Shapiro ?</p></div>
+  <details class="sol"><summary>Voir le corrigé</summary>
+    <p><strong>1.</strong> 7 × 12 = <strong>84 €</strong>.</p>
+    <p><strong>2.</strong> D = 7 × 60 % = 4,20 €. V = 4,20 ÷ (0,10 − 0,06) = <strong>105 €</strong>.</p>
+    <p>Gordon-Shapiro donne une valeur plus haute, car il intègre la croissance de 6 % par an des dividendes.</p>
+  </details>
+</section>
+
+<!-- ============ CHAPITRE 6 ============ -->
+<section class="part" id="p6">
+  <div class="part-head"><span class="part-num">6</span><div><div class="eyebrow">Décisions d'investissement (d'après tes notes de cours)</div><h2>Un projet est-il rentable ? VAN, IP, DR, TRI</h2></div></div>
+  <div class="box def"><span class="tag">Définition</span>
+    <p><strong>Investir</strong>, c'est dépenser de l'argent aujourd'hui (l'<strong>investissement initial</strong>, noté I₀) pour acquérir des biens durables qui rapporteront des <strong>flux de trésorerie</strong> (<span class="en">cash-flows</span>, CF) pendant N années. Pour juger le projet, il faut connaître le <strong>taux d'actualisation</strong> r : la rentabilité minimale exigée par les actionnaires.</p>
+  </div>
+  <h3>1. Capitaliser et actualiser : 1 000 € aujourd'hui ≠ 1 000 € demain</h3>
+  <p>Tu préfères 1 000 € maintenant ou dans un an ? Maintenant, bien sûr : tu pourrais les placer et toucher des intérêts. L'argent a une <strong>valeur temps</strong>.</p>
+  <div class="grid2">
+    <div class="card"><h4>Capitalisation : présent → futur</h4><p class="formula" style="margin:6px 0">CFₙ = CF₀ × (1 + r)ⁿ</p><p>1 000 € placés à 10 % pendant 2 ans : 1 000 × 1,1² = <strong>1 210 €</strong>.</p></div>
+    <div class="card"><h4>Actualisation : futur → présent</h4><p class="formula" style="margin:6px 0">VA = CFₙ ÷ (1 + r)ⁿ</p><p>1 210 € reçus dans 2 ans à 10 % : 1 210 ÷ 1,1² = <strong>1 000 €</strong> aujourd'hui.</p></div>
+  </div>
+
+  <h3>2. Les quatre critères, sur le même projet</h3>
+  <div class="enonce"><p><strong>Projet du cours :</strong> I₀ = 100 ; cash-flows de 30, 40, 50 et 20 les années 1 à 4 ; taux d'actualisation 10 %.</p></div>
+  <h4>a) La VAN (valeur actuelle nette)</h4>
+  <div class="formula">VAN = Σ CFₜ ÷ (1 + r)ᵗ − I₀</div>
+  <div class="tbl"><table>
+    <tr><th>Année</th><th class="num">CF</th><th class="num">Facteur 1,1ᵗ</th><th class="num">CF actualisé</th><th class="num">Cumul non actualisé</th></tr>
+    <tr><td>1</td><td class="num">30</td><td class="num">1,1</td><td class="num">27,27</td><td class="num">30</td></tr>
+    <tr><td>2</td><td class="num">40</td><td class="num">1,21</td><td class="num">33,06</td><td class="num">70</td></tr>
+    <tr><td>3</td><td class="num">50</td><td class="num">1,331</td><td class="num">37,57</td><td class="num">120</td></tr>
+    <tr><td>4</td><td class="num">20</td><td class="num">1,4641</td><td class="num">13,66</td><td class="num">140</td></tr>
+    <tr class="total"><td colspan="3">Somme des CF actualisés</td><td class="num">111,56</td><td></td></tr>
+  </table></div>
+  <p>VAN = 111,56 − 100 = <strong>+ 11,56</strong>. <strong>VAN &gt; 0 : projet rentable</strong> (il rapporte plus que ce qu'il coûte, même en tenant compte du temps). VAN = 0 : il rapporte juste ce qu'il coûte. VAN &lt; 0 : il fait perdre de l'argent.</p>
+  <h4>b) L'IP (indice de profitabilité)</h4>
+  <div class="formula">IP = (VAN + I₀) ÷ I₀</div>
+  <p>IP = (11,56 + 100) ÷ 100 = <strong>1,12</strong> : chaque euro investi rapporte 1,12 €, soit un gain de 12 centimes. IP &gt; 1 : rentable ; IP = 1 : ni gain ni perte ; IP &lt; 1 : pas rentable. L'IP est très utile pour comparer des projets qui <strong>n'ont pas le même investissement initial</strong> : on choisit l'IP le plus élevé.</p>
+  <h4>c) Le DR (délai de récupération)</h4>
+  <p>Le temps nécessaire pour récupérer la mise de départ. Avec les cumuls : 30, puis 70, puis 120. On dépasse 100 pendant l'année 3.</p>
+  <div class="formula">DR = (n − 1) ans + [(I₀ − CF cumulés à n − 1) ÷ CFₙ] × 365 jours</div>
+  <p>DR = 2 ans + [(100 − 70) ÷ 50] × 365 = 2 ans + 0,6 × 365 = <strong>2 ans et 219 jours</strong>. Entre deux projets, on préfère le <strong>DR le plus court</strong> (moins risqué).</p>
+  <h4>d) Le TRI (taux de rentabilité interne)</h4>
+  <p>C'est le taux d'actualisation qui <strong>annule la VAN</strong> : le rendement réel du projet, le taux maximum qu'il peut supporter avant de ne plus être rentable. Pour ce projet, le TRI est d'environ <strong>15,3 %</strong> (on le trouve par essais : à 15 % la VAN vaut + 0,65, à 16 % elle vaut − 1,33).</p>
+  <p>Règle : un projet est rentable si <strong>TRI &gt; taux d'actualisation</strong>.</p>
+  <div class="box ex"><span class="tag">Exemple du cours</span>
+    <p>Taux d'actualisation 10 %. Projet A : TRI 12 % &gt; 10 % → <strong>rentable</strong>, sa VAN est positive. Projet B : TRI 8 % &lt; 10 % → <strong>pas rentable</strong>, sa VAN est négative. On choisit A.</p>
+  </div>
+  <div class="box key"><span class="tag">À retenir</span>
+    <ul>
+      <li>VAN &gt; 0, IP &gt; 1, TRI &gt; r : trois façons de dire « rentable ». Le DR mesure le risque (plus il est court, mieux c'est).</li>
+      <li>Pour départager deux projets de <strong>même mise</strong> : la VAN la plus élevée. De <strong>mises différentes</strong> : l'IP le plus élevé.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ CHAPITRE 7 ============ -->
+<section class="part" id="p7">
+  <div class="part-head"><span class="part-num">7</span><div><div class="eyebrow">Les différentes modalités de financement (d'après tes notes)</div><h2>Comment l'entreprise trouve de l'argent</h2></div></div>
+  <div class="grid2">
+    <div class="card"><h4>Financement interne</h4><p><strong>Autofinancement</strong> (CAF − dividendes, bénéfices mis en réserve) et <strong>cessions d'actifs</strong>. Aucune dette, autonomie totale, mais limité par la rentabilité.</p></div>
+    <div class="card"><h4>Emprunt bancaire (indirect)</h4><p>Rapide et simple, mais coûte des intérêts et doit être remboursé.</p></div>
+    <div class="card"><h4>Emprunt obligataire</h4><p>Un gros emprunt découpé en parts égales (les <strong>obligations</strong>) achetées par de nombreux prêteurs (les obligataires).</p></div>
+    <div class="card"><h4>Capitaux propres (direct)</h4><p>Augmentation de capital, apports des associés. Rien à rembourser, crédibilité renforcée, mais <strong>dilution</strong> du pouvoir des anciens actionnaires.</p></div>
+    <div class="card"><h4>Crowdfunding</h4><p>Beaucoup de particuliers via une plateforme (don, prêt ou capital). Accessible, donne de la visibilité ; montants limités, succès incertain.</p></div>
+    <div class="card"><h4>Aides publiques</h4><p>Subventions, crédits d'impôt, Bpifrance. Pas de remboursement, mais critères stricts et dossiers longs.</p></div>
+    <div class="card"><h4>Crédit-bail (leasing)</h4><p>Location avec option d'achat. Pas d'achat immédiat, souplesse ; coût total plus élevé qu'un achat.</p></div>
+  </div>
+
+  <h3>Le tableau d'amortissement d'un emprunt</h3>
+  <p>Chaque année, l'emprunteur verse une <strong>annuité</strong> composée de deux parts :</p>
+  <div class="formula">Annuité = Intérêt + Amortissement (remboursement du capital)
+  <small>Intérêt = capital restant dû en début de période × taux · Capital fin = capital début − amortissement</small></div>
+  <p>Exemple commun aux trois méthodes : <strong>300 000 € empruntés sur 3 ans à 5 %</strong>.</p>
+  <h4>Méthode 1 : remboursement in fine</h4>
+  <p>On ne paie que les intérêts chaque année, et tout le capital à la fin. Risqué pour la banque.</p>
+  <div class="tbl"><table>
+    <tr><th>Année</th><th class="num">Capital début</th><th class="num">Intérêt</th><th class="num">Amortissement</th><th class="num">Annuité</th><th class="num">Capital fin</th></tr>
+    <tr><td>1</td><td class="num">300 000</td><td class="num">15 000</td><td class="num">0</td><td class="num">15 000</td><td class="num">300 000</td></tr>
+    <tr><td>2</td><td class="num">300 000</td><td class="num">15 000</td><td class="num">0</td><td class="num">15 000</td><td class="num">300 000</td></tr>
+    <tr><td>3</td><td class="num">300 000</td><td class="num">15 000</td><td class="num">300 000</td><td class="num">315 000</td><td class="num">0</td></tr>
+    <tr class="total"><td colspan="2">Coût total (intérêts)</td><td class="num">45 000</td><td colspan="3"></td></tr>
+  </table></div>
+  <h4>Méthode 2 : amortissement constant</h4>
+  <p>On rembourse la même part de capital chaque année : 300 000 ÷ 3 = 100 000. Les intérêts baissent, donc l'annuité baisse.</p>
+  <div class="tbl"><table>
+    <tr><th>Année</th><th class="num">Capital début</th><th class="num">Intérêt</th><th class="num">Amortissement</th><th class="num">Annuité</th><th class="num">Capital fin</th></tr>
+    <tr><td>1</td><td class="num">300 000</td><td class="num">15 000</td><td class="num">100 000</td><td class="num">115 000</td><td class="num">200 000</td></tr>
+    <tr><td>2</td><td class="num">200 000</td><td class="num">10 000</td><td class="num">100 000</td><td class="num">110 000</td><td class="num">100 000</td></tr>
+    <tr><td>3</td><td class="num">100 000</td><td class="num">5 000</td><td class="num">100 000</td><td class="num">105 000</td><td class="num">0</td></tr>
+    <tr class="total"><td colspan="2">Coût total (intérêts)</td><td class="num">30 000</td><td colspan="3"></td></tr>
+  </table></div>
+  <h4>Méthode 3 : annuités constantes (la plus courante)</h4>
+  <div class="formula">Annuité = C × i ÷ [1 − (1 + i)⁻ⁿ]<small>300 000 × 0,05 ÷ [1 − 1,05⁻³] = 110 162,57 €. Ensuite, chaque année : amortissement = annuité − intérêt.</small></div>
+  <div class="tbl"><table>
+    <tr><th>Année</th><th class="num">Capital début</th><th class="num">Intérêt</th><th class="num">Amortissement</th><th class="num">Annuité</th><th class="num">Capital fin</th></tr>
+    <tr><td>1</td><td class="num">300 000,00</td><td class="num">15 000,00</td><td class="num">95 162,57</td><td class="num">110 162,57</td><td class="num">204 837,43</td></tr>
+    <tr><td>2</td><td class="num">204 837,43</td><td class="num">10 241,87</td><td class="num">99 920,70</td><td class="num">110 162,57</td><td class="num">104 916,73</td></tr>
+    <tr><td>3</td><td class="num">104 916,73</td><td class="num">5 245,84</td><td class="num">104 916,73</td><td class="num">110 162,57</td><td class="num">0</td></tr>
+    <tr class="total"><td colspan="2">Coût total (intérêts)</td><td class="num">30 487,71</td><td colspan="3"></td></tr>
+  </table></div>
+  <div class="box trap"><span class="tag">Vérifications rapides</span><p>La somme des amortissements doit toujours être égale au capital emprunté, et le capital de fin de la dernière année doit tomber à 0. L'intérêt se calcule toujours sur le capital <strong>restant dû en début</strong> d'année.</p></div>
+</section>
+
+<!-- ============ CHAPITRE 8 ============ -->
+<section class="part" id="p8">
+  <div class="part-head"><span class="part-num">8</span><div><div class="eyebrow">Les opérations sur le marché des changes (d'après tes notes)</div><h2>Le Forex et la cotation des devises</h2></div></div>
+  <div class="box def"><span class="tag">Définition</span>
+    <p>Le marché des changes s'appelle le <strong>Forex</strong> (contraction de <span class="en">FOReign EXchange</span>). C'est le <strong>plus grand marché financier du monde</strong>. On y échange des devises entre banques (marché interbancaire), sans lieu physique unique.</p>
+  </div>
+  <h3>Cotation et paire de devises</h3>
+  <p>Une devise n'a de prix que par rapport à une autre : on cote donc toujours une <strong>paire</strong> (un <span class="en">cross</span>), par exemple EUR/USD. Codes à connaître : <strong>EUR</strong> euro, <strong>USD</strong> dollar américain, <strong>GBP</strong> livre sterling, <strong>JPY</strong> yen, <strong>CHF</strong> franc suisse, <strong>CAD</strong> dollar canadien, <strong>AUD</strong> dollar australien.</p>
+  <div class="formula">EUR/USD = 1,16 → 1 euro s'échange contre 1,16 dollar<small>La première devise (de base) vaut toujours 1 ; le chiffre dit combien il faut de la seconde.</small></div>
+  <div class="grid2">
+    <div class="card"><h4>Cotation au certain</h4><p>Quantité <strong>fixe de monnaie nationale</strong> contre une quantité variable de monnaie étrangère. En France : EUR/USD = 1,3775 (1 € = 1,3775 $). C'est le système utilisé en France et en zone euro.</p></div>
+    <div class="card"><h4>Cotation à l'incertain</h4><p>Quantité <strong>fixe de monnaie étrangère</strong> contre une quantité variable de monnaie nationale. Pour un Français : USD/EUR = 0,7260 (1 $ = 0,7260 €).</p></div>
+  </div>
+  <h3>Bid, ask, spread</h3>
+  <p>Chaque paire affiche deux prix, par exemple <strong>EUR/USD 1,3601 – 1,3603</strong> :</p>
+  <ul>
+    <li><strong>Bid</strong> (le plus bas, 1,3601) : le prix auquel la banque t'<strong>achète</strong> la devise de base, donc le prix auquel <strong>tu vends</strong> tes euros.</li>
+    <li><strong>Ask</strong> (le plus haut, 1,3603) : le prix auquel la banque te <strong>vend</strong> la devise de base, donc le prix auquel <strong>tu achètes</strong> des euros.</li>
+    <li><strong>Spread</strong> = ask − bid = 0,0002 : la marge de l'intermédiaire. Le bid est toujours inférieur à l'ask.</li>
+    <li>Le cours <strong>MID</strong> est la moyenne des deux, publié chaque jour par certaines banques centrales (cours de référence).</li>
+  </ul>
+  <p>La banque se rémunère de deux façons : soit elle applique le cours moyen et prend une commission, soit elle achète au cours acheteur (sous le moyen) et vend au cours vendeur (au-dessus).</p>
+  <div class="box ex"><span class="tag">Exemple : une entreprise française et le dollar</span>
+    <p>Cotation EUR/USD 1,1600 – 1,1620.</p>
+    <p>Elle <strong>reçoit 10 000 $</strong> d'un client et veut des euros : elle achète des euros, au prix le plus défavorable pour elle (ask 1,1620). 10 000 ÷ 1,1620 = <strong>8 605,85 €</strong>.</p>
+    <p>Elle doit <strong>payer 10 000 $</strong> à un fournisseur : elle vend des euros au bid 1,1600. Coût : 10 000 ÷ 1,1600 = <strong>8 620,69 €</strong>.</p>
+    <p>Dans les deux cas, la banque gagne l'écart : c'est le spread.</p>
+  </div>
+  <div class="box def"><span class="tag">Appréciation, dépréciation</span><p>Si EUR/USD passe de 1,10 à 1,16, il faut plus de dollars pour 1 euro : l'<strong>euro s'apprécie</strong> et le <strong>dollar se déprécie</strong>. Bon pour un importateur européen (ses achats en dollars coûtent moins cher), mauvais pour un exportateur européen (ses produits deviennent plus chers pour les Américains).</p></div>
+  <div class="box exam"><span class="tag">Examen</span><p>Pas d'exercice de calcul annoncé sur ce chapitre : prépare plutôt des réponses de cours (« Qu'est-ce que le Forex ? », « Différence entre cotation au certain et à l'incertain ? », « Qu'est-ce que le spread ? »).</p></div>
+</section>
+
+<!-- ============ FORMULAIRE ============ -->
+<section class="part" id="formulaire">
+  <div class="part-head"><span class="part-num">Σ</span><div><div class="eyebrow">À connaître par cœur</div><h2>Le formulaire complet</h2></div></div>
+  <div class="tbl"><table>
+    <tr><th>Notion</th><th>Formule</th></tr>
+    <tr><td>Patrimoine</td><td>Biens + créances − dettes</td></tr>
+    <tr><td>Résultat</td><td>Produits − charges</td></tr>
+    <tr><td>Coût d'achat des marchandises vendues</td><td>Achats + (stock initial − stock final)</td></tr>
+    <tr><td>Marge commerciale</td><td>Ventes de marchandises − coût d'achat des marchandises vendues</td></tr>
+    <tr><td>Production de l'exercice</td><td>Vendue + stockée + immobilisée</td></tr>
+    <tr><td>Valeur ajoutée</td><td>MC + production − consommations des tiers</td></tr>
+    <tr><td>EBE</td><td>VA + subventions d'exploitation − impôts et taxes − charges de personnel</td></tr>
+    <tr><td>Résultat d'exploitation</td><td>EBE + reprises et transferts + autres produits − dotations − autres charges</td></tr>
+    <tr><td>RCAI</td><td>RE + produits financiers − charges financières</td></tr>
+    <tr><td>Résultat de l'exercice</td><td>RCAI + résultat exceptionnel − participation − IS</td></tr>
+    <tr><td>Plus-value de cession</td><td>Prix de cession − valeur comptable de l'actif cédé</td></tr>
+    <tr><td>CAF</td><td>Produits encaissables − charges décaissables (hors cessions)</td></tr>
+    <tr><td>CAF (additive)</td><td>Résultat net + dotations − reprises − prix de cession + VCEAC</td></tr>
+    <tr><td>Autofinancement</td><td>CAF − dividendes</td></tr>
+    <tr><td>Capacité de remboursement</td><td>Dettes financières ÷ CAF &lt; 4</td></tr>
+    <tr><td>Rentabilité financière (ROE)</td><td>Résultat net ÷ capitaux propres</td></tr>
+    <tr><td>Rentabilité économique</td><td>Résultat d'exploitation ÷ ressources stables (actif économique)</td></tr>
+    <tr><td>Effet de levier</td><td>RF = [Re + (Re − i) × D/CP] × (1 − T)</td></tr>
+    <tr><td>Frais financiers</td><td>Intérêts ÷ CA HT (&lt; 3 % bien, &gt; 5 % limite atteinte)</td></tr>
+    <tr><td>FRNG</td><td>Ressources stables − emplois stables</td></tr>
+    <tr><td>BFRE / BFRHE</td><td>ACE − PCE / ACHE − PCHE</td></tr>
+    <tr><td>Trésorerie nette</td><td>FRNG − BFR = Ta − Tp</td></tr>
+    <tr><td>Actif net</td><td>Actif − passif exigible</td></tr>
+    <tr><td>Goodwill</td><td>V = ANC + goodwill</td></tr>
+    <tr><td>Gordon-Shapiro</td><td>V = D ÷ (K − g), avec K &gt; g</td></tr>
+    <tr><td>PER</td><td>Cours ÷ BNPA ; cours = BNPA × PER</td></tr>
+    <tr><td>Capitalisation / actualisation</td><td>CFₙ = CF₀ (1 + r)ⁿ ; VA = CFₙ ÷ (1 + r)ⁿ</td></tr>
+    <tr><td>VAN / IP</td><td>Σ CF actualisés − I₀ ; (VAN + I₀) ÷ I₀</td></tr>
+    <tr><td>Délai de récupération</td><td>(n − 1) ans + [(I₀ − cumul n−1) ÷ CFₙ] × 365 j</td></tr>
+    <tr><td>Annuité</td><td>Intérêt + amortissement ; constante : C × i ÷ [1 − (1 + i)⁻ⁿ]</td></tr>
+  </table></div>
+</section>
+
+<!-- ============ GLOSSAIRE ============ -->
+<section class="part" id="glossaire">
+  <div class="part-head"><span class="part-num">EN</span><div><div class="eyebrow">Les termes anglais du cours</div><h2>Glossaire français / anglais</h2></div></div>
+  <dl class="glo">
+    <dt>Bilan</dt><dd><span class="en">Balance sheet</span></dd>
+    <dt>Actif / Passif</dt><dd><span class="en">Assets / Liabilities</span></dd>
+    <dt>Capitaux propres</dt><dd><span class="en">Equity</span></dd>
+    <dt>Actif immobilisé / circulant</dt><dd><span class="en">Fixed assets / Current assets</span></dd>
+    <dt>Dettes</dt><dd><span class="en">Debts</span></dd>
+    <dt>Compte de résultat</dt><dd><span class="en">Income statement</span></dd>
+    <dt>Chiffre d'affaires</dt><dd><span class="en">Turnover, revenue, sales</span></dd>
+    <dt>EBE</dt><dd><span class="en">EBITDA (Earnings Before Interest, Taxes, Depreciation and Amortization)</span></dd>
+    <dt>Résultat d'exploitation</dt><dd><span class="en">EBIT (Earnings Before Interest and Taxes)</span></dd>
+    <dt>Résultat net</dt><dd><span class="en">Net income, net profit</span></dd>
+    <dt>CAF</dt><dd><span class="en">Cash-flow</span></dd>
+    <dt>Rentabilité financière / globale</dt><dd><span class="en">ROE (Return on Equity) / ROA (Return on Assets)</span></dd>
+    <dt>Effet de levier</dt><dd><span class="en">Financial leverage</span></dd>
+    <dt>FRNG</dt><dd><span class="en">Working capital</span></dd>
+    <dt>BFR</dt><dd><span class="en">Working capital requirement</span></dd>
+    <dt>Trésorerie nette</dt><dd><span class="en">Net cash</span></dd>
+    <dt>Crédit-bail</dt><dd><span class="en">Leasing</span></dd>
+    <dt>Survaleur</dt><dd><span class="en">Goodwill</span></dd>
+    <dt>PER, BNPA</dt><dd><span class="en">Price Earning Ratio, EPS (Earnings Per Share)</span></dd>
+    <dt>VAN, TRI</dt><dd><span class="en">NPV (Net Present Value), IRR (Internal Rate of Return)</span></dd>
+    <dt>Délai de récupération</dt><dd><span class="en">Payback period</span></dd>
+    <dt>Marché des changes</dt><dd><span class="en">Foreign exchange market (Forex)</span></dd>
+    <dt>Cours acheteur / vendeur</dt><dd><span class="en">Bid / Ask</span></dd>
+  </dl>
+</section>
+
+<!-- ============ QUIZ ============ -->
+<section class="part" id="quiz">
+  <div class="part-head"><span class="part-num">?</span><div><div class="eyebrow">Inspiré du QCM SIG et des exercices de TD</div><h2>QCM d'entraînement corrigé</h2></div></div>
+  <p>Comme dans le QCM du prof, certaines questions ont <strong>plusieurs bonnes propositions</strong> : elles sont alors regroupées dans une option du type « a et c ». Une seule option est juste à chaque fois. Clique pour voir l'explication. Garde une calculatrice à côté.</p>
+  <div class="scorebar" aria-live="polite"><span>Score : <b id="score">0</b> / <span id="done">0</span> répondues sur <span id="total">0</span> · note sur 20 : <b id="note">0</b></span><button type="button" id="reset">Recommencer</button></div>
+  <div class="quiz" id="quizbox"></div>
+  <div class="box key result" id="result"><span class="tag">Ton résultat</span><p id="resultText"></p></div>
+</section>
+</main>
+</div>
+
+<script>
+const L="ABCDEFGH";
+const Q=[
+ {t:"Bilan",q:"Le bilan est :",o:["Un document dynamique qui retrace l'activité de l'année","Une photographie du patrimoine à une date donnée","Un document facultatif","La liste des charges et des produits"],a:1,e:"Le bilan est <b>statique</b> : une photo au 31/12. Le document dynamique, c'est le compte de résultat."},
+ {t:"Bilan",q:"Un véhicule acheté pour être utilisé plusieurs années est :",o:["Une charge d'exploitation","Une immobilisation corporelle (actif)","Un actif circulant","Une dette financière"],a:1,e:"Il reste durablement dans l'entreprise : <b>immobilisation corporelle</b>, classe 2, au bilan. Ce serait une charge s'il était consommé dans l'année."},
+ {t:"Bilan",q:"Le passif est classé par ordre :",o:["De liquidité croissante","D'exigibilité croissante","Alphabétique","De montant décroissant"],a:1,e:"Passif : <b>exigibilité croissante</b> (capital en haut, dettes à court terme en bas). C'est l'actif qui est classé par liquidité croissante."},
+ {t:"Compte de résultat",q:"Quelle opération ne figure PAS dans le compte de résultat ?",o:["Le paiement des salaires","Les intérêts d'emprunt","L'obtention d'un nouvel emprunt bancaire","Un don versé à une association"],a:2,e:"Obtenir un emprunt crée une <b>dette au bilan</b>, ce n'est ni une charge ni un produit. Les intérêts, eux, sont une charge financière, et le don une charge exceptionnelle."},
+ {t:"Compte de résultat",q:"Un escompte obtenu d'un fournisseur pour paiement anticipé est :",o:["Une charge financière","Un produit d'exploitation","Un produit financier","Un produit exceptionnel"],a:2,e:"C'est une réduction financière qui enrichit l'entreprise : <b>produit financier</b> (exercice ABC)."},
+ {t:"États financiers",q:"Exercice ABC : la présence de 2 200 € de réserves au passif signifie que :",o:["L'entreprise a fait une perte cette année","Les associés ont fait un nouvel apport","L'entreprise a déjà réalisé des bénéfices non distribués","L'entreprise a contracté un emprunt"],a:2,e:"Les réserves sont des <b>bénéfices passés gardés</b> dans l'entreprise au lieu d'être distribués en dividendes."},
+ {t:"États financiers",q:"Dettes financières 15 000, capitaux propres 26 300. Le taux d'endettement vaut environ :",o:["17 %","57 %","175 %","36 %"],a:1,e:"15 000 ÷ 26 300 ≈ <b>57 %</b>, sous 100 % : entreprise peu endettée."},
+ {t:"QCM SIG",q:"Les soldes intermédiaires de gestion permettent d'analyser : a. la structure financière ; b. la solvabilité ; c. l'activité ; d. la rentabilité.",o:["a et b","c et d","a, b, c et d","c seulement"],a:1,e:"Les SIG découpent le <b>compte de résultat</b> : ils parlent d'activité et de rentabilité. La structure financière et la solvabilité s'analysent avec le <b>bilan</b> (fonctionnel)."},
+ {t:"QCM SIG",q:"Les ressources internes générées par l'activité proviennent :",o:["De la différence entre recettes et dépenses","De la différence entre produits encaissables et charges décaissables","Des subventions d'investissement et des emprunts","D'une augmentation de capital en numéraire"],a:1,e:"C'est la définition de la <b>CAF</b>. Emprunts et augmentation de capital sont des ressources <b>externes</b>."},
+ {t:"QCM SIG",q:"La marge commerciale est : a. un indicateur de rentabilité ; b. souvent proportionnelle aux ventes de marchandises ; c. la ressource essentielle d'exploitation des entreprises de négoce.",o:["a seulement","b et c","a et c","a, b et c"],a:1,e:"Elle grandit avec les ventes (b) et c'est ce qui fait vivre un commerçant (c). Ce n'est pas un indicateur de rentabilité : elle ne tient compte ni des salaires, ni des capitaux investis."},
+ {t:"QCM SIG",q:"Une entreprise embauche un commercial : salaire 25 000 €, charges sociales 12 500 €, frais de déplacement 2 500 €. Cela entraîne :",o:["Une baisse de la VA de 25 000 € et de l'EBE de 37 500 €","Aucune modification de la VA, une baisse de l'EBE de 37 500 €","Une baisse de la VA de 2 500 € et de l'EBE de 40 000 €","Une baisse de la VA de 40 000 €"],a:2,e:"Seuls les frais de déplacement sont une consommation externe : <b>VA − 2 500</b>. Les charges de personnel viennent après, dans l'EBE : <b>EBE − 40 000</b> (25 000 + 12 500 + 2 500)."},
+ {t:"QCM SIG",q:"Les consommations de l'exercice en provenance des tiers se composent : a. achats de marchandises ; b. achats de matières premières et approvisionnements ; c. variation des stocks de marchandises ; d. variation des stocks de matières ; e. autres achats et charges externes.",o:["a, c et e","b, d et e","a, b, c, d et e","b et e"],a:1,e:"Les marchandises (a et c) servent au calcul de la <b>marge commerciale</b>, pas des consommations des tiers. Restent b, d et e."},
+ {t:"QCM SIG",q:"L'excédent brut d'exploitation est la part de valeur ajoutée :",o:["Attribuée aux salariés","Attribuée à l'État","Revenant à l'entreprise et aux apporteurs de capitaux","Attribuée aux salariés et à l'État"],a:2,e:"On retire de la VA ce qui va aux salariés (personnel) et à l'État (impôts et taxes) : il reste l'EBE, pour l'entreprise et ses <b>apporteurs de capitaux</b> (actionnaires et prêteurs)."},
+ {t:"QCM SIG",q:"Le résultat d'exploitation : a. représente la ressource nette dégagée par l'activité normale ; b. est égal à EBE + reprises + autres produits − dotations − autres charges ; c. mesure la performance industrielle et commerciale indépendamment de la politique financière ; d. peut être positif ou négatif.",o:["a et b","b et d","a, c et d","a, b, c et d"],a:3,e:"Les quatre propositions sont justes : c'est un piège classique de croire qu'il faut en éliminer une."},
+ {t:"QCM SIG",q:"L'EBE est indépendant de la politique d'amortissement et du mode de financement.",o:["Vrai","Faux"],a:0,fixed:1,e:"<b>Vrai</b> : il est calculé avant les dotations aux amortissements et avant les charges financières. C'est pour ça qu'il sert à comparer des entreprises."},
+ {t:"SIG",q:"Ventes de marchandises 216 000 ; achats 120 000 ; stock initial 0 ; stock final 20 000. La marge commerciale vaut :",o:["96 000","116 000","136 000","216 000"],a:1,e:"Coût d'achat des marchandises vendues = 120 000 + (0 − 20 000) = 100 000. MC = 216 000 − 100 000 = <b>116 000</b>."},
+ {t:"SIG",q:"Production vendue 1 200 000, stockée 200 000, immobilisée 100 000. Consommations des tiers 600 000, marge commerciale 116 000. La VA vaut :",o:["900 000","1 016 000","1 616 000","816 000"],a:1,e:"Production = 1 500 000. VA = 116 000 + 1 500 000 − 600 000 = <b>1 016 000</b>."},
+ {t:"SIG",q:"Quel SIG mesure la richesse créée par l'entreprise et son poids dans l'économie ?",o:["La marge commerciale","La valeur ajoutée","L'EBE","Le résultat de l'exercice"],a:1,e:"La <b>valeur ajoutée</b> : la somme des VA des entreprises donne le PIB."},
+ {t:"SIG",q:"Quel SIG mesure la performance des activités d'exploitation ET financières ?",o:["Le résultat d'exploitation","Le RCAI","Le résultat exceptionnel","L'EBE"],a:1,e:"<b>RCAI</b> = résultat d'exploitation + résultat financier."},
+ {t:"SIG",q:"Une machine achetée 100 000 € est amortie linéairement sur 5 ans. Sa valeur nette comptable au bout de 3 ans est :",o:["20 000","40 000","60 000","80 000"],a:1,e:"Annuité 20 000 ; cumul après 3 ans 60 000 ; VNC = 100 000 − 60 000 = <b>40 000</b>."},
+ {t:"SIG",q:"Une machine de valeur comptable 10 000 € est vendue 15 000 €. On a :",o:["Une moins-value de 5 000","Une plus-value de 5 000","Une plus-value de 15 000","Rien, c'est neutre"],a:1,e:"Prix de cession − valeur comptable = 15 000 − 10 000 = <b>plus-value de 5 000</b>."},
+ {t:"CAF",q:"Les dotations aux amortissements sont :",o:["Des charges décaissables","Des charges calculées (non décaissables)","Des produits encaissables","Des produits calculés"],a:1,e:"Aucun euro ne sort : c'est une <b>charge calculée</b>, qu'on rajoute au résultat dans la méthode additive."},
+ {t:"CAF",q:"Le prix de vente d'une machine (produit de cession d'élément d'actif) :",o:["Est inclus dans la CAF","Est exclu de la CAF","Est une charge décaissable","Est soustrait deux fois"],a:1,e:"La CAF se calcule <b>hors cessions</b> : vendre ses équipements n'est pas l'activité courante. Dans la méthode additive, on le retranche du résultat."},
+ {t:"CAF",q:"Méthode additive : résultat net 111, dotations 53, reprises 2, prix de cession 20, valeur comptable des actifs cédés 15. La CAF vaut :",o:["111","157","147","197"],a:1,e:"111 + 53 − 2 − 20 + 15 = <b>157</b>."},
+ {t:"CAF",q:"CAF 150 000 €, dividendes 20 000 €. L'autofinancement est de :",o:["170 000","150 000","130 000","20 000"],a:2,e:"Autofinancement = CAF − dividendes = <b>130 000</b>."},
+ {t:"CAF",q:"CAF 150 000, dettes financières 200 000. L'entreprise demande un crédit de 800 000. La banque :",o:["Accepte, car le ratio dettes/CAF est de 1,33","Refuse, car l'endettement maximal est de 600 000 et il ne reste que 400 000 de marge","Accepte, car la CAF est positive","Refuse, car la CAF est inférieure aux dettes"],a:1,e:"Capacité maximale = 4 × 150 000 = 600 000. Déjà 200 000 de dettes : il reste <b>400 000</b>. 800 000 est trop."},
+ {t:"Ratios",q:"Le ratio intérêts / CA HT est de 6 %. Cela signifie que :",o:["L'entreprise est indépendante de ses prêteurs","Elle est relativement dépendante des banques","Elle a atteint sa capacité d'endettement","Elle est très rentable"],a:2,e:"Au-delà de <b>5 %</b>, l'entreprise a atteint sa capacité d'endettement. Moins de 3 % : indépendante ; entre 3 et 5 % : relativement dépendante."},
+ {t:"Ratios",q:"La rentabilité financière (ROE) se calcule par :",o:["Résultat net ÷ CA HT","Résultat net ÷ capitaux propres","Résultat d'exploitation ÷ ressources stables","EBE ÷ CA HT"],a:1,e:"ROE = <b>résultat net ÷ capitaux propres</b> : ce que rapporte l'argent des actionnaires. Résultat net ÷ CA, c'est un taux de marge (profitabilité)."},
+ {t:"Effet de levier",q:"Le coût de la dette est de 6 % et la rentabilité économique de 10 %. Si l'entreprise s'endette davantage :",o:["Sa rentabilité financière baisse","Sa rentabilité financière augmente","Rien ne change","Sa rentabilité économique augmente"],a:1,e:"i &lt; Re : <b>effet de levier positif</b>, chaque euro emprunté rapporte plus qu'il ne coûte."},
+ {t:"Effet de levier",q:"Re = 5 %, coût de la dette 10 %. L'effet de levier est :",o:["Positif","Nul","Négatif","Impossible à déterminer"],a:2,e:"i &gt; Re : <b>effet négatif</b> (effet massue). S'endetter détruit de la valeur (projet B du cours)."},
+ {t:"Effet de levier",q:"Entreprise B : Re = 15 %, i = 9 %, D/CP = 40 000/60 000, impôt 1/3. Sa rentabilité financière est :",o:["10 %","12,67 %","15 %","19 %"],a:1,e:"[15 % + 6 % × 2/3] × 2/3 = 19 % × 2/3 = <b>12,67 %</b>. C'est bien 7 600 ÷ 60 000."},
+ {t:"Bilan fonctionnel",q:"Lequel est vrai pour le bilan fonctionnel ?",o:["Il est obligatoire et publié","L'actif y est en valeurs nettes","Il adopte une optique économique et réintègre le crédit-bail","Il est classé par liquidité et exigibilité"],a:2,e:"Le bilan fonctionnel est <b>facultatif</b>, en <b>valeurs brutes</b>, classé <b>par fonction</b>, et il réintègre les biens en crédit-bail comme s'ils avaient été achetés."},
+ {t:"Bilan fonctionnel",q:"Dans le retraitement du crédit-bail, la valeur nette (Vo − amortissements) est placée :",o:["En emplois stables","En ressources propres","En dettes financières","En trésorerie passive"],a:2,e:"Vo va en emplois stables, le cumul des amortissements en ressources propres, et la <b>VNC en dettes financières</b> (comme le capital restant dû d'un emprunt)."},
+ {t:"Bilan fonctionnel",q:"Ressources stables 2 750, emplois stables 2 600. Le FRNG est :",o:["− 150","150","5 350","2 600"],a:1,e:"FRNG = 2 750 − 2 600 = <b>+ 150</b>."},
+ {t:"Bilan fonctionnel",q:"Stocks 270, créances d'exploitation 300, dettes d'exploitation 400. Le BFRE est :",o:["170","− 170","970","570"],a:0,e:"BFRE = (270 + 300) − 400 = <b>170</b>."},
+ {t:"Bilan fonctionnel",q:"FRNG 192 000, BFR 241 000. La trésorerie nette est :",o:["+ 49 000","− 49 000","433 000","0"],a:1,e:"TN = FRNG − BFR = <b>− 49 000</b> : le FRNG ne couvre pas le BFR, l'entreprise vit à découvert (cas ACP)."},
+ {t:"Bilan fonctionnel",q:"Pour améliorer une trésorerie négative, laquelle de ces mesures est MAUVAISE ?",o:["Augmenter le capital","Raccourcir les délais accordés aux clients","Augmenter fortement les stocks","Obtenir des délais fournisseurs plus longs"],a:2,e:"Augmenter les stocks <b>augmente le BFR</b>, donc dégrade la trésorerie. Les trois autres augmentent le FRNG ou diminuent le BFR."},
+ {t:"Bilan fonctionnel",q:"Un BFR négatif :",o:["Est toujours le signe d'une faillite","Est une ressource pour l'entreprise","Est impossible","Signifie que le FRNG est négatif"],a:1,e:"BFR négatif = l'exploitation <b>fournit</b> de l'argent (clients payés comptant, fournisseurs payés tard). Typique de la grande distribution."},
+ {t:"Évaluation",q:"Capitaux propres 400, EBE 250, résultat net 120, CAF 195 (k€). Avec les multiples 2, 3, 6 et 4, la valeur moyenne est :",o:["720 k€","750 k€","762,5 k€","800 k€"],a:2,e:"(800 + 750 + 720 + 780) ÷ 4 = <b>762,5 k€</b>."},
+ {t:"Évaluation",q:"Actif immobilisé 250 000, créances 50 000, disponibilités 15 000, dettes 150 000 + 55 000 + 45 000. L'actif net est :",o:["315 000","250 000","65 000","− 65 000"],a:2,e:"315 000 − 250 000 = <b>65 000</b>."},
+ {t:"Évaluation",q:"Le goodwill correspond à :",o:["La valeur du matériel","La survaleur liée au savoir-faire, à la notoriété, à l'emplacement","Les dettes cachées","Le capital social"],a:1,e:"C'est l'<b>excédent de valeur</b> par rapport à l'actif net corrigé : V = ANC + goodwill."},
+ {t:"Évaluation",q:"Dividende 10 €, coût du capital 15 %, croissance du dividende 5 %. Selon Gordon-Shapiro, l'action vaut :",o:["66,67 €","100 €","200 €","50 €"],a:1,e:"10 ÷ (0,15 − 0,05) = <b>100 €</b>."},
+ {t:"Évaluation",q:"Le modèle de Gordon-Shapiro ne fonctionne pas si :",o:["Le dividende est positif","K est supérieur à g","g est supérieur ou égal à K","Il y a plus de 1 000 actions"],a:2,e:"Il faut <b>K &gt; g</b>, sinon le dénominateur est nul ou négatif."},
+ {t:"Évaluation",q:"PER = 19 et cours = 380 €. Le BNPA vaut :",o:["7 220 €","20 €","19 €","5,26 €"],a:1,e:"BNPA = cours ÷ PER = 380 ÷ 19 = <b>20 €</b>."},
+ {t:"Évaluation",q:"Le PER d'un titre est de 20, celui du marché de 16. On en déduit que :",o:["Le titre est sous-évalué","Le marché prévoit pour ce titre une croissance plus forte que la moyenne","Le titre ne verse pas de dividende","Le titre est en perte"],a:1,e:"PER relatif = 20 ÷ 16 = 1,25 &gt; 1 : le marché paie plus cher ce bénéfice car il anticipe <b>plus de croissance</b>."},
+ {t:"Évaluation",q:"BNPA 7 €, taux de distribution 60 %, coût du capital 10 %, croissance 6 %. La valeur Gordon-Shapiro est :",o:["70 €","84 €","105 €","175 €"],a:2,e:"D = 7 × 0,6 = 4,20 ; V = 4,20 ÷ 0,04 = <b>105 €</b> (exercice Begmeil)."},
+ {t:"Investissement",q:"1 000 € placés à 10 % pendant 2 ans deviennent :",o:["1 200 €","1 210 €","1 100 €","1 221 €"],a:1,e:"Capitalisation : 1 000 × 1,1² = <b>1 210 €</b> (les intérêts produisent eux-mêmes des intérêts)."},
+ {t:"Investissement",q:"I₀ = 100, VAN = 11,56. L'indice de profitabilité vaut :",o:["0,12","1,12","11,56","0,89"],a:1,e:"(11,56 + 100) ÷ 100 = <b>1,12</b> : chaque euro investi rapporte 1,12 €."},
+ {t:"Investissement",q:"I₀ = 100 ; cash-flows cumulés : 30 (an 1), 70 (an 2), 120 (an 3). Le délai de récupération est :",o:["2 ans","2 ans et 219 jours","3 ans","2 ans et 146 jours"],a:1,e:"2 ans + (30 ÷ 50) × 365 = 2 ans + <b>219 jours</b>."},
+ {t:"Investissement",q:"Taux d'actualisation 10 %. Projet A : TRI 12 %. Projet B : TRI 8 %. On choisit :",o:["B, car son TRI est plus prudent","A, car son TRI dépasse le taux d'actualisation","Aucun des deux","Les deux"],a:1,e:"Rentable si <b>TRI &gt; taux d'actualisation</b> : A seulement. La VAN de B est négative."},
+ {t:"Financement",q:"Emprunt de 300 000 € sur 3 ans à 5 %, amortissement constant. La première annuité est :",o:["100 000","110 000","115 000","110 162,57"],a:2,e:"Amortissement 100 000 + intérêt 300 000 × 5 % = 15 000 → <b>115 000</b>. 110 162,57 serait l'annuité constante."},
+ {t:"Financement",q:"Dans un remboursement in fine :",o:["On rembourse le capital par parts égales","On ne paie que les intérêts, puis tout le capital la dernière année","L'annuité est constante","Il n'y a pas d'intérêts"],a:1,e:"<b>In fine</b> = à la fin. C'est le plus risqué pour la banque."},
+ {t:"Financement",q:"Quel inconvénient est propre à l'augmentation de capital ?",o:["Les intérêts à payer","L'obligation de rembourser","La dilution du pouvoir des actionnaires existants","Le coût plus élevé qu'un achat direct"],a:2,e:"De nouveaux actionnaires arrivent : les anciens possèdent une part plus petite (<b>dilution</b>). Rien à rembourser, en revanche."},
+ {t:"Change",q:"EUR/USD = 1,16 signifie :",o:["1 dollar = 1,16 euro","1 euro = 1,16 dollar","L'euro vaut 16 % de moins que le dollar","1,16 euro = 1 dollar"],a:1,e:"La devise de base (la première) vaut 1 : <b>1 € = 1,16 $</b>."},
+ {t:"Change",q:"En France, la cotation EUR/USD est une cotation :",o:["À l'incertain","Au certain","Mixte","Croisée"],a:1,e:"Quantité fixe de monnaie <b>nationale</b> (1 €) contre une quantité variable de devise étrangère : cotation <b>au certain</b>."},
+ {t:"Change",q:"EUR/USD 1,3601 – 1,3603. Le spread est :",o:["1,3602","0,0002","2,7204","0,02"],a:1,e:"Spread = ask − bid = 1,3603 − 1,3601 = <b>0,0002</b>, la marge de la banque."},
+ {t:"Change",q:"EUR/USD passe de 1,10 à 1,16. Que s'est-il passé ?",o:["L'euro s'est déprécié","Le dollar s'est apprécié","L'euro s'est apprécié face au dollar","Rien"],a:2,e:"Il faut plus de dollars pour 1 euro : l'<b>euro s'apprécie</b>, le dollar se déprécie."}
+];
+const box=document.getElementById('quizbox');
+let score=0,done=0;
+document.getElementById('total').textContent=Q.length;
+function update(){
+  document.getElementById('score').textContent=score;
+  document.getElementById('done').textContent=done;
+  document.getElementById('note').textContent=done?(Math.round(score/done*200)/10).toString().replace('.',','):'0';
+}
+function render(){
+  box.innerHTML='';score=0;done=0;update();
+  document.getElementById('result').classList.remove('on');
+  Q.forEach((item,i)=>{
+    const d=document.createElement('div');d.className='q';
+    const th=document.createElement('div');th.className='theme';th.textContent=item.t;d.appendChild(th);
+    const h=document.createElement('h4');h.textContent=item.q;d.appendChild(h);
+    const opts=document.createElement('div');opts.className='opts';
+    const order=item.o.map((_,k)=>k);
+    if(!item.fixed){for(let k=order.length-1;k>0;k--){const r=Math.floor(Math.random()*(k+1));[order[k],order[r]]=[order[r],order[k]];}}
+    item.pos=order.indexOf(item.a);
+    order.forEach((k,j)=>{
+      const b=document.createElement('button');b.type='button';
+      b.textContent=L[j]+'. '+item.o[k];
+      b.addEventListener('click',()=>answer(i,j,opts,d));
+      opts.appendChild(b);
+    });
+    d.appendChild(opts);box.appendChild(d);
+  });
+}
+function answer(i,j,opts,d){
+  const item=Q[i];const btns=opts.querySelectorAll('button');
+  btns.forEach(b=>b.disabled=true);
+  btns[item.pos].classList.add('right');
+  const ok=j===item.pos;
+  if(!ok)btns[j].classList.add('wrong');else score++;
+  done++;update();
+  const ex=document.createElement('div');ex.className='expl';
+  ex.innerHTML=(ok?'<b class="v">Bonne réponse.</b> ':'<b class="x">Raté : la bonne réponse est '+L[item.pos]+'.</b> ')+item.e;
+  d.appendChild(ex);
+  if(done===Q.length){
+    const n=Math.round(score/Q.length*200)/10;
+    let msg='Tu as '+score+' bonnes réponses sur '+Q.length+', soit '+String(n).replace('.',',')+'/20. ';
+    msg+= n>=16?'Excellent, tu es prête pour le QCM de l\'examen.':n>=12?'Bien : relis les explications des questions ratées, puis refais le QCM.':'Reprends les chapitres concernés et les exercices corrigés, puis recommence.';
+    document.getElementById('resultText').textContent=msg;
+    document.getElementById('result').classList.add('on');
+  }
+}
+document.getElementById('reset').addEventListener('click',()=>{render();document.getElementById('quiz').scrollIntoView({behavior:'smooth'});});
+render();
+</script>

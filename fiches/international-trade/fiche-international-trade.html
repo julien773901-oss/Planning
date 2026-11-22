@@ -1,0 +1,1134 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>International Trade</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Public+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap">
+<style>
+/* Univers « orange vif » : bandeau dégradé orange → rouge-orange, encadrés crème, accents sarcelle pour les exemples */
+:root{
+  --bg:#fffaf5; --paper:#ffffff; --ink:#3a2214; --muted:#7f5a43;
+  --or:#f6b48a; --or-deep:#b05a24; --hot:#e9895c; --cream:#fff0e4; --cream-2:#fbd5b8; --line:#f5e0cf;
+  --teal:#0f766e; --teal-bg:#e2f5f2; --ok:#1f8a5b; --ok-bg:#e3f5ec; --ko:#c0262d; --ko-bg:#fde4e2;
+  --a1:#fcd2b0; --a2:#f6a877; --a3:#ffe6d2; --a4:#bfe5de;
+  --f-display:"Bricolage Grotesque", "Arial Black", system-ui, sans-serif;
+  --f-body:"Public Sans", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#1a0f08; --paper:#24150b; --ink:#fbeee3; --muted:#d1a98a;
+  --or:#e8a578; --or-deep:#f5bf98; --hot:#e89470; --cream:#3a1f0e; --cream-2:#6a3514; --line:#48291a;
+  --teal:#5eead4; --teal-bg:#0f2d2a; --ok:#5fd39b; --ok-bg:#163327; --ko:#ff8b7d; --ko-bg:#3a1a17;
+  --a1:#7a4a2c; --a2:#b9734a; --a3:#4a2c1a; --a4:#1f5c55; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#1a0f08; --paper:#24150b; --ink:#fbeee3; --muted:#d1a98a;
+  --or:#e8a578; --or-deep:#f5bf98; --hot:#e89470; --cream:#3a1f0e; --cream-2:#6a3514; --line:#48291a;
+  --teal:#5eead4; --teal-bg:#0f2d2a; --ok:#5fd39b; --ok-bg:#163327; --ko:#ff8b7d; --ko-bg:#3a1a17;
+  --a1:#7a4a2c; --a2:#b9734a; --a3:#4a2c1a; --a4:#1f5c55; color-scheme:dark }
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.65;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;padding-block:28px 80px}
+@media (max-width:900px){.wrap{grid-template-columns:minmax(0,1fr);gap:0}.toc{display:none}}
+main{min-width:0;max-width:76ch}
+h1,h2,h3,h4{font-family:var(--f-display);text-wrap:balance;line-height:1.1;color:var(--ink)}
+h1{font-size:clamp(2.3rem,6.4vw,3.9rem);font-weight:800;margin:0 0 .3em;letter-spacing:-.02em;color:#3a2214}
+h2{font-size:clamp(1.6rem,3.6vw,2.3rem);font-weight:800;margin:0 0 .4em;letter-spacing:-.01em}
+h3{font-size:1.32rem;font-weight:750;margin:2em 0 .5em;color:var(--or-deep)}
+h4{font-size:1.06rem;margin:1.4em 0 .3em}
+p{margin:.6em 0}
+a{color:var(--or-deep)}
+strong{font-weight:700}
+.eyebrow{font-family:var(--f-display);text-transform:uppercase;letter-spacing:.12em;font-size:.78rem;font-weight:800;color:var(--or-deep)}
+.hl{background:var(--cream);padding:0 .2em;border-radius:3px}
+.en{font-style:italic;color:var(--muted)}
+
+.toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 24px);align-self:start;font-size:.92rem;max-height:calc(100vh - 48px);overflow-y:auto}
+.toc ol{list-style:none;padding:0;margin:.6em 0 0;display:grid;gap:2px}
+.toc a{display:block;padding:6px 10px;border-radius:8px;text-decoration:none;color:var(--muted)}
+.toc a:hover,.toc a:focus-visible{background:var(--cream);color:var(--ink)}
+
+.hero{background:linear-gradient(130deg,#ffe3cc 0%,#ffcfae 50%,#ffbe98 100%);color:#3a2214;border-radius:22px;padding:28px 26px 26px;margin-bottom:28px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,#fff3e6 0%,rgba(255,243,230,0) 70%);opacity:.8;pointer-events:none}
+.hero > *{position:relative;z-index:1}
+.hero .eyebrow{color:#9a4c1c}
+.hero .lede{font-size:1.12rem;color:#4a2c1a;max-width:60ch;position:relative}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;position:relative}
+.chip{background:rgba(255,255,255,.6);color:#7a3c14;border:1px solid rgba(176,90,36,.25);border-radius:999px;padding:4px 12px;font-size:.85rem;font-weight:600}
+
+section.part{padding-top:40px;margin-top:40px;border-top:3px solid var(--line)}
+.part-head{display:flex;gap:16px;align-items:flex-start;margin-bottom:8px}
+.part-num{font-family:var(--f-display);font-weight:800;font-size:3rem;line-height:1;color:#5a2a0c;background:linear-gradient(135deg,#ffd9bd,#f8b88f);border-radius:14px;padding:6px 14px;flex:none;box-shadow:0 4px 0 #e8a77c}
+
+.box{border-radius:14px;padding:14px 18px;margin:16px 0;border:1px solid var(--line);background:var(--paper)}
+.box > :first-child{margin-top:0}.box > :last-child{margin-bottom:0}
+.box .tag{display:inline-block;font-family:var(--f-display);font-weight:800;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;padding:2px 8px;border-radius:6px;margin-bottom:6px}
+.def{background:var(--cream);border-color:var(--cream-2)}
+.def .tag{background:var(--or);color:#3a2214}
+.ex{border-left:6px solid var(--teal);background:var(--paper)}
+.ex .tag{background:var(--teal);color:var(--paper)}
+.trap{border:1.5px dashed var(--ko)}
+.trap .tag{background:transparent;color:var(--ko);border:1.5px solid var(--ko)}
+.key{border:3px solid var(--or);position:relative;padding-top:22px}
+.key::before{content:"";position:absolute;inset:0 0 auto 0;height:9px;border-radius:10px 10px 0 0;background:linear-gradient(90deg,#ffe0c4,#f8b88f,#f2a07a)}
+.key .tag{background:var(--ink);color:var(--bg)}
+.key ul{margin:.3em 0;padding-left:1.2em}
+.exam{background:linear-gradient(135deg,var(--cream),var(--paper));border:2px solid var(--or)}
+.exam .tag{background:var(--hot);color:#3a2214}
+.simple{font-style:italic;color:var(--muted)}
+.formula{font-family:var(--f-display);font-weight:700;background:var(--cream);border-radius:10px;padding:10px 14px;margin:12px 0;font-size:1.04rem;overflow-x:auto}
+
+.tbl{overflow-x:auto;margin:16px 0;border-radius:12px;border:1px solid var(--line)}
+table{border-collapse:collapse;width:100%;font-size:.93rem;background:var(--paper)}
+th,td{padding:9px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+th{background:var(--cream);font-family:var(--f-display);font-weight:800;color:var(--or-deep)}
+tr:last-child td{border-bottom:none}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.total td{font-weight:700;background:var(--cream)}
+td.win{background:var(--ok-bg);font-weight:700}
+.matrix td,.matrix th{text-align:center}
+
+figure{margin:20px 0;padding:16px;background:var(--paper);border:1px solid var(--line);border-radius:14px}
+figure .scroll{overflow-x:auto}
+figure svg{display:block;width:100%;height:auto;max-width:560px;margin:0 auto}
+figcaption{font-size:.86rem;color:var(--muted);margin-top:8px}
+svg text{font-family:var(--f-body);fill:var(--ink);font-size:13px}
+svg .mut{fill:var(--muted)}
+svg .ax{stroke:var(--ink);stroke-width:1.6;fill:none}
+svg .dem{stroke:var(--or-deep);stroke-width:3;fill:none}
+svg .sup{stroke:var(--teal);stroke-width:3;fill:none}
+svg .pw{stroke:var(--hot);stroke-width:2.2;stroke-dasharray:7 5;fill:none}
+svg .guide{stroke:var(--muted);stroke-width:1;stroke-dasharray:3 4;fill:none}
+svg .fA{fill:var(--a1);opacity:.85}
+svg .fB{fill:var(--a2);opacity:.85}
+svg .fC{fill:var(--a4);opacity:.9}
+svg .fD{fill:var(--a2);opacity:.85}
+svg .ftr{fill:var(--a3)}
+svg .dot{fill:var(--ink)}
+svg .b{font-weight:700}
+svg .big{font-family:var(--f-display);font-weight:800;font-size:15px}
+
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch}
+.flow .step{flex:1 1 130px;background:var(--cream);border-radius:12px;padding:10px 12px;font-size:.9rem;min-width:0}
+.flow .step b{display:block;font-family:var(--f-display);color:var(--or-deep);font-size:1rem}
+.flow .arrow{align-self:center;color:var(--or);font-weight:900;font-size:1.2rem}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px 14px;min-width:0}
+.card h4{margin:0 0 4px;color:var(--or-deep)}
+.card p{margin:.2em 0;font-size:.93rem}
+.pm{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+.pm > div{border-radius:12px;padding:12px 14px}
+.pm .plus{background:var(--ok-bg)}.pm .minus{background:var(--ko-bg)}
+.pm h4{margin:0 0 4px}.pm .plus h4{color:var(--ok)}.pm .minus h4{color:var(--ko)}
+.pm ul{margin:0;padding-left:1.1em;font-size:.93rem}
+.steps{counter-reset:s;list-style:none;padding:0;display:grid;gap:10px}
+.steps > li{counter-increment:s;position:relative;padding:12px 14px 12px 52px;background:var(--paper);border:1px solid var(--line);border-radius:12px}
+.steps > li::before{content:counter(s);position:absolute;left:12px;top:12px;width:28px;height:28px;border-radius:50%;background:var(--or);color:#3a2214;font-family:var(--f-display);font-weight:800;display:grid;place-items:center}
+.answer{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:4px 18px 14px;margin:18px 0}
+.answer > h4{font-size:1.08rem;color:var(--or-deep)}
+.answer .rep{display:inline-block;background:var(--or);color:#3a2214;font-family:var(--f-display);font-weight:800;border-radius:8px;padding:1px 10px;margin-right:6px}
+
+.quiz{counter-reset:q}
+.q{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:14px 0}
+.q h4{margin:0 0 10px;font-family:var(--f-body);font-weight:700;line-height:1.45}
+.q h4::before{counter-increment:q;content:"Q" counter(q) " · ";color:var(--or-deep);font-family:var(--f-display)}
+.q .theme{display:inline-block;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--teal);margin-bottom:4px}
+.q .fig{margin:6px 0 12px}
+.opts{display:grid;gap:7px}
+.opts button{font:inherit;font-size:.94rem;text-align:left;padding:9px 14px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer;line-height:1.45}
+.opts button:hover:not(:disabled){border-color:var(--or)}
+.opts button:focus-visible{outline:3px solid var(--or);outline-offset:2px}
+.opts button.right{background:var(--ok-bg);border-color:var(--ok);font-weight:600}
+.opts button.wrong{background:var(--ko-bg);border-color:var(--ko)}
+.opts button:disabled{cursor:default}
+.expl{margin-top:10px;padding:10px 14px;border-radius:10px;background:var(--cream);font-size:.93rem}
+.expl b.v{color:var(--ok)}.expl b.x{color:var(--ko)}
+.scorebar{position:sticky;top:calc(env(safe-area-inset-top,0px) + 8px);z-index:5;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;background:linear-gradient(120deg,#ffdcc2,#f8b88f);color:#3a2214;border-radius:12px;padding:10px 16px;margin:16px 0}
+.scorebar b{font-family:var(--f-display);font-size:1.2rem}
+.scorebar button{font:inherit;font-size:.88rem;background:#fff;color:#b05a24;font-weight:700;border:none;border-radius:8px;padding:6px 12px;cursor:pointer}
+.scorebar button:focus-visible{outline:3px solid #b05a24;outline-offset:2px}
+.result{display:none}
+.result.on{display:block}
+dl.glo{display:grid;grid-template-columns:minmax(150px,max-content) minmax(0,1fr);gap:6px 16px;font-size:.93rem}
+dl.glo dt{font-weight:700;color:var(--or-deep)}
+dl.glo dd{margin:0}
+@media (max-width:520px){dl.glo{grid-template-columns:minmax(0,1fr)}dl.glo dd{margin-bottom:8px}.hero{padding:22px 18px}.part-num{font-size:2.3rem}}
+@media (prefers-reduced-motion:no-preference){.opts button{transition:background .15s,border-color .15s}}
+</style>
+<div class="wrap">
+<nav class="toc" aria-label="Sommaire">
+  <div class="eyebrow">Sommaire</div>
+  <ol>
+    <li><a href="#p0">Mode d'emploi et examen</a></li>
+    <li><a href="#p1">0. Rappels de microéconomie</a></li>
+    <li><a href="#p2">0 bis. Théorie des jeux</a></li>
+    <li><a href="#p3">1. Le commerce international</a></li>
+    <li><a href="#p4">2. L'avantage absolu</a></li>
+    <li><a href="#p5">3. L'avantage comparatif</a></li>
+    <li><a href="#p6">4. La politique commerciale</a></li>
+    <li><a href="#p7">5. Le modèle d'échange pur</a></li>
+    <li><a href="#p8">6. Heckscher-Ohlin et défense commerciale</a></li>
+    <li><a href="#methodes">Boîte à outils de calcul</a></li>
+    <li><a href="#exam">Examen 2025-2026 corrigé</a></li>
+    <li><a href="#glossaire">Glossaire EN / FR</a></li>
+    <li><a href="#quiz">QCM d'entraînement</a></li>
+  </ol>
+</nav>
+
+<main>
+<header class="hero">
+  <div class="eyebrow">International Trade · CM en anglais · L3 Commerce International · UPEC · S5</div>
+  <h1>Comprendre le commerce international, depuis zéro</h1>
+  <p class="lede">Pourquoi un pays exporte du riz et importe des motos ? Qui gagne et qui perd quand on ouvre les frontières ou qu'on met un droit de douane ? Toute la matière des slides (Session 0 à Lecture 4 et le fichier Excel), expliquée en français avec des exemples chiffrés, plus le corrigé de l'examen 2025-2026 et un QCM dans le même style.</p>
+  <div class="chips"><span class="chip">Offre, demande, surplus</span><span class="chip">Dilemme du prisonnier, Nash</span><span class="chip">Avantage absolu (Smith)</span><span class="chip">Avantage comparatif (Ricardo)</span><span class="chip">Tarifs, quotas, anti-dumping</span><span class="chip">Boîte d'Edgeworth</span><span class="chip">Heckscher-Ohlin</span></div>
+</header>
+
+<section id="p0">
+  <h2>Mode d'emploi</h2>
+  <p>Le cours suit le manuel de Kenneth Reinert (<span class="en">An Introduction to International Economics</span>, 2021) et, pour la Lecture 4, celui de Steven Suranovic. Il pose une seule grande question : <strong>pourquoi les pays échangent-ils, et est-ce que tout le monde y gagne ?</strong></p>
+  <figure>
+    <div class="flow">
+      <div class="step"><b>Outils</b>Offre, demande, surplus, théorie des jeux (Session 0).</div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>Pourquoi on échange</b>Avantage absolu puis comparatif (Lectures 1 et 2).</div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>Comment on protège</b>Tarifs, quotas, anti-dumping (Lecture 3).</div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>Échange pur</b>Boîte d'Edgeworth, optimum de Pareto (Lecture 4).</div>
+    </div>
+  </figure>
+  <div class="box exam"><span class="tag">Format de l'examen (d'après le sujet 2025-2026)</span>
+    <ul>
+      <li><strong>10 QCM</strong>, une seule bonne réponse par question.</li>
+      <li><strong>+2 points</strong> par bonne réponse, <strong>0</strong> si faux : pas de points négatifs, donc <strong>ne laisse jamais une case vide</strong>.</li>
+      <li>Beaucoup de propositions (de A à L, parfois M), avec des réponses combinées du type « Only A and B are correct » ou « Both B. and F. are correct ».</li>
+      <li>Environ la moitié des questions sont des <strong>calculs</strong> : gain ou perte de bien-être d'un tarif, coût d'opportunité, intervalle des termes de l'échange, tarif nécessaire pour atteindre une production, équilibre de Nash, modèle H-O.</li>
+      <li>Le sujet est en anglais : le <a href="#glossaire">glossaire</a> donne tous les mots-clés.</li>
+    </ul>
+  </div>
+  <div class="box def"><span class="tag">Les encadrés</span>
+    <p><strong>Définition</strong> sur fond crème orangé, <strong>Exemple</strong> avec une barre vert sarcelle, <strong>Piège</strong> en pointillés rouges, <strong>À retenir</strong> avec le bandeau dégradé, et <strong>Examen</strong> pour ce qui tombe au partiel.</p>
+  </div>
+</section>
+
+<!-- ============ PARTIE 0 ============ -->
+<section class="part" id="p1">
+  <div class="part-head"><span class="part-num">0</span><div><div class="eyebrow">Session 0 · Review of microeconomics</div><h2>Les outils de base : marché, offre, demande, surplus</h2></div></div>
+  <p>Avant de parler de pays, il faut comprendre un marché. Tout le cours réutilise ces outils : quand le Japon importe du riz, on dessine simplement l'offre et la demande de riz au Japon.</p>
+
+  <h3>Le marché concurrentiel</h3>
+  <div class="box def"><span class="tag">Définition</span>
+    <p>Un <strong>marché</strong> (<span class="en">market</span>) est le lieu où des agents échangent un bien ou un service, avec les règles de ces échanges. Le <strong>prix de marché</strong> est le prix auquel se font les transactions.</p>
+    <p>En <strong>concurrence parfaite</strong> : l'échange est volontaire, aucun acheteur ou vendeur n'est assez gros pour influencer le prix, et tous vendent un bien identique. Chacun est donc <strong>preneur de prix</strong> (<span class="en">price-taker</span>).</p>
+  </div>
+  <p>Le prix sert de <strong>signal</strong> : pour l'acheteur, il se compare à la satisfaction qu'il tire du bien ; pour le vendeur, il indique si produire est rentable.</p>
+
+  <h3>La demande</h3>
+  <div class="grid2">
+    <div class="card"><h4>Quantité demandée</h4><p>Ce que les acheteurs veulent acheter à un prix donné. Le <strong>barème de demande</strong> (<span class="en">demand schedule</span>) est le tableau prix/quantité ; la <strong>courbe de demande</strong> en est le dessin.</p></div>
+    <div class="card"><h4>Disposition à payer (WTP)</h4><p>Le prix maximum qu'un acheteur accepte pour une unité de plus. Elle baisse à chaque unité : c'est le <strong>bénéfice marginal décroissant</strong>.</p></div>
+  </div>
+  <div class="box key"><span class="tag">Loi de la demande</span>
+    <p>Quand le prix monte, la quantité demandée baisse : la courbe de demande est <strong>décroissante</strong>. La demande du marché est la <strong>somme horizontale</strong> des demandes individuelles.</p>
+  </div>
+  <div class="pm">
+    <div class="plus"><h4>Mouvement LE LONG de la courbe</h4><ul><li>Seule cause : le <strong>prix du bien lui-même</strong> change.</li><li>On parle de variation de la <em>quantité demandée</em>.</li></ul></div>
+    <div class="minus"><h4>DÉPLACEMENT de la courbe</h4><ul><li>Goûts et préférences</li><li>Revenu et richesse (bien <strong>normal</strong> : on en achète plus quand le revenu monte ; bien <strong>inférieur</strong> : moins)</li><li>Prix des biens liés : <strong>substituts</strong> (café/thé), <strong>compléments</strong> (imprimante/encre)</li><li>Nombre d'acheteurs, anticipations</li></ul></div>
+  </div>
+
+  <h3>L'élasticité</h3>
+  <p>L'<strong>élasticité-prix de la demande</strong> mesure à quel point la quantité demandée réagit au prix : % de variation de la quantité ÷ % de variation du prix. Il existe aussi l'élasticité-revenu et l'élasticité-prix croisée.</p>
+  <div class="grid2">
+    <div class="card"><h4>Parfaitement élastique</h4><p>Courbe horizontale : la moindre hausse de prix fait tomber la demande à zéro.</p></div>
+    <div class="card"><h4>Élasticité constante</h4><p>La sensibilité reste la même partout sur la courbe.</p></div>
+    <div class="card"><h4>Parfaitement inélastique</h4><p>Courbe verticale : on achète la même quantité quel que soit le prix (médicament vital).</p></div>
+  </div>
+  <div class="box ex"><span class="tag">La question du cours</span>
+    <p><strong>Pourquoi un billet d'avion de dernière minute est très cher, alors qu'une place de concert de dernière minute (sur TicketSwap) est souvent bradée ?</strong></p>
+    <p>Celui qui achète un billet d'avion la veille est souvent un voyageur d'affaires ou quelqu'un qui doit absolument partir : sa demande est <strong>inélastique</strong>, la compagnie peut monter le prix. La place de concert, elle, ne vaut plus rien après le concert : le vendeur doit s'en débarrasser, et l'acheteur de dernière minute a beaucoup d'autres choix de sortie (demande <strong>élastique</strong>). Le prix baisse.</p>
+  </div>
+
+  <h3>L'offre</h3>
+  <div class="grid2">
+    <div class="card"><h4>Quantité offerte</h4><p>Ce que les vendeurs veulent vendre à un prix donné. <strong>Loi de l'offre</strong> : la courbe est <strong>croissante</strong>.</p></div>
+    <div class="card"><h4>Disposition à accepter (WTA)</h4><p>Le prix minimum pour lequel un vendeur accepte de vendre une unité de plus. Elle monte car le <strong>coût marginal est croissant</strong> : chaque unité coûte plus cher à produire que la précédente.</p></div>
+  </div>
+  <p>Ce qui <strong>déplace</strong> l'offre : le prix des intrants (s'ils montent, l'offre baisse, la courbe va à gauche), la technologie (un progrès la pousse à droite), le nombre de vendeurs, leurs anticipations. Un changement du prix du bien lui-même fait seulement <strong>glisser le long</strong> de la courbe.</p>
+
+  <h3>Surplus et bien-être</h3>
+  <div class="box def"><span class="tag">Définitions</span>
+    <p><strong>Surplus du consommateur</strong> (<span class="en">consumer surplus, CS</span>) = disposition à payer − prix payé. Exemple du cours : WTP = 100, P = 50, son surplus est 50. Sur un graphique, c'est l'aire <strong>sous la demande et au-dessus du prix</strong>.</p>
+    <p><strong>Surplus du producteur</strong> (<span class="en">producer surplus, PS</span>) = prix reçu − disposition à accepter. C'est l'aire <strong>au-dessus de l'offre et sous le prix</strong>.</p>
+    <p><strong>Bien-être social</strong> (<span class="en">social welfare, total surplus</span>) = CS + PS (+ recettes de l'État s'il y en a).</p>
+  </div>
+  <div class="box ex"><span class="tag">Exemple chiffré</span>
+    <p>Demande : P = 10 − Q. Offre : P = Q. L'équilibre est là où les deux se croisent : 10 − Q = Q, donc <strong>Q* = 5 et P* = 5</strong>.</p>
+    <p>CS = triangle entre la demande et le prix = ½ × 5 × (10 − 5) = <strong>12,5</strong>. PS = triangle entre le prix et l'offre = ½ × 5 × (5 − 0) = <strong>12,5</strong>. Bien-être = <strong>25</strong>.</p>
+  </div>
+
+  <h3>Quand l'État intervient : prix plafond, prix plancher, taxe</h3>
+  <div class="tbl"><table>
+    <tr><th>Mesure</th><th>Ce que c'est</th><th>Conséquence</th></tr>
+    <tr><td><strong>Prix plafond</strong> <span class="en">(price ceiling)</span></td><td>Prix maximum fixé <em>sous</em> l'équilibre (loyers encadrés)</td><td><strong>Pénurie</strong> (<span class="en">excess demand, shortage</span>) : on demande plus qu'on n'offre</td></tr>
+    <tr><td><strong>Prix plancher</strong> <span class="en">(price floor)</span></td><td>Prix minimum fixé <em>au-dessus</em> de l'équilibre (salaire minimum)</td><td><strong>Excédent</strong> (<span class="en">excess supply, surplus</span>) : on offre plus qu'on ne demande</td></tr>
+    <tr><td><strong>Taxe unitaire</strong> <span class="en">(unit tax)</span></td><td>Un montant fixe par unité vendue</td><td>Le prix payé monte, le prix reçu baisse, la quantité diminue</td></tr>
+  </table></div>
+  <div class="box def"><span class="tag">Perte sèche</span>
+    <p>La <strong>perte sèche</strong> (<span class="en">deadweight loss, DWL</span>) est la baisse du surplus total causée par une distorsion du marché : des échanges qui auraient profité aux deux côtés n'ont plus lieu. Sur un graphique, c'est toujours un <strong>triangle</strong>. C'est exactement ce qu'on calculera pour les droits de douane.</p>
+  </div>
+  <div class="box key"><span class="tag">Incidence fiscale</span>
+    <p>L'<strong>incidence fiscale</strong> (<span class="en">tax incidence</span>) dit qui supporte vraiment la taxe. Résultat clé du cours : <strong>taxer le vendeur ou taxer l'acheteur donne exactement le même résultat</strong> (même quantité, même perte sèche, même partage de la charge). Taxer le vendeur déplace l'offre vers le haut ; taxer l'acheteur, c'est comme lui retirer du revenu, donc la demande se déplace vers la gauche.</p>
+  </div>
+  <div class="box def"><span class="tag">Externalités</span>
+    <p>Une <strong>externalité</strong> existe quand une activité a un coût (pollution) ou un bénéfice qui retombe sur quelqu'un d'extérieur à l'échange. Le marché n'est plus efficace : le coût marginal privé est différent du coût marginal social, et dans le cas d'une pollution on produit trop (Q social &lt; Q*). Le cours précise qu'on ne vise pas « zéro pollution » : un peu de pollution est acceptable si l'éliminer complètement coûte trop cher.</p>
+  </div>
+</section>
+
+<section class="part" id="p2">
+  <div class="part-head"><span class="part-num">0<small style="font-size:.5em">bis</small></span><div><div class="eyebrow">Session 0 · Game theory</div><h2>La théorie des jeux : quand mon gain dépend de ce que fait l'autre</h2></div></div>
+  <p>La théorie des jeux étudie les <strong>interactions stratégiques</strong>. Elle sert en commerce international pour comprendre les <strong>guerres commerciales</strong> : si les États-Unis taxent la Chine, la Chine répond… L'examen 2025-2026 avait une question là-dessus.</p>
+  <div class="box def"><span class="tag">Les 3 éléments d'un jeu</span>
+    <ul><li>Des <strong>joueurs</strong> (<span class="en">players</span>)</li><li>Des <strong>stratégies</strong> (actions possibles)</li><li>Des <strong>gains</strong> (<span class="en">payoffs</span>) qui dépendent des stratégies de tous</li></ul>
+    <p>Un jeu simultané se présente dans une <strong>matrice</strong> ; un jeu séquentiel dans un <strong>arbre</strong>.</p>
+  </div>
+
+  <h3>Le dilemme du prisonnier</h3>
+  <p>Toi et ta complice Josie êtes arrêtées. Si vous avouez toutes les deux : 5 ans chacune. Si tu avoues et pas elle : tu sors libre, elle prend 10 ans (et inversement). Si personne n'avoue : 2 ans chacune.</p>
+  <div class="tbl matrix"><table>
+    <tr><th>Toi \ Josie</th><th>Josie avoue</th><th>Josie se tait</th></tr>
+    <tr><th>Tu avoues</th><td class="win">5 ans, 5 ans</td><td>0, 10 ans</td></tr>
+    <tr><th>Tu te tais</th><td>10 ans, 0</td><td>2 ans, 2 ans</td></tr>
+  </table></div>
+  <ol class="steps">
+    <li><strong>Meilleure réponse</strong> (<span class="en">best response</span>) : la meilleure stratégie d'un joueur, en prenant celle de l'autre comme donnée. Si Josie avoue, tu préfères avouer (5 &lt; 10 ans). Si Josie se tait, tu préfères avouer (0 &lt; 2 ans).</li>
+    <li><strong>Stratégie dominante</strong> : une stratégie qui est la meilleure réponse <em>quoi que fasse l'autre</em>. Ici, avouer est dominant pour toi, et pour Josie (même raisonnement).</li>
+    <li><strong>Équilibre en stratégies dominantes</strong> : (avouer, avouer), 5 ans chacune.</li>
+    <li><strong>Le dilemme</strong> : se taire ensemble (2 ans) serait mieux pour les deux, mais chacune a intérêt à trahir. Coopération contre compétition : c'est la forme mathématique du problème du <strong>passager clandestin</strong> (<span class="en">free rider</span>).</li>
+  </ol>
+  <div class="box ex"><span class="tag">Le jeu de la publicité (cours)</span>
+    <p>En 1970, le Congrès américain voulait interdire la publicité pour les cigarettes à la télévision. Aucun cigarettier n'est venu protester. Pourquoi ? Chaque marque avait pour stratégie dominante de faire de la pub (sinon elle perd des clients au profit de l'autre), alors qu'elles gagneraient toutes plus sans pub (budget économisé). L'interdiction les sortait du dilemme du prisonnier : elle leur imposait la coopération qu'elles n'arrivaient pas à tenir seules.</p>
+  </div>
+
+  <h3>L'équilibre de Nash</h3>
+  <div class="box key"><span class="tag">À retenir</span>
+    <ul>
+      <li><strong>Équilibre de Nash</strong> : situation où <strong>chaque stratégie est une meilleure réponse aux stratégies des autres</strong>. Personne n'a intérêt à changer seul.</li>
+      <li>Un équilibre en stratégies dominantes est toujours un équilibre de Nash (l'inverse n'est pas vrai).</li>
+      <li>Hypothèses : chaque joueur comprend le jeu et ses gains, et sait que les autres le comprennent aussi.</li>
+      <li><strong>Méthode</strong> : pour chaque joueur, souligne sa meilleure réponse à chaque stratégie de l'autre. La case où les deux gains sont soulignés est un Nash. Il peut y en avoir <strong>zéro, un ou plusieurs</strong>.</li>
+    </ul>
+  </div>
+  <div class="box ex"><span class="tag">Guerre tarifaire en dilemme du prisonnier</span>
+    <p>Deux pays choisissent un tarif élevé (protéger) ou bas (libre-échange). Gains en milliards (pays A, pays B) :</p>
+    <div class="tbl matrix"><table>
+      <tr><th>A \ B</th><th>B : tarif élevé</th><th>B : tarif bas</th></tr>
+      <tr><th>A : tarif élevé</th><td class="win">2 , 2</td><td>5 , 1</td></tr>
+      <tr><th>A : tarif bas</th><td>1 , 5</td><td>4 , 4</td></tr>
+    </table></div>
+    <p>Pour A : si B est élevé, élevé rapporte 2 &gt; 1 ; si B est bas, élevé rapporte 5 &gt; 4. Élevé est dominant pour A, et pour B par symétrie. <strong>Nash = (élevé, élevé)</strong> avec 2 chacun, alors que (bas, bas) donnerait 4 chacun : c'est un dilemme du prisonnier. D'où l'utilité de l'OMC, qui organise la coopération.</p>
+  </div>
+  <div class="box trap"><span class="tag">Piège</span>
+    <p>Tous les jeux de tarifs ne sont pas des dilemmes du prisonnier ! À l'examen 2025-2026, les gains étaient tels que le <strong>tarif bas</strong> était dominant pour les deux pays : l'équilibre de Nash (bas, bas) était aussi le meilleur résultat, donc les pays n'avaient pas besoin de coopérer. Toujours <strong>vérifier les chiffres</strong> case par case (voir le <a href="#exam">corrigé</a>).</p>
+  </div>
+
+  <h3>Les jeux séquentiels et l'induction à rebours</h3>
+  <p>Quand un joueur joue <strong>après</strong> l'autre en ayant vu son choix, on dessine un <strong>arbre</strong> (<span class="en">extensive-form game</span>).</p>
+  <div class="box def"><span class="tag">Induction à rebours</span>
+    <p>L'<strong>induction à rebours</strong> (<span class="en">backward induction</span>) consiste à résoudre le jeu <strong>en partant de la fin</strong> : on regarde ce que choisira le dernier joueur dans chaque cas, puis on remonte l'arbre, sachant ce que fera le suivant.</p>
+  </div>
+  <div class="box ex"><span class="tag">Exemples du cours</span>
+    <p><strong>Work or surf</strong> : joué simultanément, ce jeu de coordination a deux équilibres de Nash. Joué en séquence, l'induction à rebours n'en laisse qu'un, (surf, work), le plus favorable au premier joueur : c'est l'<strong>avantage du premier joueur</strong> (<span class="en">first-mover advantage</span>).</p>
+    <p><strong>Les deux armées et l'île</strong> : l'armée 2 envahit une île reliée aux deux pays par des ponts. Si elle <strong>brûle son propre pont</strong>, elle ne peut plus battre en retraite : elle se battra forcément si l'armée 1 attaque. L'armée 1, qui le sait, préfère ne pas attaquer. Se priver d'options peut rendre une menace <strong>crédible</strong> et changer l'équilibre.</p>
+  </div>
+</section>
+
+<!-- ============ PARTIE 1 ============ -->
+<section class="part" id="p3">
+  <div class="part-head"><span class="part-num">1</span><div><div class="eyebrow">Lecture 1 · Introduction</div><h2>Le commerce international et la finance internationale</h2></div></div>
+  <div class="box def"><span class="tag">Définition</span>
+    <p>Le <strong>commerce international</strong> est l'échange de <strong>biens</strong> (marchandises) et de <strong>services</strong> entre les pays.</p>
+    <ul>
+      <li><strong>Bien</strong> : tangible et stockable, « quelque chose que tu peux te faire tomber sur le pied » (un iPhone, du riz).</li>
+      <li><strong>Service</strong> : intangible et non stockable (une consultation, un transport, un cours en ligne).</li>
+    </ul>
+    <p>Les services représentent environ <strong>un cinquième (20 %)</strong> du commerce mondial, et les deux sont souvent liés (on vend une machine + sa maintenance).</p>
+  </div>
+  <h3>Pourquoi le commerce mondial a explosé</h3>
+  <p>Depuis 1970, les exportations mondiales ont augmenté beaucoup plus vite que le PIB mondial. Quatre raisons :</p>
+  <div class="grid2">
+    <div class="card"><h4>Transport</h4><p>La révolution du <strong>conteneur</strong> : charger un navire prend des heures au lieu de semaines.</p></div>
+    <div class="card"><h4>Technologie</h4><p>Les <strong>TIC</strong> (technologies de l'information et de la communication) permettent de piloter une production à l'autre bout du monde.</p></div>
+    <div class="card"><h4>Tarifs</h4><p>La <strong>libéralisation commerciale</strong> : baisse des droits de douane (GATT puis OMC).</p></div>
+    <div class="card"><h4>Entrée de la Chine</h4><p>Réformes de marché à partir de la fin des années 1970, puis adhésion à l'<strong>OMC en 2001</strong>.</p></div>
+  </div>
+  <div class="box trap"><span class="tag">Piège</span>
+    <p>On croit souvent que la Chine est le pays le plus « ouvert ». En réalité, ses exportations en % du PIB sont <strong>nettement plus faibles que celles de l'Allemagne</strong>, et elles <strong>baissent depuis 2006</strong> (son énorme marché intérieur pèse de plus en plus).</p>
+  </div>
+  <p>Les notions clés de la matière : <strong>avantage comparatif</strong>, <strong>Organisation mondiale du commerce (OMC / WTO)</strong>, <strong>accords commerciaux préférentiels</strong> (<span class="en">preferential trade agreements</span>, comme l'UE ou l'accord UE-Mercosur).</p>
+
+  <h3>La finance internationale</h3>
+  <p>C'est l'échange d'<strong>actifs</strong> entre pays : devises, actions, obligations d'État, obligations d'entreprise (<span class="en">commercial paper</span>), immobilier. Les transactions sur le marché des changes sont <strong>bien plus importantes</strong> que les échanges commerciaux.</p>
+  <ul>
+    <li>Les flux de capitaux peuvent être <strong>déstabilisants</strong> : crises de balance des paiements, crises financières.</li>
+    <li>La <strong>fuite des capitaux</strong> (<span class="en">capital flight</span>) : les investisseurs vendent les actifs d'un pays pour placer leur argent ailleurs.</li>
+    <li>La <strong>crise financière mondiale de 2008</strong> est partie du marché immobilier américain (subprimes), mais c'est l'<strong>Europe</strong> qui en a subi les effets les plus graves.</li>
+  </ul>
+  <div class="box key"><span class="tag">À retenir</span>
+    <p>Les trois éléments de tous les modèles du cours : des <strong>pays</strong>, des <strong>secteurs</strong> (riz, motos…) et des <strong>facteurs de production</strong> (travail, terre, capital).</p>
+  </div>
+</section>
+
+<!-- ============ PARTIE 2 ============ -->
+<section class="part" id="p4">
+  <div class="part-head"><span class="part-num">2</span><div><div class="eyebrow">Lecture 1 · Absolute advantage</div><h2>L'avantage absolu : produire avec moins</h2></div></div>
+  <h3>D'où vient l'idée</h3>
+  <p>Avant Adam Smith régnait le <strong>mercantilisme</strong> : un pays s'enrichit en exportant beaucoup et en important peu, pour accumuler de l'or. Le commerce serait un jeu à somme nulle : ce que je gagne, tu le perds. En <strong>1776</strong>, dans <span class="en">La Richesse des nations</span> (<span class="en">The Wealth of Nations</span>), Smith répond avec l'<strong>avantage absolu</strong> : chaque pays a intérêt à acheter aux autres ce qu'ils produisent plus efficacement.</p>
+  <div class="box def"><span class="tag">Définition</span>
+    <p>Un pays a un <strong>avantage absolu</strong> dans un bien s'il le produit avec <strong>moins de ressources réelles (d'intrants)</strong> qu'un autre pays.</p>
+    <p class="formula">a<sub>R</sub><sup>V</sup> &lt; a<sub>R</sub><sup>J</sup> ⟹ le Vietnam a un avantage absolu dans le riz</p>
+    <p class="simple">a<sub>R</sub> = quantité de travail nécessaire pour produire 1 unité de riz (le « coefficient technique »). Moins il en faut, plus on est efficace.</p>
+  </div>
+
+  <h3>L'exemple du fichier Excel : Allemagne et États-Unis</h3>
+  <p>Unités de travail nécessaires pour produire <strong>1</strong> unité :</p>
+  <div class="tbl"><table>
+    <tr><th></th><th class="num">1 voiture</th><th class="num">1 téléphone</th></tr>
+    <tr><td>Allemagne</td><td class="num win">20</td><td class="num">10</td></tr>
+    <tr><td>États-Unis</td><td class="num">30</td><td class="num win">5</td></tr>
+  </table></div>
+  <p>L'Allemagne a besoin de moins de travail pour une voiture (20 &lt; 30) : <strong>avantage absolu dans les voitures</strong>. Les États-Unis pour un téléphone (5 &lt; 10) : <strong>avantage absolu dans les téléphones</strong>.</p>
+  <div class="grid2">
+    <div class="card"><h4>Autarcie : chacun fait 50 de chaque</h4>
+      <p>Allemagne : 50 × 20 + 50 × 10 = 1 000 + 500 = <strong>1 500</strong></p>
+      <p>États-Unis : 50 × 30 + 50 × 5 = 1 500 + 250 = <strong>1 750</strong></p>
+      <p>Total pour 100 voitures + 100 téléphones : <strong>3 250 unités de travail</strong></p></div>
+    <div class="card"><h4>Spécialisation et échange</h4>
+      <p>Allemagne : 100 voitures × 20 = <strong>2 000</strong></p>
+      <p>États-Unis : 100 téléphones × 5 = <strong>500</strong></p>
+      <p>Total pour la même production : <strong>2 500 unités de travail</strong></p></div>
+  </div>
+  <div class="box key"><span class="tag">À retenir</span>
+    <p>En se spécialisant chacun dans son avantage absolu, les deux pays produisent exactement la même chose avec <strong>750 unités de travail en moins</strong> (−23 %). Ces ressources libérées peuvent produire autre chose : c'est le <strong>gain à l'échange</strong>.</p>
+  </div>
+
+  <h3>L'avantage absolu avec l'offre et la demande</h3>
+  <p>Le cours prend le riz au Vietnam et au Japon. On suppose la <strong>même demande</strong> dans les deux pays, mais le Vietnam a une meilleure technologie : son offre est plus à droite (à chaque prix, il produit plus).</p>
+  <div class="box def"><span class="tag">Autarcie et prix d'autarcie</span>
+    <p>L'<strong>autarcie</strong> (<span class="en">autarky</span>) est la situation d'un pays sans aucune relation économique avec l'extérieur. Le prix qui s'y forme est le <strong>prix d'autarcie</strong>. Ici : <strong>P<sub>V</sub> &lt; P<sub>J</sub></strong>, le riz est moins cher au Vietnam.</p>
+  </div>
+  <p>Si les deux pays s'ouvrent, un <strong>prix mondial</strong> unique s'installe, forcément <strong>entre</strong> les deux prix d'autarcie :</p>
+  <p class="formula">P<sub>V</sub> &lt; P<sub>W</sub> &lt; P<sub>J</sub></p>
+  <figure>
+    <div class="scroll">
+    <svg viewBox="0 0 560 300" role="img" aria-label="Deux graphiques côte à côte. Vietnam : au prix mondial, l'offre dépasse la demande, l'écart est l'exportation. Japon : au prix mondial, la demande dépasse l'offre, l'écart est l'importation.">
+      <!-- Vietnam -->
+      <text x="150" y="22" text-anchor="middle" class="big">Vietnam (exporte)</text>
+      <path class="ax" d="M50 36 V260 H260"/>
+      <text x="40" y="44" text-anchor="end" class="mut">P</text><text x="258" y="278" text-anchor="end" class="mut">Q riz</text>
+      <line class="dem" x1="50" y1="40" x2="250" y2="260"/>
+      <line class="sup" x1="50" y1="260" x2="250" y2="150"/>
+      <text x="254" y="158" class="b" style="fill:var(--teal)">S<tspan baseline-shift="sub" font-size="10">V</tspan></text>
+      <text x="226" y="248" class="b" style="fill:var(--or-deep)">D</text>
+      <line class="guide" x1="50" y1="186.7" x2="183.3" y2="186.7"/>
+      <circle class="dot" cx="183.3" cy="186.7" r="4"/>
+      <text x="44" y="190" text-anchor="end">P<tspan baseline-shift="sub" font-size="10">V</tspan></text>
+      <line class="pw" x1="50" y1="163.2" x2="255" y2="163.2"/>
+      <text x="44" y="167" text-anchor="end" style="fill:var(--hot)" class="b">P<tspan baseline-shift="sub" font-size="10">W</tspan></text>
+      <line x1="162" y1="120" x2="226" y2="120" stroke="var(--or)" stroke-width="3"/>
+      <path d="M162 120 l6 -4 v8 z M226 120 l-6 -4 v8 z" fill="var(--or)"/>
+      <line class="guide" x1="162" y1="120" x2="162" y2="163"/><line class="guide" x1="226" y1="120" x2="226" y2="163"/>
+      <text x="194" y="110" text-anchor="middle" class="b" style="fill:var(--or-deep)">Export E<tspan baseline-shift="sub" font-size="10">V</tspan></text>
+      <!-- Japon -->
+      <text x="420" y="22" text-anchor="middle" class="big">Japon (importe)</text>
+      <path class="ax" d="M320 36 V260 H530"/>
+      <text x="310" y="44" text-anchor="end" class="mut">P</text><text x="528" y="278" text-anchor="end" class="mut">Q riz</text>
+      <line class="dem" x1="320" y1="40" x2="520" y2="260"/>
+      <line class="sup" x1="320" y1="216" x2="480" y2="40"/>
+      <text x="484" y="54" class="b" style="fill:var(--teal)">S<tspan baseline-shift="sub" font-size="10">J</tspan></text>
+      <text x="496" y="248" class="b" style="fill:var(--or-deep)">D</text>
+      <line class="guide" x1="320" y1="128" x2="400" y2="128"/>
+      <circle class="dot" cx="400" cy="128" r="4"/>
+      <text x="314" y="132" text-anchor="end">P<tspan baseline-shift="sub" font-size="10">J</tspan></text>
+      <line class="pw" x1="320" y1="163.2" x2="525" y2="163.2"/>
+      <text x="314" y="167" text-anchor="end" style="fill:var(--hot)" class="b">P<tspan baseline-shift="sub" font-size="10">W</tspan></text>
+      <line x1="368" y1="182" x2="432" y2="182" stroke="var(--or)" stroke-width="3"/>
+      <path d="M368 182 l6 -4 v8 z M432 182 l-6 -4 v8 z" fill="var(--or)"/>
+      <text x="400" y="200" text-anchor="middle" class="b" style="fill:var(--or-deep)">Import Z<tspan baseline-shift="sub" font-size="10">J</tspan></text>
+      <text x="150" y="292" text-anchor="middle" class="mut">le prix monte : P<tspan baseline-shift="sub" font-size="9">V</tspan> → P<tspan baseline-shift="sub" font-size="9">W</tspan></text>
+      <text x="420" y="292" text-anchor="middle" class="mut">le prix baisse : P<tspan baseline-shift="sub" font-size="9">J</tspan> → P<tspan baseline-shift="sub" font-size="9">W</tspan></text>
+    </svg>
+    </div>
+    <figcaption>Au prix mondial P<sub>W</sub>, le Vietnam produit plus qu'il ne consomme : il exporte la différence (E<sub>V</sub>). Le Japon consomme plus qu'il ne produit : il importe la différence (Z<sub>J</sub>). À l'équilibre mondial, E<sub>V</sub> = Z<sub>J</sub>.</figcaption>
+  </figure>
+  <div class="box ex"><span class="tag">Pourquoi exportations = importations ?</span>
+    <p>Si le Vietnam exportait <em>moins</em> que ce que le Japon veut importer (E<sub>V</sub> &lt; Z<sub>J</sub>), il y aurait une <strong>pénurie</strong> sur le marché mondial : P<sub>W</sub> monterait, le Vietnam exporterait plus, le Japon importerait moins, jusqu'à l'égalité. Dans le cas inverse, P<sub>W</sub> baisse. Le prix mondial s'ajuste toujours pour que E<sub>V</sub> = Z<sub>J</sub>.</p>
+  </div>
+
+  <h3>Qui gagne, qui perd ? Les gains à l'échange</h3>
+  <p>Pour savoir si un pays a intérêt à quitter l'autarcie, on compare les surplus avant et après. Le graphique ci-dessous montre un <strong>pays importateur</strong> (le Japon pour le riz, ou les États-Unis pour les avocats comme à l'examen).</p>
+  <figure>
+    <div class="scroll">
+    <svg viewBox="0 0 520 320" role="img" aria-label="Pays importateur. Le prix passe de Po à Pw. Le trapèze Pw Po A B passe des producteurs aux consommateurs, le triangle A B C est le gain net.">
+      <path class="ax" d="M60 24 V300 H480"/>
+      <text x="50" y="32" text-anchor="end" class="mut">Prix</text><text x="478" y="316" text-anchor="end" class="mut">Quantité</text>
+      <polygon class="ftr" points="60,222 60,170 260,170 180,222"/>
+      <polygon class="fB" points="260,170 180,222 340,222"/>
+      <line class="dem" x1="60" y1="40" x2="460" y2="300"/>
+      <line class="sup" x1="60" y1="300" x2="440" y2="53"/>
+      <text x="446" y="56" class="b" style="fill:var(--teal)">S<tspan baseline-shift="sub" font-size="10">d</tspan></text>
+      <text x="428" y="272" class="b" style="fill:var(--or-deep)">D<tspan baseline-shift="sub" font-size="10">d</tspan></text>
+      <line class="guide" x1="60" y1="170" x2="260" y2="170"/>
+      <line class="guide" x1="260" y1="170" x2="260" y2="300"/>
+      <line class="guide" x1="180" y1="222" x2="180" y2="300"/>
+      <line class="guide" x1="340" y1="222" x2="340" y2="300"/>
+      <line class="pw" x1="60" y1="222" x2="470" y2="222"/>
+      <text x="474" y="226" style="fill:var(--hot)" class="b">S<tspan baseline-shift="sub" font-size="10">w</tspan></text>
+      <text x="52" y="174" text-anchor="end" class="b">P<tspan baseline-shift="sub" font-size="10">o</tspan></text>
+      <text x="52" y="226" text-anchor="end" class="b" style="fill:var(--hot)">P<tspan baseline-shift="sub" font-size="10">w</tspan></text>
+      <circle class="dot" cx="260" cy="170" r="4"/><text x="262" y="160" class="b">A</text>
+      <circle class="dot" cx="180" cy="222" r="4"/><text x="170" y="214" class="b">B</text>
+      <circle class="dot" cx="340" cy="222" r="4"/><text x="344" y="214" class="b">C</text>
+      <text x="64" y="44" class="b">D</text>
+      <text x="48" y="300" text-anchor="end" class="b">O</text>
+      <text x="180" y="316" text-anchor="middle" class="mut">Q<tspan baseline-shift="sub" font-size="9">s</tspan></text>
+      <text x="260" y="316" text-anchor="middle" class="mut">Q<tspan baseline-shift="sub" font-size="9">o</tspan></text>
+      <text x="340" y="316" text-anchor="middle" class="mut">Q<tspan baseline-shift="sub" font-size="9">d</tspan></text>
+      <text x="140" y="202" text-anchor="middle" style="font-size:12px">transfert</text>
+      <text x="262" y="210" text-anchor="middle" class="b" style="font-size:12px">gain net</text>
+      <line x1="180" y1="262" x2="340" y2="262" stroke="var(--or)" stroke-width="3"/>
+      <path d="M180 262 l6 -4 v8 z M340 262 l-6 -4 v8 z" fill="var(--or)"/>
+      <text x="260" y="256" text-anchor="middle" class="b" style="fill:var(--or-deep)">importations</text>
+    </svg>
+    </div>
+    <figcaption>Le prix passe de P<sub>o</sub> (autarcie, point A) à P<sub>w</sub> (prix mondial). Lettres identiques à celles du graphique de l'examen 2025-2026.</figcaption>
+  </figure>
+  <div class="tbl"><table>
+    <tr><th>Avec ce graphique</th><th>Avant (autarcie)</th><th>Après (libre-échange)</th><th>Variation</th></tr>
+    <tr><td>Surplus du consommateur</td><td>Triangle D-P<sub>o</sub>-A</td><td>Triangle D-P<sub>w</sub>-C</td><td><strong>+ P<sub>w</sub>P<sub>o</sub>AC</strong> (le trapèze)</td></tr>
+    <tr><td>Surplus du producteur</td><td>Triangle P<sub>o</sub>-A-O</td><td>Triangle P<sub>w</sub>-B-O</td><td><strong>− P<sub>w</sub>P<sub>o</sub>AB</strong> (il <em>tombe à</em> P<sub>w</sub>BO)</td></tr>
+    <tr class="total"><td>Bien-être total</td><td></td><td></td><td><strong>+ triangle ABC</strong></td></tr>
+  </table></div>
+  <div class="box key"><span class="tag">Le raisonnement du cours (lettres du manuel)</span>
+    <ul>
+      <li><strong>Vietnam (exportateur)</strong> : le prix monte. Les producteurs gagnent A + B, les consommateurs perdent A. Gain net : <strong>B</strong>.</li>
+      <li><strong>Japon (importateur)</strong> : le prix baisse. Les consommateurs gagnent C + D, les producteurs perdent C. Gain net : <strong>D</strong>.</li>
+      <li>Passer de l'autarcie au commerce augmente le bien-être net <strong>des deux pays</strong> : le commerce n'est pas « gagnant-perdant ».</li>
+    </ul>
+  </div>
+
+  <h3>Les limites de l'avantage absolu</h3>
+  <div class="pm">
+    <div class="minus"><h4>Limite 1 : un pays sans avantage</h4><ul><li>Selon cette théorie, un pays moins efficace en tout n'aurait <strong>rien à exporter</strong>.</li><li>C'est peu réaliste, et c'est ce que l'avantage comparatif corrige.</li><li>L'avantage absolu n'est <strong>ni nécessaire ni suffisant</strong> pour exporter.</li></ul></div>
+    <div class="minus"><h4>Limite 2 : il y a des perdants</h4><ul><li>Le pays dans son ensemble gagne, <strong>pas chaque individu</strong>.</li><li>Les <strong>producteurs de riz japonais</strong> perdent (le prix baisse).</li><li>Les <strong>consommateurs de riz vietnamiens</strong> perdent (le prix monte).</li></ul></div>
+  </div>
+</section>
+
+<!-- ============ PARTIE 3 ============ -->
+<section class="part" id="p5">
+  <div class="part-head"><span class="part-num">3</span><div><div class="eyebrow">Lecture 2 · Comparative advantage</div><h2>L'avantage comparatif : le concept central du cours</h2></div></div>
+  <p>Le revenu des Vietnamiens augmente, ils veulent des motos. On met donc <strong>deux biens</strong> face à face (riz et motos) pour comprendre comment on choisit ce qu'on produit.</p>
+
+  <h3>Le coût d'opportunité</h3>
+  <div class="box def"><span class="tag">Définition</span>
+    <p>Le <strong>coût d'opportunité</strong> d'un bien, c'est <strong>ce à quoi on renonce</strong> pour le produire. Si une heure de travail sert à faire une moto, elle ne sert pas à faire du riz : le vrai coût de la moto, c'est le riz qu'on n'a pas produit.</p>
+  </div>
+  <div class="box ex"><span class="tag">Exemple de la vie</span>
+    <p>Une avocate tape son courrier deux fois plus vite que son assistant. Elle a l'avantage absolu en dactylo ! Mais chaque heure passée à taper, c'est une heure de plaidoirie à 300 € perdue. Son coût d'opportunité de la dactylo est énorme : elle a intérêt à laisser l'assistant taper et à plaider. C'est l'avantage comparatif.</p>
+  </div>
+
+  <h3>La frontière des possibilités de production (FPP)</h3>
+  <div class="box def"><span class="tag">Définition</span>
+    <p>La <strong>FPP</strong> (<span class="en">production possibilities frontier, PPF</span>) montre toutes les combinaisons de deux biens qu'un pays peut produire avec ses ressources et sa technologie.</p>
+    <ul>
+      <li>Point <strong>sur</strong> la FPP : plein emploi des ressources.</li>
+      <li>Point <strong>à l'intérieur</strong> : réalisable, mais des ressources sont inemployées (chômage).</li>
+      <li>Point <strong>à l'extérieur</strong> : impossible à produire seul.</li>
+    </ul>
+    <p>La <strong>pente</strong> de la FPP donne le <strong>coût d'opportunité du bien en abscisse</strong> (axe horizontal).</p>
+  </div>
+  <figure>
+    <div class="scroll">
+    <svg viewBox="0 0 520 330" role="img" aria-label="FPP de deux pays. Pays A peut produire 20 vins ou 10 fromages ; pays B 10 vins ou 20 fromages. La droite de prix mondial passe au-delà de la FPP de A.">
+      <path class="ax" d="M60 24 V290 H340"/>
+      <text x="66" y="20" class="mut">Fromage</text><text x="338" y="308" text-anchor="end" class="mut">Vin</text>
+      <line x1="300" y1="290" x2="60" y2="170" stroke="var(--or)" stroke-width="3.5"/>
+      <line x1="180" y1="290" x2="60" y2="50" stroke="var(--teal)" stroke-width="3.5"/>
+      <line x1="300" y1="290" x2="60" y2="50" class="pw"/>
+      <text x="52" y="174" text-anchor="end">10</text><text x="52" y="54" text-anchor="end">20</text>
+      <text x="180" y="306" text-anchor="middle">10</text><text x="300" y="306" text-anchor="middle">20</text>
+      <text x="200" y="246" class="b" style="fill:var(--or-deep)">FPP de A</text>
+      <text x="112" y="140" class="b" style="fill:var(--teal)">FPP de B</text>
+      <circle class="dot" cx="300" cy="290" r="4"/>
+            <text x="258" y="96" style="fill:var(--hot);font-size:12px" class="b">prix mondial :</text><text x="258" y="112" style="fill:var(--hot);font-size:12px" class="b">1 vin = 1 fromage</text>
+      <text x="360" y="60" class="big">Pays A</text>
+      <text x="360" y="80">20 vins OU 10 fromages</text>
+      <text x="360" y="100">1 vin coûte <tspan class="b">0,5 fromage</tspan></text>
+      <text x="360" y="150" class="big">Pays B</text>
+      <text x="360" y="170">10 vins OU 20 fromages</text>
+      <text x="360" y="190">1 vin coûte <tspan class="b">2 fromages</tspan></text>
+      <text x="360" y="236" class="mut">A : avantage comparatif</text>
+      <text x="360" y="254" class="mut">dans le vin,</text>
+      <text x="360" y="272" class="mut">B dans le fromage</text>
+    </svg>
+    </div>
+    <figcaption>Exemple de l'examen 2025-2026 (question 8). En se spécialisant et en échangeant au prix mondial (ligne pointillée), A peut consommer au-delà de sa propre FPP.</figcaption>
+  </figure>
+
+  <h3>L'avantage comparatif</h3>
+  <div class="box key"><span class="tag">À retenir</span>
+    <ul>
+      <li>Un pays a un <strong>avantage comparatif</strong> dans le bien qu'il produit avec le <strong>coût d'opportunité le plus faible</strong>.</li>
+      <li>En autarcie, avec plein emploi, maximisation du profit et concurrence parfaite, le coût d'opportunité est égal au <strong>prix relatif</strong> : (P<sub>R</sub>/P<sub>M</sub>)<sup>V</sup> &lt; (P<sub>R</sub>/P<sub>M</sub>)<sup>J</sup> veut dire que le riz est relativement moins cher au Vietnam.</li>
+      <li>L'avantage absolu compare <strong>2 prix</strong> ; l'avantage comparatif en compare <strong>4</strong> (deux biens, deux pays).</li>
+      <li>Un pays peut avoir un avantage comparatif dans un bien où il a un <strong>désavantage absolu</strong>. Tout pays a donc toujours quelque chose à exporter.</li>
+      <li>C'est le concept le plus central de l'économie internationale (modèle de <strong>Ricardo</strong>).</li>
+    </ul>
+  </div>
+
+  <h3>L'exemple du fichier Excel : Mexique et États-Unis</h3>
+  <p>Unités de travail nécessaires pour produire 1 unité :</p>
+  <div class="tbl"><table>
+    <tr><th></th><th class="num">1 ordinateur</th><th class="num">1 chemise</th></tr>
+    <tr><td>Mexique</td><td class="num">12</td><td class="num">2</td></tr>
+    <tr><td>États-Unis</td><td class="num">1</td><td class="num">1</td></tr>
+  </table></div>
+  <p>Les États-Unis ont l'<strong>avantage absolu dans les deux biens</strong> (1 &lt; 12 et 1 &lt; 2). Selon Smith, le Mexique n'aurait rien à vendre. Calculons les coûts d'opportunité :</p>
+  <div class="tbl"><table>
+    <tr><th></th><th>Coût d'opportunité d'1 ordinateur</th><th>Coût d'opportunité d'1 chemise</th></tr>
+    <tr><td>Mexique</td><td>12 ÷ 2 = <strong>6 chemises</strong></td><td class="win">2 ÷ 12 = <strong>1/6 ordinateur</strong></td></tr>
+    <tr><td>États-Unis</td><td class="win">1 ÷ 1 = <strong>1 chemise</strong></td><td>1 ÷ 1 = <strong>1 ordinateur</strong></td></tr>
+  </table></div>
+  <p>Les États-Unis renoncent à moins pour un ordinateur (1 chemise contre 6) : <strong>avantage comparatif dans les ordinateurs</strong>. Le Mexique renonce à moins pour une chemise (1/6 d'ordinateur contre 1) : <strong>avantage comparatif dans les chemises</strong>, alors qu'il a un désavantage absolu.</p>
+  <div class="box ex"><span class="tag">Les chiffres de l'Excel</span>
+    <p>Main-d'œuvre : Mexique <strong>700</strong> unités, États-Unis <strong>600</strong>.</p>
+    <div class="tbl"><table>
+      <tr><th>Situation</th><th class="num">Ordinateurs</th><th class="num">Chemises</th></tr>
+      <tr><td>Autarcie : le Mexique fait 50 + 50 (50 × 12 + 50 × 2 = 700), les É.-U. 300 + 300</td><td class="num">350</td><td class="num">350</td></tr>
+      <tr><td>Spécialisation totale : le Mexique fait 700 ÷ 2 = 350 chemises, les É.-U. 600 ordinateurs</td><td class="num">600</td><td class="num">350</td></tr>
+      <tr class="total"><td>Spécialisation partielle : le Mexique fait 350 chemises, les É.-U. 500 ordinateurs + 100 chemises</td><td class="num">500</td><td class="num">450</td></tr>
+    </table></div>
+    <p>Avec la spécialisation partielle, le monde a <strong>plus des deux biens</strong> (+150 ordinateurs, +100 chemises) avec exactement les mêmes travailleurs.</p>
+  </div>
+
+  <h3>Le passage au commerce</h3>
+  <ul>
+    <li>Le prix relatif mondial s'installe <strong>entre</strong> les deux prix relatifs d'autarcie : (P<sub>R</sub>/P<sub>M</sub>)<sup>V</sup> &lt; (P<sub>R</sub>/P<sub>M</sub>)<sup>W</sup> &lt; (P<sub>R</sub>/P<sub>M</sub>)<sup>J</sup>.</li>
+    <li><strong>Production</strong> : avec des coûts d'opportunité constants (FPP en ligne droite), chaque pays se <strong>spécialise complètement</strong> (il passe du point A au coin de sa FPP, point B).</li>
+    <li><strong>Consommation</strong> : chaque pays consomme au point C, <strong>différent</strong> de sa production, et <strong>au-delà de sa FPP</strong>. C'est possible uniquement grâce à l'échange.</li>
+    <li>De A à C, chaque pays consomme <strong>plus des deux biens</strong> : son bien-être augmente. Les gains sont <strong>mutuels</strong>.</li>
+  </ul>
+  <div class="box exam"><span class="tag">Calcul type examen : l'intervalle des termes de l'échange</span>
+    <p>Les deux pays gagnent seulement si le prix mondial est <strong>entre leurs deux coûts d'opportunité</strong>. Exemple ci-dessus : 1 vin coûte 0,5 fromage chez A et 2 fromages chez B, donc il faut <strong>0,5 &lt; TOT &lt; 2</strong> fromages par vin. Si le prix sortait de cet intervalle, un des deux pays préférerait produire lui-même.</p>
+    <p>Mexique / É.-U. : 1 ordinateur coûte 1 chemise aux É.-U. et 6 au Mexique, donc <strong>1 &lt; prix de l'ordinateur &lt; 6 chemises</strong>.</p>
+  </div>
+  <div class="box trap"><span class="tag">Piège n°1 : tableau d'heures ou tableau de production ?</span>
+    <p><strong>Tableau d'heures par unité</strong> (« hours per unit », « labor units required ») : plus c'est petit, mieux c'est. Coût d'opportunité de X = heures de X ÷ heures de Y.</p>
+    <p><strong>Tableau de production maximale</strong> (« maximum output », « units per day ») : plus c'est grand, mieux c'est. Coût d'opportunité de X = max de Y ÷ max de X.</p>
+    <p>Vérifie toujours le titre du tableau avant de calculer : c'est l'erreur la plus fréquente.</p>
+  </div>
+  <div class="box trap"><span class="tag">Piège n°2 : le coût d'opportunité croissant</span>
+    <p>Si l'énoncé dit que les 9 premiers robots coûtent 2 drones chacun et les 9 suivants 4 drones chacun, le pays ne raisonne plus avec une moyenne. Le coût d'<strong>une unité de plus</strong> est celui de la tranche où on se trouve. Après 9 robots, le 10<sup>e</sup> coûte <strong>4 drones</strong>, pas 3 (la moyenne 54 ÷ 18).</p>
+  </div>
+
+  <h3>Les limites (caveats) du modèle de Ricardo</h3>
+  <div class="pm">
+    <div class="minus"><h4>Des hypothèses strictes</h4><ul><li>Un seul facteur : le <strong>travail</strong></li><li>Concurrence parfaite, plein emploi, maximisation du profit</li><li>Pas de migration internationale</li><li>Les pays ne diffèrent que par leur <strong>technologie</strong></li></ul></div>
+    <div class="minus"><h4>Des gains à nuancer</h4><ul><li>Le pays gagne, mais <strong>certains groupes perdent</strong> et s'opposent à l'ouverture</li><li>Certains échanges n'augmentent pas le bien-être : <strong>mines antipersonnel, héroïne, prostitution</strong></li></ul></div>
+  </div>
+</section>
+
+<!-- ============ PARTIE 4 ============ -->
+<section class="part" id="p6">
+  <div class="part-head"><span class="part-num">4</span><div><div class="eyebrow">Lecture 3 · Trade policy analysis</div><h2>La politique commerciale : tarifs, quotas, anti-dumping</h2></div></div>
+  <p>Quand le Japon importe du riz vietnamien, la production japonaise de riz baisse. Les riziculteurs japonais vont donc demander à leur gouvernement de les <strong>protéger</strong>, alors que le pays dans son ensemble gagne à importer. Les mesures de protection sont partout dans le monde. Les analystes doivent savoir mesurer leurs effets.</p>
+
+  <h3>Les instruments de protection</h3>
+  <div class="grid2">
+    <div class="card"><h4>Le tarif (droit de douane)</h4><p>Une <strong>taxe sur les importations</strong>.</p><p><strong>Spécifique</strong> : montant fixe par unité physique (2 € par kilo).</p><p><strong>Ad valorem</strong> : pourcentage de la valeur (10 % du prix).</p></div>
+    <div class="card"><h4>Les mesures non tarifaires (NTM)</h4><p>Quatre familles du tableau 7.1 :</p><p>• mesures <strong>de type taxe</strong> (prélèvements variables…)</p><p>• mesures qui <strong>augmentent les coûts</strong> (normes, contrôles…)</p><p>• mesures <strong>quantitatives</strong> (quotas, interdictions…)</p><p>• <strong>marchés publics</strong> (préférence nationale)</p></div>
+  </div>
+
+  <h3>Les effets d'un tarif (petit pays)</h3>
+  <p>Le tarif fait monter le prix intérieur au-dessus du prix mondial : P<sub>d</sub> = P<sub>W</sub> + t. Au Japon, le prix du riz est plusieurs fois supérieur au prix mondial.</p>
+  <figure>
+    <div class="scroll">
+    <svg viewBox="0 0 520 320" role="img" aria-label="Tarif sur les importations. Le prix monte de Pw à Pw plus t. Aire A gain des producteurs, B et D pertes sèches, C recettes de l'État.">
+      <path class="ax" d="M60 24 V300 H480"/>
+      <text x="50" y="32" text-anchor="end" class="mut">Prix</text><text x="478" y="316" text-anchor="end" class="mut">Quantité</text>
+      <polygon class="fA" points="60,248 60,209 200,209 140,248"/>
+      <polygon class="fB" points="140,248 200,209 200,248"/>
+      <polygon class="fC" points="200,209 320,209 320,248 200,248"/>
+      <polygon class="fD" points="320,209 380,248 320,248"/>
+      <line class="dem" x1="60" y1="40" x2="460" y2="300"/>
+      <line class="sup" x1="60" y1="300" x2="440" y2="53"/>
+      <text x="446" y="56" class="b" style="fill:var(--teal)">S</text>
+      <text x="436" y="272" class="b" style="fill:var(--or-deep)">D</text>
+      <line class="pw" x1="60" y1="248" x2="470" y2="248"/>
+      <line x1="60" y1="209" x2="470" y2="209" stroke="var(--or-deep)" stroke-width="2"/>
+      <text x="52" y="252" text-anchor="end" class="b" style="fill:var(--hot)">P<tspan baseline-shift="sub" font-size="10">W</tspan></text>
+      <text x="52" y="213" text-anchor="end" class="b">P<tspan baseline-shift="sub" font-size="10">W</tspan>+t</text>
+      <line class="guide" x1="140" y1="248" x2="140" y2="300"/><line class="guide" x1="200" y1="209" x2="200" y2="300"/>
+      <line class="guide" x1="320" y1="209" x2="320" y2="300"/><line class="guide" x1="380" y1="248" x2="380" y2="300"/>
+      <text x="140" y="316" text-anchor="middle" class="mut" style="font-size:11px">S₁</text>
+      <text x="200" y="316" text-anchor="middle" class="mut" style="font-size:11px">S₂</text>
+      <text x="320" y="316" text-anchor="middle" class="mut" style="font-size:11px">D₂</text>
+      <text x="380" y="316" text-anchor="middle" class="mut" style="font-size:11px">D₁</text>
+      <text x="112" y="236" class="big">A</text>
+      <text x="184" y="242" class="big">B</text>
+      <text x="252" y="236" class="big">C</text>
+      <text x="328" y="242" class="big">D</text>
+      <text x="470" y="203" text-anchor="end" style="font-size:12px" class="mut">après : D₂ − S₂</text>
+      <text x="470" y="243" text-anchor="end" style="font-size:12px" class="mut">avant : D₁ − S₁</text>
+    </svg>
+    </div>
+    <figcaption>Effets d'un tarif dans un petit pays (le prix mondial ne bouge pas). Les importations passent de D₁ − S₁ (avant) à D₂ − S₂ (après).</figcaption>
+  </figure>
+  <div class="tbl"><table>
+    <tr><th>Qui ?</th><th>Effet</th><th>Aire</th></tr>
+    <tr><td>Consommateurs</td><td>Paient plus cher, consomment moins</td><td><strong>− (A + B + C + D)</strong></td></tr>
+    <tr><td>Producteurs nationaux</td><td>Vendent plus cher, produisent plus (l'effet voulu par les riziculteurs)</td><td><strong>+ A</strong></td></tr>
+    <tr><td>État</td><td>Encaisse le tarif sur chaque unité importée</td><td><strong>+ C</strong> = t × importations</td></tr>
+    <tr class="total"><td>Pays (effet net)</td><td>N = A + C − (A + B + C + D)</td><td><strong>− (B + D)</strong></td></tr>
+  </table></div>
+  <div class="box key"><span class="tag">À retenir</span>
+    <ul>
+      <li><strong>B</strong> = perte sèche de <strong>production</strong> : on produit chez soi des unités qu'on aurait pu acheter moins cher à l'étranger.</li>
+      <li><strong>D</strong> = perte sèche de <strong>consommation</strong> : des consommateurs renoncent à acheter.</li>
+      <li>Le tarif profite aux producteurs et à l'État, mais les pertes des consommateurs sont plus grandes : <strong>la société dans son ensemble perd</strong>.</li>
+    </ul>
+  </div>
+  <div class="box exam"><span class="tag">Exemple chiffré (question 4 de l'examen 2025-2026)</span>
+    <p>Demande : P = 50 − Q, donc Q<sub>d</sub> = 50 − P. Offre : P = 20 + 2Q, donc Q<sub>s</sub> = (P − 20) ÷ 2. Prix mondial 30, tarif t = 4, donc P<sub>d</sub> = 34.</p>
+    <div class="tbl"><table>
+      <tr><th></th><th class="num">P = 30</th><th class="num">P = 34</th></tr>
+      <tr><td>Production Q<sub>s</sub></td><td class="num">5</td><td class="num">7</td></tr>
+      <tr><td>Consommation Q<sub>d</sub></td><td class="num">20</td><td class="num">16</td></tr>
+      <tr><td>Importations</td><td class="num">15</td><td class="num">9</td></tr>
+    </table></div>
+    <p>A = 4 × (5 + 7) ÷ 2 = <strong>24</strong> · B = ½ × 4 × (7 − 5) = <strong>4</strong> · C = 4 × 9 = <strong>36</strong> · D = ½ × 4 × (20 − 16) = <strong>8</strong></p>
+    <p>Perte des consommateurs = A + B + C + D = 72. Effet net = −(B + D) = <strong>−12</strong>. Le bien-être <strong>baisse de 12 unités</strong>. Le piège : « baisse de 72 » est la perte des seuls consommateurs.</p>
+  </div>
+
+  <h3>L'effet termes de l'échange (grand pays)</h3>
+  <p>Si le Japon est un <strong>grand pays</strong>, son tarif réduit tellement ses importations qu'il crée un excédent de riz sur le marché mondial : le <strong>prix mondial baisse</strong>. Comme le Japon est importateur, c'est une bonne nouvelle pour lui : une partie du tarif est en fait payée par les exportateurs étrangers.</p>
+  <div class="box key"><span class="tag">À retenir</span>
+    <p>Petit pays : perte nette <strong>certaine</strong> (−B − D). Grand pays : effet net <strong>ambigu</strong>, car le gain de termes de l'échange (baisse du prix mondial) peut dépasser la perte d'efficacité.</p>
+  </div>
+  <div class="box def"><span class="tag">Termes de l'échange</span>
+    <p>Les <strong>termes de l'échange</strong> (<span class="en">terms of trade, ToT</span>) sont le prix des exportations d'un pays rapporté au prix de ses importations. Ils s'améliorent quand ce que tu vends devient relativement plus cher, ou quand ce que tu achètes devient moins cher.</p>
+  </div>
+
+  <h3>Le quota</h3>
+  <div class="box def"><span class="tag">Définition</span>
+    <p>Un <strong>quota d'importation</strong> est une <strong>restriction quantitative</strong> : on n'autorise que X tonnes d'importations. C'est une mesure non tarifaire. Il crée une pénurie par rapport au libre-échange, donc le prix intérieur monte : cet écart de prix s'appelle la <strong>prime de quota</strong> (<span class="en">quota premium</span>). Comme pour le tarif, le surplus du consommateur baisse et celui du producteur augmente.</p>
+  </div>
+  <p>Le quota est géré avec des <strong>licences d'importation</strong>. Celui qui détient une licence achète au prix mondial et revend au prix intérieur : il empoche la <strong>rente de quota</strong> (<span class="en">quota rents</span>, aire C, l'équivalent des recettes du tarif). Tout dépend de <strong>qui reçoit les licences</strong> :</p>
+  <div class="pm">
+    <div class="plus"><h4>Licences aux importateurs nationaux</h4><ul><li>La rente C <strong>reste au Japon</strong> : c'est un gain pour le pays.</li><li>Perte nette : <strong>B + D</strong> (comme le tarif).</li></ul></div>
+    <div class="minus"><h4>Licences aux exportateurs étrangers</h4><ul><li>La rente C <strong>part à l'étranger</strong> : c'est une perte.</li><li>Perte nette : <strong>B + C + D</strong>, plus grande.</li></ul></div>
+  </div>
+  <div class="tbl"><table>
+    <tr><th>Politique</th><th>Effet net sur le bien-être</th></tr>
+    <tr><td>Tarif (petit pays)</td><td><strong>Perte certaine</strong> : la perte des consommateurs dépasse les gains des producteurs et de l'État</td></tr>
+    <tr><td>Tarif avec effet termes de l'échange (grand pays)</td><td><strong>Ambigu</strong> : le gain de ToT peut compenser</td></tr>
+    <tr><td>Quota alloué aux importateurs nationaux</td><td><strong>Perte certaine</strong> (B + D)</td></tr>
+    <tr><td>Quota alloué aux exportateurs étrangers</td><td><strong>Perte certaine et plus grande</strong> (B + C + D)</td></tr>
+  </table></div>
+
+  <h3>L'anti-dumping et les droits compensateurs</h3>
+  <div class="box def"><span class="tag">Dumping</span>
+    <p>Il y a <strong>dumping</strong> quand un produit est vendu à l'étranger <strong>en dessous de sa valeur « normale »</strong>. Le pays importateur peut alors appliquer un <strong>droit anti-dumping</strong> si ce dumping cause un <strong>« préjudice important »</strong> (<span class="en">material injury</span>) à la branche nationale qui produit un <strong>« produit similaire »</strong> (<span class="en">like product</span>). C'est autorisé par l'OMC.</p>
+  </div>
+  <div class="grid2">
+    <div class="card"><h4>Dumping par les prix</h4><p>L'exportateur vend dans le pays importateur <strong>moins cher que chez lui</strong>. Ex. : de l'acier vendu 500 $ la tonne en Chine et 400 $ en Europe.</p></div>
+    <div class="card"><h4>Dumping par les coûts</h4><p>L'exportateur vend <strong>en dessous de son coût de production</strong>.</p></div>
+  </div>
+  <p>Calculer la marge de dumping est compliqué, surtout quand le pays exportateur n'est pas une vraie économie de marché. Le pays importateur a <strong>trois réponses possibles</strong> :</p>
+  <ol class="steps">
+    <li>Un droit anti-dumping <strong>égal à la marge de dumping</strong> constatée.</li>
+    <li>Un droit juste suffisant pour <strong>supprimer le préjudice</strong> : la <strong>règle du droit moindre</strong> (<span class="en">lesser-duty rule</span>).</li>
+    <li>Demander aux exportateurs étrangers de <strong>monter leurs prix</strong> : l'<strong>engagement de prix</strong> (<span class="en">price undertaking</span>).</li>
+  </ol>
+  <div class="box def"><span class="tag">Droits compensateurs</span>
+    <p>Les <strong>droits compensateurs</strong> (<span class="en">countervailing duties, CVD</span>) compensent les <strong>subventions</strong> que l'État étranger verse à ses exportateurs. L'OMC les autorise si on prouve (1) que la subvention a profité à l'exportateur et (2) que les exportations causent un préjudice important à la branche nationale.</p>
+    <p><strong>Critique commune</strong> à l'anti-dumping et aux CVD : ce peut être du <strong>protectionnisme déguisé</strong>.</p>
+  </div>
+
+  <h3>Au-delà d'un seul secteur</h3>
+  <p>Quand les effets touchent plusieurs secteurs, on utilise des modèles d'avantage comparatif. Leur idée centrale : <strong>protéger un secteur revient à taxer implicitement les autres</strong> (on y attire du travail et du capital qui manquent ailleurs).</p>
+  <div class="grid2">
+    <div class="card"><h4>Modèle des substituts imparfaits</h4><p>Dans la réalité, le riz importé et le riz japonais ne sont pas identiques : ce sont des <strong>substituts imparfaits</strong>. Un tarif fait monter le prix du riz importé, la demande se reporte en partie sur le riz national. L'ampleur dépend de l'<strong>élasticité-prix croisée</strong>. Très utilisé, notamment en anti-dumping.</p></div>
+    <div class="card"><h4>Le contingent tarifaire (TRQ)</h4><p><span class="en">Tariff rate quota</span> : <strong>deux niveaux de tarif</strong>. Un tarif bas pour les importations <strong>dans</strong> le quota, un tarif élevé <strong>au-delà</strong>. Il sert à garantir des <strong>niveaux d'accès minimum</strong> (<span class="en">MAL</span>) en agriculture. Trois cas : importations sous le quota, égales, au-dessus.</p></div>
+  </div>
+</section>
+
+<!-- ============ PARTIE 5 ============ -->
+<section class="part" id="p7">
+  <div class="part-head"><span class="part-num">5</span><div><div class="eyebrow">Lecture 4 · Pure exchange model (Suranovic)</div><h2>Le modèle d'échange pur : pourquoi échanger rend les deux plus heureux</h2></div></div>
+  <p>On oublie la production : deux personnes ont chacune un stock de biens, et on regarde si l'échange les rend plus heureuses. C'est la base de la preuve que le commerce est <strong>gagnant-gagnant</strong>.</p>
+  <h3>Les hypothèses</h3>
+  <ul>
+    <li><strong>Deux personnes</strong> : Smith et Jones. <strong>Deux biens homogènes</strong> : pommes (A) et oranges (O).</li>
+    <li>Ils connaissent leurs préférences : ils savent quelle <strong>utilité</strong> (satisfaction) leur donne chaque panier.</li>
+    <li>Plus de biens vaut mieux que moins, et l'<strong>utilité marginale est décroissante</strong>.</li>
+    <li><strong>Dotations</strong> : Smith a 10 oranges, Jones a 10 pommes.</li>
+    <li>Ils veulent maximiser leur utilité, échangent volontairement et connaissent parfaitement la qualité des biens de l'autre.</li>
+    <li>Hypothèses implicites : ce sont des humains, ils peuvent se rencontrer (un marché) et parlent la même langue.</li>
+  </ul>
+  <div class="box ex"><span class="tag">L'utilité de Smith pour les pommes</span>
+    <div class="tbl"><table>
+      <tr><th class="num">Pommes</th><th class="num">Utilité totale (utils)</th><th class="num">Utilité marginale</th></tr>
+      <tr><td class="num">0</td><td class="num">0</td><td class="num">·</td></tr>
+      <tr><td class="num">1</td><td class="num">20</td><td class="num">20</td></tr>
+      <tr><td class="num">2</td><td class="num">38</td><td class="num">18</td></tr>
+      <tr><td class="num">3</td><td class="num">54</td><td class="num">16</td></tr>
+      <tr><td class="num">4</td><td class="num">68</td><td class="num">14</td></tr>
+    </table></div>
+    <p>L'utilité totale monte (plus, c'est mieux), mais de moins en moins vite : la 1<sup>re</sup> pomme rapporte 20, la 4<sup>e</sup> seulement 14. C'est l'<strong>utilité marginale décroissante</strong>. Utilité marginale = utilité totale avec n unités − utilité avec n − 1.</p>
+  </div>
+  <h3>Les courbes d'indifférence</h3>
+  <div class="box def"><span class="tag">Définition</span>
+    <p>Une <strong>courbe d'indifférence</strong> relie tous les paniers qui donnent la <strong>même utilité</strong>. Si Smith ne sait pas mesurer son bonheur, il sait au moins classer deux paniers (préféré, moins préféré, équivalent).</p>
+    <ul>
+      <li>Une courbe plus haut à droite = utilité plus élevée (plus, c'est mieux).</li>
+      <li>Les courbes sont <strong>convexes</strong> (bombées vers l'origine) à cause de l'utilité marginale décroissante. Si l'utilité marginale était constante, ce seraient des droites.</li>
+    </ul>
+  </div>
+  <h3>La boîte d'Edgeworth</h3>
+  <p>On superpose le graphique de Smith (à l'endroit, origine en bas à gauche) et celui de Jones (<strong>à l'envers</strong>, origine en haut à droite). La boîte mesure 10 oranges de large et 10 pommes de haut : chaque point est une <strong>répartition</strong> des 20 fruits entre les deux.</p>
+  <figure>
+    <div class="scroll">
+    <svg viewBox="0 0 520 360" role="img" aria-label="Boîte d'Edgeworth. Le point de dotation E est en bas à droite. Les courbes d'indifférence de Smith et de Jones passant par E forment une lentille où les deux gagnent.">
+      <rect x="80" y="20" width="300" height="300" fill="none" class="ax"/>
+      <path d="M380 320 Q 150 300 120 20 L 140 20 Q 360 50 380 320 Z" fill="var(--a3)"/>
+      <path d="M380 320 Q 360 50 140 20" fill="none" stroke="var(--hot)" stroke-width="3"/>
+      <path d="M380 320 Q 150 300 120 20" fill="none" stroke="var(--teal)" stroke-width="3"/>
+      <line x1="80" y1="320" x2="380" y2="20" class="guide"/>
+      <circle class="dot" cx="380" cy="320" r="5"/><text x="390" y="336" class="b">E (dotation)</text>
+      <circle class="dot" cx="350" cy="290" r="4"/><text x="358" y="288" class="b" style="font-size:12px">D</text>
+      <circle cx="230" cy="170" r="5" fill="var(--or)"/><text x="160" y="160" class="b" style="font-size:12px">P* (Pareto)</text>
+      <text x="74" y="340" text-anchor="end" class="b">0 Smith</text>
+      <text x="386" y="14" class="b">0 Jones</text>
+      <text x="230" y="352" text-anchor="middle" class="mut">oranges de Smith →</text>
+      <text x="230" y="12" text-anchor="middle" class="mut">← oranges de Jones</text>
+      <text x="64" y="170" text-anchor="end" class="mut" transform="rotate(-90 64 170)">pommes de Smith ↑</text>
+      <text x="90" y="306" style="fill:var(--teal);font-size:12px" class="b">courbe de Smith</text>
+      <text x="396" y="140" style="fill:var(--hot);font-size:12px" class="b">courbe de Jones</text>
+      <text x="396" y="190" class="mut" style="font-size:12px">lentille : zone</text>
+      <text x="396" y="206" class="mut" style="font-size:12px">où les deux gagnent</text>
+      <text x="396" y="250" class="mut" style="font-size:12px">diagonale pointillée :</text>
+      <text x="396" y="266" class="mut" style="font-size:12px">courbe des contrats</text>
+    </svg>
+    </div>
+    <figcaption>Schéma simplifié de la boîte d'Edgeworth : E = Smith a 10 oranges et 0 pomme, Jones 0 orange et 10 pommes. Aller de E à D, c'est échanger 1 orange contre 1 pomme.</figcaption>
+  </figure>
+  <ul>
+    <li>Un mouvement en <strong>diagonale</strong> depuis E représente un <strong>échange</strong>. De E à D, Smith donne 1 orange à Jones contre 1 pomme.</li>
+    <li>Cet échange rend <strong>les deux plus heureux</strong> : chacun atteint une courbe d'indifférence plus haute. Grâce à l'utilité marginale décroissante, chacun cède un bien qu'il a en abondance (donc qui vaut peu pour lui) contre un bien qu'il n'a pas (qui vaut beaucoup).</li>
+    <li>Tout échange qui mène <strong>dans la lentille</strong> formée par les deux courbes passant par E (points F, G, H du cours) est <strong>mutuellement bénéfique</strong>.</li>
+  </ul>
+  <h3>Les termes de l'échange dans la boîte</h3>
+  <div class="box def"><span class="tag">Formule</span>
+    <p class="formula">ToT = nombre de pommes ÷ nombre d'oranges échangées = P<sub>orange</sub> ÷ P<sub>pomme</sub></p>
+    <p>De E à H, 5 pommes contre 5 oranges : ToT = 5/5 = <strong>1 pomme par orange</strong>. De E à J, 6 pommes contre 2 oranges : ToT = 6/2 = <strong>3 pommes par orange</strong>. Le ToT est exactement la <strong>pente</strong> de la droite qui relie les deux paniers.</p>
+  </div>
+  <div class="box key"><span class="tag">Implications</span>
+    <ul>
+      <li>Si l'information est parfaite et l'échange volontaire, <strong>les deux sont mieux après qu'avant</strong> : le commerce est <strong>gagnant-gagnant</strong>, pas gagnant-perdant.</li>
+      <li>La boîte montre la tendance humaine à <strong>transporter</strong> ses produits au marché (<span class="en">truck</span>), <strong>négocier</strong> (<span class="en">barter</span>) et <strong>échanger</strong> (<span class="en">exchange</span>), les mots d'Adam Smith.</li>
+      <li>L'échange crée un <strong>surplus</strong> (gain à l'échange) partagé entre les deux. Si l'échange mène à un point proche de la courbe d'indifférence de Jones (celle qui passe par E), c'est <strong>Smith</strong> qui empoche presque tout le surplus, et inversement : celui qui reste près de sa propre courbe de départ ne gagne presque rien.</li>
+    </ul>
+  </div>
+  <h3>L'optimum de Pareto</h3>
+  <div class="box def"><span class="tag">Définition</span>
+    <p>Un <strong>optimum de Pareto</strong> est une répartition où l'on ne peut plus améliorer la situation de l'un <strong>sans détériorer</strong> celle de l'autre. Tant qu'il existe un échange qui améliore l'un sans nuire à l'autre, on n'y est pas.</p>
+    <p>Si Smith et Jones sont <strong>rationnels</strong> (ils utilisent toute l'information) et maximisent leur utilité, ils épuisent tous les gains à l'échange et atteignent un optimum de Pareto.</p>
+  </div>
+  <div class="box key"><span class="tag">Condition d'optimum</span>
+    <p class="formula">TMS<sub>Smith</sub> = TMS<sub>Jones</sub> = P<sub>orange</sub> / P<sub>pomme</sub></p>
+    <p>Le <strong>taux marginal de substitution</strong> (<span class="en">marginal rate of substitution, MRS</span>) = UM<sub>orange</sub> ÷ UM<sub>pomme</sub> : combien de pommes on est prêt à céder pour une orange de plus. C'est la pente de la courbe d'indifférence. À l'optimum, les deux courbes sont <strong>tangentes</strong>, et leur pente commune est égale au prix relatif (le ToT).</p>
+  </div>
+</section>
+
+<!-- ============ PARTIE 6 ============ -->
+<section class="part" id="p8">
+  <div class="part-head"><span class="part-num">6</span><div><div class="eyebrow">Notions de l'examen 2025-2026 absentes des slides reçues</div><h2>Heckscher-Ohlin, Stolper-Samuelson et défense commerciale</h2></div></div>
+  <p>L'examen 2025-2026 contient 3 questions sur des notions qui ne sont pas dans les Lectures 1 à 4 : elles viendront sans doute dans les prochains cours. Les voici expliquées simplement pour que tu ne sois pas prise au dépourvu. Si tu reçois les slides correspondantes, envoie-les et je compléterai.</p>
+
+  <h3>Le modèle Heckscher-Ohlin (H-O)</h3>
+  <p>Ricardo explique l'échange par des différences de <strong>technologie</strong>. Le modèle H-O suppose au contraire une <strong>technologie identique</strong> partout et explique l'échange par des différences de <strong>dotations en facteurs</strong> : certains pays ont beaucoup de travailleurs, d'autres beaucoup de capital (machines, usines). Le modèle « 2 × 2 × 2 » : 2 pays, 2 biens, 2 facteurs (travail L et capital K).</p>
+  <div class="grid2">
+    <div class="card"><h4>Abondance d'un facteur (pays)</h4><p>On compare le ratio <strong>L/K</strong> des pays. Le pays qui a le ratio L/K le plus élevé est <strong>abondant en travail</strong>. Attention : c'est le <strong>ratio</strong> qui compte, pas le nombre absolu de travailleurs.</p></div>
+    <div class="card"><h4>Intensité d'un facteur (bien)</h4><p>On compare le ratio <strong>L/K utilisé par unité</strong> de chaque bien. Le vêtement (3 L pour 1 K) est <strong>intensif en travail</strong> ; l'ordinateur (1 L pour 2 K) est <strong>intensif en capital</strong>.</p></div>
+  </div>
+  <div class="box key"><span class="tag">Théorème H-O</span>
+    <p>Un pays a un avantage comparatif (et exporte) dans le bien qui utilise <strong>intensivement le facteur dont il est abondamment doté</strong>. Pays abondant en travail → exporte le bien intensif en travail.</p>
+  </div>
+  <div class="box ex"><span class="tag">Question 9 de l'examen</span>
+    <p>Home : L = 100, K = 200 → L/K = <strong>0,5</strong>. Foreign : L = 150, K = 50 → L/K = <strong>3</strong>. Foreign est abondant en travail, donc il a l'avantage comparatif dans le <strong>vêtement</strong> (<span class="en">cloth</span>), bien intensif en travail. Réponse : <strong>Foreign</strong>.</p>
+  </div>
+
+  <h3>Le théorème de Stolper-Samuelson</h3>
+  <div class="box key"><span class="tag">À retenir</span>
+    <p>Quand le prix d'un bien augmente, la rémunération du facteur <strong>utilisé intensivement</strong> dans ce bien augmente <strong>plus que proportionnellement</strong> (effet d'amplification), et celle de l'autre facteur <strong>baisse</strong>. Exemple : si le prix du vêtement (intensif en travail) monte, le salaire w monte fortement et le loyer du capital r baisse.</p>
+  </div>
+  <div class="box exam"><span class="tag">Méthode de calcul (question 10 de l'examen)</span>
+    <p>Concurrence parfaite = profit nul, donc prix = coût unitaire :</p>
+    <p class="formula">p<sub>Cloth</sub> = 3w + r &nbsp;&nbsp;·&nbsp;&nbsp; p<sub>Computer</sub> = w + 2r = 1</p>
+    <ol class="steps">
+      <li>De la 2<sup>e</sup> équation : w = 1 − 2r.</li>
+      <li>Avec p<sub>Cloth</sub> = 1 : 3(1 − 2r) + r = 1 → 3 − 5r = 1 → <strong>r = 0,4</strong> et w = 0,2.</li>
+      <li>Avec p<sub>Cloth</sub> = 1,2 : 3 − 5r = 1,2 → <strong>r = 0,36</strong> et w = (1,2 − 0,36) ÷ 3 = 0,28.</li>
+      <li>Variation de r : (0,36 − 0,4) ÷ 0,4 = <strong>−10 %</strong>. Le salaire, lui, monte de 0,2 à 0,28, soit <strong>+40 %</strong> (pour une hausse du prix de seulement 20 % : c'est l'amplification).</li>
+    </ol>
+  </div>
+
+  <h3>La défense commerciale et les restrictions volontaires</h3>
+  <div class="box def"><span class="tag">Trade remedies (instruments de défense commerciale)</span>
+    <p>Ce sont les outils prévus par l'OMC pour <strong>corriger des pratiques commerciales déloyales</strong> (dumping, subventions) et des <strong>changements imprévus</strong> des flux commerciaux qui nuisent aux industries nationales concurrencées par les importations. Ils permettent aux industries nationales de demander des <strong>tarifs supérieurs aux taux consolidés</strong>, appliqués de façon <strong>discriminatoire</strong> (contre un pays ou une entreprise précise). Trois instruments :</p>
+    <ul>
+      <li><strong>Droits anti-dumping</strong> (contre le dumping),</li>
+      <li><strong>Droits compensateurs</strong> (contre les subventions),</li>
+      <li><strong>Mesures de sauvegarde</strong> (<span class="en">safeguards</span>) : protection temporaire en cas de hausse brutale des importations, même loyales.</li>
+    </ul>
+  </div>
+  <div class="box def"><span class="tag">Taux consolidé (bound rate)</span>
+    <p>Le <strong>taux consolidé</strong> est le <strong>tarif maximum</strong> qu'un pays s'est engagé à l'OMC à ne pas dépasser. Le tarif réellement appliqué (<span class="en">applied rate</span>) peut être plus bas.</p>
+  </div>
+  <div class="box def"><span class="tag">Restriction volontaire des exportations (VER)</span>
+    <p>Une <strong>VER</strong> (<span class="en">voluntary export restraint</span>) est une limite fixée par un gouvernement sur la <strong>quantité de biens exportés</strong> hors de son pays pendant une période donnée, en général sous la pression du pays importateur. Elle est <strong>bilatérale</strong> : un exportateur vers un pays importateur.</p>
+    <p><strong>Exemple célèbre</strong> : en 1981, le Japon limite « volontairement » ses exportations de voitures vers les États-Unis. Comme un quota alloué aux exportateurs étrangers, la <strong>rente part à l'étranger</strong> (les constructeurs japonais vendent plus cher). Les VER sont <strong>interdites par l'OMC depuis 1995</strong> (accord sur les sauvegardes).</p>
+  </div>
+</section>
+
+<!-- ============ METHODES ============ -->
+<section class="part" id="methodes">
+  <div class="part-head"><span class="part-num">✦</span><div><div class="eyebrow">Ce qui tombe en calcul</div><h2>Boîte à outils : les 7 calculs de l'examen</h2></div></div>
+  <div class="answer"><h4>1. Avantage absolu</h4>
+    <p>Tableau d'heures : le pays avec le <strong>plus petit</strong> nombre d'heures. Tableau de production : le pays avec la <strong>plus grande</strong> production. On compare bien par bien, sans calcul.</p>
+  </div>
+  <div class="answer"><h4>2. Coût d'opportunité et avantage comparatif</h4>
+    <p>Heures : CO(X) = h<sub>X</sub> ÷ h<sub>Y</sub>. Production max : CO(X) = max<sub>Y</sub> ÷ max<sub>X</sub>. Le pays au <strong>CO le plus faible</strong> a l'avantage comparatif. Un pays a forcément l'avantage comparatif dans un bien, l'autre dans l'autre.</p>
+    <p><em>Exemple : Arden 1,5 h par pile, 0,4 h par puce ; Boreal 2 h et 0,5 h. Arden a l'avantage absolu dans les deux. CO d'une pile : Arden 1,5 ÷ 0,4 = 3,75 puces ; Boreal 2 ÷ 0,5 = 4 puces → Arden a l'avantage comparatif dans les piles, Boreal dans les puces.</em></p>
+  </div>
+  <div class="answer"><h4>3. Intervalle des termes de l'échange</h4>
+    <p>Calcule le CO du même bien dans les deux pays : le ToT gagnant-gagnant est <strong>strictement entre les deux</strong>.</p>
+  </div>
+  <div class="answer"><h4>4. Effet d'un tarif sur le bien-être</h4>
+    <ol>
+      <li>Réécris les fonctions en Q<sub>d</sub>(P) et Q<sub>s</sub>(P).</li>
+      <li>Calcule Q<sub>s</sub> et Q<sub>d</sub> au prix mondial, puis à P<sub>W</sub> + t.</li>
+      <li>B = ½ × t × (hausse de production) ; D = ½ × t × (baisse de consommation).</li>
+      <li>Petit pays : Δ bien-être = <strong>−(B + D)</strong>. Recettes = t × nouvelles importations.</li>
+    </ol>
+  </div>
+  <div class="answer"><h4>5. Tarif pour atteindre une production cible</h4>
+    <p>Cherche le prix qui donne la production voulue avec l'offre, puis t = ce prix − P<sub>W</sub>. Exemple examen : S(p) = p, P<sub>W</sub> = 3, cible 4 → p = 4 → <strong>t = 1</strong>. Le <strong>tarif prohibitif</strong> (qui supprime toute importation) est celui qui ramène le prix au prix d'autarcie.</p>
+  </div>
+  <div class="answer"><h4>6. Gain du libre-échange</h4>
+    <p>Gain net = triangle = ½ × (P<sub>autarcie</sub> − P<sub>W</sub>) × importations (ou exportations) au prix mondial.</p>
+  </div>
+  <div class="answer"><h4>7. Équilibre de Nash dans une matrice</h4>
+    <p>Pour chaque colonne, souligne le meilleur gain du joueur ligne ; pour chaque ligne, le meilleur gain du joueur colonne. Case doublement soulignée = Nash. Puis vérifie : existe-t-il une case meilleure pour <strong>les deux</strong> ? Si oui, c'est un dilemme du prisonnier.</p>
+  </div>
+</section>
+
+<!-- ============ EXAMEN ============ -->
+<section class="part" id="exam">
+  <div class="part-head"><span class="part-num">★</span><div><div class="eyebrow">International Trade 2526 · final A</div><h2>L'examen 2025-2026 corrigé</h2></div></div>
+  <p>Les réponses ci-dessous sont mon corrigé (le sujet n'en donnait pas). Les calculs sont vérifiés ; pour la question 1, qui porte sur des définitions, la réponse est la plus probable.</p>
+  <div class="answer"><h4><span class="rep">Q1 → E</span> Trade remedies et VER</h4>
+    <p>A est vraie (les trade remedies permettent des tarifs au-dessus des taux consolidés, appliqués de manière discriminatoire ; la VER est bien une limite de quantité exportée sur une période). B est vraie (but des trade remedies, et VER bilatérales). C est fausse : les deux ne doivent pas être utilisés « simultanément » pour « restreindre les industries nationales ». Donc <strong>« Only A and B are correct »</strong>.</p>
+  </div>
+  <div class="answer"><h4><span class="rep">Q2 → H</span> Jeu des tarifs</h4>
+    <p>Gains (A, B) : élevé/élevé = (1, 1) ; A élevé, B bas = (2 ; 1,5) ; A bas, B élevé = (1,5 ; 2) ; bas/bas = (3, 3). Pour A : si B joue élevé, bas rapporte 1,5 &gt; 1 ; si B joue bas, bas rapporte 3 &gt; 2. <strong>Bas est dominant</strong>, pour B aussi. Nash = (bas, bas), qui est aussi le meilleur résultat : <strong>pas de dilemme</strong>, pas besoin de coopérer. B et F sont vraies.</p>
+  </div>
+  <div class="answer"><h4><span class="rep">Q3 → B</span> Marché de l'avocat</h4>
+    <p>Le prix baisse de P<sub>o</sub> à P<sub>w</sub>. Le CS augmente du trapèze P<sub>w</sub>P<sub>o</sub>AC ; le PS <strong>tombe à</strong> P<sub>w</sub>BO (il était P<sub>o</sub>AO) ; le bien-être augmente du triangle ABC. Le piège : D dit « welfare decreases », L donne la mauvaise aire, et la formulation « decreases <strong>to</strong> » de B est la seule correcte pour le producteur.</p>
+  </div>
+  <div class="answer"><h4><span class="rep">Q4 → D</span> Tarif de 4</h4>
+    <p>Calcul détaillé dans la <a href="#p6">partie 4</a> : B = 4, D = 8, donc le bien-être <strong>baisse de 12</strong>. « Decrease by 72 » est la perte des consommateurs seuls.</p>
+  </div>
+  <div class="answer"><h4><span class="rep">Q5 → E</span> Robots de Lyria</h4>
+    <p>Lyria a déjà produit la moitié de ses 18 robots, soit 9 : la première tranche (à 2 drones) est épuisée. Le 10<sup>e</sup> robot est dans la deuxième tranche : <strong>4 drones</strong>. Piège : 3 drones est la moyenne (54 ÷ 18), 2,5 est le coût de Kato (25 ÷ 10).</p>
+  </div>
+  <div class="answer"><h4><span class="rep">Q6 → B</span> Nanopuces</h4>
+    <p>Avantage absolu = moins d'heures par unité : Arden, car <strong>0,4 &lt; 0,5</strong>. Les autres réponses mélangent avantage absolu et coût d'opportunité.</p>
+  </div>
+  <div class="answer"><h4><span class="rep">Q7 → A</span> Tarif pour produire 4</h4>
+    <p>L'offre est S(p) = p : pour produire 4, il faut p = 4. Prix mondial 3, donc <strong>t = 1</strong>.</p>
+  </div>
+  <div class="answer"><h4><span class="rep">Q8 → B</span> Vin et fromage</h4>
+    <p>CO d'un vin : A = 10 ÷ 20 = 0,5 fromage ; B = 20 ÷ 10 = 2 fromages. Donc <strong>0,5 &lt; TOT &lt; 2</strong>.</p>
+  </div>
+  <div class="answer"><h4><span class="rep">Q9 → B</span> H-O, vêtement</h4>
+    <p>L/K : Home 0,5, Foreign 3. Foreign est abondant en travail et a l'avantage comparatif dans le bien intensif en travail : <strong>Foreign</strong>.</p>
+  </div>
+  <div class="answer"><h4><span class="rep">Q10 → B</span> Stolper-Samuelson</h4>
+    <p>r passe de 0,4 à 0,36 : <strong>baisse de 10 %</strong> (calcul détaillé en <a href="#p8">partie 6</a>). Piège : « increase by 40 % » est la variation du salaire, pas du loyer du capital.</p>
+  </div>
+</section>
+
+<!-- ============ GLOSSAIRE ============ -->
+<section class="part" id="glossaire">
+  <div class="part-head"><span class="part-num">EN</span><div><div class="eyebrow">Le cours et l'examen sont en anglais</div><h2>Glossaire anglais / français</h2></div></div>
+  <dl class="glo">
+    <dt>Absolute advantage</dt><dd>Avantage absolu : produire avec moins de ressources.</dd>
+    <dt>Ad valorem tariff</dt><dd>Droit de douane en pourcentage de la valeur.</dd>
+    <dt>Anti-dumping duty</dt><dd>Droit anti-dumping.</dd>
+    <dt>Autarky</dt><dd>Autarcie : aucun échange avec l'extérieur.</dd>
+    <dt>Backward induction</dt><dd>Induction à rebours (résoudre un arbre en partant de la fin).</dd>
+    <dt>Best response</dt><dd>Meilleure réponse.</dd>
+    <dt>Bound rate</dt><dd>Taux consolidé : tarif maximum promis à l'OMC.</dd>
+    <dt>Capital flight</dt><dd>Fuite des capitaux.</dd>
+    <dt>Comparative advantage</dt><dd>Avantage comparatif : coût d'opportunité le plus faible.</dd>
+    <dt>Consumer / producer surplus</dt><dd>Surplus du consommateur / du producteur.</dd>
+    <dt>Countervailing duty (CVD)</dt><dd>Droit compensateur (contre les subventions).</dd>
+    <dt>Deadweight loss</dt><dd>Perte sèche.</dd>
+    <dt>Dominant strategy</dt><dd>Stratégie dominante.</dd>
+    <dt>Edgeworth box</dt><dd>Boîte d'Edgeworth.</dd>
+    <dt>Endowment</dt><dd>Dotation (ce qu'on possède au départ).</dd>
+    <dt>Excess demand / supply</dt><dd>Pénurie / excédent.</dd>
+    <dt>Factor abundance / intensity</dt><dd>Abondance (pays) / intensité (bien) en facteur.</dd>
+    <dt>Gains from trade</dt><dd>Gains à l'échange.</dd>
+    <dt>Indifference curve</dt><dd>Courbe d'indifférence.</dd>
+    <dt>Lesser-duty rule</dt><dd>Règle du droit moindre.</dd>
+    <dt>Like product</dt><dd>Produit similaire.</dd>
+    <dt>Marginal rate of substitution</dt><dd>Taux marginal de substitution (TMS).</dd>
+    <dt>Marginal utility</dt><dd>Utilité marginale.</dd>
+    <dt>Material injury</dt><dd>Préjudice important.</dd>
+    <dt>Nash equilibrium</dt><dd>Équilibre de Nash.</dd>
+    <dt>Non-tariff measures</dt><dd>Mesures non tarifaires.</dd>
+    <dt>Opportunity cost</dt><dd>Coût d'opportunité.</dd>
+    <dt>Payoff</dt><dd>Gain (dans un jeu).</dd>
+    <dt>Price ceiling / floor</dt><dd>Prix plafond / plancher.</dd>
+    <dt>Price-taker</dt><dd>Preneur de prix.</dd>
+    <dt>Price undertaking</dt><dd>Engagement de prix.</dd>
+    <dt>PPF</dt><dd>Frontière des possibilités de production (FPP).</dd>
+    <dt>Quota rent / premium</dt><dd>Rente de quota / prime de quota.</dd>
+    <dt>Rental rate (r)</dt><dd>Rémunération (loyer) du capital.</dd>
+    <dt>Safeguard</dt><dd>Mesure de sauvegarde.</dd>
+    <dt>Specific tariff</dt><dd>Droit spécifique (montant par unité).</dd>
+    <dt>Tariff rate quota (TRQ)</dt><dd>Contingent tarifaire.</dd>
+    <dt>Tax incidence</dt><dd>Incidence fiscale.</dd>
+    <dt>Terms of trade (ToT)</dt><dd>Termes de l'échange.</dd>
+    <dt>Trade remedies</dt><dd>Instruments de défense commerciale.</dd>
+    <dt>Voluntary export restraint (VER)</dt><dd>Restriction volontaire des exportations.</dd>
+    <dt>Wage (w)</dt><dd>Salaire.</dd>
+    <dt>Willingness to pay / accept</dt><dd>Disposition à payer / à accepter.</dd>
+  </dl>
+</section>
+
+<!-- ============ QUIZ ============ -->
+<section class="part" id="quiz">
+  <div class="part-head"><span class="part-num">?</span><div><div class="eyebrow">Dans le style de l'examen 2025-2026</div><h2>QCM d'entraînement corrigé</h2></div></div>
+  <p>Comme à l'examen : <strong>une seule bonne réponse</strong>, beaucoup de propositions (A à L), des réponses combinées et environ la moitié de calculs. Les énoncés sont en anglais, comme le jour J ; les corrections sont en français. Clique sur une réponse pour voir l'explication. Garde une feuille et une calculatrice à côté.</p>
+  <div class="scorebar" aria-live="polite"><span>Score : <b id="score">0</b> / <span id="done">0</span> répondues sur <span id="total">0</span> · note sur 20 : <b id="note">0</b></span><button type="button" id="reset">Recommencer</button></div>
+  <div class="quiz" id="quizbox"></div>
+  <div class="box key result" id="result"><span class="tag">Ton résultat</span><p id="resultText"></p></div>
+</section>
+</main>
+</div>
+
+<script>
+const L="ABCDEFGHKLM";
+const Q=[
+ {t:"Microéconomie",q:"Which of the following causes a SHIFT of the demand curve for a normal good to the right?",o:["A fall in the price of the good","A rise in the price of the good","A rise in consumers' income","A rise in the price of a complement","A fall in the price of a substitute","Only A and C are correct","None of the above are correct"],a:2,e:"Le revenu monte → on achète plus d'un bien normal à chaque prix → la courbe se déplace à droite. A et B font seulement glisser LE LONG de la courbe. Un complément plus cher ou un substitut moins cher font baisser la demande (déplacement à gauche)."},
+ {t:"Microéconomie",q:"A buyer's willingness to pay for a concert ticket is 100 and the market price is 50. Her consumer surplus is:",o:["0","25","50","100","150","Impossible to determine"],a:2,e:"CS = disposition à payer − prix = 100 − 50 = 50. C'est l'exemple exact de la Session 0."},
+ {t:"Microéconomie",q:"The government sets a price ceiling BELOW the competitive equilibrium price. What happens?",o:["Excess supply (surplus)","Excess demand (shortage)","No effect on the market","The quantity exchanged increases","Social welfare increases","Only A and E are correct"],a:1,e:"Prix trop bas → beaucoup veulent acheter, peu veulent vendre : pénurie. La quantité échangée baisse (on est limité par l'offre) et une perte sèche apparaît."},
+ {t:"Microéconomie",q:"Select the most correct answer about a unit tax:",o:["Taxing sellers shifts the supply curve; taxing buyers shifts the demand curve to the left","Taxing buyers or sellers gives the same quantity, the same deadweight loss and the same tax incidence","A tax always falls entirely on consumers","A tax creates a deadweight loss","Only A, B and D are correct","Only C and D are correct","All of the above are correct"],a:4,e:"A, B et D sont des résultats du cours. C est faux : la charge est partagée entre acheteurs et vendeurs selon les élasticités, peu importe qui paie officiellement."},
+ {t:"Microéconomie",q:"In the case of pollution (negative externality), compared with the market equilibrium Q*, the socially optimal quantity is:",o:["Higher than Q*","Equal to Q*","Lower than Q*","Zero, because any pollution is a loss","Impossible to determine"],a:2,e:"Le coût marginal social dépasse le coût privé : le marché produit trop. Q social < Q*. Mais pas zéro : un peu de pollution est acceptable si la supprimer coûte trop cher."},
+ {t:"Théorie des jeux",q:"In the prisoner's dilemma of the course (both confess: 5 years each; one confesses: 0 and 10 years; both hold out: 2 years each), the dominant strategy equilibrium is:",o:["(Hold out, Hold out)","(Confess, Hold out)","(Hold out, Confess)","(Confess, Confess)","There is no equilibrium","There are two equilibria"],a:3,e:"Avouer est la meilleure réponse quoi que fasse l'autre (5 < 10 et 0 < 2). D'où (avouer, avouer) avec 5 ans chacune, alors que (se taire, se taire) donnerait 2 ans : c'est le dilemme."},
+ {t:"Théorie des jeux",q:"Payoffs (Country A, Country B) in billions: (High, High) = (2, 2); A High, B Low = (5, 1); A Low, B High = (1, 5); (Low, Low) = (4, 4). Select the best answer:",o:["Both countries choose High Tariff is the Nash equilibrium","Both countries choose Low Tariff is the Nash equilibrium","There are two Nash equilibria","The Nash equilibrium is when one country chooses High and the other Low","This game illustrates a Prisoner's Dilemma","The countries do not need to cooperate to achieve the best outcome","Both A. and E. are correct","Both B. and F. are correct","Both A. and F. are correct","Both B. and E. are correct"],a:6,e:"Pour A : si B est élevé, élevé donne 2 > 1 ; si B est bas, élevé donne 5 > 4. Élevé est dominant, pour B aussi. Nash = (élevé, élevé) avec (2, 2) alors que (bas, bas) donnerait (4, 4) : dilemme du prisonnier. A et E sont vraies. C'est la version « inverse » de la Q2 de l'examen : toujours refaire le calcul !"},
+ {t:"Théorie des jeux",q:"Which statement about Nash equilibrium is correct?",o:["Each player's strategy is a best response to the others' strategies","A dominant strategy equilibrium is always a Nash equilibrium","A game can have more than one Nash equilibrium","A Nash equilibrium is always the best outcome for all players","Only A and B are correct","Only A, B and C are correct","All of the above are correct"],a:5,e:"D est faux : le dilemme du prisonnier montre qu'un Nash peut être mauvais pour tout le monde. Les trois autres sont des définitions du cours (le jeu « work or surf » simultané a deux Nash)."},
+ {t:"Théorie des jeux",q:"Backward induction consists in:",o:["Solving a simultaneous game with a matrix","Solving an extensive-form game starting with the last mover's decision","Always choosing the strategy that gives the highest payoff to everyone","Letting the second player choose first","Computing elasticities"],a:1,e:"On résout l'arbre en partant de la fin, puis on remonte. Dans le jeu séquentiel « work or surf », cela donne un seul Nash et un avantage au premier joueur."},
+ {t:"Introduction",q:"Trade in services accounts for approximately what share of global trade?",o:["One twentieth","One fifth","One half","Two thirds","Four fifths"],a:1,e:"Environ un cinquième. Les services sont intangibles et non stockables (on ne peut pas se les faire tomber sur le pied)."},
+ {t:"Introduction",q:"Which factors explain the expansion of world trade since 1970?",o:["Container shipping","Information and communication technology","Trade liberalization (lower tariffs)","The entry of China, which joined the WTO in 2001","Only A and C are correct","All of the above are correct","None of the above are correct"],a:5,e:"Les quatre raisons du cours : transport (conteneur), technologie (TIC), tarifs (libéralisation), entrée de la Chine (réformes fin des années 1970, OMC 2001)."},
+ {t:"Introduction",q:"According to Lecture 1, exports as a percentage of GDP:",o:["Are higher in China than in Germany","Are lower in China than in Germany and have been decreasing in China since 2006","Are equal in China and Germany","Have constantly increased in China since 1990"],a:1,e:"Piège classique : l'Allemagne est beaucoup plus ouverte que la Chine en % du PIB, et ce ratio baisse en Chine depuis 2006."},
+ {t:"Avantage absolu",q:"The concept of absolute advantage was first presented by:",o:["David Ricardo, 1817","Adam Smith, The Wealth of Nations, 1776","Heckscher and Ohlin","John Nash","Kenneth Reinert"],a:1,e:"Adam Smith l'oppose au mercantilisme, qui voyait le commerce comme un jeu à somme nulle (accumuler de l'or en exportant)."},
+ {t:"Avantage absolu",q:"Labor hours per unit: Country X needs 4 hours per shirt and 8 hours per phone; Country Y needs 6 hours per shirt and 5 hours per phone. Which statement is correct?",o:["X has an absolute advantage in both goods","Y has an absolute advantage in both goods","X has an absolute advantage in shirts, Y in phones","Y has an absolute advantage in shirts, X in phones","Neither has an absolute advantage","Impossible to determine"],a:2,e:"Tableau d'heures : le plus petit gagne. Chemise : 4 < 6 → X. Téléphone : 5 < 8 → Y."},
+ {t:"Avantage absolu",q:"Vietnam has an absolute advantage in rice. If Vietnam and Japan move from autarky to trade, the world price of rice PW will be:",o:["PW < PV < PJ","PV < PJ < PW","PV < PW < PJ","PW = PV","PW = PJ"],a:2,e:"Le prix mondial se situe entre les deux prix d'autarcie : il monte au Vietnam (exportateur) et baisse au Japon (importateur)."},
+ {t:"Avantage absolu",q:"When Vietnam exports rice to Japan, who loses?",o:["Vietnamese rice producers and Japanese rice consumers","Japanese rice producers and Vietnamese rice consumers","Nobody","Both countries as a whole","Only the Japanese government"],a:1,e:"Au Japon le prix baisse : les producteurs perdent. Au Vietnam le prix monte : les consommateurs perdent. Mais chaque pays dans son ensemble gagne (B pour le Vietnam, D pour le Japon)."},
+ {t:"Avantage absolu",q:"Excel file: Germany needs 20 labor units per car and 10 per phone; the US needs 30 per car and 5 per phone. Producing 100 cars and 100 phones costs 3,250 labor units in autarky (50 of each in each country). How much labor is saved if Germany makes all the cars and the US all the phones?",o:["250","500","750","1,000","1,250","No labor is saved"],a:2,e:"Spécialisation : Allemagne 100 × 20 = 2 000 ; É.-U. 100 × 5 = 500 ; total 2 500. Économie : 3 250 − 2 500 = 750 unités de travail."},
+ {t:"Avantage comparatif",q:"Country Z can produce at most 30 cars OR 60 bikes per day (constant costs). The opportunity cost of one car is:",o:["0.5 bike","1 bike","2 bikes","30 bikes","60 bikes","Impossible to determine"],a:2,e:"Tableau de production : CO(voiture) = max vélos ÷ max voitures = 60 ÷ 30 = 2 vélos. Une voiture de plus = 2 vélos de moins."},
+ {t:"Avantage comparatif",q:"Excel file: Mexico needs 12 labor units per computer and 2 per shirt; the US needs 1 per computer and 1 per shirt. Select the best answer:",o:["The US has an absolute advantage in both goods","Mexico has a comparative advantage in shirts","The US has a comparative advantage in computers","Mexico has nothing to export","Only A and B are correct","Only A, B and C are correct","All of the above are correct"],a:5,e:"Les É.-U. ont l'avantage absolu partout. Mais CO d'une chemise : Mexique 2/12 = 1/6 ordinateur, É.-U. 1 ordinateur → Mexique en chemises. CO d'un ordinateur : É.-U. 1 chemise, Mexique 6 → É.-U. en ordinateurs. D est faux : tout pays a un avantage comparatif."},
+ {t:"Avantage comparatif",q:"Same data (Mexico/US). Within which range must the world price of one computer (in shirts) lie for both countries to gain?",o:["0 < P < 1","1 < P < 6","1/6 < P < 1","6 < P < 12","2 < P < 12","1 < P < 12"],a:1,e:"Un ordinateur coûte 1 chemise aux É.-U. et 6 au Mexique. Le prix gagnant-gagnant est strictement entre les deux."},
+ {t:"Avantage comparatif",q:"Two countries produce wine (W) and cheese (C). Max output: A = 40 W or 20 C; B = 15 W or 45 C. What is the range of TOT (price of wine in terms of cheese) for which both gain?",o:["0.33 < TOT < 2","0.5 < TOT < 2","0.5 < TOT < 3","1 < TOT < 3","2 < TOT < 3","0.33 < TOT < 0.5"],a:2,e:"CO d'un vin : A = 20/40 = 0,5 fromage ; B = 45/15 = 3 fromages. Intervalle : 0,5 < TOT < 3. Même méthode que la Q8 de l'examen."},
+ {t:"Avantage comparatif",q:"Country K faces increasing opportunity costs: the first 10 tablets cost 1 TV each, the next 10 tablets cost 3 TVs each. K has already produced 12 tablets. What is the opportunity cost of one more tablet?",o:["1 TV","1.5 TVs","2 TVs","2.5 TVs","3 TVs","4 TVs","12 TVs"],a:4,e:"Après 12 tablettes, on est dans la 2e tranche : la 13e coûte 3 TV. Ne pas faire la moyenne (2). C'est le même piège que la Q5 de l'examen."},
+ {t:"Avantage comparatif",q:"Labor hours per unit: Arden 1.5 h per energy cell and 0.4 h per nanochip; Boreal 2 h per energy cell and 0.5 h per nanochip. Which country has the COMPARATIVE advantage in energy cells?",o:["Arden, because 1.5 < 2","Arden, because its opportunity cost is 3.75 nanochips vs 4 for Boreal","Boreal, because its opportunity cost is 4 nanochips vs 3.75 for Arden","Boreal, because 0.5 > 0.4","Neither of them","Impossible to determine"],a:1,e:"CO d'une pile = heures pile ÷ heures puce : Arden 1,5/0,4 = 3,75 ; Boreal 2/0,5 = 4. Le plus faible gagne : Arden. A donne la bonne réponse avec la mauvaise justification (c'est l'avantage ABSOLU)."},
+ {t:"Avantage comparatif",q:"Excel file, partial specialization: Mexico (700 labor units) makes only shirts (2 units each); the US (600 labor units) makes 500 computers and 100 shirts. World output is:",o:["350 computers and 350 shirts","600 computers and 350 shirts","500 computers and 450 shirts","450 computers and 500 shirts","500 computers and 350 shirts"],a:2,e:"Mexique : 700/2 = 350 chemises. É.-U. : 500 ordinateurs + 100 chemises. Total : 500 ordinateurs, 450 chemises, soit plus des deux biens qu'en autarcie (350 et 350)."},
+ {t:"Avantage comparatif",q:"A point INSIDE the production possibilities frontier is:",o:["Not feasible","Feasible with full employment","Feasible with unemployed resources","Only reachable through trade","Always efficient"],a:2,e:"Sur la FPP : plein emploi. À l'intérieur : possible mais avec des ressources inemployées. À l'extérieur : impossible seul, mais on peut y CONSOMMER grâce à l'échange."},
+ {t:"Avantage comparatif",q:"Which is NOT an assumption (caveat) of the Ricardian model in the course?",o:["Only one resource: labor","Perfect competition and full employment","No international migration","Countries differ only in technological efficiency","Countries differ in their endowments of labor and capital"],a:4,e:"Les différences de dotations en travail et capital, c'est le modèle Heckscher-Ohlin. Ricardo suppose que seule la technologie diffère."},
+ {t:"Politique commerciale",q:"A tariff of 2 euros per kilo of imported rice is:",o:["An ad valorem tariff","A specific tariff","An import quota","A countervailing duty","A non-tariff measure"],a:1,e:"Montant fixe par unité physique = droit spécifique. Un droit ad valorem serait un pourcentage de la valeur (par ex. 10 %)."},
+ {t:"Politique commerciale",q:"Domestic demand Qd = 100 − P, domestic supply Qs = P. Small country, world price Pw = 20. The country imposes a specific tariff t = 10. Compute the change in national welfare.",o:["Welfare increases by 100","Welfare decreases by 100","Welfare increases by 250","Welfare decreases by 250","Welfare increases by 400","Welfare decreases by 400","Welfare decreases by 750","Welfare increases by 750"],a:1,e:"À 20 : Qs = 20, Qd = 80. À 30 : Qs = 30, Qd = 70, importations 40. B = ½ × 10 × 10 = 50 ; D = ½ × 10 × 10 = 50. Effet net = −(B + D) = −100. (750 = perte des consommateurs, 250 = gain des producteurs, 400 = recettes.)"},
+ {t:"Politique commerciale",q:"Same market (Qd = 100 − P, Qs = P, Pw = 20, t = 10). Government tariff revenue is:",o:["100","200","300","400","600","800"],a:3,e:"Recettes = t × importations APRÈS le tarif = 10 × (70 − 30) = 400. Piège : 600 utilise les importations avant tarif (60)."},
+ {t:"Politique commerciale",q:"Domestic supply S(p) = 2p and demand D(p) = 30 − p. World price p = 6. What tariff must be imposed so that domestic production rises to 16 units?",o:["t = 1","t = 2","t = 3","t = 4","t = 6","t = 8","It is not possible to use a tariff to raise domestic production"],a:1,e:"2p = 16 → p = 8. Tarif = 8 − 6 = 2. Même méthode que la Q7 de l'examen."},
+ {t:"Politique commerciale",q:"Same market (S = 2p, D = 30 − p, world price 6). What is the minimum (prohibitive) tariff that eliminates all imports?",o:["t = 2","t = 4","t = 6","t = 10","t = 24","No tariff can do that"],a:1,e:"Le tarif prohibitif ramène le prix au prix d'autarcie : 2p = 30 − p → p = 10. t = 10 − 6 = 4."},
+ {t:"Politique commerciale",q:"Qd = 100 − P, Qs = P. The country moves from autarky to free trade at Pw = 20. What is the net welfare gain?",o:["450","600","900","1,050","1,950","There is no gain"],a:2,e:"Autarcie : P = 50, Q = 50. À 20, importations = 80 − 20 = 60. Gain = triangle ½ × (50 − 20) × 60 = 900. (Les consommateurs gagnent 1 950, les producteurs perdent 1 050.)"},
+ {t:"Politique commerciale",q:"Using the importing-country graph of Part 2 (autarky point A, B and C at the world price Pw), what are the effects of free trade?",o:["Consumer surplus increases by PwPoAC; producer surplus decreases to PwBO; social welfare increases by ABC","Producer surplus increases by PwPoAC; consumer surplus decreases by PwBO; social welfare increases by ABC","Consumer surplus increases by PwPoAC; producer surplus decreases by PwBO; social welfare decreases by ABC","Consumer surplus increases by PwPoAC; producer surplus increases by PwBO; social welfare increases by ABC","Consumer surplus does not change; producer surplus decreases; social welfare increases","Consumer surplus increases by PwPoAC; producer surplus decreases to PwBO; social welfare does not change"],a:0,e:"Le prix baisse : les consommateurs gagnent le trapèze PwPoAC, le surplus des producteurs tombe à PwBO, et le pays gagne le triangle ABC. Exactement le raisonnement de la Q3 de l'examen."},
+ {t:"Politique commerciale",q:"A LARGE importing country imposes a tariff. The world price falls. The net welfare effect for this country is:",o:["Unambiguously negative","Unambiguously positive","Ambiguous: the terms-of-trade gain may outweigh the efficiency loss","Zero","Always equal to −(B + D)"],a:2,e:"Grand pays : la baisse du prix mondial (gain de termes de l'échange) peut compenser les pertes B + D. Pour un petit pays, la perte est certaine."},
+ {t:"Politique commerciale",q:"With the letters of the tariff graph (A, B, C, D), the net welfare loss of an import quota whose licenses are allocated to FOREIGN exporters is:",o:["A","B + D","C","B + C + D","A + B + C + D","Zero"],a:3,e:"La rente de quota C part chez les exportateurs étrangers. Perte = B + C + D, plus grande que pour un quota alloué aux importateurs nationaux (B + D)."},
+ {t:"Politique commerciale",q:"Quota rents are:",o:["The tariff revenue of the government","The extra value of the right to import, earned by license holders","The loss of consumers","The gain of domestic producers","The fee paid to the WTO"],a:1,e:"Le titulaire d'une licence achète au prix mondial et revend au prix intérieur plus élevé : la différence est la rente de quota (aire C)."},
+ {t:"Politique commerciale",q:"An exporter sells steel in Europe below its cost of production. This is:",o:["Price-based dumping","Cost-based dumping","A countervailing duty","A voluntary export restraint","A tariff rate quota"],a:1,e:"En dessous du coût de production = dumping par les coûts. Moins cher que dans son propre pays = dumping par les prix."},
+ {t:"Politique commerciale",q:"Which are possible responses of the importing country to dumping?",o:["Anti-dumping duties equal to the dumping margin","Duties just sufficient to remove material injury (lesser-duty rule)","Price undertakings by foreign firms","Only A and B are correct","All of the above are correct","None of the above are correct"],a:4,e:"Les trois réponses du cours. Toutes sont compatibles avec l'OMC si le dumping cause un préjudice important à une branche produisant un produit similaire."},
+ {t:"Politique commerciale",q:"Countervailing duties (CVD) are allowed by the WTO when:",o:["A foreign firm sells below its home price","Foreign exporters benefit from subsidies AND their exports cause material injury","Imports increase, whatever the reason","The importing country has a trade deficit","Always, without conditions"],a:1,e:"Deux conditions : la subvention a profité à l'exportateur, et les exportations causent un préjudice important. Critique : protectionnisme déguisé ?"},
+ {t:"Politique commerciale",q:"A tariff rate quota (TRQ):",o:["Is a quota without any tariff","Has two tariff levels: a lower one within the quota, a higher one above it","Is a tax on exports","Is used to ban agricultural imports","Is the same as a voluntary export restraint"],a:1,e:"Deux tarifs selon que l'on est dans le quota ou au-delà. Il sert à garantir des niveaux d'accès minimum (MAL) en agriculture, comme pour le riz au Japon."},
+ {t:"Défense commerciale",q:"Select the most correct answer:",o:["Trade remedies allow tariffs above bound rates, applied in a discriminatory fashion","A voluntary export restraint limits the quantity of goods EXPORTED by a country during a period","A VER is typically bilateral: one exporter to one importing country","Trade remedies and VERs must be used simultaneously to reduce trade deficits","Only A and B are correct","Only A, B and C are correct","All of the above are correct"],a:5,e:"A, B, C reprennent les définitions de la Q1 de l'examen. D est inventée : aucune obligation de les utiliser ensemble."},
+ {t:"Défense commerciale",q:"Under a voluntary export restraint (e.g. Japanese cars to the US in 1981), the rent from higher prices goes to:",o:["The importing country's government","Domestic consumers","Foreign exporters","The WTO","Nobody, it disappears"],a:2,e:"Comme un quota alloué aux exportateurs étrangers : la rente part à l'étranger, ce qui rend la VER plus coûteuse pour le pays importateur. Les VER sont interdites par l'OMC depuis 1995."},
+ {t:"Échange pur",q:"Smith's utility from apples: 0, 20, 38, 54, 68 utils for 0 to 4 apples. The marginal utility of the 3rd apple is:",o:["54","38","18","16","14","20"],a:3,e:"UM = 54 − 38 = 16. Elle baisse à chaque pomme (20, 18, 16, 14) : utilité marginale décroissante."},
+ {t:"Échange pur",q:"In the Edgeworth box, Smith moves from E to J by giving 2 oranges for 6 apples. The terms of trade are:",o:["1/3 apple per orange","1 apple per orange","2 apples per orange","3 apples per orange","6 apples per orange"],a:3,e:"ToT = pommes ÷ oranges = 6/2 = 3 pommes par orange = P orange / P pomme. C'est la pente de la droite entre E et J."},
+ {t:"Échange pur",q:"A Pareto optimal allocation between Smith and Jones requires:",o:["Each has the same quantity of each good","MRS of Smith = MRS of Jones","Smith's marginal utility of apples = Jones's marginal utility of oranges","Each keeps his endowment","Total utility is maximized for Smith only"],a:1,e:"À l'optimum, les courbes d'indifférence sont tangentes : TMS Smith = TMS Jones (= P orange / P pomme). On ne peut plus améliorer l'un sans nuire à l'autre."},
+ {t:"Échange pur",q:"Select the best answer about the Edgeworth box model:",o:["Any trade into the lens makes both Smith and Jones better off","Trade is win-lose","Mutual gains require perfect information and voluntary exchange","Indifference curves are convex because of diminishing marginal utility","Only A and C are correct","Only A, C and D are correct","All of the above are correct"],a:5,e:"B est faux : avec les hypothèses du modèle, l'échange est gagnant-gagnant. A, C et D sont des conclusions du cours."},
+ {t:"Heckscher-Ohlin",q:"Home has L = 200, K = 100. Foreign has L = 90, K = 90. Shoes are labor-intensive. According to the H-O model, which country has a comparative advantage in shoes?",o:["Home","Foreign","Both equally","Neither","Depends on relative prices","Cannot be determined"],a:0,e:"L/K : Home = 2, Foreign = 1. Home est abondant en travail → avantage comparatif dans le bien intensif en travail (chaussures). C'est le ratio qui compte, pas le nombre absolu."},
+ {t:"Heckscher-Ohlin",q:"Good X uses 4 labor units and 2 capital units; good Y uses 1 labor unit and 3 capital units. Which is correct?",o:["X is capital-intensive","Y is labor-intensive","X is labor-intensive and Y is capital-intensive","Both are labor-intensive","Impossible to determine"],a:2,e:"L/K de X = 4/2 = 2 ; de Y = 1/3. X utilise relativement plus de travail : intensif en travail. Y : intensif en capital."},
+ {t:"Stolper-Samuelson",q:"Zero-profit conditions: pX = 2w + r and pY = w + 2r, with pY = 1. If pX rises from 1 to 1.25, the rental rate r:",o:["Increases by 25%","Decreases by 25%","Increases by 50%","Decreases by 50%","Increases by 10%","Decreases by 10%","Does not change"],a:1,e:"pX = 1 : w = 1 − 2r → 2 − 4r + r = 1 → r = 1/3. pX = 1,25 : 2 − 3r = 1,25 → r = 0,25. Variation : (0,25 − 0,333)/0,333 = −25 %. Le salaire passe de 1/3 à 0,5 (+50 %) : amplification."},
+ {t:"Stolper-Samuelson",q:"According to the Stolper-Samuelson theorem, a rise in the price of the labor-intensive good:",o:["Raises both wages and the rental rate","Raises the wage more than proportionally and lowers the rental rate","Lowers wages","Has no effect on factor prices","Raises the rental rate and lowers wages"],a:1,e:"Le facteur utilisé intensivement dans le bien qui renchérit gagne plus que proportionnellement ; l'autre perd. Exemple de l'examen : prix +20 %, salaire +40 %, loyer du capital −10 %."}
+];
+const box=document.getElementById('quizbox');
+let score=0,done=0;
+document.getElementById('total').textContent=Q.length;
+function render(){
+  box.innerHTML='';score=0;done=0;update();
+  document.getElementById('result').classList.remove('on');
+  Q.forEach((item,i)=>{
+    const d=document.createElement('div');d.className='q';
+    const th=document.createElement('div');th.className='theme';th.textContent=item.t;d.appendChild(th);
+    const h=document.createElement('h4');h.textContent=item.q;d.appendChild(h);
+    const opts=document.createElement('div');opts.className='opts';
+    item.o.forEach((t,j)=>{
+      const b=document.createElement('button');b.type='button';
+      b.textContent=L[j]+'. '+t;
+      b.addEventListener('click',()=>answer(i,j,opts,d));
+      opts.appendChild(b);
+    });
+    d.appendChild(opts);box.appendChild(d);
+  });
+}
+function answer(i,j,opts,d){
+  const item=Q[i];const btns=opts.querySelectorAll('button');
+  btns.forEach(b=>b.disabled=true);
+  btns[item.a].classList.add('right');
+  const ok=j===item.a;
+  if(!ok)btns[j].classList.add('wrong');else score++;
+  done++;
+  const ex=document.createElement('div');ex.className='expl';
+  const head=document.createElement('b');head.className=ok?'v':'x';
+  head.textContent=ok?'Bonne réponse. ':'Pas tout à fait. ';
+  ex.appendChild(head);
+  if(!ok)ex.appendChild(document.createTextNode('La bonne réponse est '+L[item.a]+'. '));
+  ex.appendChild(document.createTextNode(item.e));
+  d.appendChild(ex);update();
+  if(done===Q.length){
+    const r=document.getElementById('result');const t=document.getElementById('resultText');
+    const pct=score/Q.length;
+    t.textContent=score+' / '+Q.length+', soit '+(Math.round(pct*200)/10)+' / 20. '+(pct>=.85?'Excellent, tu es prête pour l\'examen. Relis juste les explications de tes erreurs.':pct>=.6?'Bonne base. Refais les calculs ratés avec la boîte à outils, puis recommence.':'Pas de panique, c\'est normal en partant de zéro. Reprends une partie à la fois (commence par l\'avantage comparatif et les tarifs), puis refais le QCM.');
+    r.classList.add('on');
+  }
+}
+function update(){
+  document.getElementById('score').textContent=score;
+  document.getElementById('done').textContent=done;
+  document.getElementById('note').textContent=done?(Math.round(score/done*200)/10).toString().replace('.',','):'0';
+}
+document.getElementById('reset').addEventListener('click',()=>{render();document.getElementById('quiz').scrollIntoView({behavior:'smooth'})});
+render();
+</script>

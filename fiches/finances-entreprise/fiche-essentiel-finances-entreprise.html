@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Finances : l'essentiel examen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Public+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap">
+<style>
+:root{
+  --bg:#f5f5f6; --paper:#ffffff; --ink:#1f2125; --muted:#5d6068;
+  --acc-deep:#3d4048; --cream:#ececee; --cream-2:#d3d5d9; --line:#e1e2e5;
+  --teal:#3f5566; --teal-bg:#e6ebef; --ok:#1f7a50; --ok-bg:#e1f2e8; --ko:#b3262d; --ko-bg:#fbe3e2;
+  --hot:#8a5a00; --hot-bg:#fff1d6;
+  --f-display:"Bricolage Grotesque","Arial Black",system-ui,sans-serif;
+  --f-body:"Public Sans","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#141518; --paper:#1d1f23; --ink:#eceef1; --muted:#a8acb4;
+  --acc-deep:#d4d7dc; --cream:#2a2d32; --cream-2:#454950; --line:#33363c;
+  --teal:#a9c1d3; --teal-bg:#22303a; --ok:#5fd39b; --ok-bg:#163327; --ko:#ff8b7d; --ko-bg:#3a1a17;
+  --hot:#ffcf7a; --hot-bg:#3a2c10; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#141518; --paper:#1d1f23; --ink:#eceef1; --muted:#a8acb4;
+  --acc-deep:#d4d7dc; --cream:#2a2d32; --cream-2:#454950; --line:#33363c;
+  --teal:#a9c1d3; --teal-bg:#22303a; --ok:#5fd39b; --ok-bg:#163327; --ko:#ff8b7d; --ko-bg:#3a1a17;
+  --hot:#ffcf7a; --hot-bg:#3a2c10; color-scheme:dark }
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.6;padding:0 16px}
+main{max-width:860px;margin:0 auto;padding:28px 0 80px}
+h1,h2,h3{font-family:var(--f-display);line-height:1.1;text-wrap:balance}
+h1{font-size:clamp(2.1rem,6vw,3.4rem);font-weight:800;margin:0 0 .3em;letter-spacing:-.02em}
+h2{font-size:clamp(1.5rem,3.4vw,2.1rem);font-weight:800;margin:0 0 .4em}
+h3{font-size:1.2rem;font-weight:750;margin:1.6em 0 .4em;color:var(--acc-deep)}
+p{margin:.55em 0}
+.eyebrow{font-family:var(--f-display);text-transform:uppercase;letter-spacing:.12em;font-size:.78rem;font-weight:800;color:var(--muted)}
+.hero{background:linear-gradient(130deg,#f1f2f4 0%,#d9dbdf 50%,#b9bcc2 100%);color:#1f2125;border-radius:22px;padding:28px 24px;margin-bottom:24px}
+.hero .eyebrow{color:#4a4d55}
+.hero p{color:#2c2f35;max-width:62ch}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chip{background:rgba(255,255,255,.7);color:#2c2f35;border:1px solid rgba(61,64,72,.2);border-radius:999px;padding:3px 12px;font-size:.85rem;font-weight:600}
+nav.toc{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:14px 18px;margin-bottom:8px}
+nav.toc ol{margin:.4em 0 0;padding-left:1.3em;columns:2;column-gap:28px}
+@media (max-width:640px){nav.toc ol{columns:1}}
+nav.toc a{color:var(--acc-deep);text-decoration:none}
+nav.toc a:hover{text-decoration:underline}
+section.part{padding-top:34px;margin-top:34px;border-top:3px solid var(--line)}
+.part-head{display:flex;gap:14px;align-items:center;margin-bottom:6px}
+.num{font-family:var(--f-display);font-weight:800;font-size:2.2rem;line-height:1;color:#2a2c31;background:linear-gradient(135deg,#eceef0,#c5c8cd);border-radius:12px;padding:6px 12px;flex:none;box-shadow:0 3px 0 #a3a7ad}
+.part-head h2{margin:0}
+.badge{display:inline-block;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;border-radius:999px;padding:2px 10px;vertical-align:middle;margin-left:6px}
+.b-max{background:var(--ko-bg);color:var(--ko)}
+.b-high{background:var(--hot-bg);color:var(--hot)}
+.b-cours{background:var(--teal-bg);color:var(--teal)}
+.box{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin:14px 0}
+.box .eyebrow{display:block;margin-bottom:4px}
+.def{background:var(--cream);border-color:transparent}
+.ex{border-left:5px solid var(--acc-deep)}
+.trap{border:2px dashed var(--ko)}
+.trap .eyebrow{color:var(--ko)}
+.key{background:linear-gradient(135deg,#e9eaed,#cfd2d7);color:#1f2125;border:none}
+.key .eyebrow{color:#4a4d55}
+.exam{background:var(--teal-bg);border:none}
+.exam .eyebrow{color:var(--teal)}
+.f{font-family:var(--f-display);font-weight:700;font-size:1.12rem;background:var(--paper);border:2px solid var(--cream-2);border-radius:12px;padding:10px 14px;margin:10px 0;text-align:center}
+.f small{display:block;font-family:var(--f-body);font-weight:400;font-size:.82rem;color:var(--muted);margin-top:4px}
+.tw{overflow-x:auto;margin:12px 0}
+table{border-collapse:collapse;width:100%;font-size:.93rem;background:var(--paper)}
+th,td{border:1px solid var(--line);padding:6px 9px;text-align:left;vertical-align:top}
+th{background:var(--cream);font-weight:700}
+td.n,th.n{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+ol.steps{padding-left:1.3em}
+ol.steps li{margin:.35em 0}
+.top{display:grid;gap:10px;margin:14px 0}
+.top div{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:10px 14px;display:flex;gap:12px;align-items:flex-start}
+.top b.r{font-family:var(--f-display);font-size:1.4rem;min-width:1.6em;color:var(--acc-deep)}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:640px){.cols{grid-template-columns:1fr}}
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:center;margin:12px 0}
+.flow span{background:var(--paper);border:2px solid var(--cream-2);border-radius:10px;padding:6px 10px;font-weight:700;font-size:.9rem}
+.flow i{font-style:normal;color:var(--muted);font-weight:800}
+details{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:10px 16px;margin:10px 0}
+summary{cursor:pointer;font-weight:700;color:var(--acc-deep)}
+details[open] summary{margin-bottom:8px}
+/* quiz */
+.scorebar{position:sticky;top:0;z-index:5;background:var(--bg);padding:8px 0;font-weight:700;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.scorebar button{font:inherit;font-size:.9rem;background:var(--paper);color:var(--ink);border:1px solid var(--cream-2);border-radius:999px;padding:4px 14px;cursor:pointer}
+.q{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:12px 0}
+.q .tag{font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.q p.st{font-weight:700;margin:.2em 0 .6em}
+.q button.o{display:block;width:100%;text-align:left;font:inherit;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin:6px 0;cursor:pointer}
+.q button.o:hover{border-color:var(--cream-2)}
+.q button.o.good{background:var(--ok-bg);border-color:var(--ok);color:var(--ink)}
+.q button.o.wrong{background:var(--ko-bg);border-color:var(--ko)}
+.q button.o:disabled{cursor:default}
+.expl{display:none;margin-top:8px;padding:8px 12px;border-radius:10px;background:var(--cream);font-size:.94rem}
+.q.done .expl{display:block}
+footer{margin-top:40px;color:var(--muted);font-size:.85rem}
+@media print{
+  body{font-size:13.5px;padding:0}
+  main{padding:0;max-width:none}
+  .scorebar,nav.toc{display:none}
+  section.part{break-before:auto}
+  .box,.q,.f,table,.top div{break-inside:avoid}
+  details{border:none;padding:0}
+  details summary{display:none}
+  h2,h3{break-after:avoid}
+  .q{padding:8px 12px;margin:6px 0}
+  .q p.st{margin:0 0 .3em}
+  .q button.o{padding:2px 10px;margin:2px 0;font-size:.92em}
+  .expl{margin-top:4px;padding:4px 10px}
+}
+</style>
+</head>
+<body>
+<main>
+
+<header class="hero">
+  <div class="eyebrow">Finances d'entreprise · CM Dr Issam Beya · L3 Commerce International · S5</div>
+  <h1>L'essentiel pour l'examen</h1>
+  <p>Seulement ce qui tombe presque à coup sûr : les formules à savoir par cœur, la méthode pour chaque type d'exercice, les questions de cours annoncées et les pièges du QCM. Pour les explications détaillées, garde ta grande fiche à côté.</p>
+  <div class="chips"><span class="chip">CAF + capacité d'endettement</span><span class="chip">Effet de levier</span><span class="chip">FRNG, BFR, TN</span><span class="chip">Gordon-Shapiro, PER, ANC</span><span class="chip">VAN, IP, DR, TRI</span><span class="chip">Emprunts</span></div>
+</header>
+
+<div class="box exam">
+  <span class="eyebrow">Le format de l'examen (d'après tes notes)</span>
+  <p><strong>2 heures. 2 exercices sur 5 points + 1 question de cours sur 5 points + 1 QCM sur 5 points.</strong></p>
+  <p>Le prof a dit : <strong>pas d'exercice de calcul</strong> sur le chapitre 1 (bilan, compte de résultat), les SIG ni le change. Ces chapitres tombent en <strong>question de cours ou en QCM</strong>. Les exercices portent donc sur : CAF et levier, bilan fonctionnel, évaluation, investissement, financement.</p>
+  <p>Les étiquettes : <span class="badge b-max">Quasi sûr</span> annoncé par le prof ou au cœur de tous les TD · <span class="badge b-high">Très probable</span> · <span class="badge b-cours">Question de cours / QCM</span>.</p>
+</div>
+
+<nav class="toc">
+  <span class="eyebrow">Sommaire</span>
+  <ol>
+    <li><a href="#top10">Le top 10 à maîtriser</a></li>
+    <li><a href="#caf">CAF et capacité d'endettement</a></li>
+    <li><a href="#levier">Effet de levier</a></li>
+    <li><a href="#bf">Bilan fonctionnel : FRNG, BFR, TN</a></li>
+    <li><a href="#eval">Évaluer une entreprise</a></li>
+    <li><a href="#invest">Investissement : VAN, IP, DR, TRI</a></li>
+    <li><a href="#emprunt">Tableau d'emprunt</a></li>
+    <li><a href="#cours">Questions de cours rédigées</a></li>
+    <li><a href="#sig">SIG et bilan (QCM)</a></li>
+    <li><a href="#formulaire">Formulaire express</a></li>
+    <li><a href="#qcm">QCM d'entraînement corrigé</a></li>
+  </ol>
+</nav>
+
+<!-- 1 -->
+<section class="part" id="top10">
+  <div class="part-head"><span class="num">1</span><h2>Le top 10 à maîtriser</h2></div>
+  <p>Si tu n'as le temps de revoir que ça, revois ça, dans cet ordre.</p>
+  <div class="top">
+    <div><b class="r">1</b><span><strong>FRNG, BFR, trésorerie nette</strong> et la vérification TN = FRNG − BFR = Ta − Tp. <span class="badge b-max">Quasi sûr</span></span></div>
+    <div><b class="r">2</b><span><strong>Bilan comptable vs bilan fonctionnel</strong> (tableau des différences), retraitement du crédit-bail. <span class="badge b-max">Quasi sûr</span></span></div>
+    <div><b class="r">3</b><span><strong>CAF</strong> par les deux méthodes, autofinancement, capacité d'endettement (dettes ÷ CAF &lt; 4). <span class="badge b-max">Quasi sûr</span></span></div>
+    <div><b class="r">4</b><span><strong>VAN et IP</strong>, puis DR et TRI : calculer et conclure « rentable / pas rentable ». <span class="badge b-max">Quasi sûr</span></span></div>
+    <div><b class="r">5</b><span><strong>Effet de levier</strong> : Re, i, RF, et dire s'il est positif, nul ou négatif. <span class="badge b-high">Très probable</span></span></div>
+    <div><b class="r">6</b><span><strong>Gordon-Shapiro et PER</strong> : valeur d'une action, BNPA, capitalisation. <span class="badge b-high">Très probable</span></span></div>
+    <div><b class="r">7</b><span><strong>Actif net corrigé</strong> et méthode des multiples (×6, ×2, ×3, ×4). <span class="badge b-high">Très probable</span></span></div>
+    <div><b class="r">8</b><span><strong>Tableau d'emprunt</strong> : in fine, amortissement constant, annuités constantes. <span class="badge b-high">Très probable</span></span></div>
+    <div><b class="r">9</b><span><strong>Comment améliorer la trésorerie ?</strong> et <strong>Qu'est-ce que le Forex ?</strong> <span class="badge b-cours">Question de cours</span></span></div>
+    <div><b class="r">10</b><span><strong>SIG</strong> : ordre des soldes, « quel SIG pour quelle question », piège VA / EBE. <span class="badge b-cours">QCM</span></span></div>
+  </div>
+</section>
+
+<!-- 2 CAF -->
+<section class="part" id="caf">
+  <div class="part-head"><span class="num">2</span><h2>CAF et capacité d'endettement <span class="badge b-max">Quasi sûr</span></h2></div>
+  <div class="box def"><span class="eyebrow">Définition</span>
+  La <strong>capacité d'autofinancement (CAF)</strong> est l'argent que l'entreprise génère elle-même grâce à son activité, sans banque ni actionnaire. On ne garde que les flux qui font vraiment bouger la trésorerie.</div>
+  <div class="f">CAF = Produits encaissables − Charges décaissables <small>toujours « hors cessions » : le prix de vente d'une immobilisation et sa valeur comptable sont exclus</small></div>
+
+  <div class="cols">
+    <div class="box"><span class="eyebrow">Méthode soustractive (part de l'EBE)</span>
+      EBE<br>+ transferts de charges + autres produits − autres charges<br>+ produits financiers encaissables (hors reprises)<br>− charges financières décaissables (hors dotations)<br>+ produits exceptionnels de gestion − charges exceptionnelles de gestion<br>− participation − impôt sur les sociétés<br><strong>= CAF</strong></div>
+    <div class="box"><span class="eyebrow">Méthode additive (part du résultat net)</span>
+      Résultat de l'exercice<br>+ toutes les dotations (DAP)<br>− toutes les reprises<br>− produits de cession d'actif (PCEA)<br>+ valeur comptable des actifs cédés (VCEAC)<br>− quote-part des subventions d'investissement<br><strong>= CAF</strong><br><em>On « annule » ce qui n'était qu'un calcul.</em></div>
+  </div>
+
+  <div class="box ex"><span class="eyebrow">Exemple chiffré (en k€) : les deux méthodes donnent 157</span>
+  EBE 200 ; autres produits 10 ; autres charges 5 ; dotations d'exploitation 50 ; produits financiers 8 (dont reprise 2) ; charges financières 12 (dont dotation 3) ; produits exceptionnels : gestion 4, cession 20 ; charges exceptionnelles : gestion 3, VCEAC 15 ; participation 6 ; IS 40.<br>
+  <strong>Soustractive :</strong> 200 + 10 − 5 + (8 − 2) − (12 − 3) + 4 − 3 − 6 − 40 = <strong>157</strong>.<br>
+  <strong>Additive :</strong> résultat net 111 → 111 + 50 + 3 − 2 − 20 + 15 = <strong>157</strong> ✓</div>
+
+  <h3>Classer un élément (exercice Jakès, très fréquent)</h3>
+  <div class="tw"><table>
+    <tr><th>Charge décaissable (dans la CAF)</th><th>Charge calculée (hors CAF)</th><th>Produit encaissable (dans la CAF)</th><th>Produit calculé (hors CAF)</th></tr>
+    <tr><td>IS, intérêts, participation, pertes sur créances irrécouvrables</td><td>Dotations (amortissements, dépréciations, provisions), VCEAC</td><td>Ventes, transferts de charges, gains de change, produits nets sur cessions de VMP</td><td>Reprises, quote-part des subventions d'investissement virée au résultat</td></tr>
+  </table></div>
+  <div class="box trap"><span class="eyebrow">Piège</span>Le <strong>prix de cession d'une immobilisation</strong> fait entrer de l'argent, mais il est <strong>exclu de la CAF</strong> (ce n'est pas l'activité courante). En revanche, la cession de <strong>VMP</strong> reste dedans (c'est de la trésorerie).</div>
+
+  <h3>Après la CAF : autofinancement et capacité d'endettement</h3>
+  <div class="f">Autofinancement = CAF − Dividendes</div>
+  <div class="f">Capacité de remboursement = Dettes financières ÷ CAF &lt; 4 <small>donc dette maximale = 4 × CAF</small></div>
+  <div class="box ex"><span class="eyebrow">Exemple du cours : ABC demande 800 000 €</span>
+  CAF 150 000 ; dettes actuelles 200 000 ; dividendes 20 000.
+  <ol class="steps"><li>Dette maximale = 4 × 150 000 = <strong>600 000</strong>.</li><li>Autofinancement = 150 000 − 20 000 = 130 000.</li><li>Ratio actuel = 200 000 ÷ 150 000 = 1,33 &lt; 4 : capacité pas atteinte.</li><li>Marge restante = 600 000 − 200 000 = <strong>400 000</strong>. La demande de 800 000 est <strong>refusée</strong> ; ABC peut emprunter au plus 400 000.</li></ol></div>
+</section>
+
+<!-- 3 Levier -->
+<section class="part" id="levier">
+  <div class="part-head"><span class="num">3</span><h2>Effet de levier <span class="badge b-high">Très probable</span></h2></div>
+  <p>L'idée : emprunter est une bonne affaire si l'investissement rapporte plus (Re) que ce que coûte la dette (i).</p>
+  <div class="f">RF = [ Re + (Re − i) × D/CP ] × (1 − T)<small>Re = résultat d'exploitation ÷ actif économique · i = intérêts ÷ dettes · RF = résultat net ÷ capitaux propres · T = taux d'IS</small></div>
+  <div class="tw"><table>
+    <tr><th>Cas</th><th>Condition</th><th>Conclusion à écrire</th></tr>
+    <tr><td><strong>Levier positif</strong></td><td>i &lt; Re</td><td>L'endettement augmente la rentabilité des actionnaires : on peut conseiller d'emprunter.</td></tr>
+    <tr><td><strong>Levier nul</strong></td><td>i = Re</td><td>L'endettement ne change rien (RF = Re avant impôt).</td></tr>
+    <tr><td><strong>Levier négatif (effet massue)</strong></td><td>i &gt; Re</td><td>La dette détruit de la valeur : à éviter.</td></tr>
+  </table></div>
+  <div class="box ex"><span class="eyebrow">Exercice type : A ou B ?</span>
+  Même RE (15 000), même actif économique (100 000). A : pas de dette, CP 100 000, RN 10 000. B : dette 40 000, intérêts 3 600, CP 60 000, RN 7 600.<br>
+  Re = 15 % pour les deux. i(B) = 3 600 ÷ 40 000 = 9 %. RF(A) = 10 %, RF(B) = 7 600 ÷ 60 000 = <strong>12,67 %</strong>.<br>
+  Vérif. : [15 % + (15 % − 9 %) × 40/60] × 2/3 = 12,67 % ✓<br>
+  <strong>Conclusion :</strong> i (9 %) &lt; Re (15 %) → levier positif, B rapporte plus à ses actionnaires, mais elle est plus risquée (intérêts à payer même en mauvaise année).</div>
+  <div class="box trap"><span class="eyebrow">Piège</span><strong>Profitabilité</strong> = on divise par le chiffre d'affaires. <strong>Rentabilité</strong> = on divise par les capitaux investis. Le levier parle de rentabilité.</div>
+</section>
+
+<!-- 4 BF -->
+<section class="part" id="bf">
+  <div class="part-head"><span class="num">4</span><h2>Bilan fonctionnel : FRNG, BFR, trésorerie <span class="badge b-max">Quasi sûr</span></h2></div>
+  <p>On réorganise le bilan par fonction (investissement, financement, exploitation) pour savoir si l'entreprise est <strong>équilibrée</strong>.</p>
+  <div class="tw"><table>
+    <tr><th>EMPLOIS (valeurs brutes)</th><th>RESSOURCES</th></tr>
+    <tr><td><strong>Emplois stables</strong> : immobilisations brutes + biens en crédit-bail (valeur d'origine)</td><td><strong>Ressources stables</strong> : capitaux propres + provisions + amortissements et dépréciations (y compris fictifs du crédit-bail) + dettes financières (hors découverts) + VNC du crédit-bail</td></tr>
+    <tr><td><strong>ACE</strong> : stocks bruts + créances clients brutes</td><td><strong>PCE</strong> : fournisseurs, dettes fiscales et sociales</td></tr>
+    <tr><td><strong>ACHE</strong> : créances hors exploitation</td><td><strong>PCHE</strong> : dettes sur immobilisations, IS…</td></tr>
+    <tr><td><strong>Ta</strong> : disponibilités, VMP</td><td><strong>Tp</strong> : découverts, concours bancaires courants</td></tr>
+  </table></div>
+
+  <h3>Les 4 formules</h3>
+  <div class="f">FRNG = Ressources stables − Emplois stables</div>
+  <div class="f">BFRE = ACE − PCE &nbsp;·&nbsp; BFRHE = ACHE − PCHE &nbsp;·&nbsp; BFR = BFRE + BFRHE</div>
+  <div class="f">TN = FRNG − BFR = Ta − Tp <small>les deux calculs doivent donner le même chiffre : c'est ta vérification</small></div>
+
+  <h3>Méthode en 4 étapes (exercice RIVAL)</h3>
+  <ol class="steps">
+    <li><strong>Remettre l'actif en brut</strong> : brut = net + amortissements. Le total des amortissements et provisions d'actif monte en ressources stables.</li>
+    <li><strong>Retraiter le crédit-bail</strong> : valeur d'origine en emplois stables ; amortissements fictifs en ressources propres ; VNC en dettes financières. Les ressources stables augmentent exactement de la valeur d'origine.</li>
+    <li><strong>Classer</strong> le circulant : exploitation, hors exploitation, trésorerie.</li>
+    <li><strong>Calculer et interpréter</strong> FRNG, BFRE, BFRHE, BFR, TN.</li>
+  </ol>
+  <div class="box ex"><span class="eyebrow">Résultat RIVAL (k€)</span>
+  Emplois stables 2 600 ; ressources stables 2 750 → <strong>FRNG = + 150</strong>. BFRE = 570 − 400 = 170 ; BFRHE = 50 − 100 = − 50 → <strong>BFR = 120</strong>. <strong>TN = 150 − 120 = + 30</strong> = Ta 30 − Tp 0 ✓. RIVAL est équilibrée.</div>
+
+  <div class="box key"><span class="eyebrow">À retenir : les 3 conditions de l'équilibre</span>
+  1. FRNG &gt; 0 (règle d'or : emplois stables financés par des ressources stables).<br>
+  2. FRNG &gt; BFR.<br>
+  3. Donc TN &gt; 0. Si FRNG &lt; BFR, la trésorerie est négative : l'entreprise vit à découvert (cas ACP : TN = − 49 000).</div>
+  <div class="box trap"><span class="eyebrow">Piège</span>Un <strong>BFR négatif</strong> n'est pas un problème : c'est une ressource (grande distribution : clients payés comptant, fournisseurs à 60 jours).</div>
+</section>
+
+<!-- 5 Eval -->
+<section class="part" id="eval">
+  <div class="part-head"><span class="num">5</span><h2>Évaluer une entreprise <span class="badge b-high">Très probable</span></h2></div>
+  <p>Il n'y a pas une seule « vraie » valeur : on applique plusieurs méthodes et on donne une <strong>fourchette</strong>.</p>
+  <div class="cols">
+    <div class="box"><span class="eyebrow">1. Multiples (valeur de rendement)</span>
+      Résultat net × 6 · Capitaux propres × 2 · EBE × 3 · CAF × 4<br>
+      <em>ABC : 800 / 750 / 720 / 780 → moyenne 762,5 k€, fourchette 720 à 800.</em></div>
+    <div class="box"><span class="eyebrow">2. Patrimoniale</span>
+      Actif net = Actif − toutes les dettes<br>
+      ANC = actif net + plus-values (− moins-values) sur actifs réévalués<br>
+      <em>On retire les non-valeurs (charges à répartir).</em></div>
+    <div class="box"><span class="eyebrow">3. Goodwill</span>
+      V = ANC + Goodwill<br>
+      <em>Le goodwill (survaleur) = savoir-faire, marque, clientèle, emplacement.</em></div>
+    <div class="box"><span class="eyebrow">4. Boursières</span>
+      Gordon-Shapiro : V = D ÷ (K − g), si K &gt; g<br>
+      PER = Cours ÷ BNPA → Cours = BNPA × PER<br>
+      Capitalisation = nb d'actions × cours</div>
+  </div>
+  <div class="box ex"><span class="eyebrow">Les 3 calculs qui tombent</span>
+  <strong>Gordon-Shapiro</strong> : BNPA 7 €, distribution 60 %, K = 10 %, g = 6 % → D = 4,20 → V = 4,20 ÷ 0,04 = <strong>105 €</strong>.<br>
+  <strong>PER</strong> : PER 19, cours 380 € → BNPA = 380 ÷ 19 = <strong>20 €</strong> ; taux requis = 1 ÷ 19 ≈ 5,26 %.<br>
+  <strong>ANC Hélouis</strong> : actif net = 1 220 000 − 90 000 (charges à répartir) − 420 000 = 710 000 ; immobilisations sous-estimées de 25 % → plus-value 100 000, après impôt latent 66 667 → ANC ≈ 776 667 → 97,08 € par action (8 000 actions). Sans impôt latent : 810 000 et 101,25 €. <em>Écris ton hypothèse.</em></div>
+  <div class="box trap"><span class="eyebrow">Pièges</span>
+  Dans Gordon-Shapiro, <strong>D est le dividende</strong>, pas le BNPA : D = BNPA × taux de distribution.<br>
+  Un PER <strong>bas</strong> = action bon marché, peut-être <strong>sous-évaluée</strong>. PER relatif = PER du titre ÷ PER du marché.</div>
+</section>
+
+<!-- 6 Invest -->
+<section class="part" id="invest">
+  <div class="part-head"><span class="num">6</span><h2>Investissement : VAN, IP, DR, TRI <span class="badge b-max">Quasi sûr</span></h2></div>
+  <div class="f">Actualiser : VA = CFₙ ÷ (1 + r)ⁿ &nbsp;·&nbsp; Capitaliser : CFₙ = CF₀ × (1 + r)ⁿ</div>
+  <div class="tw"><table>
+    <tr><th>Critère</th><th>Formule</th><th>Rentable si…</th></tr>
+    <tr><td><strong>VAN</strong></td><td>Σ CF actualisés − I₀</td><td>VAN &gt; 0</td></tr>
+    <tr><td><strong>IP</strong></td><td>(VAN + I₀) ÷ I₀</td><td>IP &gt; 1</td></tr>
+    <tr><td><strong>DR</strong></td><td>(n − 1) ans + [(I₀ − cumul à n−1) ÷ CFₙ] × 365 j</td><td>le plus court possible</td></tr>
+    <tr><td><strong>TRI</strong></td><td>taux qui annule la VAN</td><td>TRI &gt; taux d'actualisation</td></tr>
+  </table></div>
+  <div class="box ex"><span class="eyebrow">Exemple du cours : I₀ = 100, CF 30 / 40 / 50 / 20, r = 10 %</span>
+  <div class="tw"><table>
+    <tr><th>Année</th><th class="n">CF</th><th class="n">÷ 1,1ᵗ</th><th class="n">CF actualisé</th><th class="n">Cumul non actualisé</th></tr>
+    <tr><td>1</td><td class="n">30</td><td class="n">1,1</td><td class="n">27,27</td><td class="n">30</td></tr>
+    <tr><td>2</td><td class="n">40</td><td class="n">1,21</td><td class="n">33,06</td><td class="n">70</td></tr>
+    <tr><td>3</td><td class="n">50</td><td class="n">1,331</td><td class="n">37,57</td><td class="n">120</td></tr>
+    <tr><td>4</td><td class="n">20</td><td class="n">1,4641</td><td class="n">13,66</td><td class="n">140</td></tr>
+  </table></div>
+  VAN = 111,56 − 100 = <strong>+ 11,56</strong> → rentable. IP = 111,56 ÷ 100 = <strong>1,12</strong>. DR = 2 ans + (30 ÷ 50) × 365 = <strong>2 ans et 219 jours</strong>. TRI ≈ <strong>15,3 %</strong> &gt; 10 %.</div>
+  <div class="box key"><span class="eyebrow">Pour choisir entre deux projets</span>
+  Même mise de départ → la <strong>VAN</strong> la plus élevée. Mises différentes → l'<strong>IP</strong> le plus élevé. Le DR mesure le <strong>risque</strong>.</div>
+</section>
+
+<!-- 7 Emprunt -->
+<section class="part" id="emprunt">
+  <div class="part-head"><span class="num">7</span><h2>Tableau d'emprunt <span class="badge b-high">Très probable</span></h2></div>
+  <div class="f">Annuité = Intérêt + Amortissement <small>Intérêt = capital restant dû en début d'année × taux · Capital fin = capital début − amortissement</small></div>
+  <p>Exemple : 300 000 € sur 3 ans à 5 %.</p>
+  <div class="tw"><table>
+    <tr><th>Méthode</th><th>Principe</th><th class="n">Annuités</th><th class="n">Coût (intérêts)</th></tr>
+    <tr><td><strong>In fine</strong></td><td>Que des intérêts, tout le capital à la fin</td><td class="n">15 000 · 15 000 · 315 000</td><td class="n">45 000</td></tr>
+    <tr><td><strong>Amortissement constant</strong></td><td>Même part de capital : 300 000 ÷ 3 = 100 000</td><td class="n">115 000 · 110 000 · 105 000</td><td class="n">30 000</td></tr>
+    <tr><td><strong>Annuités constantes</strong></td><td>a = C × i ÷ [1 − (1 + i)⁻ⁿ]</td><td class="n">110 162,57 × 3</td><td class="n">30 487,71</td></tr>
+  </table></div>
+  <div class="box ex"><span class="eyebrow">Annuités constantes, ligne par ligne</span>
+  <div class="tw"><table>
+    <tr><th>Année</th><th class="n">Capital début</th><th class="n">Intérêt</th><th class="n">Amortissement</th><th class="n">Annuité</th><th class="n">Capital fin</th></tr>
+    <tr><td>1</td><td class="n">300 000,00</td><td class="n">15 000,00</td><td class="n">95 162,57</td><td class="n">110 162,57</td><td class="n">204 837,43</td></tr>
+    <tr><td>2</td><td class="n">204 837,43</td><td class="n">10 241,87</td><td class="n">99 920,70</td><td class="n">110 162,57</td><td class="n">104 916,73</td></tr>
+    <tr><td>3</td><td class="n">104 916,73</td><td class="n">5 245,84</td><td class="n">104 916,73</td><td class="n">110 162,57</td><td class="n">0</td></tr>
+  </table></div>
+  Vérification : la somme des amortissements = capital emprunté, et le capital final = 0.</div>
+  <h3>Les modes de financement (question de cours possible)</h3>
+  <p><strong>Interne</strong> : autofinancement, cessions d'actifs (autonomie, mais limité). <strong>Capitaux propres</strong> : augmentation de capital (rien à rembourser, mais dilution du pouvoir). <strong>Emprunt bancaire</strong> (rapide, mais intérêts) ou <strong>obligataire</strong> (gros emprunt découpé en obligations). <strong>Crédit-bail</strong> (souple, mais plus cher au total). <strong>Crowdfunding</strong>, <strong>aides publiques</strong> (Bpifrance, subventions).</p>
+</section>
+
+<!-- 8 Cours -->
+<section class="part" id="cours">
+  <div class="part-head"><span class="num">8</span><h2>Questions de cours rédigées <span class="badge b-cours">5 points</span></h2></div>
+  <p>Les trois premières ont été citées comme probables dans tes notes. Apprends la structure, pas les phrases mot à mot.</p>
+
+  <details open><summary>Quelle différence entre bilan comptable et bilan fonctionnel ?</summary>
+  <div class="tw"><table>
+    <tr><th>Critère</th><th>Bilan comptable</th><th>Bilan fonctionnel</th></tr>
+    <tr><td>Obligation</td><td>Obligatoire, publié</td><td>Facultatif, outil d'analyse interne</td></tr>
+    <tr><td>Optique</td><td>Juridique : le patrimoine</td><td>Économique : ce qui sert à fonctionner</td></tr>
+    <tr><td>Actif</td><td>Valeurs nettes</td><td>Valeurs brutes</td></tr>
+    <tr><td>Amortissements</td><td>Déduits de l'actif</td><td>Ajoutés aux ressources stables</td></tr>
+    <tr><td>Classement</td><td>Liquidité / exigibilité</td><td>Par cycle : investissement, financement, exploitation</td></tr>
+    <tr><td>Crédit-bail</td><td>Absent</td><td>Réintégré comme un achat à crédit</td></tr>
+  </table></div>
+  <p><em>Conclusion type :</em> le bilan comptable dit ce que l'entreprise possède et doit ; le bilan fonctionnel dit si elle est financièrement équilibrée, grâce au FRNG, au BFR et à la trésorerie nette.</p></details>
+
+  <details open><summary>Comment améliorer la trésorerie ?</summary>
+  <p>Comme TN = FRNG − BFR, on agit sur l'un des deux termes.</p>
+  <p><strong>1. Augmenter le FRNG</strong> : augmentation de capital, nouvel emprunt à long terme, mise en réserve des bénéfices (moins de dividendes), vente d'immobilisations inutiles.</p>
+  <p><strong>2. Diminuer le BFR</strong> : réduire les stocks, raccourcir les délais de paiement des clients (relances, escompte pour paiement comptant), obtenir des délais plus longs des fournisseurs.</p>
+  <p><em>À court terme</em>, l'entreprise peut aussi recourir à des crédits de trésorerie (découvert, escompte d'effets), mais c'est cher et ça ne règle pas le problème de fond.</p></details>
+
+  <details open><summary>Qu'est-ce que le Forex ?</summary>
+  <p>Le <strong>Forex</strong> (FOReign EXchange) est le marché des changes, le plus grand marché financier du monde. Les devises s'y échangent entre banques (marché interbancaire), sans lieu physique unique.</p>
+  <p>Une devise se cote toujours par <strong>paire</strong> : EUR/USD = 1,16 veut dire 1 € = 1,16 $. En France on cote <strong>au certain</strong> (quantité fixe d'euros contre une quantité variable de devise) ; l'inverse est la cotation <strong>à l'incertain</strong>.</p>
+  <p>Chaque paire a deux prix : le <strong>bid</strong> (cours acheteur, le plus bas) et l'<strong>ask</strong> (cours vendeur, le plus haut). L'écart est le <strong>spread</strong>, la marge de la banque. Le cours <strong>MID</strong> est leur moyenne.</p>
+  <p>Si EUR/USD passe de 1,10 à 1,16, l'euro <strong>s'apprécie</strong> : bon pour l'importateur européen, mauvais pour l'exportateur.</p></details>
+
+  <details><summary>Autres questions possibles (réponses courtes)</summary>
+  <p><strong>Bilan vs compte de résultat :</strong> le bilan est une photo statique du patrimoine (actif = passif) ; le compte de résultat est le film dynamique de l'année (produits − charges = résultat). Le résultat apparaît dans les deux.</p>
+  <p><strong>Pourquoi la CAF et pas le résultat ?</strong> Le résultat contient des charges qui ne font sortir aucun euro (dotations) ; la CAF mesure l'argent réellement généré, donc l'indépendance financière.</p>
+  <p><strong>Profitabilité vs rentabilité :</strong> rapport au CA vs rapport aux capitaux investis.</p>
+  <p><strong>Action vs obligation :</strong> titre de propriété (dividendes, risque) vs titre de créance (intérêts, remboursement, moins risqué).</p>
+  <p><strong>Fonds de commerce vs titres :</strong> acheter le fonds, c'est acheter l'outil (clientèle, matériel, nom, droit au bail) ; acheter les titres, c'est acheter toute la société, dettes comprises.</p></details>
+</section>
+
+<!-- 9 SIG -->
+<section class="part" id="sig">
+  <div class="part-head"><span class="num">9</span><h2>SIG et états financiers <span class="badge b-cours">QCM</span></h2></div>
+  <p>Pas de calcul annoncé, mais le QCM adore ces questions.</p>
+  <div class="flow"><span>Marge commerciale</span><i>+</i><span>Production</span><i>→</i><span>VA</span><i>→</i><span>EBE</span><i>→</i><span>RE</span><i>→</i><span>RCAI</span><i>→</i><span>Résultat net</span></div>
+  <div class="tw"><table>
+    <tr><th>SIG</th><th>Formule</th><th>Il mesure…</th></tr>
+    <tr><td>Marge commerciale</td><td>Ventes de marchandises − coût d'achat des marchandises vendues</td><td>l'activité de négoce</td></tr>
+    <tr><td>Production</td><td>Vendue + stockée + immobilisée</td><td>l'activité de production</td></tr>
+    <tr><td>Valeur ajoutée</td><td>MC + production − consommations des tiers</td><td>la richesse créée, le poids économique</td></tr>
+    <tr><td>EBE</td><td>VA + subventions − impôts et taxes − personnel</td><td>la rentabilité économique pure</td></tr>
+    <tr><td>Résultat d'exploitation</td><td>EBE + reprises + autres produits − dotations − autres charges</td><td>la performance industrielle et commerciale</td></tr>
+    <tr><td>RCAI</td><td>RE + résultat financier</td><td>exploitation + politique financière</td></tr>
+    <tr><td>Résultat de l'exercice</td><td>RCAI + exceptionnel − participation − IS</td><td>le bénéfice ou la perte</td></tr>
+  </table></div>
+  <div class="box trap"><span class="eyebrow">Les 4 pièges classiques</span>
+  1. Embauche d'un commercial (salaire 25 000, charges 12 500, déplacements 2 500) : la <strong>VA baisse de 2 500</strong> seulement (déplacements = consommation des tiers), l'<strong>EBE baisse de 40 000</strong>.<br>
+  2. Coût d'achat des marchandises vendues = achats + (<strong>stock initial − stock final</strong>).<br>
+  3. Obtenir un emprunt ou payer un fournisseur <strong>n'est pas</strong> une charge (c'est au bilan). Un ordinateur acheté = immobilisation, pas charge.<br>
+  4. L'escompte obtenu = <strong>produit financier</strong>. Actif classé par liquidité croissante, passif par exigibilité croissante.</div>
+</section>
+
+<!-- 10 Formulaire -->
+<section class="part" id="formulaire">
+  <div class="part-head"><span class="num">10</span><h2>Formulaire express</h2></div>
+  <div class="tw"><table>
+    <tr><th>Notion</th><th>Formule</th></tr>
+    <tr><td>CAF</td><td>Produits encaissables − charges décaissables (hors cessions)</td></tr>
+    <tr><td>CAF additive</td><td>RN + dotations − reprises − PCEA + VCEAC</td></tr>
+    <tr><td>Autofinancement</td><td>CAF − dividendes</td></tr>
+    <tr><td>Capacité de remboursement</td><td>Dettes financières ÷ CAF &lt; 4</td></tr>
+    <tr><td>Rentabilité économique / financière</td><td>RE ÷ actif économique / RN ÷ capitaux propres</td></tr>
+    <tr><td>Effet de levier</td><td>RF = [Re + (Re − i) × D/CP] × (1 − T)</td></tr>
+    <tr><td>Endettement</td><td>Dettes financières ÷ capitaux propres (&lt; 100 % : peu endettée)</td></tr>
+    <tr><td>Frais financiers</td><td>Intérêts ÷ CA HT (&lt; 3 % bien, &gt; 5 % limite atteinte)</td></tr>
+    <tr><td>FRNG</td><td>Ressources stables − emplois stables</td></tr>
+    <tr><td>BFR</td><td>(ACE − PCE) + (ACHE − PCHE)</td></tr>
+    <tr><td>Trésorerie nette</td><td>FRNG − BFR = Ta − Tp</td></tr>
+    <tr><td>Actif net</td><td>Actif − dettes ; ANC = actif net ± réévaluations</td></tr>
+    <tr><td>Valeur avec goodwill</td><td>V = ANC + goodwill</td></tr>
+    <tr><td>Gordon-Shapiro</td><td>V = D ÷ (K − g), avec K &gt; g</td></tr>
+    <tr><td>PER</td><td>Cours ÷ BNPA ; taux requis = 1 ÷ PER</td></tr>
+    <tr><td>VAN / IP</td><td>Σ CF ÷ (1 + r)ᵗ − I₀ ; (VAN + I₀) ÷ I₀</td></tr>
+    <tr><td>DR</td><td>(n − 1) ans + [(I₀ − cumul n−1) ÷ CFₙ] × 365 j</td></tr>
+    <tr><td>Annuité constante</td><td>C × i ÷ [1 − (1 + i)⁻ⁿ]</td></tr>
+  </table></div>
+  <p class="eyebrow">Vocabulaire anglais qui peut apparaître</p>
+  <p>EBE = EBITDA · RE = EBIT · FRNG = working capital · BFR = working capital requirement · crédit-bail = leasing · VAN = NPV · TRI = IRR · DR = payback period · BNPA = EPS · ROE = rentabilité financière.</p>
+</section>
+
+<!-- 11 QCM -->
+<section class="part" id="qcm">
+  <div class="part-head"><span class="num">11</span><h2>QCM d'entraînement corrigé</h2></div>
+  <p>20 questions sur les notions de cette fiche. Clique sur une réponse pour voir la correction.</p>
+  <div class="scorebar"><span id="score">Score : 0 / 0</span><button id="reset" type="button">Recommencer</button></div>
+  <div id="quiz"></div>
+</section>
+
+<footer>Fiche « essentiel examen » tirée de ta fiche complète de Finances d'entreprise (chapitres 1 à 8, TD corrigés). Le classement par probabilité s'appuie sur le format d'examen noté en cours et sur les TD : c'est une priorité de révision, pas une garantie.</footer>
+</main>
+
+<script>
+const Q=[
+ {t:"CAF",q:"Le prix de cession d'une machine est, pour le calcul de la CAF :",o:["Ajouté, car il fait entrer de l'argent","Exclu, car la CAF se calcule hors cessions","Ajouté seulement s'il y a une plus-value","Retranché comme une charge décaissable"],a:1,e:"La CAF mesure l'activité courante : les cessions d'immobilisations (prix de cession et valeur comptable) en sont exclues."},
+ {t:"CAF",q:"Dans la méthode additive, on part du résultat net et on :",o:["Retire les dotations et ajoute les reprises","Ajoute les dotations, retire les reprises, retire le prix de cession, ajoute la VCEAC","Ajoute l'EBE","Retire l'impôt sur les sociétés"],a:1,e:"On annule tout ce qui était calculé : + dotations, − reprises, − PCEA, + VCEAC."},
+ {t:"CAF",q:"Les dotations aux amortissements sont :",o:["Une charge décaissable","Un produit calculé","Une charge calculée (non décaissable)","Un produit encaissable"],a:2,e:"Aucun euro ne sort : c'est l'étalement comptable de l'usure. Elles sont hors CAF."},
+ {t:"CAF",q:"CAF = 200 000, dettes financières = 500 000. Combien l'entreprise peut-elle encore emprunter au maximum ?",o:["800 000","300 000","500 000","Rien, elle a atteint sa capacité"],a:1,e:"Dette maximale = 4 × 200 000 = 800 000. Marge = 800 000 − 500 000 = 300 000."},
+ {t:"CAF",q:"L'autofinancement est égal à :",o:["CAF + dividendes","Résultat net − dividendes","CAF − dividendes","EBE − impôt"],a:2,e:"Autofinancement = CAF − dividendes : ce qui reste à l'entreprise pour investir et rembourser."},
+ {t:"LEVIER",q:"Re = 12 %, coût de la dette i = 7 %. L'effet de levier est :",o:["Positif : s'endetter augmente la rentabilité financière","Négatif","Nul","Impossible à dire sans le taux d'IS"],a:0,e:"i < Re : chaque euro emprunté rapporte plus qu'il ne coûte, le levier est positif."},
+ {t:"LEVIER",q:"Si le coût de la dette est supérieur à la rentabilité économique, on parle :",o:["D'effet de levier positif","D'effet massue (levier négatif)","De levier nul","De BFR négatif"],a:1,e:"i > Re : plus l'entreprise s'endette, plus la rentabilité financière baisse."},
+ {t:"BILAN FONCTIONNEL",q:"Dans le bilan fonctionnel, les actifs sont pris :",o:["En valeur nette","En valeur de marché","En valeur brute","En valeur actualisée"],a:2,e:"Valeurs brutes ; les amortissements et dépréciations remontent dans les ressources stables."},
+ {t:"BILAN FONCTIONNEL",q:"Une machine en crédit-bail de 600 est retraitée en :",o:["Charge d'exploitation","600 en emplois stables, et 600 répartis entre amortissements et dettes financières","Trésorerie passive","Rien, elle n'appartient pas à l'entreprise"],a:1,e:"On fait comme si l'entreprise l'avait achetée à crédit : Vo en emplois stables, amortissements fictifs + VNC en ressources stables."},
+ {t:"BILAN FONCTIONNEL",q:"FRNG = 150, BFR = 120. La trésorerie nette vaut :",o:["+ 270","− 30","+ 30","+ 120"],a:2,e:"TN = FRNG − BFR = 150 − 120 = + 30 (cas RIVAL)."},
+ {t:"BILAN FONCTIONNEL",q:"FRNG positif mais inférieur au BFR. Que conclure ?",o:["L'entreprise est parfaitement équilibrée","La trésorerie est négative : l'entreprise vit à découvert","Le BFR est négatif","Le FRNG est négatif"],a:1,e:"TN = FRNG − BFR < 0 : c'est le cas ACP (TN = − 49 000)."},
+ {t:"BILAN FONCTIONNEL",q:"Quelle mesure diminue le BFR ?",o:["Augmentation de capital","Nouvel emprunt à long terme","Raccourcir les délais de paiement des clients","Acheter une machine"],a:2,e:"Moins de créances clients = moins d'actif circulant d'exploitation = BFR plus faible. Capital et emprunt LT augmentent le FRNG."},
+ {t:"ÉVALUATION",q:"Dividende 10 €, K = 15 %, g = 5 %. Valeur de l'action par Gordon-Shapiro :",o:["66,67 €","100 €","200 €","50 €"],a:1,e:"V = D ÷ (K − g) = 10 ÷ 0,10 = 100 €."},
+ {t:"ÉVALUATION",q:"Cours 380 €, PER 19. Le BNPA vaut :",o:["7 220 €","20 €","19 €","5,26 €"],a:1,e:"BNPA = cours ÷ PER = 380 ÷ 19 = 20 €."},
+ {t:"ÉVALUATION",q:"Dans un secteur au PER moyen de 17,6, la société la plus sous-évaluée est celle qui a :",o:["Le PER le plus élevé","Le PER le plus bas","Le dividende le plus élevé","Le cours le plus bas"],a:1,e:"Un PER bas signifie qu'on paie peu de fois le bénéfice : l'action est bon marché (CJK, PER 12)."},
+ {t:"ÉVALUATION",q:"Les charges à répartir, dans le calcul de l'actif net :",o:["Sont gardées à l'actif","Sont retirées : ce sont des non-valeurs","Sont ajoutées au passif","Sont multipliées par 2"],a:1,e:"Ce sont des charges étalées, pas des biens revendables : on les retire de l'actif (exercice Hélouis)."},
+ {t:"INVESTISSEMENT",q:"Un projet a une VAN de + 11,56 pour I₀ = 100. Son IP vaut :",o:["0,1156","1,1156","11,56","0,89"],a:1,e:"IP = (VAN + I₀) ÷ I₀ = 111,56 ÷ 100 ≈ 1,12 > 1 : rentable."},
+ {t:"INVESTISSEMENT",q:"Taux d'actualisation 10 %, TRI du projet 8 %. Le projet :",o:["Est rentable","N'est pas rentable, sa VAN est négative","A une VAN nulle","A un IP supérieur à 1"],a:1,e:"Rentable seulement si TRI > taux d'actualisation. Ici 8 % < 10 %, donc VAN < 0."},
+ {t:"EMPRUNT",q:"300 000 € sur 3 ans à 5 % en amortissement constant. L'annuité de l'année 2 vaut :",o:["115 000","110 000","110 162,57","105 000"],a:1,e:"Amortissement 100 000 ; capital début année 2 = 200 000 ; intérêt 10 000 ; annuité 110 000."},
+ {t:"FOREX",q:"EUR/USD passe de 1,10 à 1,16. Que se passe-t-il ?",o:["L'euro se déprécie","L'euro s'apprécie, c'est mauvais pour l'exportateur européen","Le dollar s'apprécie","Rien pour les entreprises"],a:1,e:"Il faut plus de dollars pour 1 € : l'euro s'apprécie, les produits européens deviennent plus chers pour les Américains."}
+];
+const L="ABCD";let done=0,good=0;
+const box=document.getElementById('quiz'),sc=document.getElementById('score');
+function upd(){sc.textContent="Score : "+good+" / "+done+" (sur "+Q.length+")";}
+function build(){box.innerHTML="";done=0;good=0;
+ Q.forEach((x,i)=>{const d=document.createElement('div');d.className='q';
+  d.innerHTML='<div class="tag">'+x.t+'</div><p class="st">Q'+(i+1)+' · '+x.q+'</p>'+x.o.map((o,j)=>'<button type="button" class="o" data-j="'+j+'">'+L[j]+'. '+o+'</button>').join('')+'<div class="expl"></div>';
+  d.querySelectorAll('button.o').forEach(b=>b.addEventListener('click',()=>{if(d.classList.contains('done'))return;
+   const j=+b.dataset.j;d.classList.add('done');done++;
+   d.querySelectorAll('button.o').forEach(bb=>{bb.disabled=true;if(+bb.dataset.j===x.a)bb.classList.add('good');});
+   if(j===x.a){good++;}else b.classList.add('wrong');
+   d.querySelector('.expl').textContent=(j===x.a?"Bravo ! ":"Pas tout à fait. ")+"Réponse "+L[x.a]+". "+x.e;upd();}));
+  box.appendChild(d);});upd();}
+document.getElementById('reset').addEventListener('click',build);
+window.showAllAnswers=function(){document.querySelectorAll('.q').forEach((d,i)=>{const x=Q[i];d.classList.add('done');
+ d.querySelectorAll('button.o').forEach(bb=>{bb.disabled=true;bb.classList.remove('wrong');if(+bb.dataset.j===x.a)bb.classList.add('good');});
+ d.querySelector('.expl').textContent="Réponse "+L[x.a]+". "+x.e;});
+ document.querySelectorAll('details').forEach(d=>d.open=true);};
+build();
+</script>
+</body>
+</html>

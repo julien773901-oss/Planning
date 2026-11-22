@@ -1,0 +1,503 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Essentiel International Trade</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Public+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap">
+<style>
+/* Univers « orange vif » : bandeau dégradé orange → rouge-orange, encadrés crème, accents sarcelle pour les exemples */
+:root{
+  --bg:#fffaf5; --paper:#ffffff; --ink:#3a2214; --muted:#7f5a43;
+  --or:#f6b48a; --or-deep:#b05a24; --hot:#e9895c; --cream:#fff0e4; --cream-2:#fbd5b8; --line:#f5e0cf;
+  --teal:#0f766e; --teal-bg:#e2f5f2; --ok:#1f8a5b; --ok-bg:#e3f5ec; --ko:#c0262d; --ko-bg:#fde4e2;
+  --a1:#fcd2b0; --a2:#f6a877; --a3:#ffe6d2; --a4:#bfe5de;
+  --f-display:"Bricolage Grotesque", "Arial Black", system-ui, sans-serif;
+  --f-body:"Public Sans", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#1a0f08; --paper:#24150b; --ink:#fbeee3; --muted:#d1a98a;
+  --or:#e8a578; --or-deep:#f5bf98; --hot:#e89470; --cream:#3a1f0e; --cream-2:#6a3514; --line:#48291a;
+  --teal:#5eead4; --teal-bg:#0f2d2a; --ok:#5fd39b; --ok-bg:#163327; --ko:#ff8b7d; --ko-bg:#3a1a17;
+  --a1:#7a4a2c; --a2:#b9734a; --a3:#4a2c1a; --a4:#1f5c55; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#1a0f08; --paper:#24150b; --ink:#fbeee3; --muted:#d1a98a;
+  --or:#e8a578; --or-deep:#f5bf98; --hot:#e89470; --cream:#3a1f0e; --cream-2:#6a3514; --line:#48291a;
+  --teal:#5eead4; --teal-bg:#0f2d2a; --ok:#5fd39b; --ok-bg:#163327; --ko:#ff8b7d; --ko-bg:#3a1a17;
+  --a1:#7a4a2c; --a2:#b9734a; --a3:#4a2c1a; --a4:#1f5c55; color-scheme:dark }
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.65;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;padding-block:28px 80px}
+@media (max-width:900px){.wrap{grid-template-columns:minmax(0,1fr);gap:0}.toc{display:none}}
+main{min-width:0;max-width:76ch}
+h1,h2,h3,h4{font-family:var(--f-display);text-wrap:balance;line-height:1.1;color:var(--ink)}
+h1{font-size:clamp(2.3rem,6.4vw,3.9rem);font-weight:800;margin:0 0 .3em;letter-spacing:-.02em;color:#3a2214}
+h2{font-size:clamp(1.6rem,3.6vw,2.3rem);font-weight:800;margin:0 0 .4em;letter-spacing:-.01em}
+h3{font-size:1.32rem;font-weight:750;margin:2em 0 .5em;color:var(--or-deep)}
+h4{font-size:1.06rem;margin:1.4em 0 .3em}
+p{margin:.6em 0}
+a{color:var(--or-deep)}
+strong{font-weight:700}
+.eyebrow{font-family:var(--f-display);text-transform:uppercase;letter-spacing:.12em;font-size:.78rem;font-weight:800;color:var(--or-deep)}
+.hl{background:var(--cream);padding:0 .2em;border-radius:3px}
+.en{font-style:italic;color:var(--muted)}
+
+.toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 24px);align-self:start;font-size:.92rem;max-height:calc(100vh - 48px);overflow-y:auto}
+.toc ol{list-style:none;padding:0;margin:.6em 0 0;display:grid;gap:2px}
+.toc a{display:block;padding:6px 10px;border-radius:8px;text-decoration:none;color:var(--muted)}
+.toc a:hover,.toc a:focus-visible{background:var(--cream);color:var(--ink)}
+
+.hero{background:linear-gradient(130deg,#ffe3cc 0%,#ffcfae 50%,#ffbe98 100%);color:#3a2214;border-radius:22px;padding:28px 26px 26px;margin-bottom:28px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,#fff3e6 0%,rgba(255,243,230,0) 70%);opacity:.8;pointer-events:none}
+.hero > *{position:relative;z-index:1}
+.hero .eyebrow{color:#9a4c1c}
+.hero .lede{font-size:1.12rem;color:#4a2c1a;max-width:60ch;position:relative}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;position:relative}
+.chip{background:rgba(255,255,255,.6);color:#7a3c14;border:1px solid rgba(176,90,36,.25);border-radius:999px;padding:4px 12px;font-size:.85rem;font-weight:600}
+
+section.part{padding-top:40px;margin-top:40px;border-top:3px solid var(--line)}
+.part-head{display:flex;gap:16px;align-items:flex-start;margin-bottom:8px}
+.part-num{font-family:var(--f-display);font-weight:800;font-size:3rem;line-height:1;color:#5a2a0c;background:linear-gradient(135deg,#ffd9bd,#f8b88f);border-radius:14px;padding:6px 14px;flex:none;box-shadow:0 4px 0 #e8a77c}
+
+.box{border-radius:14px;padding:14px 18px;margin:16px 0;border:1px solid var(--line);background:var(--paper)}
+.box > :first-child{margin-top:0}.box > :last-child{margin-bottom:0}
+.box .tag{display:inline-block;font-family:var(--f-display);font-weight:800;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;padding:2px 8px;border-radius:6px;margin-bottom:6px}
+.def{background:var(--cream);border-color:var(--cream-2)}
+.def .tag{background:var(--or);color:#3a2214}
+.ex{border-left:6px solid var(--teal);background:var(--paper)}
+.ex .tag{background:var(--teal);color:var(--paper)}
+.trap{border:1.5px dashed var(--ko)}
+.trap .tag{background:transparent;color:var(--ko);border:1.5px solid var(--ko)}
+.key{border:3px solid var(--or);position:relative;padding-top:22px}
+.key::before{content:"";position:absolute;inset:0 0 auto 0;height:9px;border-radius:10px 10px 0 0;background:linear-gradient(90deg,#ffe0c4,#f8b88f,#f2a07a)}
+.key .tag{background:var(--ink);color:var(--bg)}
+.key ul{margin:.3em 0;padding-left:1.2em}
+.exam{background:linear-gradient(135deg,var(--cream),var(--paper));border:2px solid var(--or)}
+.exam .tag{background:var(--hot);color:#3a2214}
+.simple{font-style:italic;color:var(--muted)}
+.formula{font-family:var(--f-display);font-weight:700;background:var(--cream);border-radius:10px;padding:10px 14px;margin:12px 0;font-size:1.04rem;overflow-x:auto}
+
+.tbl{overflow-x:auto;margin:16px 0;border-radius:12px;border:1px solid var(--line)}
+table{border-collapse:collapse;width:100%;font-size:.93rem;background:var(--paper)}
+th,td{padding:9px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+th{background:var(--cream);font-family:var(--f-display);font-weight:800;color:var(--or-deep)}
+tr:last-child td{border-bottom:none}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.total td{font-weight:700;background:var(--cream)}
+td.win{background:var(--ok-bg);font-weight:700}
+.matrix td,.matrix th{text-align:center}
+
+figure{margin:20px 0;padding:16px;background:var(--paper);border:1px solid var(--line);border-radius:14px}
+figure .scroll{overflow-x:auto}
+figure svg{display:block;width:100%;height:auto;max-width:560px;margin:0 auto}
+figcaption{font-size:.86rem;color:var(--muted);margin-top:8px}
+svg text{font-family:var(--f-body);fill:var(--ink);font-size:13px}
+svg .mut{fill:var(--muted)}
+svg .ax{stroke:var(--ink);stroke-width:1.6;fill:none}
+svg .dem{stroke:var(--or-deep);stroke-width:3;fill:none}
+svg .sup{stroke:var(--teal);stroke-width:3;fill:none}
+svg .pw{stroke:var(--hot);stroke-width:2.2;stroke-dasharray:7 5;fill:none}
+svg .guide{stroke:var(--muted);stroke-width:1;stroke-dasharray:3 4;fill:none}
+svg .fA{fill:var(--a1);opacity:.85}
+svg .fB{fill:var(--a2);opacity:.85}
+svg .fC{fill:var(--a4);opacity:.9}
+svg .fD{fill:var(--a2);opacity:.85}
+svg .ftr{fill:var(--a3)}
+svg .dot{fill:var(--ink)}
+svg .b{font-weight:700}
+svg .big{font-family:var(--f-display);font-weight:800;font-size:15px}
+
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch}
+.flow .step{flex:1 1 130px;background:var(--cream);border-radius:12px;padding:10px 12px;font-size:.9rem;min-width:0}
+.flow .step b{display:block;font-family:var(--f-display);color:var(--or-deep);font-size:1rem}
+.flow .arrow{align-self:center;color:var(--or);font-weight:900;font-size:1.2rem}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px 14px;min-width:0}
+.card h4{margin:0 0 4px;color:var(--or-deep)}
+.card p{margin:.2em 0;font-size:.93rem}
+.pm{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+.pm > div{border-radius:12px;padding:12px 14px}
+.pm .plus{background:var(--ok-bg)}.pm .minus{background:var(--ko-bg)}
+.pm h4{margin:0 0 4px}.pm .plus h4{color:var(--ok)}.pm .minus h4{color:var(--ko)}
+.pm ul{margin:0;padding-left:1.1em;font-size:.93rem}
+.steps{counter-reset:s;list-style:none;padding:0;display:grid;gap:10px}
+.steps > li{counter-increment:s;position:relative;padding:12px 14px 12px 52px;background:var(--paper);border:1px solid var(--line);border-radius:12px}
+.steps > li::before{content:counter(s);position:absolute;left:12px;top:12px;width:28px;height:28px;border-radius:50%;background:var(--or);color:#3a2214;font-family:var(--f-display);font-weight:800;display:grid;place-items:center}
+.answer{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:4px 18px 14px;margin:18px 0}
+.answer > h4{font-size:1.08rem;color:var(--or-deep)}
+.answer .rep{display:inline-block;background:var(--or);color:#3a2214;font-family:var(--f-display);font-weight:800;border-radius:8px;padding:1px 10px;margin-right:6px}
+
+.quiz{counter-reset:q}
+.q{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:14px 0}
+.q h4{margin:0 0 10px;font-family:var(--f-body);font-weight:700;line-height:1.45}
+.q h4::before{counter-increment:q;content:"Q" counter(q) " · ";color:var(--or-deep);font-family:var(--f-display)}
+.q .theme{display:inline-block;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--teal);margin-bottom:4px}
+.q .fig{margin:6px 0 12px}
+.opts{display:grid;gap:7px}
+.opts button{font:inherit;font-size:.94rem;text-align:left;padding:9px 14px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer;line-height:1.45}
+.opts button:hover:not(:disabled){border-color:var(--or)}
+.opts button:focus-visible{outline:3px solid var(--or);outline-offset:2px}
+.opts button.right{background:var(--ok-bg);border-color:var(--ok);font-weight:600}
+.opts button.wrong{background:var(--ko-bg);border-color:var(--ko)}
+.opts button:disabled{cursor:default}
+.expl{margin-top:10px;padding:10px 14px;border-radius:10px;background:var(--cream);font-size:.93rem}
+.expl b.v{color:var(--ok)}.expl b.x{color:var(--ko)}
+.scorebar{position:sticky;top:calc(env(safe-area-inset-top,0px) + 8px);z-index:5;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;background:linear-gradient(120deg,#ffdcc2,#f8b88f);color:#3a2214;border-radius:12px;padding:10px 16px;margin:16px 0}
+.scorebar b{font-family:var(--f-display);font-size:1.2rem}
+.scorebar button{font:inherit;font-size:.88rem;background:#fff;color:#b05a24;font-weight:700;border:none;border-radius:8px;padding:6px 12px;cursor:pointer}
+.scorebar button:focus-visible{outline:3px solid #b05a24;outline-offset:2px}
+.result{display:none}
+.result.on{display:block}
+dl.glo{display:grid;grid-template-columns:minmax(150px,max-content) minmax(0,1fr);gap:6px 16px;font-size:.93rem}
+dl.glo dt{font-weight:700;color:var(--or-deep)}
+dl.glo dd{margin:0}
+@media (max-width:520px){dl.glo{grid-template-columns:minmax(0,1fr)}dl.glo dd{margin-bottom:8px}.hero{padding:22px 18px}.part-num{font-size:2.3rem}}
+@media (prefers-reduced-motion:no-preference){.opts button{transition:background .15s,border-color .15s}}
+
+@media print{.opts{grid-template-columns:1fr 1fr}.opts button{padding:5px 10px;font-size:.85rem}.q{padding:10px 14px;margin:8px 0}.toc,.scorebar,.result{display:none!important}.wrap{display:block}section.part{break-inside:auto}.box,.card,.q,figure{break-inside:avoid}}
+</style></head><body><div class="wrap">
+<nav class="toc" aria-label="Sommaire">
+  <div class="eyebrow">Sommaire</div>
+  <ol>
+    <li><a href="#top10">★ Le top des notions</a></li>
+    <li><a href="#p1">1. Coût d'opportunité &amp; avantages</a></li>
+    <li><a href="#p2">2. Gains du libre-échange</a></li>
+    <li><a href="#p3">3. Tarif, quota, VER</a></li>
+    <li><a href="#p4">4. Équilibre de Nash</a></li>
+    <li><a href="#p5">5. H-O &amp; Stolper-Samuelson</a></li>
+    <li><a href="#p6">6. Défense commerciale</a></li>
+    <li><a href="#p7">7. À savoir en une ligne</a></li>
+    <li><a href="#jourj">✓ Check-list jour J</a></li>
+    <li><a href="#quiz">? QCM corrigé</a></li>
+  </ol>
+</nav>
+<main>
+<header class="hero">
+  <div class="eyebrow">International Trade · L3 Commerce International · UPEC · S5</div>
+  <h1>L'essentiel pour l'examen</h1>
+  <p class="lede">Seulement ce qui a le plus de chances de tomber, d'après le sujet 2025-2026 et les slides : les 7 calculs à savoir refaire, les définitions qui reviennent, les pièges. Tout le reste est dans la fiche complète.</p>
+  <div class="chips"><span class="chip">10 QCM · +2 / 0</span><span class="chip">~ moitié de calculs</span><span class="chip">Sujet en anglais</span><span class="chip">15 QCM corrigés</span></div>
+</header>
+
+<div class="box exam"><span class="tag">Format de l'examen</span>
+<p><strong>10 QCM</strong>, une seule bonne réponse, <strong>+2 si juste, 0 si faux</strong> : pas de points négatifs, donc <strong>ne laisse jamais une case vide</strong>. Les propositions vont de A à L avec des réponses combinées (« Only A and B are correct », « Both B. and F. are correct »). Lis toutes les propositions avant de cocher.</p>
+</div>
+
+<section class="part" id="top10">
+<div class="part-head"><div class="part-num">★</div><div><div class="eyebrow">Ce qui tombe</div><h2>Le top des notions, par priorité</h2></div></div>
+<p>Chaque ligne correspond à une question du sujet 2025-2026. Ce sont les notions que je considère comme quasi certaines de retomber (même type de question, chiffres différents).</p>
+<div class="tbl"><table>
+<tr><th>Priorité</th><th>Notion</th><th>Ce qu'on te demande</th><th>Partie</th></tr>
+<tr><td>★★★</td><td>Effet d'un tarif sur le bien-être</td><td>Calculer −(B + D), recettes, perte des consommateurs</td><td>3</td></tr>
+<tr><td>★★★</td><td>Coût d'opportunité, avantage comparatif</td><td>Qui a l'avantage ? CO croissant ?</td><td>1</td></tr>
+<tr><td>★★★</td><td>Intervalle des termes de l'échange</td><td>« 0,5 &lt; TOT &lt; 2 »</td><td>1</td></tr>
+<tr><td>★★★</td><td>Avantage absolu</td><td>Lire un tableau d'heures ou de production</td><td>1</td></tr>
+<tr><td>★★★</td><td>Gains du libre-échange (graphique)</td><td>Quelles aires changent pour CS, PS, bien-être</td><td>2</td></tr>
+<tr><td>★★★</td><td>Équilibre de Nash, dilemme du prisonnier</td><td>Trouver le Nash dans une matrice de tarifs</td><td>4</td></tr>
+<tr><td>★★★</td><td>Tarif pour atteindre une production</td><td>t = prix voulu − Pw</td><td>3</td></tr>
+<tr><td>★★☆</td><td>Heckscher-Ohlin</td><td>Comparer L/K, trouver qui exporte quoi</td><td>5</td></tr>
+<tr><td>★★☆</td><td>Stolper-Samuelson</td><td>Variation de w ou r quand un prix monte</td><td>5</td></tr>
+<tr><td>★★☆</td><td>Trade remedies, VER, quotas</td><td>Question de définitions</td><td>3, 6</td></tr>
+</table></div>
+</section>
+
+<section class="part" id="p1">
+<div class="part-head"><div class="part-num">1</div><div><div class="eyebrow">Lectures 1 et 2 · Smith et Ricardo</div><h2>Coût d'opportunité, avantage absolu et comparatif</h2></div></div>
+
+<div class="grid2">
+  <div class="card"><h4>Avantage absolu (Smith, 1776)</h4><p>Produire un bien avec <strong>moins de ressources</strong> que l'autre pays. On compare 2 chiffres, sans calcul.</p></div>
+  <div class="card"><h4>Avantage comparatif (Ricardo)</h4><p>Produire un bien avec le <strong>coût d'opportunité le plus faible</strong>. On compare 4 chiffres. Tout pays en a toujours un, même s'il est moins efficace en tout.</p></div>
+</div>
+
+<div class="box def"><span class="tag">Coût d'opportunité</span>
+<p>Ce à quoi on renonce pour produire une unité de plus d'un bien. Si une heure sert à faire une moto, elle ne sert pas à faire du riz.</p></div>
+
+<div class="box trap"><span class="tag">Piège n°1 · Regarde le titre du tableau</span>
+<div class="tbl"><table>
+<tr><th>Type de tableau</th><th>Avantage absolu</th><th>Coût d'opportunité de X</th></tr>
+<tr><td><strong>Heures par unité</strong> (hours per unit, labor required)</td><td>le plus <strong>petit</strong> gagne</td><td>heures de X ÷ heures de Y</td></tr>
+<tr><td><strong>Production maximale</strong> (maximum output, units per day)</td><td>le plus <strong>grand</strong> gagne</td><td>max de Y ÷ max de X</td></tr>
+</table></div></div>
+
+<div class="box ex"><span class="tag">Exemple (examen Q6 et cours)</span>
+<p>Arden : 1,5 h par pile, 0,4 h par puce. Boreal : 2 h par pile, 0,5 h par puce.</p>
+<ul>
+<li><strong>Avantage absolu</strong> : Arden dans les deux (1,5 &lt; 2 et 0,4 &lt; 0,5).</li>
+<li><strong>CO d'une pile</strong> : Arden 1,5 ÷ 0,4 = 3,75 puces ; Boreal 2 ÷ 0,5 = 4 puces. Arden a l'avantage comparatif dans les piles, donc Boreal dans les puces.</li>
+</ul></div>
+
+<div class="box key"><span class="tag">Intervalle des termes de l'échange</span>
+<p>Calcule le CO <strong>du même bien</strong> dans les deux pays. Les deux gagnent seulement si le prix mondial est <strong>strictement entre</strong> les deux.</p>
+<p>Examen Q8 : A produit 20 vins ou 10 fromages, B 10 vins ou 20 fromages. CO d'un vin : A = 10 ÷ 20 = 0,5 fromage, B = 20 ÷ 10 = 2 fromages. Donc <strong>0,5 &lt; TOT &lt; 2</strong>.</p></div>
+
+<div class="box trap"><span class="tag">Piège n°2 · Coût d'opportunité croissant</span>
+<p>« Les 9 premiers robots coûtent 2 drones chacun, les 9 suivants 4 drones. » Après 9 robots, le 10e coûte <strong>4</strong> drones (la tranche où tu es), pas 3 (la moyenne 54 ÷ 18). Réponse E de l'examen.</p></div>
+
+<p>Ce qu'on retient aussi : un point <strong>sur</strong> la FPP = plein emploi ; <strong>à l'intérieur</strong> = ressources inemployées ; <strong>à l'extérieur</strong> = impossible seul, mais on peut y <em>consommer</em> grâce à l'échange. Ricardo suppose un seul facteur (le travail) et des pays qui ne diffèrent que par la technologie.</p>
+</section>
+
+<section class="part" id="p2">
+<div class="part-head"><div class="part-num">2</div><div><div class="eyebrow">Lecture 1 · Gains to trade</div><h2>Les gains du libre-échange (pays importateur)</h2></div></div>
+<p>Quand un pays importateur s'ouvre, le prix baisse de P<sub>o</sub> (autarcie) à P<sub>w</sub> (prix mondial). C'est exactement le graphique de la question 3 de l'examen (marché de l'avocat).</p>
+<figure>
+    <div class="scroll">
+    <svg viewBox="0 0 520 320" role="img" aria-label="Pays importateur. Le prix passe de Po à Pw. Le trapèze Pw Po A B passe des producteurs aux consommateurs, le triangle A B C est le gain net.">
+      <path class="ax" d="M60 24 V300 H480"/>
+      <text x="50" y="32" text-anchor="end" class="mut">Prix</text><text x="478" y="316" text-anchor="end" class="mut">Quantité</text>
+      <polygon class="ftr" points="60,222 60,170 260,170 180,222"/>
+      <polygon class="fB" points="260,170 180,222 340,222"/>
+      <line class="dem" x1="60" y1="40" x2="460" y2="300"/>
+      <line class="sup" x1="60" y1="300" x2="440" y2="53"/>
+      <text x="446" y="56" class="b" style="fill:var(--teal)">S<tspan baseline-shift="sub" font-size="10">d</tspan></text>
+      <text x="428" y="272" class="b" style="fill:var(--or-deep)">D<tspan baseline-shift="sub" font-size="10">d</tspan></text>
+      <line class="guide" x1="60" y1="170" x2="260" y2="170"/>
+      <line class="guide" x1="260" y1="170" x2="260" y2="300"/>
+      <line class="guide" x1="180" y1="222" x2="180" y2="300"/>
+      <line class="guide" x1="340" y1="222" x2="340" y2="300"/>
+      <line class="pw" x1="60" y1="222" x2="470" y2="222"/>
+      <text x="474" y="226" style="fill:var(--hot)" class="b">S<tspan baseline-shift="sub" font-size="10">w</tspan></text>
+      <text x="52" y="174" text-anchor="end" class="b">P<tspan baseline-shift="sub" font-size="10">o</tspan></text>
+      <text x="52" y="226" text-anchor="end" class="b" style="fill:var(--hot)">P<tspan baseline-shift="sub" font-size="10">w</tspan></text>
+      <circle class="dot" cx="260" cy="170" r="4"/><text x="262" y="160" class="b">A</text>
+      <circle class="dot" cx="180" cy="222" r="4"/><text x="170" y="214" class="b">B</text>
+      <circle class="dot" cx="340" cy="222" r="4"/><text x="344" y="214" class="b">C</text>
+      <text x="64" y="44" class="b">D</text>
+      <text x="48" y="300" text-anchor="end" class="b">O</text>
+      <text x="180" y="316" text-anchor="middle" class="mut">Q<tspan baseline-shift="sub" font-size="9">s</tspan></text>
+      <text x="260" y="316" text-anchor="middle" class="mut">Q<tspan baseline-shift="sub" font-size="9">o</tspan></text>
+      <text x="340" y="316" text-anchor="middle" class="mut">Q<tspan baseline-shift="sub" font-size="9">d</tspan></text>
+      <text x="140" y="202" text-anchor="middle" style="font-size:12px">transfert</text>
+      <text x="262" y="210" text-anchor="middle" class="b" style="font-size:12px">gain net</text>
+      <line x1="180" y1="262" x2="340" y2="262" stroke="var(--or)" stroke-width="3"/>
+      <path d="M180 262 l6 -4 v8 z M340 262 l-6 -4 v8 z" fill="var(--or)"/>
+      <text x="260" y="256" text-anchor="middle" class="b" style="fill:var(--or-deep)">importations</text>
+    </svg>
+    </div>
+    <figcaption>Le prix passe de P<sub>o</sub> (autarcie, point A) à P<sub>w</sub> (prix mondial). Lettres identiques à celles du graphique de l'examen 2025-2026.</figcaption>
+  </figure>
+<div class="tbl"><table>
+<tr><th>Qui ?</th><th>Effet du libre-échange</th></tr>
+<tr><td>Consommateurs</td><td>CS <strong>augmente</strong> du trapèze P<sub>w</sub>P<sub>o</sub>AC</td></tr>
+<tr><td>Producteurs</td><td>PS <strong>diminue jusqu'à</strong> (decreases <em>to</em>) P<sub>w</sub>BO</td></tr>
+<tr class="total"><td>Pays</td><td>Bien-être <strong>augmente</strong> du triangle ABC</td></tr>
+</table></div>
+<div class="box key"><span class="tag">À retenir</span>
+<ul>
+<li>Le prix mondial est <strong>entre les deux prix d'autarcie</strong> : P<sub>V</sub> &lt; P<sub>W</sub> &lt; P<sub>J</sub>.</li>
+<li>Chaque pays gagne dans son ensemble, mais il y a des perdants : les <strong>producteurs du pays importateur</strong> et les <strong>consommateurs du pays exportateur</strong>.</li>
+<li>Gain net en calcul = ½ × (P<sub>autarcie</sub> − P<sub>w</sub>) × importations au prix mondial.</li>
+</ul></div>
+</section>
+
+<section class="part" id="p3">
+<div class="part-head"><div class="part-num">3</div><div><div class="eyebrow">Lecture 3 · Trade policy</div><h2>Tarif, quota, VER : qui gagne, qui perd</h2></div></div>
+<p>Un tarif fait monter le prix intérieur : <strong>P<sub>d</sub> = P<sub>w</sub> + t</strong>. Petit pays = le prix mondial ne bouge pas.</p>
+<figure>
+    <div class="scroll">
+    <svg viewBox="0 0 520 320" role="img" aria-label="Tarif sur les importations. Le prix monte de Pw à Pw plus t. Aire A gain des producteurs, B et D pertes sèches, C recettes de l'État.">
+      <path class="ax" d="M60 24 V300 H480"/>
+      <text x="50" y="32" text-anchor="end" class="mut">Prix</text><text x="478" y="316" text-anchor="end" class="mut">Quantité</text>
+      <polygon class="fA" points="60,248 60,209 200,209 140,248"/>
+      <polygon class="fB" points="140,248 200,209 200,248"/>
+      <polygon class="fC" points="200,209 320,209 320,248 200,248"/>
+      <polygon class="fD" points="320,209 380,248 320,248"/>
+      <line class="dem" x1="60" y1="40" x2="460" y2="300"/>
+      <line class="sup" x1="60" y1="300" x2="440" y2="53"/>
+      <text x="446" y="56" class="b" style="fill:var(--teal)">S</text>
+      <text x="436" y="272" class="b" style="fill:var(--or-deep)">D</text>
+      <line class="pw" x1="60" y1="248" x2="470" y2="248"/>
+      <line x1="60" y1="209" x2="470" y2="209" stroke="var(--or-deep)" stroke-width="2"/>
+      <text x="52" y="252" text-anchor="end" class="b" style="fill:var(--hot)">P<tspan baseline-shift="sub" font-size="10">W</tspan></text>
+      <text x="52" y="213" text-anchor="end" class="b">P<tspan baseline-shift="sub" font-size="10">W</tspan>+t</text>
+      <line class="guide" x1="140" y1="248" x2="140" y2="300"/><line class="guide" x1="200" y1="209" x2="200" y2="300"/>
+      <line class="guide" x1="320" y1="209" x2="320" y2="300"/><line class="guide" x1="380" y1="248" x2="380" y2="300"/>
+      <text x="140" y="316" text-anchor="middle" class="mut" style="font-size:11px">S₁</text>
+      <text x="200" y="316" text-anchor="middle" class="mut" style="font-size:11px">S₂</text>
+      <text x="320" y="316" text-anchor="middle" class="mut" style="font-size:11px">D₂</text>
+      <text x="380" y="316" text-anchor="middle" class="mut" style="font-size:11px">D₁</text>
+      <text x="112" y="236" class="big">A</text>
+      <text x="184" y="242" class="big">B</text>
+      <text x="252" y="236" class="big">C</text>
+      <text x="328" y="242" class="big">D</text>
+      <text x="470" y="203" text-anchor="end" style="font-size:12px" class="mut">après : D₂ − S₂</text>
+      <text x="470" y="243" text-anchor="end" style="font-size:12px" class="mut">avant : D₁ − S₁</text>
+    </svg>
+    </div>
+    <figcaption>Effets d'un tarif dans un petit pays (le prix mondial ne bouge pas). Les importations passent de D₁ − S₁ (avant) à D₂ − S₂ (après).</figcaption>
+  </figure>
+<div class="tbl"><table>
+<tr><th>Qui ?</th><th>Aire</th></tr>
+<tr><td>Consommateurs</td><td>− (A + B + C + D)</td></tr>
+<tr><td>Producteurs</td><td>+ A</td></tr>
+<tr><td>État (recettes)</td><td>+ C = t × importations <strong>après</strong> le tarif</td></tr>
+<tr class="total"><td>Pays</td><td><strong>− (B + D)</strong> : B = perte de production, D = perte de consommation</td></tr>
+</table></div>
+
+<h3>La méthode de calcul en 4 étapes</h3>
+<ol class="steps">
+<li>Réécris les fonctions en Q<sub>d</sub>(P) et Q<sub>s</sub>(P).</li>
+<li>Calcule Q<sub>s</sub> et Q<sub>d</sub> au prix mondial, puis à P<sub>w</sub> + t.</li>
+<li>B = ½ × t × (hausse de production) ; D = ½ × t × (baisse de consommation).</li>
+<li>Effet net = −(B + D). Recettes = t × (Q<sub>d</sub> − Q<sub>s</sub>) au nouveau prix.</li>
+</ol>
+
+<div class="box ex"><span class="tag">Examen Q4 · Réponse D</span>
+<p>P = 50 − Q et P = 20 + 2Q, donc Q<sub>d</sub> = 50 − P et Q<sub>s</sub> = (P − 20) ÷ 2. P<sub>w</sub> = 30, t = 4.</p>
+<div class="tbl"><table>
+<tr><th></th><th class="num">P = 30</th><th class="num">P = 34</th></tr>
+<tr><td>Production Q<sub>s</sub></td><td class="num">5</td><td class="num">7</td></tr>
+<tr><td>Consommation Q<sub>d</sub></td><td class="num">20</td><td class="num">16</td></tr>
+<tr><td>Importations</td><td class="num">15</td><td class="num">9</td></tr>
+</table></div>
+<p>B = ½ × 4 × 2 = 4 ; D = ½ × 4 × 4 = 8 ; <strong>bien-être −12</strong>. Recettes C = 4 × 9 = 36. Le leurre : « decrease by 72 » est la perte des seuls consommateurs.</p></div>
+
+<div class="grid2">
+  <div class="card"><h4>Tarif pour une production cible</h4><p>Trouve le prix qui donne cette production avec l'offre, puis <strong>t = ce prix − P<sub>w</sub></strong>.</p><p>Examen Q7 : S(p) = p, P<sub>w</sub> = 3, cible 4 → p = 4 → <strong>t = 1</strong>.</p></div>
+  <div class="card"><h4>Tarif prohibitif</h4><p>Celui qui supprime toute importation : il ramène le prix au <strong>prix d'autarcie</strong> (offre = demande). t = P<sub>autarcie</sub> − P<sub>w</sub>.</p></div>
+</div>
+
+<h3>Comparer les politiques</h3>
+<div class="tbl"><table>
+<tr><th>Politique</th><th>Effet net sur le pays</th></tr>
+<tr><td>Tarif, petit pays</td><td>Perte certaine − (B + D)</td></tr>
+<tr><td>Tarif, grand pays</td><td><strong>Ambigu</strong> : le prix mondial baisse (gain de termes de l'échange) et peut compenser</td></tr>
+<tr><td>Quota, licences aux importateurs nationaux</td><td>− (B + D), la rente de quota C reste au pays</td></tr>
+<tr><td>Quota, licences aux exportateurs étrangers</td><td>− (B + C + D), la rente part à l'étranger</td></tr>
+<tr><td>VER (restriction volontaire des exportations)</td><td>Comme le quota étranger : − (B + C + D)</td></tr>
+</table></div>
+<div class="grid2">
+  <div class="card"><h4>Droit spécifique / ad valorem</h4><p>Spécifique : montant fixe par unité (2 € par kilo). Ad valorem : % de la valeur (10 %).</p></div>
+  <div class="card"><h4>Rente de quota</h4><p>Le détenteur de licence achète au prix mondial et revend au prix intérieur : il empoche l'aire C.</p></div>
+</div>
+</section>
+
+<section class="part" id="p4">
+<div class="part-head"><div class="part-num">4</div><div><div class="eyebrow">Session 0 · Game theory</div><h2>Trouver l'équilibre de Nash</h2></div></div>
+<div class="box def"><span class="tag">Définitions</span>
+<p><strong>Équilibre de Nash</strong> : chaque joueur joue sa meilleure réponse à la stratégie de l'autre ; personne n'a intérêt à changer seul. <strong>Stratégie dominante</strong> : la meilleure quoi que fasse l'autre. Un équilibre en stratégies dominantes est toujours un Nash.</p></div>
+<ol class="steps">
+<li>Pour chaque choix de B, souligne le meilleur gain de A (premier chiffre).</li>
+<li>Pour chaque choix de A, souligne le meilleur gain de B (second chiffre).</li>
+<li>La case avec deux soulignements est un Nash.</li>
+<li>Existe-t-il une autre case meilleure <strong>pour les deux</strong> ? Si oui : dilemme du prisonnier (ils auraient besoin de coopérer, rôle de l'OMC). Si non : pas besoin de coopérer.</li>
+</ol>
+<div class="grid2">
+<div class="card"><h4>Cours : dilemme du prisonnier</h4>
+<div class="tbl"><table class="matrix"><tr><th>A \ B</th><th>Élevé</th><th>Bas</th></tr><tr><th>Élevé</th><td class="win">2, 2</td><td>5, 1</td></tr><tr><th>Bas</th><td>1, 5</td><td>4, 4</td></tr></table></div>
+<p>Élevé est dominant (2 &gt; 1, 5 &gt; 4). Nash = (élevé, élevé), alors que (bas, bas) donnerait 4 chacun.</p></div>
+<div class="card"><h4>Examen Q2 : pas de dilemme · Réponse H</h4>
+<div class="tbl"><table class="matrix"><tr><th>A \ B</th><th>Élevé</th><th>Bas</th></tr><tr><th>Élevé</th><td>1, 1</td><td>2 ; 1,5</td></tr><tr><th>Bas</th><td>1,5 ; 2</td><td class="win">3, 3</td></tr></table></div>
+<p>Bas est dominant (1,5 &gt; 1, 3 &gt; 2). Nash = (bas, bas), qui est aussi le meilleur résultat : pas besoin de coopérer.</p></div>
+</div>
+<div class="box trap"><span class="tag">Piège</span><p>Ne réponds jamais « dilemme du prisonnier » par réflexe : refais le calcul case par case.</p></div>
+</section>
+
+<section class="part" id="p5">
+<div class="part-head"><div class="part-num">5</div><div><div class="eyebrow">Facteurs de production</div><h2>Heckscher-Ohlin et Stolper-Samuelson</h2></div></div>
+<div class="box key"><span class="tag">Théorème H-O</span>
+<p>Un pays exporte le bien qui utilise intensivement le facteur dont il est <strong>abondamment doté</strong>.</p>
+<ul><li><strong>Abondance (pays)</strong> : compare les ratios L/K. Le plus grand L/K = abondant en travail. C'est le <strong>ratio</strong> qui compte, pas le nombre de travailleurs.</li>
+<li><strong>Intensité (bien)</strong> : compare L/K par unité. Vêtement (3 L, 1 K) = intensif en travail ; ordinateur (1 L, 2 K) = intensif en capital.</li></ul></div>
+<div class="box ex"><span class="tag">Examen Q9 · Réponse B</span><p>Home L/K = 100/200 = 0,5 ; Foreign = 150/50 = 3. Foreign est abondant en travail → avantage comparatif dans le vêtement.</p></div>
+
+<div class="box key"><span class="tag">Théorème de Stolper-Samuelson</span>
+<p>Si le prix d'un bien monte, la rémunération du facteur qu'il utilise intensivement monte <strong>plus que proportionnellement</strong>, celle de l'autre facteur <strong>baisse</strong>.</p></div>
+<div class="box ex"><span class="tag">Examen Q10 · Méthode · Réponse B</span>
+<p>Profit nul : prix = coût unitaire. p<sub>Cloth</sub> = 3w + r ; p<sub>Computer</sub> = w + 2r = 1, donc <strong>w = 1 − 2r</strong>.</p>
+<ul><li>p<sub>Cloth</sub> = 1 : 3(1 − 2r) + r = 1 → 3 − 5r = 1 → r = 0,4, w = 0,2.</li>
+<li>p<sub>Cloth</sub> = 1,2 : 3 − 5r = 1,2 → r = 0,36, w = 0,28.</li>
+<li>r : (0,36 − 0,4) ÷ 0,4 = <strong>−10 %</strong>. w : +40 % (le leurre).</li></ul></div>
+</section>
+
+<section class="part" id="p6">
+<div class="part-head"><div class="part-num">6</div><div><div class="eyebrow">OMC</div><h2>Défense commerciale (examen Q1 · Réponse E)</h2></div></div>
+<div class="grid2">
+<div class="card"><h4>Trade remedies</h4><p>Outils de l'OMC contre les pratiques déloyales et les hausses imprévues d'importations. Ils permettent des tarifs <strong>au-dessus des taux consolidés</strong>, appliqués de façon <strong>discriminatoire</strong>. Trois : <strong>anti-dumping</strong>, <strong>droits compensateurs</strong> (contre les subventions), <strong>sauvegardes</strong>.</p></div>
+<div class="card"><h4>VER</h4><p>Limite de la quantité <strong>exportée</strong> pendant une période, sous pression du pays importateur. <strong>Bilatérale</strong>. Ex. : voitures japonaises vers les États-Unis, 1981. Interdite par l'OMC depuis 1995.</p></div>
+<div class="card"><h4>Dumping</h4><p>Vente à l'étranger sous la valeur normale : moins cher que chez soi (par les prix) ou sous le coût de production (par les coûts). Droit anti-dumping possible si <strong>préjudice important</strong> à un <strong>produit similaire</strong>.</p></div>
+<div class="card"><h4>Taux consolidé</h4><p>Tarif maximum promis à l'OMC (bound rate). Le taux appliqué peut être plus bas.</p></div>
+</div>
+<p>Réponses possibles au dumping : droit égal à la marge, droit moindre (lesser-duty rule), engagement de prix (price undertaking).</p>
+</section>
+
+<section class="part" id="p7">
+<div class="part-head"><div class="part-num">7</div><div><div class="eyebrow">Moins probable</div><h2>À savoir en une ligne</h2></div></div>
+<ul>
+<li><strong>Surplus du consommateur</strong> = disposition à payer − prix ; <strong>du producteur</strong> = prix − disposition à accepter.</li>
+<li><strong>Prix plafond</strong> sous l'équilibre → pénurie ; <strong>prix plancher</strong> au-dessus → excédent. Toute distorsion crée une <strong>perte sèche</strong> (triangle).</li>
+<li>Taxer le vendeur ou l'acheteur donne <strong>le même résultat</strong>.</li>
+<li>Commerce mondial : services ≈ <strong>1/5</strong>. Quatre causes de l'essor depuis 1970 : conteneur, TIC, baisse des tarifs, entrée de la Chine (OMC 2001). Exportations/PIB plus faibles en Chine qu'en Allemagne.</li>
+<li><strong>Utilité marginale</strong> = utilité totale(n) − utilité totale(n − 1), décroissante.</li>
+<li><strong>Boîte d'Edgeworth</strong> : tout échange vers la lentille rend les deux plus heureux. ToT = pommes données ÷ oranges reçues.</li>
+<li><strong>Optimum de Pareto</strong> : impossible d'améliorer l'un sans nuire à l'autre ; TMS Smith = TMS Jones.</li>
+</ul>
+</section>
+
+<section class="part" id="jourj">
+<div class="part-head"><div class="part-num">✓</div><div><div class="eyebrow">Avant de rendre la copie</div><h2>Check-list du jour J</h2></div></div>
+<ul>
+<li>Tableau d'heures ou de production ? (inverse tout le calcul)</li>
+<li>Coût croissant : quelle tranche, pas la moyenne.</li>
+<li>Tarif : variation du <strong>bien-être total</strong>, pas des consommateurs. Recettes avec les importations <strong>après</strong> tarif.</li>
+<li>Nash : vérifier chaque case avant de dire « dilemme du prisonnier ».</li>
+<li>H-O : comparer des <strong>ratios</strong> L/K. Stolper-Samuelson : on demande w ou r ?</li>
+<li>Réponses combinées : vérifier chaque proposition, puis choisir la combinaison exacte.</li>
+<li>Aucune case vide.</li>
+</ul>
+<h3>Les 12 mots anglais à reconnaître</h3>
+<dl class="glo">
+<dt>Opportunity cost</dt><dd>Coût d'opportunité</dd>
+<dt>Terms of trade (TOT)</dt><dd>Termes de l'échange</dd>
+<dt>Autarky</dt><dd>Autarcie</dd>
+<dt>Deadweight loss</dt><dd>Perte sèche</dd>
+<dt>Consumer / producer surplus</dt><dd>Surplus du consommateur / producteur</dd>
+<dt>Social welfare</dt><dd>Bien-être total</dd>
+<dt>Payoff</dt><dd>Gain (dans un jeu)</dd>
+<dt>Bound rate</dt><dd>Taux consolidé</dd>
+<dt>Countervailing duty</dt><dd>Droit compensateur</dd>
+<dt>Factor abundance / intensity</dt><dd>Abondance / intensité en facteur</dd>
+<dt>Rental rate (r) / wage (w)</dt><dd>Loyer du capital / salaire</dd>
+<dt>Quota rent</dt><dd>Rente de quota</dd>
+</dl>
+</section>
+
+<section class="part" id="quiz">
+<div class="part-head"><div class="part-num">?</div><div><div class="eyebrow">Style examen · énoncés en anglais</div><h2>15 QCM corrigés</h2></div></div>
+<p>Des questions nouvelles sur les notions ★★★ et ★★☆, avec d'autres chiffres que le sujet. Clique sur une réponse pour voir la correction.</p>
+<div class="scorebar"><span>Score : <b id="score">0</b> / <span id="tot">15</span></span><button id="reset" type="button">Recommencer</button></div>
+<div class="quiz" id="qz"></div>
+<div class="box key result" id="res"></div>
+</section>
+</main>
+</div>
+<script>const Q=[
+{t:"Coût d'opportunité",q:"Labor hours per unit: Country A needs 3 hours per cloth and 6 hours per wine; Country B needs 2 hours per cloth and 1 hour per wine. Select the best answer:",o:["B has an absolute advantage in both goods","A has a comparative advantage in cloth","B has a comparative advantage in wine","A has nothing to export","Only A and B are correct","Only A, B and C are correct","All of the above are correct"],a:5,e:"B a l'avantage absolu partout (2 < 3 et 1 < 6). CO d'un cloth : A = 3 ÷ 6 = 0,5 wine ; B = 2 ÷ 1 = 2 wines → A en cloth, donc B en wine. D est faux : tout pays a un avantage comparatif. Donc A, B et C."},
+{t:"Termes de l'échange",q:"Maximum output per day: Country X can produce 50 corn OR 25 steel; Country Y can produce 30 corn OR 30 steel. Within which range must the price of one steel (in corn) lie for both countries to gain?",o:["0.5 < P < 1","1 < P < 2","0.5 < P < 2","2 < P < 3","1 < P < 50","Impossible to determine"],a:1,e:"Tableau de production : CO(steel) = max corn ÷ max steel. X = 50 ÷ 25 = 2 corn ; Y = 30 ÷ 30 = 1 corn. Le prix gagnant-gagnant est entre les deux : 1 < P < 2."},
+{t:"Coût croissant",q:"Country K: the first 5 drones cost 1 robot each, the next 5 drones cost 3 robots each. K has already produced 6 drones. What is the opportunity cost of one more drone?",o:["1 robot","1.5 robots","2 robots","3 robots","6 robots","Impossible to determine"],a:3,e:"Après 6 drones, on est dans la 2e tranche : le 7e coûte 3 robots. Le leurre 2 est la moyenne (20 ÷ 10)."},
+{t:"Avantage absolu",q:"Labor hours per unit: Italy needs 4 hours per bag and 10 hours per car; Spain needs 5 hours per bag and 8 hours per car. Which statement is correct?",o:["Italy has an absolute advantage in both goods","Spain has an absolute advantage in both goods","Italy has an absolute advantage in bags, Spain in cars","Spain has an absolute advantage in bags, Italy in cars","Neither has an absolute advantage"],a:2,e:"Tableau d'heures : le plus petit gagne. Sac : 4 < 5 → Italie. Voiture : 8 < 10 → Espagne."},
+{t:"Gains du libre-échange",q:"An importing country moves from autarky (price Po) to free trade (world price Pw < Po). Who loses?",o:["Domestic consumers","Domestic producers","The government","Nobody","The country as a whole","Only A and E are correct"],a:1,e:"Le prix baisse : les producteurs nationaux perdent (PS tombe à PwBO). Les consommateurs gagnent le trapèze PwPoAC et le pays gagne le triangle ABC."},
+{t:"Gains du libre-échange",q:"Qd = 60 − P and Qs = P − 10. The country moves from autarky to free trade at Pw = 20. What is the net welfare gain?",o:["150","225","300","450","525","There is no gain"],a:1,e:"Autarcie : 60 − P = P − 10 → P = 35. À 20 : Qd = 40, Qs = 10, importations 30. Gain = ½ × (35 − 20) × 30 = 225."},
+{t:"Tarif",q:"Same market (Qd = 60 − P, Qs = P − 10), small country, Pw = 20. A specific tariff t = 5 is imposed. What is the change in national welfare?",o:["Welfare increases by 25","Welfare decreases by 25","Welfare decreases by 62.5","Welfare decreases by 100","Welfare decreases by 187.5","Welfare increases by 100"],a:1,e:"À 20 : Qs = 10, Qd = 40. À 25 : Qs = 15, Qd = 35. B = ½ × 5 × 5 = 12,5 ; D = ½ × 5 × 5 = 12,5. Effet net −25. Les leurres : 187,5 = perte des consommateurs, 62,5 = gain des producteurs, 100 = recettes."},
+{t:"Tarif",q:"Same market and tariff (t = 5). Government tariff revenue is:",o:["50","100","125","150","187.5"],a:1,e:"Recettes = t × importations APRÈS le tarif = 5 × (35 − 15) = 100. Le leurre 150 utilise les importations avant tarif (30)."},
+{t:"Tarif cible",q:"Domestic supply S(p) = 3p, world price p = 4. What tariff must be imposed so that domestic production rises to 18 units?",o:["t = 1","t = 2","t = 3","t = 4","t = 6","It is not possible with a tariff"],a:1,e:"3p = 18 → p = 6. Tarif = 6 − 4 = 2. Même méthode que la Q7 de l'examen."},
+{t:"Tarif prohibitif",q:"Qd = 60 − P, Qs = P − 10, Pw = 20. What is the minimum tariff that eliminates all imports?",o:["t = 5","t = 10","t = 15","t = 20","t = 35"],a:2,e:"Le tarif prohibitif ramène le prix au prix d'autarcie : 35. t = 35 − 20 = 15."},
+{t:"Quota",q:"With the letters of the tariff graph, the net welfare loss of an import quota whose licenses go to FOREIGN exporters (or of a VER) is:",o:["A","B + D","C","B + C + D","A + B + C + D","Zero"],a:3,e:"La rente de quota C part à l'étranger : perte = B + C + D. Si les licences vont aux importateurs nationaux, la perte n'est que B + D."},
+{t:"Théorie des jeux",q:"Payoffs (A, B): (High, High) = (3, 3); A High, B Low = (6, 1); A Low, B High = (1, 6); (Low, Low) = (5, 5). Select the best answer:",o:["Both countries choose High Tariff is the Nash equilibrium","Both countries choose Low Tariff is the Nash equilibrium","There are two Nash equilibria","The countries do not need to cooperate to achieve the best outcome","This game illustrates a Prisoner's Dilemma","Both A. and E. are correct","Both B. and D. are correct"],a:5,e:"Pour A : si B élevé, élevé donne 3 > 1 ; si B bas, élevé donne 6 > 5. Élevé est dominant pour les deux. Nash = (élevé, élevé) avec (3, 3), alors que (bas, bas) donnerait (5, 5) : dilemme du prisonnier. A et E."},
+{t:"Heckscher-Ohlin",q:"Home has L = 300, K = 100. Foreign has L = 200, K = 200. Computers are capital-intensive. According to H-O, which country has a comparative advantage in computers?",o:["Home","Foreign","Both","Neither","Cannot be determined"],a:1,e:"L/K : Home = 3, Foreign = 1. Foreign est relativement abondant en capital → avantage comparatif dans le bien intensif en capital (ordinateurs). Peu importe que Home ait plus de travailleurs en nombre absolu."},
+{t:"Stolper-Samuelson",q:"Zero-profit conditions: pX = 2w + r and pY = w + 3r, with pY = 1. If pX rises from 1 to 1.5, the wage w:",o:["Increases by 50%","Increases by 75%","Decreases by 50%","Increases by 25%","Decreases by 75%","Does not change"],a:1,e:"w = 1 − 3r. pX = 1 : 2 − 6r + r = 1 → r = 0,2, w = 0,4. pX = 1,5 : 2 − 5r = 1,5 → r = 0,1, w = 0,7. w : (0,7 − 0,4) ÷ 0,4 = +75 % (plus que les +50 % du prix : amplification). Le leurre −50 % est la variation de r."},
+{t:"Défense commerciale",q:"Select the most correct answer:",o:["Trade remedies allow tariffs above bound rates, applied in a discriminatory fashion","The three trade remedies are anti-dumping duties, countervailing duties and safeguards","A VER limits the quantity of goods imported by a country","A large country's tariff always reduces its welfare","Only A and B are correct","Only A, B and C are correct","All of the above are correct"],a:4,e:"A et B sont des définitions du cours. C est faux : la VER limite les EXPORTATIONS. D est faux : pour un grand pays, l'effet est ambigu (gain de termes de l'échange)."}
+];
+const L="ABCDEFGHIJKLM";let score=0,done=0;
+const qz=document.getElementById('qz');
+function build(){qz.innerHTML='';score=0;done=0;upd();
+Q.forEach((x,i)=>{const d=document.createElement('div');d.className='q';
+d.innerHTML=`<span class="theme">${x.t}</span><h4>${x.q}</h4><div class="opts">${x.o.map((o,j)=>`<button type="button" data-j="${j}">${L[j]}. ${o}</button>`).join('')}</div>`;
+const ex=document.createElement('div');ex.className='expl';ex.hidden=true;d.appendChild(ex);
+d.querySelectorAll('button').forEach(b=>b.onclick=()=>answer(d,x,+b.dataset.j));qz.appendChild(d);});}
+function answer(d,x,j){const bs=d.querySelectorAll('button');bs.forEach(b=>b.disabled=true);
+bs[x.a].classList.add('right');if(j!==x.a)bs[j].classList.add('wrong');else score++;done++;
+const ex=d.querySelector('.expl');ex.hidden=false;ex.innerHTML=(j===x.a?'<b class="v">Juste !</b> ':'<b class="x">Raté.</b> ')+`Réponse ${L[x.a]}. ${x.e}`;upd();}
+function upd(){document.getElementById('score').textContent=score;const r=document.getElementById('res');
+if(done===Q.length){r.classList.add('on');r.innerHTML=`<span class="tag">Résultat</span><p>${score} / ${Q.length}, soit environ ${Math.round(score/Q.length*20)} / 20. ${score>=12?'Tu es prête : relis seulement les pièges.':'Refais les parties correspondant à tes erreurs, puis recommence.'}</p>`}else r.classList.remove('on');}
+document.getElementById('reset').onclick=build;build();
+window.showAllAnswers=()=>{document.querySelectorAll('.q').forEach((d,i)=>{const x=Q[i];const bs=d.querySelectorAll('button');bs.forEach(b=>b.disabled=true);bs[x.a].classList.add('right');const ex=d.querySelector('.expl');ex.hidden=false;ex.innerHTML=`Réponse ${L[x.a]}. ${x.e}`;});};
+</script></body></html>

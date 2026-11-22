@@ -1,0 +1,1429 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Marques, positionnement et désir</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:ital,wght@0,400;0,600;0,700;1,400&display=swap">
+<style>
+/* Layout: une colonne de lecture (~68ch), sommaire collant sur grand écran, encadrés roses par rôle (définition, exemple, piège, à retenir) */
+:root{
+  --bg:#fff6f9; --paper:#ffffff; --ink:#3b1530; --muted:#7a5068;
+  --rose:#d6336c; --rose-deep:#a61e55; --blush:#fde0ea; --blush-2:#f9c4d6; --line:#f1c9d8;
+  --plum:#6b2a5a; --ok:#1f8a5b; --ok-bg:#e3f5ec; --ko:#c0392b; --ko-bg:#fde6e3;
+  --f-display:"Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+  --f-body:"Figtree", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#1d0f18; --paper:#28141f; --ink:#fbe6ee; --muted:#d3a7bb;
+  --rose:#ff6f9f; --rose-deep:#ff94b8; --blush:#3d1d2e; --blush-2:#5a2943; --line:#4a2539;
+  --plum:#e7a6cf; --ok:#5fd39b; --ok-bg:#163327; --ko:#ff8b7d; --ko-bg:#3a1a17; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#1d0f18; --paper:#28141f; --ink:#fbe6ee; --muted:#d3a7bb;
+  --rose:#ff6f9f; --rose-deep:#ff94b8; --blush:#3d1d2e; --blush-2:#5a2943; --line:#4a2539;
+  --plum:#e7a6cf; --ok:#5fd39b; --ok-bg:#163327; --ko:#ff8b7d; --ko-bg:#3a1a17; color-scheme:dark }
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.65;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;padding-block:32px 80px}
+@media (max-width:900px){.wrap{grid-template-columns:minmax(0,1fr);gap:0}.toc{display:none}}
+main{min-width:0;max-width:72ch}
+h1,h2,h3,h4{font-family:var(--f-display);text-wrap:balance;line-height:1.15;color:var(--ink)}
+h1{font-size:clamp(2.2rem,5.5vw,3.6rem);font-weight:800;margin:0 0 .3em;letter-spacing:-.02em}
+h1 em{font-style:normal;color:var(--rose)}
+h2{font-size:clamp(1.6rem,3.6vw,2.2rem);font-weight:800;margin:0 0 .4em}
+h3{font-size:1.3rem;font-weight:700;margin:2em 0 .5em;color:var(--rose-deep)}
+h4{font-size:1.05rem;margin:1.4em 0 .3em}
+p{margin:.6em 0}
+a{color:var(--rose-deep)}
+strong{color:var(--plum)}
+.eyebrow{font-family:var(--f-display);text-transform:uppercase;letter-spacing:.12em;font-size:.78rem;font-weight:700;color:var(--rose)}
+.lede{font-size:1.15rem;color:var(--muted)}
+
+/* Sommaire */
+.toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 24px);align-self:start;font-size:.92rem}
+.toc ol{list-style:none;padding:0;margin:.6em 0 0;display:grid;gap:2px}
+.toc a{display:block;padding:6px 10px;border-radius:8px;text-decoration:none;color:var(--muted)}
+.toc a:hover,.toc a:focus-visible{background:var(--blush);color:var(--ink)}
+.toc .sub{padding-left:22px;font-size:.86rem}
+
+/* Hero */
+.hero{padding-block:8px 28px;border-bottom:2px solid var(--line);margin-bottom:24px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.chip{background:var(--blush);color:var(--rose-deep);border-radius:999px;padding:4px 12px;font-size:.85rem;font-weight:600}
+
+/* Parties */
+section.part{padding-top:40px;margin-top:40px;border-top:2px solid var(--line)}
+.part-head{display:flex;gap:16px;align-items:flex-start;margin-bottom:8px}
+.part-num{font-family:var(--f-display);font-weight:800;font-size:3.2rem;line-height:1;color:var(--blush-2);flex:none}
+.part-head .src{font-size:.85rem;color:var(--muted)}
+
+/* Encadrés */
+.box{border-radius:14px;padding:14px 18px;margin:16px 0;border:1px solid var(--line);background:var(--paper)}
+.box > :first-child{margin-top:0}.box > :last-child{margin-bottom:0}
+.box .tag{display:inline-block;font-family:var(--f-display);font-weight:700;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;padding:2px 8px;border-radius:6px;margin-bottom:6px}
+.def{background:var(--blush);border-color:var(--blush-2)}
+.def .tag{background:var(--rose);color:var(--paper)}
+.ex .tag{background:var(--plum);color:var(--paper)}
+.ex{border-left:5px solid var(--plum)}
+.trap{border:1.5px dashed var(--rose)}
+.trap .tag{background:transparent;color:var(--rose);border:1.5px solid var(--rose)}
+.key{background:var(--ink);color:var(--bg);border:none}
+.key strong{color:var(--blush-2)}
+.key .tag{background:var(--rose);color:#fff}
+.key ul{margin:.3em 0;padding-left:1.2em}
+.simple{font-style:italic;color:var(--muted)}
+
+/* Tableaux */
+.tbl{overflow-x:auto;margin:16px 0;border-radius:12px;border:1px solid var(--line)}
+table{border-collapse:collapse;width:100%;font-size:.93rem;background:var(--paper)}
+th,td{padding:9px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+th{background:var(--blush);font-family:var(--f-display);font-weight:700;color:var(--rose-deep)}
+tr:last-child td{border-bottom:none}
+
+/* Schémas */
+figure{margin:20px 0;padding:16px;background:var(--paper);border:1px solid var(--line);border-radius:14px}
+figure .scroll{overflow-x:auto}
+figcaption{font-size:.85rem;color:var(--muted);margin-top:8px}
+svg text{font-family:var(--f-body)}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch}
+.flow .step{flex:1 1 120px;background:var(--blush);border-radius:12px;padding:10px 12px;font-size:.9rem;min-width:0}
+.flow .step b{display:block;font-family:var(--f-display);color:var(--rose-deep);font-size:.95rem}
+.flow .arrow{align-self:center;color:var(--rose);font-weight:800}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px 14px;min-width:0}
+.card h4{margin:0 0 4px;color:var(--rose-deep)}
+.card p{margin:.2em 0;font-size:.93rem}
+.pm{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+.pm > div{border-radius:12px;padding:12px 14px}
+.pm .plus{background:var(--ok-bg)}.pm .minus{background:var(--ko-bg)}
+.pm h4{margin:0 0 4px}.pm .plus h4{color:var(--ok)}.pm .minus h4{color:var(--ko)}
+.pm ul{margin:0;padding-left:1.1em;font-size:.93rem}
+
+/* Quiz */
+.quiz{counter-reset:q}
+.q{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:14px 0}
+.q h4{margin:0 0 10px;font-family:var(--f-body);font-weight:700}
+.q h4::before{counter-increment:q;content:"Q" counter(q) " · ";color:var(--rose);font-family:var(--f-display)}
+.opts{display:grid;gap:8px}
+.opts button{font:inherit;font-size:.95rem;text-align:left;padding:10px 14px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.opts button:hover:not(:disabled){border-color:var(--rose)}
+.opts button:focus-visible{outline:3px solid var(--rose);outline-offset:2px}
+.opts button.right{background:var(--ok-bg);border-color:var(--ok);font-weight:600}
+.opts button.wrong{background:var(--ko-bg);border-color:var(--ko)}
+.opts button:disabled{cursor:default}
+.expl{margin-top:10px;padding:10px 14px;border-radius:10px;background:var(--blush);font-size:.93rem}
+.expl b.v{color:var(--ok)}.expl b.x{color:var(--ko)}
+.scorebar{position:sticky;top:calc(env(safe-area-inset-top,0px) + 8px);z-index:5;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;background:var(--ink);color:var(--bg);border-radius:12px;padding:10px 16px;margin:16px 0}
+.scorebar b{font-family:var(--f-display);font-size:1.15rem;color:var(--blush-2)}
+.scorebar button{font:inherit;font-size:.88rem;background:var(--rose);color:#fff;border:none;border-radius:8px;padding:6px 12px;cursor:pointer}
+.result{display:none}
+.result.on{display:block}
+dl.glo{display:grid;grid-template-columns:minmax(120px,max-content) minmax(0,1fr);gap:6px 16px;font-size:.93rem}
+dl.glo dt{font-weight:700;color:var(--rose-deep)}
+dl.glo dd{margin:0}
+@media (max-width:520px){dl.glo{grid-template-columns:minmax(0,1fr)}dl.glo dd{margin-bottom:8px}}
+@media (prefers-reduced-motion:no-preference){.opts button{transition:background .15s,border-color .15s}}
+</style>
+
+<div class="wrap">
+<nav class="toc" aria-label="Sommaire">
+  <div class="eyebrow">Sommaire</div>
+  <ol>
+    <li><a href="#p1">1. Le marketing crée-t-il nos envies ?</a></li>
+    <li><a href="#p2">2. Segmentation et ciblage</a></li>
+    <li><a href="#p3">3. Le positionnement</a></li>
+    <li><a href="#p4">4. La marque : ce qui fait Nike</a></li>
+    <li><a href="#p5">5. Étendre une marque</a></li>
+    <li><a href="#p6">6. La communication</a></li>
+    <li><a href="#glossaire">Glossaire FR / EN</a></li>
+    <li><a href="#quiz">Quiz corrigé</a></li>
+  </ol>
+</nav>
+
+<main>
+<header class="hero">
+  <div class="eyebrow">Digital Marketing · L3 Commerce International · UPEC</div>
+  <h1>Marques, positionnement <em>et désir</em></h1>
+  <p class="lede">Une fiche pour partir de zéro. Chaque notion est définie simplement, illustrée par un exemple vu en cours, puis résumée dans un encadré « À retenir ». Le quiz final (39 questions) te dit tout de suite si tu as juste et pourquoi.</p>
+  <div class="chips">
+    <span class="chip">Séance 1 · Marketing et envies</span>
+    <span class="chip">Séance 2 · Segmentation et ciblage</span>
+    <span class="chip">Séance 3 · Positionnement (Dyson)</span>
+    <span class="chip">Séance 4 · La marque (Nike)</span>
+    <span class="chip">Séance 5 · Extension de marque</span>
+    <span class="chip">Séance 6 · Communication</span>
+  </div>
+  <div class="box" style="margin-top:20px">
+    <span class="tag" style="background:var(--blush);color:var(--rose-deep)">Comment lire cette fiche</span>
+    <p>Les encadrés ont toujours le même rôle : <strong>rose plein</strong> = définition à savoir par cœur ; <strong>bordure violette</strong> = exemple concret ; <strong>pointillés</strong> = piège fréquent ; <strong>fond sombre</strong> = à retenir. Une partie du cours est en anglais : les termes anglais sont donnés entre parenthèses et regroupés dans le glossaire.</p>
+  </div>
+</header>
+
+<!-- ===================== PARTIE 1 ===================== -->
+<section class="part" id="p1">
+  <div class="part-head"><span class="part-num">1</span><div><div class="eyebrow">Séance 1</div><h2>Le marketing crée-t-il vraiment nos envies ?</h2><div class="src">D'après « Le marketing à l'ère du digital », B. Berthon</div></div></div>
+
+  <h3>1.1 Qu'est-ce que le marketing ?</h3>
+  <p>Au départ, il y a une idée simple : <strong>les êtres humains ont des besoins et des désirs</strong>. Les entreprises cherchent à les satisfaire, et en échange les clients leur donnent de l'argent (ou du temps, de l'attention, des données…). Le marketing, c'est tout ce qui organise cet <strong>échange</strong>.</p>
+  <div class="box def"><span class="tag">Définition</span>
+    <p>Le <strong>marketing</strong> est la fonction de l'organisation chargée de <strong>définir les clients cibles</strong> et la meilleure façon de <strong>satisfaire leurs besoins et désirs</strong>, de manière <strong>compétitive</strong> (mieux que les concurrents) et <strong>rentable</strong> (en gagnant de l'argent).</p>
+    <p>Le <strong>management marketing</strong> est le processus qui planifie et exécute la <strong>conception</strong>, la <strong>tarification</strong>, la <strong>promotion</strong> et la <strong>distribution</strong> des produits et services, afin de créer des échanges qui satisfont à la fois le client et l'entreprise.</p>
+  </div>
+  <p class="simple">En une phrase : le marketing, c'est comprendre ce que les gens veulent, leur proposer quelque chose de mieux que les autres, et faire en sorte que tout le monde y gagne.</p>
+
+  <h4>Sur quoi porte le marketing ?</h4>
+  <p>On pense d'abord aux produits, mais on peut faire du marketing sur <strong>dix types d'objets</strong> :</p>
+  <div class="tbl"><table>
+    <tr><th>Objet</th><th>Exemple</th></tr>
+    <tr><td>Biens</td><td>Un jean, un smartphone</td></tr>
+    <tr><td>Services</td><td>Netflix, une banque</td></tr>
+    <tr><td>Expériences</td><td>Disneyland, un escape game</td></tr>
+    <tr><td>Événements</td><td>Les Jeux olympiques, un festival</td></tr>
+    <tr><td>Personnes</td><td>Un sportif, une influenceuse</td></tr>
+    <tr><td>Lieux</td><td>Une ville qui attire les touristes (« Only Lyon »)</td></tr>
+    <tr><td>Propriétés</td><td>Un appartement, des actions</td></tr>
+    <tr><td>Organisations</td><td>Une université, une ONG</td></tr>
+    <tr><td>Informations</td><td>Un journal, une newsletter</td></tr>
+    <tr><td>Idées</td><td>« Manger 5 fruits et légumes par jour »</td></tr>
+  </table></div>
+
+  <h3>1.2 Besoin, désir, demande : la question centrale</h3>
+  <p>Le titre de la séance pose une question : <em>le marketing crée-t-il nos envies ?</em> Pour y répondre, il faut distinguer trois mots que l'on confond souvent.</p>
+  <figure>
+    <div class="flow">
+      <div class="step"><b>Besoin</b>Sensation de manque, physique, sociale ou individuelle. <em>« J'ai soif. »</em></div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>Désir</b>Le moyen préféré de satisfaire ce besoin, qui dépend de la personnalité et de la culture. <em>« J'ai envie d'un Coca. »</em></div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>Demande</b>Le désir + le <strong>pouvoir</strong> d'achat (l'argent) + le <strong>vouloir</strong> d'achat (la décision). <em>« J'achète un Coca à 1,50 €. »</em></div>
+    </div>
+    <figcaption>Le marketing ne crée pas le besoin (la soif existe sans lui). Il oriente le désir vers sa marque et transforme ce désir en demande.</figcaption>
+  </figure>
+  <div class="box ex"><span class="tag">Exemple · Actimel (Danone)</span>
+    <p><strong>Besoin de départ :</strong> être en bonne santé. Danone surfe sur la tendance des « alicaments » (aliments qui ont un effet santé) et promet de renforcer les défenses naturelles.</p>
+    <p><strong>Comment le désir est créé :</strong> une petite bouteille de 62,5 ml qui ressemble à une dose de médicament (crédibilité médicale), et une publicité qui installe un <strong>geste santé du matin</strong>, ancré dans les habitudes.</p>
+    <p><strong>Conclusion du cours :</strong> à partir du besoin d'être en bonne santé, Danone a créé le <em>désir d'Actimel</em>. Le même produit est d'ailleurs perçu différemment selon les pays : plutôt « médical » en Allemagne, plutôt « pratique et pour les enfants » en France, « moderne et pas pour les enfants » au Royaume-Uni.</p>
+  </div>
+  <div class="box trap"><span class="tag">Piège</span>
+    <p>Ne dis pas « le marketing crée des besoins ». La réponse attendue est plus nuancée : le marketing <strong>révèle</strong> et <strong>oriente</strong> des besoins qui existent déjà, et il <strong>crée des désirs</strong> pour une marque précise.</p>
+  </div>
+
+  <h3>1.3 Le marché</h3>
+  <div class="box def"><span class="tag">Définition</span>
+    <p>Le <strong>marché</strong> est l'ensemble des publics qui peuvent influencer les ventes d'un produit ou l'activité d'une organisation. Plus simplement : c'est le <strong>lieu de rencontre de l'offre et de la demande</strong>.</p>
+  </div>
+  <p>Pour définir son marché, on se pose quatre questions (Vernette, 2004) :</p>
+  <div class="grid2">
+    <div class="card"><h4>Quoi ?</h4><p>Quel produit ? Le vin seul, ou toutes les boissons d'un repas ?</p></div>
+    <div class="card"><h4>Qui ?</h4><p>Quels clients ? Tous les adultes ou seulement les amateurs ?</p></div>
+    <div class="card"><h4>Quand ?</h4><p>Quelle situation ? Au ski, devant la télé ?</p></div>
+    <div class="card"><h4>Pourquoi ?</h4><p>Quelle motivation ? Faire la fête, perdre 5 kilos ?</p></div>
+  </div>
+
+  <h3>1.4 L'offre, la myopie marketing et la satisfaction</h3>
+  <div class="box def"><span class="tag">Définitions</span>
+    <p><strong>Offre commerciale :</strong> combinaison de <strong>produits, services et expériences</strong> destinée à satisfaire un besoin sur un marché donné.</p>
+    <p><strong>Myopie marketing :</strong> l'erreur qui consiste à s'intéresser au <strong>produit</strong> plutôt qu'au <strong>bénéfice</strong> qu'il apporte.</p>
+    <p><strong>Satisfaction :</strong> comparaison entre les <strong>attentes</strong> avant l'achat et l'<strong>expérience vécue</strong> après.</p>
+  </div>
+  <div class="box ex"><span class="tag">Exemple de myopie</span>
+    <p>Kodak se voyait comme un vendeur de <em>pellicules</em>. Or ses clients achetaient le <em>souvenir</em>. Quand la photo numérique est arrivée, Kodak a raté le virage. Le client n'achète pas une perceuse, il achète un trou dans le mur.</p>
+  </div>
+  <div class="box"><span class="tag" style="background:var(--blush);color:var(--rose-deep)">Citation à connaître</span>
+    <p>« Une industrie commence avec le client et ses besoins, pas avec un brevet, une matière première ou un savoir-faire de vente. » Theodore Levitt, <em>Marketing Myopia</em>, 1960. C'est lui qui a inventé l'expression « myopie marketing ».</p>
+  </div>
+
+
+  <h3>1.5 La démarche marketing en 5 étapes</h3>
+  <p>Voici le schéma central du cours. Les quatre premières étapes servent à <strong>créer de la valeur pour le client</strong> ; la cinquième sert à <strong>récupérer de la valeur en retour</strong> (profits, clients fidèles).</p>
+  <figure>
+    <div class="scroll">
+    <svg viewBox="0 0 760 200" width="100%" style="min-width:600px" role="img" aria-label="Les 5 étapes de la démarche marketing">
+      <g font-size="13" fill="var(--ink)">
+        <rect x="5" y="20" width="135" height="100" rx="12" fill="var(--blush)"/>
+        <text x="72" y="45" text-anchor="middle" font-weight="700" fill="var(--rose-deep)">1. Comprendre</text>
+        <text x="72" y="68" text-anchor="middle">le marché, les</text><text x="72" y="86" text-anchor="middle">besoins et désirs</text>
+        <rect x="155" y="20" width="135" height="100" rx="12" fill="var(--blush)"/>
+        <text x="222" y="45" text-anchor="middle" font-weight="700" fill="var(--rose-deep)">2. Concevoir</text>
+        <text x="222" y="68" text-anchor="middle">une stratégie</text><text x="222" y="86" text-anchor="middle">axée valeur client</text>
+        <rect x="305" y="20" width="135" height="100" rx="12" fill="var(--blush)"/>
+        <text x="372" y="45" text-anchor="middle" font-weight="700" fill="var(--rose-deep)">3. Élaborer</text>
+        <text x="372" y="68" text-anchor="middle">l'offre (les 4P)</text><text x="372" y="86" text-anchor="middle">à valeur supérieure</text>
+        <rect x="455" y="20" width="135" height="100" rx="12" fill="var(--blush)"/>
+        <text x="522" y="45" text-anchor="middle" font-weight="700" fill="var(--rose-deep)">4. Engager</text>
+        <text x="522" y="68" text-anchor="middle">le client, créer</text><text x="522" y="86" text-anchor="middle">relation et satisfaction</text>
+        <rect x="610" y="20" width="145" height="100" rx="12" fill="var(--rose)"/>
+        <text x="682" y="45" text-anchor="middle" font-weight="700" fill="#fff">5. Capter</text>
+        <text x="682" y="68" text-anchor="middle" fill="#fff">la valeur client :</text><text x="682" y="86" text-anchor="middle" fill="#fff">profits, capital client</text>
+        <path d="M140 70h12M290 70h12M440 70h12M590 70h17" stroke="var(--rose)" stroke-width="3" fill="none"/>
+        <path d="M5 140h585" stroke="var(--plum)" stroke-width="2" fill="none"/>
+        <text x="297" y="165" text-anchor="middle" fill="var(--plum)" font-weight="700">Créer de la valeur POUR le client</text>
+        <path d="M610 140h145" stroke="var(--rose)" stroke-width="2" fill="none"/>
+        <text x="682" y="165" text-anchor="middle" fill="var(--rose)" font-weight="700">Valeur EN RETOUR</text>
+      </g>
+    </svg></div>
+  </figure>
+
+  <h3>1.6 Segmenter, cibler, choisir une proposition de valeur</h3>
+  <p>À l'étape 2, l'entreprise répond à deux questions :</p>
+  <div class="grid2">
+    <div class="card"><h4>Qui servir ?</h4><p>On découpe le marché en groupes de clients qui se ressemblent (<strong>segmentation</strong>), puis on choisit le ou les groupes à viser (<strong>ciblage</strong>).</p></div>
+    <div class="card"><h4>Comment les servir ?</h4><p>On choisit une <strong>proposition de valeur</strong> : l'ensemble des bénéfices que la marque promet au client. C'est ce qui la différencie et la positionne (voir partie 3).</p></div>
+  </div>
+
+  <h3>1.7 Les grandes « optiques » : l'histoire du marketing</h3>
+  <p>Une <em>optique</em> est la philosophie qui guide l'entreprise. Elles sont apparues dans l'ordre suivant, à mesure que l'offre dépassait la demande.</p>
+  <div class="tbl"><table>
+    <tr><th>Optique</th><th>Idée principale</th><th>Contexte</th><th>Exemple</th></tr>
+    <tr><td><strong>Production</strong></td><td>Produire beaucoup, pas cher, disponible partout</td><td>Demande &gt; offre, recherche de rendement</td><td>Ford T « de n'importe quelle couleur pourvu qu'elle soit noire »</td></tr>
+    <tr><td><strong>Produit</strong></td><td>Faire le meilleur produit techniquement</td><td>Secteurs technologiques, primauté de l'offre</td><td>Le Concorde : génial, mais trop cher pour le marché</td></tr>
+    <tr><td><strong>Vente</strong></td><td>Pousser le client à acheter (promotions, vendeurs)</td><td>Surcapacité : il faut écouler les stocks</td><td>Démarchage téléphonique</td></tr>
+    <tr><td><strong>Marketing</strong></td><td>Partir des besoins du client (il est « souverain »)</td><td>Orientation client</td><td>Netflix qui recommande selon tes goûts</td></tr>
+  </table></div>
+  <h4>Orientation production contre orientation marketing</h4>
+  <p>La différence tient au point de départ. L'une part de l'usine, l'autre part du client.</p>
+  <figure>
+    <div class="flow">
+      <div class="step"><b>Orientation production</b>Capacités de production → on fabrique le produit → gros effort de vente → clients.</div>
+      <div class="arrow" aria-hidden="true">≠</div>
+      <div class="step"><b>Orientation marketing</b>Besoins des clients → opportunités de marché → produits et services marketing → clients.</div>
+    </div>
+    <figcaption>Exemple du cours : Polaroid OneStep (« l'appareil le plus simple du monde ») ne vend pas une technologie, il vend des « souvenirs instantanés ».</figcaption>
+  </figure>
+  <h4>Petite histoire du marketing en dates</h4>
+  <div class="tbl"><table>
+    <tr><th>Période</th><th>Ce qui se passe</th></tr>
+    <tr><td>Antiquité → XIXᵉ s.</td><td>Formes primitives : troc, enseignes, panneaux, crieurs, réputation locale. On parle de transaction, pas encore de marketing.</td></tr>
+    <tr><td>XIXᵉ s. (révolution industrielle)</td><td>On produit en masse : l'offre devient inférieure puis supérieure à la demande. Naissance des marques (Coca-Cola), du packaging (la bouteille Coca déposée fait partie de la marque), de la pub dans la presse et de l'affichage.</td></tr>
+    <tr><td>Début XXᵉ s. (États-Unis)</td><td>Naissance du marketing. On passe de la production à la vente : les entreprises créent des services commerciaux, qui deviendront la fonction marketing.</td></tr>
+    <tr><td>Milieu XXᵉ s.</td><td>Radio, télévision, pub de masse : marketing de masse, branding, positionnement, modèle des 4P, études de marché et <strong>panels</strong> (groupe de personnes interrogées régulièrement).</td></tr>
+    <tr><td>Années 80–90</td><td>Saturation publicitaire et concurrence forte : on passe au <strong>marketing relationnel</strong>. Garder ses clients et les rendre rentables (fidélisation, CRM). L'informatique permet de calculer la valeur vie du client.</td></tr>
+    <tr><td>Fin XXᵉ, début XXIᵉ s.</td><td>Marketing digital : site web, référencement naturel (<strong>SEO</strong>) et payant (<strong>SEA</strong>), e-mail, pub en ligne. On mesure tout (clics, paniers).</td></tr>
+    <tr><td>Aujourd'hui</td><td>Réseaux sociaux (marketing conversationnel, influence), données et cookies, parcours omnicanal, IA, RGPD et responsabilité.</td></tr>
+  </table></div>
+  <p>Le marketing lui-même a évolué en trois âges :</p>
+  <figure>
+    <div class="flow">
+      <div class="step"><b>Début XXᵉ s. · De masse</b>« One-to-many » : un seul message pour tous.</div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>Fin des années 70 · Différencié</b>« One-to-few » : on segmente et on positionne le produit pour quelques groupes.</div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>Années 2000 · Individualisé</b>« One-to-one » : CRM, marketing digital, contenu, personnalisation, marketing sociétal.</div>
+    </div>
+  </figure>
+
+  <h3>1.8 Des 4P aux 4C : penser « consommateur »</h3>
+  <p>Le <strong>mix marketing</strong> (les <strong>4P</strong>) regroupe les quatre leviers d'action. Le cours montre qu'un bon responsable marketing traduit chaque P en question posée du point de vue du client (les <strong>4C</strong>).</p>
+  <div class="tbl"><table>
+    <tr><th>4P (vision entreprise)</th><th>Erreur à éviter</th><th>4C (vision client)</th></tr>
+    <tr><td><strong>Produit</strong></td><td>Fabriquer ce qu'on sait fabriquer</td><td>Quels <strong>bénéfices</strong> recherche le client ?</td></tr>
+    <tr><td><strong>Prix</strong></td><td>Prix = coûts de production + marge</td><td>Quel <strong>sacrifice</strong> est-il prêt à consentir ?</td></tr>
+    <tr><td><strong>Promotion</strong> (communication)</td><td>Publicité selon l'intuition du chef</td><td>Comment s'informe-t-il ? Que pense-t-il ?</td></tr>
+    <tr><td><strong>Place</strong> (distribution)</td><td>Le circuit le moins cher</td><td>Où préfère-t-il trouver le produit ?</td></tr>
+  </table></div>
+
+  <div class="box def"><span class="tag">Les 7P des services</span>
+    <p>Pour un service (hôtel, banque, compagnie aérienne), on ajoute trois P aux quatre premiers : <strong>People</strong> (le personnel), <strong>Process</strong> (le déroulement du service : réservation, attente, paiement) et <strong>Physical evidence</strong> (les preuves matérielles : décor, uniforme, site web). Exemple : Singapore Airlines met en avant ses hôtesses et le soin du service à bord.</p>
+  </div>
+  <h3>1.9 La valeur perçue : la balance du client</h3>
+  <div class="box def"><span class="tag">Définition</span>
+    <p>La <strong>valeur perçue</strong> est l'évaluation par le client de la différence entre <strong>tous les bénéfices</strong> et <strong>tous les coûts</strong> d'une offre, <strong>comparée aux offres concurrentes</strong>.</p>
+  </div>
+  <figure>
+    <div class="scroll">
+    <svg viewBox="0 0 640 230" width="100%" style="min-width:480px" role="img" aria-label="Balance bénéfices perçus contre sacrifices perçus">
+      <g font-size="13" fill="var(--ink)">
+        <path d="M320 40v150" stroke="var(--plum)" stroke-width="4"/>
+        <path d="M280 195h80" stroke="var(--plum)" stroke-width="6" stroke-linecap="round"/>
+        <path d="M90 60L550 30" stroke="var(--plum)" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="320" cy="45" r="8" fill="var(--rose)"/>
+        <rect x="20" y="70" width="190" height="125" rx="12" fill="var(--ok-bg)"/>
+        <text x="115" y="92" text-anchor="middle" font-weight="700" fill="var(--ok)">+ Bénéfices perçus</text>
+        <text x="115" y="116" text-anchor="middle">Produit (performance)</text>
+        <text x="115" y="136" text-anchor="middle">Services (SAV, conseil)</text>
+        <text x="115" y="156" text-anchor="middle">Relationnels</text>
+        <text x="115" y="176" text-anchor="middle">Image (prestige)</text>
+        <rect x="440" y="45" width="190" height="125" rx="12" fill="var(--ko-bg)"/>
+        <text x="535" y="67" text-anchor="middle" font-weight="700" fill="var(--ko)">− Sacrifices perçus</text>
+        <text x="535" y="91" text-anchor="middle">Coût monétaire (prix)</text>
+        <text x="535" y="111" text-anchor="middle">Coût en temps</text>
+        <text x="535" y="131" text-anchor="middle">Coût en effort</text>
+        <text x="535" y="151" text-anchor="middle">Coût psychologique (risque)</text>
+        <text x="320" y="222" text-anchor="middle" font-weight="700" fill="var(--rose-deep)">Valeur perçue = bénéfices − sacrifices, par rapport aux concurrents</text>
+      </g>
+    </svg></div>
+    <figcaption>Quand le plateau des bénéfices pèse plus lourd que celui des sacrifices (et plus que chez le concurrent), le client achète.</figcaption>
+  </figure>
+  <div class="box trap"><span class="tag">Piège</span>
+    <p>La valeur perçue <strong>n'est pas la simple somme des bénéfices</strong>, <strong>ne se résume pas à la qualité</strong>, est <strong>toujours relative aux concurrents</strong> et <strong>varie d'une personne à l'autre</strong>.</p>
+  </div>
+  <p>Il y a donc deux façons d'augmenter la valeur perçue :</p>
+  <div class="grid2">
+    <div class="card"><h4>① Augmenter les bénéfices</h4><p>Innover (nouveau concept), améliorer la performance, travailler le design, l'odeur, le toucher et le packaging, ajouter des services, améliorer la qualité perçue, valoriser la marque.</p></div>
+    <div class="card"><h4>② Réduire les sacrifices</h4><p>Baisser le prix (attention à la rentabilité), changer la perception du prix (le client monte lui-même son meuble chez IKEA ; l'imprimante est bon marché mais les cartouches chères), faire gagner du temps, rassurer avec des certifications.</p></div>
+  </div>
+  <div class="box ex"><span class="tag">Exemple · La success-story Nespresso</span>
+    <p>Nespresso coche toutes les cases du côté « bénéfices » : <strong>innovation</strong> de concept (la capsule), <strong>qualité perçue</strong> (les cafés présentés comme des « grands crus »), <strong>identité sensorielle</strong> forte (goûts marqués, packaging haut de gamme, machines design), <strong>services</strong> (boutiques, club, abonnement), commande en ligne facile, et une <strong>marque</strong> portée par George Clooney (« What else ? »). Résultat : on accepte de payer le café beaucoup plus cher.</p>
+  </div>
+
+  <h3>1.10 La satisfaction et le modèle de Kano</h3>
+  <div class="box def"><span class="tag">Définition</span><p>La <strong>satisfaction client</strong> mesure à quel point la performance perçue du produit correspond aux <strong>attentes</strong> de l'acheteur. Performance &lt; attentes : déçu. Égale : satisfait. Supérieure : enchanté.</p></div>
+  <p>Le <strong>modèle de Kano</strong> classe les caractéristiques d'une offre en trois familles. Le cours l'applique à un site marchand :</p>
+  <div class="grid3">
+    <div class="card"><h4>Basiques</h4><p>Attendues d'office. Leur absence mécontente, leur présence ne fait pas plaisir.</p><p><em>Paiement sécurisé, site qui fonctionne.</em></p></div>
+    <div class="card"><h4>De performance</h4><p>Plus il y en a, plus le client est satisfait.</p><p><em>Rapidité de livraison, choix de produits.</em></p></div>
+    <div class="card"><h4>D'enchantement</h4><p>Inattendues : elles surprennent et ravissent.</p><p><em>Petit mot manuscrit, échantillon offert.</em></p></div>
+  </div>
+
+  <h3>1.11 L'engagement client à l'heure des réseaux sociaux</h3>
+  <div class="box def"><span class="tag">Définitions</span>
+    <p><strong>Marketing d'engagement :</strong> faire de la marque un élément des conversations et de la vie des consommateurs, en les impliquant directement dans les expériences et la communauté de la marque.</p>
+    <p><strong>Marketing généré par le consommateur :</strong> les échanges sur la marque créés par les consommateurs eux-mêmes, que la marque le veuille ou non (avis, vidéos, mèmes).</p>
+  </div>
+  <div class="box ex"><span class="tag">Exemples</span>
+    <p><strong>Red Bull Stratos (2012) :</strong> le saut de Felix Baumgartner depuis la stratosphère. 2 000 tweets par seconde pendant le saut, 8 millions d'internautes en direct, 5,6 millions de vues en 24 h. La marque devient un sujet de conversation mondial.</p>
+    <p><strong>Heinz</strong> sponsorise le mariage d'un fan venu avec une veste faite de sachets de ketchup : la marque récupère et amplifie un contenu créé par un consommateur.</p>
+  </div>
+
+  <h3>1.12 Capter la valeur client</h3>
+  <div class="grid2">
+    <div class="card"><h4>Fidéliser</h4><p>Un client satisfait reste fidèle et recommande la marque autour de lui.</p></div>
+    <div class="card"><h4>Part de client</h4><p>La part des achats d'un client qui va à ta marque dans une catégorie. <em>Sur 10 cafés par semaine, combien chez Starbucks ?</em></p></div>
+    <div class="card"><h4>Capital client</h4><p>La somme des <strong>valeurs vie</strong> (ce que chaque client rapporte sur toute sa relation avec l'entreprise) des clients actuels et potentiels.</p></div>
+    <div class="card"><h4>Les bons clients</h4><p>Construire les bonnes relations avec les clients qui sont rentables.</p></div>
+  </div>
+
+  <h4>La valeur vie client (Customer Lifetime Value, CLV)</h4>
+  <p>C'est ce qu'un client rapporte à l'entreprise pendant toute sa relation avec elle. La formule du cours :</p>
+  <div class="box def"><span class="tag">Formule</span>
+    <p style="font-weight:700">CLV = panier moyen × nombre d'achats répétés × durée moyenne de fidélité</p>
+    <p>Exemple : un client Sephora dépense 40 € par achat, achète 6 fois par an et reste fidèle 5 ans. CLV = 40 × 6 × 5 = <strong>1 200 €</strong>. On comprend qu'il vaut mieux bien le traiter que de perdre ce client pour 5 €.</p>
+  </div>
+  <figure>
+    <div class="scroll">
+    <svg viewBox="0 0 600 230" width="100%" style="min-width:460px" role="img" aria-label="Répartition des clients selon leur valeur vie">
+      <g font-size="12.5" fill="var(--ink)">
+        <path d="M30 190H570" stroke="var(--muted)" stroke-width="1.5"/>
+        <path d="M30 190C90 185 140 150 180 70V190Z" fill="var(--plum)" fill-opacity=".55"/>
+        <path d="M185 190V60C220 20 380 20 415 60V190Z" fill="var(--rose)"/>
+        <path d="M420 70C460 150 510 185 570 190H420Z" fill="var(--rose-deep)" fill-opacity=".45"/>
+        <text x="120" y="40" text-anchor="middle" font-weight="700">20 %</text>
+        <text x="120" y="56" text-anchor="middle" font-size="11">inactifs, non rentables</text>
+        <text x="300" y="110" text-anchor="middle" font-weight="700" fill="#fff">60 %</text>
+        <text x="300" y="128" text-anchor="middle" fill="#fff" font-size="11">actifs rentables</text>
+        <text x="490" y="40" text-anchor="middle" font-weight="700">20 %</text>
+        <text x="490" y="56" text-anchor="middle" font-size="11">très rentables</text>
+        <text x="120" y="210" text-anchor="middle">CLV faible</text>
+        <text x="300" y="210" text-anchor="middle">CLV moyenne</text>
+        <text x="490" y="210" text-anchor="middle">CLV élevée</text>
+      </g>
+    </svg></div>
+    <figcaption>Tous les clients ne se valent pas : c'est pour cela que le cours parle d'établir « les bonnes relations avec les bons clients ».</figcaption>
+  </figure>
+  <h3>1.13 L'ère du numérique</h3>
+  <p>Le <strong>marketing digital</strong> utilise sites web, réseaux sociaux, applis, vidéos, e-mails et blogs pour toucher le consommateur partout et tout le temps. Le <strong>m-marketing</strong> (mobile) est la plateforme qui grandit le plus vite : le smartphone est toujours allumé, personnel et finement ciblé. Exemple du cours : la NASA gère 480 comptes de réseaux sociaux (14 M de fans Facebook, 8,8 M sur Instagram).</p>
+  <p>Chaque P du mix change avec le digital, ce qui annonce les séances suivantes :</p>
+  <div class="tbl"><table>
+    <tr><th>P</th><th>Ce que le digital change</th><th>Séances</th></tr>
+    <tr><td>Produit</td><td>Produit numérique, personnalisé</td><td>S4–S5</td></tr>
+    <tr><td>Prix</td><td>Dynamique, personnalisé, transparent (on compare en 2 clics)</td><td>S10</td></tr>
+    <tr><td>Promotion</td><td>Interactive, basée sur la permission, globale, instantanée</td><td>S6 à S9</td></tr>
+    <tr><td>Distribution</td><td>Nouveau canal virtuel (e-commerce)</td><td>S11</td></tr>
+  </table></div>
+  <h3>1.14 Pour aller plus loin (notes complémentaires)</h3>
+  <h4>Marketing stratégique et marketing opérationnel</h4>
+  <div class="grid2">
+    <div class="card"><h4>Stratégique (réfléchir)</h4><p>Analyser le marché et les besoins, segmenter, cibler, positionner, planifier à long terme.</p></div>
+    <div class="card"><h4>Opérationnel (agir)</h4><p>Mettre en œuvre le mix (4P) sur le terrain, puis suivre les résultats pour ajuster.</p></div>
+  </div>
+  <p>Le marketing a aussi trois <strong>dimensions</strong> : une dimension <strong>scientifique</strong> (étudier les échanges et les comportements), une dimension <strong>managériale</strong> (organiser les actions dans l'entreprise) et une <strong>philosophie</strong> (un état d'esprit centré sur le client).</p>
+
+  <h4>La pyramide de Maslow : hiérarchiser les besoins</h4>
+  <p>Maslow classe les besoins humains en cinq niveaux. On satisfait d'abord ceux du bas avant de chercher ceux du haut. Le marketing s'en sert pour savoir à quel besoin répond un produit.</p>
+  <figure>
+    <div class="scroll">
+    <svg viewBox="0 0 620 260" width="100%" style="min-width:460px" role="img" aria-label="Pyramide de Maslow">
+      <g font-size="12.5">
+        <path d="M300 10L345 55H255Z" fill="var(--rose)"/>
+        <path d="M255 60H345L390 105H210Z" fill="var(--rose)" fill-opacity=".8"/>
+        <path d="M210 110H390L435 155H165Z" fill="var(--rose)" fill-opacity=".6"/>
+        <path d="M165 160H435L480 205H120Z" fill="var(--rose)" fill-opacity=".4"/>
+        <path d="M120 210H480L525 255H75Z" fill="var(--rose)" fill-opacity=".25"/>
+        <g fill="var(--ink)" font-weight="700" text-anchor="middle">
+          <text x="300" y="47" fill="#fff" font-size="11">Accompl.</text>
+          <text x="300" y="88">Estime</text>
+          <text x="300" y="138">Appartenance</text>
+          <text x="300" y="188">Sécurité</text>
+          <text x="300" y="238">Physiologiques</text>
+        </g>
+        <g fill="var(--muted)" font-size="11.5">
+          <text x="360" y="38">se réaliser : Nike « Just do it »</text>
+          <text x="400" y="88">prestige : Rolex</text>
+          <text x="440" y="138">amis, famille : Coca-Cola</text>
+          <text x="478" y="188">protection : assurance</text>
+          <text x="530" y="238">faim, soif</text>
+        </g>
+      </g>
+    </svg></div>
+  </figure>
+
+  <h4>PESTEL : analyser l'environnement</h4>
+  <p>Avant d'entrer sur un marché (surtout à l'international), on étudie six familles de facteurs externes :</p>
+  <div class="tbl"><table>
+    <tr><th>Lettre</th><th>Facteurs</th><th>Exemple</th></tr>
+    <tr><td><strong>P</strong>olitique</td><td>Stabilité, politique commerciale</td><td>Droits de douane américains</td></tr>
+    <tr><td><strong>É</strong>conomique</td><td>Pouvoir d'achat, croissance, structure des dépenses</td><td>Inflation qui pousse vers les MDD</td></tr>
+    <tr><td><strong>S</strong>ociologique</td><td>Démographie, culture, religion, habitudes</td><td>Pas de porc dans les menus McDonald's en Inde</td></tr>
+    <tr><td><strong>T</strong>echnologique</td><td>Innovations, digital</td><td>Paiement mobile, IA</td></tr>
+    <tr><td><strong>E</strong>nvironnemental</td><td>Écologie, développement durable</td><td>Fin des pailles plastiques</td></tr>
+    <tr><td><strong>L</strong>égal</td><td>Lois et réglementations</td><td>Loi Évin (pub pour l'alcool), RGPD</td></tr>
+  </table></div>
+
+  <h4>Les études de marché</h4>
+  <div class="grid3">
+    <div class="card"><h4>Observation</h4><p>Regarder les clients en magasin ou en ligne (parcours, réactions).</p></div>
+    <div class="card"><h4>Enquête</h4><p>Questionnaires (quantitatif), entretiens individuels et focus groupes (qualitatif), panels.</p></div>
+    <div class="card"><h4>Expérimentation</h4><p>Tester une variable (prix, packaging) en conditions contrôlées et mesurer l'impact sur l'achat.</p></div>
+  </div>
+
+  <h4>Où s'applique le marketing ?</h4>
+  <p><strong>B2C</strong> (vente aux particuliers), <strong>B2B</strong> (entre entreprises, achats complexes et contrats), <strong>services</strong> (intangibles, l'expérience client compte), <strong>international</strong>, <strong>politique</strong> (candidats), <strong>social et sociétal</strong> (causes de santé ou d'environnement), <strong>luxe</strong> (image, prix premium, storytelling), <strong>événementiel</strong> et <strong>digital</strong>.</p>
+
+  <h4>Marketing international : standardiser ou adapter ?</h4>
+  <div class="grid2">
+    <div class="card"><h4>Standardisation</h4><p>La même stratégie partout dans le monde : image cohérente, coûts réduits. <em>Coca-Cola, Apple, Nike.</em></p></div>
+    <div class="card"><h4>Adaptation</h4><p>On ajuste produit, services et communication à la culture, aux goûts, aux lois et au pouvoir d'achat local. <em>Menus McDonald's locaux, contenus Netflix localisés.</em></p></div>
+  </div>
+  <p class="simple">En pratique, on cherche un équilibre entre les deux. Actimel (partie 1.2) en est un bon exemple : même produit, positionnement perçu différent selon les pays.</p>
+
+  <h4>Éthique et tendances actuelles</h4>
+  <p><strong>Éthique et RSE</strong> (responsabilité sociétale des entreprises) : protéger les données personnelles (RGPD), être transparent, lutter contre le <strong>greenwashing</strong> (se donner une fausse image écologique), promouvoir une consommation responsable.</p>
+  <p><strong>Tendances</strong> : data marketing, <strong>omnicanal</strong> (magasin, site, appli et réseaux sociaux qui forment une seule expérience fluide), marketing de contenu et d'influence (UGC, créateurs), personnalisation de masse par l'IA, recherche vocale et visuelle, expériences immersives (réalité augmentée, réalité virtuelle).</p>
+  <div class="box"><span class="tag" style="background:var(--blush);color:var(--rose-deep)">Lien avec le cours de management digital</span>
+    <p>Le <strong>management digital</strong> concerne toute l'entreprise et fixe la stratégie ; le <strong>marketing digital</strong> en est un outil tactique, centré sur l'offre et les clients. Voir la fiche séparée : <a href="https://claude.ai/artifact/96q9MudM94eaHyGKg3CsoX" target="_blank" rel="noopener">Management digital</a>.</p>
+  </div>
+  <div class="box key"><span class="tag">À retenir · Partie 1</span>
+    <ul>
+      <li>Besoin (manque) → désir (envie d'une marque) → demande (désir + argent + décision). Le marketing oriente le désir, il ne crée pas le besoin.</li>
+      <li>Démarche : comprendre → stratégie → offre (4P) → relation → capter la valeur.</li>
+      <li>Optiques : production → produit → vente → marketing.</li>
+      <li>Valeur perçue = bénéfices − sacrifices, toujours <strong>comparée aux concurrents</strong>.</li>
+      <li>Kano : basiques, performance, enchantement.</li>
+      <li>CLV = panier moyen × nombre d'achats × durée de fidélité.</li>
+      <li>Services : 7P (+ People, Process, Physical evidence). Environnement : PESTEL. Besoins : Maslow.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== PARTIE 2 ===================== -->
+<section class="part" id="p2">
+  <div class="part-head"><span class="part-num">2</span><div><div class="eyebrow">Séance 2 · Who are you actually talking to?</div><h2>La segmentation et le ciblage : arrêter de vendre à tout le monde</h2><div class="src">Pourquoi cette pub n'est pas faite pour toi (elle est faite pour ton voisin)</div></div></div>
+  <p>Une marque ne peut pas plaire à tout le monde. Un jeune de 20 ans et une mère de trois enfants n'attendent pas la même chose d'un fast-food. Il faut donc <strong>découper</strong> le marché en groupes, puis <strong>choisir</strong> à qui on parle. C'est la première étape de la démarche STP.</p>
+
+  <h3>2.1 Qu'est-ce que la segmentation ?</h3>
+  <div class="box def"><span class="tag">Définition</span>
+    <p>La <strong>segmentation</strong> consiste à identifier des individus ou des organisations qui ont des <strong>caractéristiques similaires</strong> ayant des conséquences importantes sur la stratégie marketing. Chaque groupe obtenu est un <strong>segment</strong> : il doit être homogène à l'intérieur et différent des autres segments.</p>
+  </div>
+  <p><strong>Pourquoi segmenter ?</strong> Pour mieux se <strong>différencier</strong>, repérer des <strong>opportunités et des menaces</strong>, <strong>choisir</strong> les marchés cibles et construire un <strong>mix marketing adapté</strong> à chacun.</p>
+  <figure>
+    <div class="flow">
+      <div class="step"><b>1. Marché désagrégé</b>On comprend les caractéristiques de chaque client.</div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>2. Marché segmenté</b>On regroupe les clients qui se ressemblent en segments.</div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>3. Marché cible</b>On juge le segment le plus attractif et on conçoit un mix marketing pour lui.</div>
+    </div>
+  </figure>
+  <div class="box ex"><span class="tag">Exemple · Les segments d'un fast-food</span>
+    <p>Le cours découpe les clients d'un fast-food selon l'<strong>occasion</strong> : la sortie en famille, le vrai repas, le lieu de rencontre entre amis, le client pressé, celui qui veut quelque chose de « sympa et facile », celui qui vient parce qu'il aime ça. Chaque segment attend une chose différente (rapidité, prix, ambiance, menu enfant).</p>
+  </div>
+
+  <h3>2.2 Les critères de segmentation des consommateurs</h3>
+  <p>On peut découper un marché de consommateurs selon trois grandes familles de critères :</p>
+  <div class="tbl"><table>
+    <tr><th>Famille</th><th>Critère</th><th>Exemples de segments</th></tr>
+    <tr><td rowspan="5"><strong>Comportementaux</strong><br><span class="simple">ce que la personne fait</span></td><td>Avantages recherchés</td><td>Praticité, statut, performance</td></tr>
+    <tr><td>Occasion d'achat</td><td>Pour soi, pour offrir</td></tr>
+    <tr><td>Comportement d'achat</td><td>Fidèle à une marque, change souvent, innovateur</td></tr>
+    <tr><td>Usage</td><td>Gros ou petit consommateur</td></tr>
+    <tr><td>Perceptions et croyances</td><td>Favorable ou défavorable à la marque</td></tr>
+    <tr><td rowspan="2"><strong>Psychographiques</strong><br><span class="simple">ce que la personne est</span></td><td>Style de vie</td><td>Avant-gardistes, conservateurs, sophistiqués</td></tr>
+    <tr><td>Personnalité</td><td>Extravertis, introvertis</td></tr>
+    <tr><td rowspan="5"><strong>Profil</strong><br><span class="simple">qui est la personne</span></td><td>Démographiques</td><td>Âge, genre, cycle de vie (jeune célibataire, jeunes parents, retraités)</td></tr>
+    <tr><td>Socio-économiques</td><td>Classe sociale, niveau d'études, revenu</td></tr>
+    <tr><td>Géographiques</td><td>Nord ou sud, ville ou campagne, pays</td></tr>
+    <tr><td>Géodémographiques</td><td>« Jeunes familles en ascension vivant en maison » : on croise lieu de vie et profil</td></tr>
+  </table></div>
+  <div class="box ex"><span class="tag">Exemple · La segmentation par avantages du dentifrice</span>
+    <div class="tbl" style="margin:8px 0 0"><table>
+      <tr><th>Avantage recherché</th><th>Qui ?</th><th>Marques préférées</th></tr>
+      <tr><td>Économique (prix bas)</td><td>Hommes, gros consommateurs</td><td>Marques en promotion</td></tr>
+      <tr><td>Médical (anti-caries)</td><td>Grandes familles, plutôt inquiètes</td><td>Crest</td></tr>
+      <tr><td>Cosmétique (dents blanches)</td><td>Ados, jeunes adultes, fumeurs, sociables</td><td>Aqua-Fresh, Ultra Brite</td></tr>
+      <tr><td>Goût</td><td>Enfants, amateurs de menthe</td><td>Colgate, Aim</td></tr>
+    </table></div>
+    <p>Cette segmentation est très utile car elle explique <strong>pourquoi</strong> les gens achètent. Fitbit l'applique avec son slogan « There's a Fitbit for everyone » : un bracelet pour chaque ensemble de bénéfices recherchés.</p>
+  </div>
+  <div class="grid2">
+    <div class="box ex" style="margin:0"><span class="tag">Genre · Dick's Sporting Goods</span><p>Avec la tendance « athleisure » (porter des tenues de sport au quotidien), l'enseigne lance ses premières pubs destinées aux femmes sportives.</p></div>
+    <div class="box ex" style="margin:0"><span class="tag">Style de vie · Gazelle</span><p>Le fabricant de vélos néerlandais propose un vélo par style de vie : ville, trekking sportif, « lifestyle » pour flâner, vélo électrique… du cycliste quotidien à la famille royale.</p></div>
+  </div>
+
+  <h3>2.3 Les 5 critères d'une bonne segmentation</h3>
+  <div class="grid3">
+    <div class="card"><h4>Efficace</h4><p>Les segments ont-ils des besoins vraiment différents ?</p></div>
+    <div class="card"><h4>Mesurable</h4><p>Peut-on identifier ces clients et connaître leur comportement ?</p></div>
+    <div class="card"><h4>Accessible</h4><p>Peut-on les toucher par la communication et la distribution ?</p></div>
+    <div class="card"><h4>Actionnable</h4><p>L'entreprise a-t-elle les moyens d'exploiter ce segment ?</p></div>
+    <div class="card"><h4>Rentable</h4><p>Le segment est-il assez grand pour gagner de l'argent ?</p></div>
+  </div>
+  <p class="simple">Moyen mnémotechnique : « EMAAR » (Efficace, Mesurable, Accessible, Actionnable, Rentable).</p>
+
+  <h3>2.4 Le ciblage : 4 stratégies</h3>
+  <div class="box def"><span class="tag">Définition</span><p>Le <strong>ciblage</strong> consiste à choisir <strong>quels</strong> segments et <strong>combien</strong> de segments on veut servir.</p></div>
+  <figure>
+    <div class="scroll">
+    <svg viewBox="0 0 720 210" width="100%" style="min-width:600px" role="img" aria-label="Les quatre stratégies de ciblage">
+      <g font-size="12" fill="var(--ink)">
+        <g text-anchor="middle" font-weight="700" fill="var(--rose-deep)">
+          <text x="90" y="18">Indifférencié</text><text x="270" y="18">Différencié</text><text x="450" y="18">Concentré</text><text x="630" y="18">Personnalisé</text>
+        </g>
+        <!-- indifférencié -->
+        <rect x="40" y="35" width="100" height="26" rx="8" fill="var(--rose)"/><text x="90" y="52" text-anchor="middle" fill="#fff">1 mix</text>
+        <path d="M90 61V95" stroke="var(--rose)" stroke-width="2"/>
+        <rect x="25" y="95" width="130" height="80" rx="10" fill="var(--blush)"/><text x="90" y="140" text-anchor="middle">tout le marché</text>
+        <!-- différencié -->
+        <g><rect x="200" y="35" width="40" height="26" rx="6" fill="var(--rose)"/><rect x="250" y="35" width="40" height="26" rx="6" fill="var(--rose)"/><rect x="300" y="35" width="40" height="26" rx="6" fill="var(--rose)"/>
+        <text x="220" y="52" text-anchor="middle" fill="#fff">mix 1</text><text x="270" y="52" text-anchor="middle" fill="#fff">mix 2</text><text x="320" y="52" text-anchor="middle" fill="#fff">mix 3</text>
+        <path d="M220 61V95M270 61V95M320 61V95" stroke="var(--rose)" stroke-width="2"/>
+        <rect x="200" y="95" width="40" height="80" rx="6" fill="var(--blush-2)"/><rect x="250" y="95" width="40" height="80" rx="6" fill="var(--blush-2)"/><rect x="300" y="95" width="40" height="80" rx="6" fill="var(--blush-2)"/>
+        <text x="220" y="140" text-anchor="middle" font-size="11">S1</text><text x="270" y="140" text-anchor="middle" font-size="11">S2</text><text x="320" y="140" text-anchor="middle" font-size="11">S3</text></g>
+        <!-- concentré -->
+        <rect x="430" y="35" width="40" height="26" rx="6" fill="var(--rose)"/><text x="450" y="52" text-anchor="middle" fill="#fff">1 mix</text>
+        <path d="M450 61V95" stroke="var(--rose)" stroke-width="2"/>
+        <rect x="380" y="95" width="40" height="80" rx="6" fill="var(--blush)"/><rect x="430" y="95" width="40" height="80" rx="6" fill="var(--blush-2)" stroke="var(--rose)" stroke-width="2"/><rect x="480" y="95" width="40" height="80" rx="6" fill="var(--blush)"/>
+        <text x="400" y="140" text-anchor="middle" font-size="11" fill="var(--muted)">S1</text><text x="450" y="140" text-anchor="middle" font-size="11">S2</text><text x="500" y="140" text-anchor="middle" font-size="11" fill="var(--muted)">S3</text>
+        <!-- personnalisé -->
+        <g fill="var(--rose)"><circle cx="590" cy="48" r="12"/><circle cx="630" cy="48" r="12"/><circle cx="670" cy="48" r="12"/></g>
+        <path d="M590 60V105M630 60V105M670 60V105" stroke="var(--rose)" stroke-width="2"/>
+        <g fill="var(--plum)"><circle cx="590" cy="118" r="12"/><circle cx="630" cy="118" r="12"/><circle cx="670" cy="118" r="12"/></g>
+        <text x="630" y="155" text-anchor="middle" font-size="11">1 mix par client</text>
+        <text x="630" y="171" text-anchor="middle" font-size="11">(ou par zone locale)</text>
+        <text x="360" y="200" text-anchor="middle" fill="var(--muted)">Rose = mix marketing ; bloc clair = segment de marché</text>
+      </g>
+    </svg></div>
+  </figure>
+  <div class="tbl"><table>
+    <tr><th>Stratégie</th><th>Principe</th><th>Exemple du cours</th></tr>
+    <tr><td><strong>Indifférenciée</strong> (de masse)</td><td>Un seul mix pour tout le marché ; on ignore les différences</td><td>Le Coca-Cola des débuts, une seule bouteille pour tous</td></tr>
+    <tr><td><strong>Différenciée</strong></td><td>Un mix différent pour chaque segment visé</td><td>Les voitures électriques Renault : Twizy (ville, 2ᵉ voiture), Zoe (ville et longs trajets), Fluence Z.E. (famille), Kangoo Z.E. (utilitaire)</td></tr>
+    <tr><td><strong>Concentrée</strong> (niche)</td><td>Un seul mix pour un seul segment</td><td>Bang & Olufsen, pour une clientèle haut de gamme qui aime le plaisir et le design</td></tr>
+    <tr><td><strong>Personnalisée</strong> (locale ou individuelle)</td><td>Un mix par client ou par zone</td><td>Les M&M's personnalisés avec ton prénom</td></tr>
+  </table></div>
+  <div class="box trap"><span class="tag">Piège</span>
+    <p>Ne confonds pas <strong>différenciée</strong> (plusieurs segments, plusieurs mix) et <strong>concentrée</strong> (un seul segment, un seul mix). Et la segmentation (découper) vient toujours <strong>avant</strong> le ciblage (choisir).</p>
+  </div>
+
+  <div class="box"><span class="tag" style="background:var(--blush);color:var(--rose-deep)">Le twist digital</span>
+    <p><strong>Niches en ligne :</strong> Stitch Fix, site de mode féminine, propose un stylisme personnel en ligne grâce à plus de 2 000 stylistes aidés par un algorithme qui cerne le style de chaque cliente.<br>
+    <strong>Ciblage individualisé :</strong> les données permettent de parler à chaque personne.<br>
+    <strong>SoLoMo</strong> (Social, Local, Mobile) : toucher le client sur les réseaux sociaux, là où il se trouve, sur son smartphone. Le <strong>marketing local</strong> adapte marques et promotions aux clients d'une zone.</p>
+  </div>
+  <div class="box key"><span class="tag">À retenir · Partie 2</span>
+    <ul>
+      <li>Segmenter = découper le marché en groupes homogènes ; cibler = choisir lesquels servir.</li>
+      <li>Critères : comportementaux, psychographiques, de profil (démographiques, socio-économiques, géographiques).</li>
+      <li>Une bonne segmentation est efficace, mesurable, accessible, actionnable et rentable.</li>
+      <li>4 ciblages : indifférencié, différencié, concentré, personnalisé.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== PARTIE 3 ===================== -->
+<section class="part" id="p3">
+  <div class="part-head"><span class="part-num">3</span><div><div class="eyebrow">Séance 3 · Own a word in someone's head</div><h2>Le positionnement : posséder un mot dans la tête du client</h2><div class="src">Fil rouge : pourquoi Dyson ne se bat jamais sur le prix</div></div></div>
+
+  <p>Pense à « sécurité » en voiture : beaucoup de gens répondent <em>Volvo</em>. Pense à « aspirateur sans sac, high-tech » : <em>Dyson</em>. Une marque bien positionnée <strong>possède un mot</strong> dans la tête de ses clients. C'est tout l'objet de cette partie.</p>
+
+  <h3>3.1 Segmentation, ciblage, positionnement (STP)</h3>
+  <figure>
+    <div class="flow">
+      <div class="step"><b>Segmentation</b>Repérer les différents besoins et préférences qui existent sur le marché.</div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>Ciblage</b>(Targeting) Choisir le ou les segments que l'on va servir.</div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>Positionnement</b>(Positioning) Concevoir l'offre pour qu'elle occupe une place <strong>claire et distincte</strong> dans l'esprit de la cible.</div>
+    </div>
+    <figcaption>On dit souvent « STP » : Segmentation, Targeting, Positioning. Les deux premières étapes sont détaillées en partie 2.</figcaption>
+  </figure>
+  <div class="box def"><span class="tag">Définition</span>
+    <p>Le <strong>positionnement</strong> consiste à relier son produit aux solutions que cherchent les consommateurs, pour que, quand ils pensent à ce besoin, ta marque soit <strong>l'une des premières à leur venir en tête</strong>.</p>
+  </div>
+
+  <h3>3.2 Les 3 éléments d'un positionnement</h3>
+  <div class="grid3">
+    <div class="card"><h4>1. La cible</h4><p>Qui ? Ses besoins, sa demande, son profil.</p></div>
+    <div class="card"><h4>2. La catégorie</h4><p>Contre quoi ? Les produits concurrents et les produits de substitution.</p></div>
+    <div class="card"><h4>3. Le point de différence</h4><p>Pourquoi moi ? Le bénéfice supérieur, prouvé par une caractéristique, une démonstration ou la garantie d'un expert.</p></div>
+  </div>
+  <p>On résume tout ça dans une phrase type, la <strong>déclaration de positionnement</strong> (positioning statement) :</p>
+  <div class="box def"><span class="tag">Modèle à réutiliser</span>
+    <p><strong>Pour</strong> [cible] qui [besoin, problème],<br><strong>la marque X est une marque de</strong> [catégorie] qui remplace [concurrents],<br><strong>qui apporte</strong> [bénéfice], <strong>grâce à</strong> [preuve].</p>
+  </div>
+  <div class="box ex"><span class="tag">Exemple · Dyson</span>
+    <p><strong>Pour</strong> les foyers urbains aisés (CSP++) qui ne veulent pas d'un aspirateur ordinaire mais cherchent un appareil performant, innovant et très design,<br>
+    <strong>Dyson est une marque d'électroménager</strong> qui remplace les aspirateurs Hoover, Philips, Rowenta ou Calor,<br>
+    <strong>grâce à</strong> la technologie Dual Cyclone qui permet un aspirateur <strong>sans sac</strong> aux performances supérieures.</p>
+    <p>Tout le mix marketing est <strong>cohérent</strong> avec ce positionnement : produits innovants et design, <strong>prix premium</strong>, distribution d'abord sélective puis large, et une communication d'abord informative puis comparative et humoristique (« Others clog. Ours doesn't. », « The only vacuum with balls »). Voilà pourquoi Dyson ne se bat jamais sur le prix : il se bat sur l'innovation.</p>
+  </div>
+
+  <h3>3.3 Les 4 conditions d'un positionnement réussi</h3>
+  <div class="grid2">
+    <div class="card"><h4>Clarté</h4><p>Simple, compréhensible en une phrase.</p></div>
+    <div class="card"><h4>Crédibilité</h4><p>Le client doit y croire (preuve, expertise).</p></div>
+    <div class="card"><h4>Cohérence</h4><p>Les 4P vont tous dans le même sens.</p></div>
+    <div class="card"><h4>Compétitivité</h4><p>Un vrai avantage face aux concurrents.</p></div>
+  </div>
+  <p class="simple">Moyen mnémotechnique : les « 4C du positionnement » (à ne pas confondre avec les 4C du mix vus en partie 1).</p>
+
+  <h3>3.4 Le diamant du positionnement</h3>
+  <p>Pour construire un positionnement, on répond à quatre questions disposées en losange :</p>
+  <figure>
+    <div class="scroll">
+    <svg viewBox="0 0 560 300" width="100%" style="min-width:440px" role="img" aria-label="Diamant du positionnement">
+      <g font-size="13" fill="var(--ink)">
+        <path d="M280 20L520 150L280 280L40 150Z" fill="var(--blush)" stroke="var(--rose)" stroke-width="2"/>
+        <text x="280" y="140" text-anchor="middle" font-family="var(--f-display)" font-weight="800" font-size="18" fill="var(--rose-deep)">Positionnement</text>
+        <text x="280" y="160" text-anchor="middle" fill="var(--muted)">le « mantra »</text>
+        <text x="280" y="55" text-anchor="middle" font-weight="700" fill="var(--rose-deep)">QUI ?</text>
+        <text x="280" y="73" text-anchor="middle">cible, motivations</text>
+        <text x="425" y="145" text-anchor="middle" font-weight="700" fill="var(--rose-deep)">QUOI ?</text>
+        <text x="425" y="163" text-anchor="middle">bénéfices fonctionnels</text>
+        <text x="425" y="179" text-anchor="middle">et émotionnels</text>
+        <text x="280" y="225" text-anchor="middle" font-weight="700" fill="var(--rose-deep)">QUAND ?</text>
+        <text x="280" y="243" text-anchor="middle">situation d'usage</text>
+        <text x="135" y="145" text-anchor="middle" font-weight="700" fill="var(--rose-deep)">CONTRE QUI ?</text>
+        <text x="135" y="163" text-anchor="middle">concurrents directs,</text>
+        <text x="135" y="179" text-anchor="middle">indirects, substituts</text>
+      </g>
+    </svg></div>
+  </figure>
+  <div class="box ex"><span class="tag">Exemple · IKEA</span>
+    <p><strong>Qui :</strong> la classe moyenne. <strong>Quoi :</strong> des meubles au design contemporain et abordable, des solutions pour la vie quotidienne, à monter soi-même. <strong>Contre qui :</strong> Habitat, Fly, les magasins locaux.</p>
+    <p><strong>Ce qui le différencie :</strong> un design suédois, un style de vie, une expérience de shopping, la gamme la plus large de produits pour la maison.</p>
+  </div>
+
+  <h3>3.5 Choisir son point de différence</h3>
+  <p>Le bon point de différence se trouve au croisement de trois cercles :</p>
+  <figure>
+    <div class="scroll">
+    <svg viewBox="0 0 560 365" width="100%" style="min-width:420px" role="img" aria-label="Zones de choix de la proposition de valeur">
+      <g font-size="12.5" fill="var(--ink)">
+        <circle cx="280" cy="115" r="105" fill="var(--rose)" fill-opacity=".18" stroke="var(--rose)" stroke-width="2"/>
+        <circle cx="210" cy="215" r="105" fill="var(--ok)" fill-opacity=".14" stroke="var(--ok)" stroke-width="2"/>
+        <circle cx="350" cy="215" r="105" fill="var(--plum)" fill-opacity=".14" stroke="var(--plum)" stroke-width="2"/>
+        <text x="280" y="45" text-anchor="middle" font-weight="700" fill="var(--rose-deep)">Ce que veulent</text>
+        <text x="280" y="61" text-anchor="middle" font-weight="700" fill="var(--rose-deep)">les clients</text>
+        <text x="160" y="340" text-anchor="middle" font-weight="700" fill="var(--ok)">Ce que ta marque</text>
+        <text x="160" y="356" text-anchor="middle" font-weight="700" fill="var(--ok)">fait le mieux</text>
+        <text x="400" y="340" text-anchor="middle" font-weight="700" fill="var(--plum)">Ce que le concurrent</text>
+        <text x="400" y="356" text-anchor="middle" font-weight="700" fill="var(--plum)">fait le mieux</text>
+        <text x="225" y="150" text-anchor="middle" font-weight="800" fill="var(--ok)">GAGNANTE</text>
+        <text x="335" y="150" text-anchor="middle" font-weight="800" fill="var(--ko)">PERDANTE</text>
+        <text x="280" y="192" text-anchor="middle" font-weight="800" fill="var(--rose-deep)">RISQUÉE</text>
+        <text x="280" y="255" text-anchor="middle" font-weight="800" fill="var(--muted)">IDIOTE</text>
+      </g>
+    </svg></div>
+    <figcaption>Gagnante : le client le veut, tu le fais mieux, le concurrent non. Perdante : le client le veut et c'est le concurrent qui le fait mieux. Risquée : vous le faites tous les deux, pas de vraie différence. Idiote (dumb zone) : vous vous battez sur un point dont le client se moque.</figcaption>
+  </figure>
+
+  <h4>La carte perceptuelle (perceptual map)</h4>
+  <p>C'est l'outil pour visualiser les positions. Méthode en 4 étapes : (1) lister les marques concurrentes ; (2) identifier les critères importants pour les clients ; (3) faire noter chaque marque par des consommateurs ; (4) placer les marques sur une carte à deux axes.</p>
+  <figure>
+    <div class="scroll">
+    <svg viewBox="0 0 520 330" width="100%" style="min-width:400px" role="img" aria-label="Exemple de carte perceptuelle pour l'électroménager">
+      <g font-size="12.5" fill="var(--ink)">
+        <path d="M260 20v290M30 165h460" stroke="var(--muted)" stroke-width="1.5"/>
+        <text x="260" y="14" text-anchor="middle" fill="var(--muted)">Prix élevé</text>
+        <text x="260" y="326" text-anchor="middle" fill="var(--muted)">Prix bas</text>
+        <text x="34" y="158" fill="var(--muted)">Classique</text>
+        <text x="486" y="158" text-anchor="end" fill="var(--muted)">Innovant</text>
+        <circle cx="420" cy="55" r="9" fill="var(--rose)"/><text x="420" y="82" text-anchor="middle" font-weight="700" fill="var(--rose-deep)">Dyson</text>
+        <circle cx="140" cy="200" r="8" fill="var(--plum)"/><text x="140" y="224" text-anchor="middle">Hoover</text>
+        <circle cx="195" cy="235" r="8" fill="var(--plum)"/><text x="195" y="259" text-anchor="middle">Calor</text>
+        <circle cx="300" cy="130" r="8" fill="var(--plum)"/><text x="300" y="118" text-anchor="middle">Philips</text>
+        <circle cx="330" cy="265" r="8" fill="var(--plum)"/><text x="330" y="289" text-anchor="middle">Xiaomi</text>
+      </g>
+    </svg></div>
+    <figcaption>Carte illustrative (positions indicatives) : Dyson est seul dans le coin « innovant et cher », une place difficile à copier.</figcaption>
+  </figure>
+
+  <h3>3.6 Dix propositions de valeur possibles</h3>
+  <div class="tbl"><table>
+    <tr><th>Proposition (EN)</th><th>Exemple</th></tr>
+    <tr><td>Nouveauté (newness)</td><td>Le premier iPhone</td></tr>
+    <tr><td>Performance</td><td>Dyson</td></tr>
+    <tr><td>Personnalisation (customization)</td><td>Nike By You</td></tr>
+    <tr><td>Faire le travail (getting the job done)</td><td>Un plombier qui répare tout de suite</td></tr>
+    <tr><td>Design et facilité d'usage</td><td>Apple</td></tr>
+    <tr><td>Rapport qualité/prix (value for money)</td><td>Dacia</td></tr>
+    <tr><td>Réduction des coûts</td><td>Un logiciel qui fait économiser du personnel</td></tr>
+    <tr><td>Réduction du risque</td><td>Garantie 7 ans de Kia</td></tr>
+    <tr><td>Accessibilité et commodité</td><td>Amazon Prime</td></tr>
+    <tr><td>Marque ou statut</td><td>Rolex</td></tr>
+  </table></div>
+
+  <h3>3.7 Les 5 axes de différenciation</h3>
+  <p>Pour être différent, une entreprise peut jouer sur cinq leviers :</p>
+  <div class="tbl"><table>
+    <tr><th>Axe</th><th>Sur quoi on joue</th><th>Exemple</th></tr>
+    <tr><td><strong>Produit</strong></td><td>Forme, fonctionnalités, performance, conformité, durabilité, fiabilité, réparabilité, style, design</td><td>Dyson, sans sac</td></tr>
+    <tr><td><strong>Services</strong></td><td>Commande facile, livraison, installation, formation, conseil, maintenance</td><td>Darty et son « contrat de confiance »</td></tr>
+    <tr><td><strong>Personnel</strong></td><td>Compétence, courtoisie, crédibilité, fiabilité, réactivité, communication</td><td>Le personnel de Singapore Airlines</td></tr>
+    <tr><td><strong>Distribution</strong> (channel)</td><td>Couverture, expertise, performance du réseau</td><td>Coca-Cola, disponible partout</td></tr>
+    <tr><td><strong>Image</strong></td><td>Symboles, slogans, personnalités, couleurs, musiques, événements</td><td>Le rouge Coca, le jingle McDonald's</td></tr>
+  </table></div>
+  <div class="box def"><span class="tag">Identité ≠ image</span>
+    <p>L'<strong>identité</strong> est la façon dont l'entreprise <strong>veut</strong> se positionner (ce qu'elle émet). L'<strong>image</strong> est la façon dont le public la <strong>perçoit réellement</strong> (ce qui est reçu). Le but est que les deux coïncident.</p>
+  </div>
+
+  <h3>3.8 Six stratégies pour communiquer le positionnement</h3>
+  <div class="tbl"><table>
+    <tr><th>Stratégie</th><th>On met en avant…</th><th>Exemple vu en cours</th></tr>
+    <tr><td>Attribut ou bénéfice</td><td>Une caractéristique et ce qu'elle apporte</td><td>Dyson : la puissance qui ne faiblit pas</td></tr>
+    <tr><td>Rapport qualité/prix</td><td>Le juste prix</td><td>IKEA « Fighting is inevitable » : le canapé à bas prix pour se réconcilier</td></tr>
+    <tr><td>Usage ou application</td><td>Le moment où l'on utilise le produit</td><td>Le gel douche énergisant pour le réveil (« Lacking energy? »)</td></tr>
+    <tr><td>Centré consommateur</td><td>Le profil de l'utilisateur</td><td>Dove « Real Beauty », avec des femmes de tous âges et toutes morphologies</td></tr>
+    <tr><td>Par la catégorie</td><td>Le leader ou l'inventeur d'une catégorie</td><td>Isostar, « la » boisson des sportifs d'endurance</td></tr>
+    <tr><td>Par rapport au concurrent</td><td>La comparaison directe</td><td>Burger King contre McDonald's</td></tr>
+  </table></div>
+
+  <h3>3.9 Le repositionnement</h3>
+  <p>Quand une marque vieillit ou se trompe de cible, elle peut changer de position. La matrice croise deux questions : change-t-on <strong>le produit</strong> ? change-t-on <strong>la cible</strong> ?</p>
+  <figure>
+    <div class="tbl" style="margin:0"><table>
+      <tr><th></th><th>Même produit</th><th>Produit différent</th></tr>
+      <tr><th>Même cible</th><td><strong>Repositionnement d'image</strong><br>On change seulement la communication.</td><td><strong>Repositionnement produit</strong><br>On améliore ou modifie le produit pour les mêmes clients.</td></tr>
+      <tr><th>Cible différente</th><td><strong>Repositionnement intangible</strong><br>Même produit, nouveaux clients.</td><td><strong>Repositionnement tangible</strong><br>Nouveau produit pour une nouvelle cible.</td></tr>
+    </table></div>
+  </figure>
+  <div class="box ex"><span class="tag">Exemple · Scholl Party Feet (2005)</span>
+    <p>Scholl, marque spécialiste du soin des pieds (image plutôt « pharmacie »), relance ses coussinets sous le nom <strong>Party Feet</strong> avec un packaging plus féminin qui explique le bénéfice : pouvoir danser toute la nuit en talons sans avoir mal. Les ventes sont multipliées et la maison mère gagne 18 % de croissance en 2005.</p>
+  </div>
+  <div class="box"><span class="tag" style="background:var(--blush);color:var(--rose-deep)">Le twist digital</span>
+    <p>Aujourd'hui, le positionnement échappe en partie à la marque : <strong>avis en ligne</strong>, <strong>bouche-à-oreille digital</strong> et <strong>communautés</strong> influencent la place qu'elle occupe dans les esprits.</p>
+  </div>
+  <div class="box key"><span class="tag">À retenir · Partie 3</span>
+    <ul>
+      <li>STP : segmenter → cibler → positionner.</li>
+      <li>Positionnement = cible + catégorie + point de différence prouvé.</li>
+      <li>4 conditions : clarté, crédibilité, cohérence, compétitivité.</li>
+      <li>5 axes de différenciation : produit, services, personnel, distribution, image.</li>
+      <li>Repositionnement : matrice produit × cible (image, produit, intangible, tangible).</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== PARTIE 3 ===================== -->
+<section class="part" id="p4">
+  <div class="part-head"><span class="part-num">4</span><div><div class="eyebrow">Séance 4 · What makes Nike… Nike?</div><h2>La marque : pourquoi on reconnaît Nike en une seconde</h2><div class="src">Fil rouge : 32 $ contre 100 $ la place, l'histoire de Joshua Bell</div></div></div>
+
+  <div class="box ex"><span class="tag">L'expérience Joshua Bell</span>
+    <p>Joshua Bell est un violoniste star : ses concerts sont complets à <strong>100 $ la place en moyenne</strong>. En 2007, il joue incognito dans une station de métro de Washington, avec le même violon. Il gagne <strong>32 $</strong>. Même « produit », mais sans la marque (le nom, la salle, l'affiche), sa valeur s'effondre. <strong>C'est la preuve que la marque crée de la valeur.</strong></p>
+  </div>
+
+  <h3>4.1 Produit ou marque ?</h3>
+  <div class="grid2">
+    <div class="card"><h4>Le produit</h4><p>Tout ce qui peut satisfaire un besoin (vision de l'offre). Mais le client achète en réalité un <strong>bénéfice</strong>, tangible ou non (vision de la demande).</p></div>
+    <div class="card"><h4>La marque (branding)</h4><p>Le processus qui <strong>distingue</strong> une offre de celles des concurrents. Elle permet au client de faire des <strong>associations</strong>, facilite sa <strong>décision</strong> et change sa <strong>perception</strong>.</p></div>
+  </div>
+
+  <h4>Les 3 niveaux de produit</h4>
+  <figure>
+    <div class="scroll">
+    <svg viewBox="0 0 620 330" width="100%" style="min-width:460px" role="img" aria-label="Les trois niveaux de produit">
+      <g font-size="12.5" fill="var(--ink)">
+        <circle cx="230" cy="165" r="155" fill="var(--blush)" stroke="var(--rose)" stroke-width="1.5"/>
+        <circle cx="230" cy="165" r="100" fill="var(--blush-2)" stroke="var(--rose)" stroke-width="1.5"/>
+        <circle cx="230" cy="165" r="45" fill="var(--rose)"/>
+        <text x="230" y="161" text-anchor="middle" fill="#fff" font-weight="700">Bénéfice</text>
+        <text x="230" y="177" text-anchor="middle" fill="#fff" font-weight="700">central</text>
+        <text x="230" y="90" text-anchor="middle">Design · Qualité</text>
+        <text x="172" y="170" text-anchor="middle">Caractéris-</text><text x="172" y="184" text-anchor="middle">tiques</text>
+        <text x="300" y="170" text-anchor="middle">Nom de</text><text x="300" y="184" text-anchor="middle">marque</text>
+        <text x="230" y="248" text-anchor="middle">Packaging</text>
+        <text x="230" y="48" text-anchor="middle">SAV · Garantie · Assistance</text>
+        <text x="230" y="300" text-anchor="middle">Livraison · Crédit</text>
+        <g font-weight="700">
+          <text x="410" y="70" fill="var(--rose-deep)">Produit augmenté</text>
+          <text x="410" y="88" font-weight="400">les services en plus</text>
+          <text x="410" y="150" fill="var(--rose-deep)">Produit réel</text>
+          <text x="410" y="168" font-weight="400">ce qu'on tient en main</text>
+          <text x="410" y="230" fill="var(--rose-deep)">Produit central</text>
+          <text x="410" y="248" font-weight="400">le bénéfice recherché</text>
+        </g>
+        <path d="M405 75L362 92M405 155H318M405 235L268 186" stroke="var(--rose)" stroke-width="1.5"/>
+      </g>
+    </svg></div>
+    <figcaption>Exemple Nike : bénéfice central = courir mieux, se dépasser ; produit réel = la chaussure, son design, le swoosh ; produit augmenté = l'appli Nike Run Club, les retours gratuits.</figcaption>
+  </figure>
+
+  <h3>4.2 Pourquoi une marque a de la valeur</h3>
+  <p>Une marque forte apporte à l'entreprise :</p>
+  <div class="grid3">
+    <div class="card"><h4>Valeur financière</h4><p>Nestlé a payé 3,6 milliards d'euros pour Rowntree (KitKat, After Eight, Quality Street) : on achète surtout des marques.</p></div>
+    <div class="card"><h4>Préférence et fidélité</h4><p>De la simple fidélité jusqu'à la marque « culte » (Apple, Harley-Davidson).</p></div>
+    <div class="card"><h4>Barrière à la concurrence</h4><p>Difficile de déloger une marque installée.</p></div>
+    <div class="card"><h4>Profits élevés</h4><p>Prix premium et distribution plus facile.</p></div>
+    <div class="card"><h4>Base pour des extensions</h4><p>Smirnoff décline des dizaines de saveurs (voir partie 5).</p></div>
+    <div class="card"><h4>Confiance et décision simplifiée</h4><p>Le client reconnaît, fait confiance et choisit vite.</p></div>
+  </div>
+  <div class="box def"><span class="tag">Définition</span>
+    <p>Le <strong>capital-marque</strong> (brand equity) est la valeur ajoutée qu'apporte le nom de marque à un produit. Il repose sur cinq piliers (modèle d'Aaker) : la <strong>fidélité</strong> à la marque, la <strong>notoriété</strong>, la <strong>qualité perçue</strong>, les <strong>associations</strong> de marque et les autres actifs (brevets, marques déposées).</p>
+  </div>
+  <div class="box ex"><span class="tag">Chiffres · Classement Kantar BrandZ 2025</span>
+    <p>Marque la plus valorisée au monde : <strong>Apple</strong>, environ 1 300 milliards de dollars, devant Google (944 Md$) et Microsoft (885 Md$). Nike est 51ᵉ (environ 49 Md$). Côté France, le luxe domine : <strong>Louis Vuitton</strong> (112 Md$), Hermès (109 Md$), Chanel (62 Md$). Le top 50 français vaut 507 Md$, en hausse de 20 % depuis 2023.</p>
+  </div>
+
+  <h3>4.3 Construire une marque : identité et image</h3>
+  <figure>
+    <div class="flow">
+      <div class="step"><b>Identité de marque</b>Ce que <strong>toi</strong> tu veux que les gens perçoivent : logo, slogan, style, ton.</div>
+      <div class="arrow" aria-hidden="true">⇄</div>
+      <div class="step"><b>Image de marque</b>Ce que les gens <strong>perçoivent réellement</strong> : réputation, émotions, croyances, impression.</div>
+    </div>
+    <figcaption>Pour construire une marque : (1) choisir les éléments de marque ; (2) développer et positionner la marque sur le marché.</figcaption>
+  </figure>
+
+  <h3>4.4 Choisir le nom de marque</h3>
+  <h4>Trois stratégies de nom</h4>
+  <div class="grid3">
+    <div class="card"><h4>Marque ombrelle</h4><p>Un seul nom pour tout (family brand). <em>Philips : ampoules, rasoirs, cafetières.</em></p></div>
+    <div class="card"><h4>Marque individuelle</h4><p>Un nom différent par produit. <em>P&G : Ariel, Pampers, Gillette.</em> Si un produit a un problème, les autres sont protégés.</p></div>
+    <div class="card"><h4>Marque combinée</h4><p>Nom de l'entreprise + nom du produit. <em>Kellogg's Special K, Kellogg's Frosties.</em></p></div>
+  </div>
+  <h4>Six critères d'un bon nom</h4>
+  <ol>
+    <li>Évoquer des associations positives</li>
+    <li>Être facile à prononcer et à retenir (Shell, Esso)</li>
+    <li>Suggérer le bénéfice (Pepsi Max, Right Guard)</li>
+    <li>Être distinctif (Apple)</li>
+    <li>Utiliser des chiffres pour souligner la technologie (PS2, PS3)</li>
+    <li>Ne pas copier une marque déjà déposée</li>
+  </ol>
+  <h4>Les catégories de noms</h4>
+  <div class="tbl"><table>
+    <tr><th>Catégorie</th><th>Exemples</th></tr>
+    <tr><td>Personnes</td><td>Ferrari, Cadbury, Heinz, Citroën</td></tr>
+    <tr><td>Lieux</td><td>Halifax, Royal Bank of Scotland</td></tr>
+    <tr><td>Descriptif</td><td>The Body Shop, I Can't Believe It's Not Butter</td></tr>
+    <tr><td>Abstrait</td><td>Kodak, Orange</td></tr>
+    <tr><td>Évocateur</td><td>Fuse, Thermos</td></tr>
+    <tr><td>Extension de marque</td><td>Une marque existante sur un nouveau produit</td></tr>
+    <tr><td>Sens étranger</td><td>LEGO (du danois « leg godt », « joue bien »), IKEA</td></tr>
+  </table></div>
+  <div class="box ex"><span class="tag">Le logo Nike</span>
+    <p>Le nom vient de <strong>Nikê</strong>, la déesse grecque de la Victoire. Le célèbre <strong>swoosh</strong> s'inspire de ses ailes. Le logo raconte déjà la promesse de la marque : la victoire, le mouvement. C'est pour cela qu'on le reconnaît en une seconde, même sans le mot « Nike ».</p>
+  </div>
+
+  <h3>4.5 Les valeurs de marque</h3>
+  <p>Une marque se construit en <strong>ajoutant des valeurs</strong> à un produit de base. Une marque forte est celle dont les valeurs sont supérieures à celles des rivales. Le cours propose une progression en trois temps :</p>
+  <figure>
+    <div class="flow">
+      <div class="step"><b>1. Notoriété</b>(Brand awareness) Être connu.</div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>2. Valeurs</b>Communiquer des valeurs <strong>fonctionnelles</strong> (ce que le produit fait) et <strong>émotionnelles</strong> (ce qu'il fait ressentir).</div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>3. Fidélité</b>(Brand loyalty) Être racheté et recommandé.</div>
+    </div>
+  </figure>
+
+  <h3>4.6 La pyramide de Keller (Brand Resonance Model)</h3>
+  <p>Ce modèle explique comment construire le capital-marque, étage par étage, de la base au sommet. Chaque étage répond à une question que se pose le client.</p>
+  <figure>
+    <div class="scroll">
+    <svg viewBox="0 0 640 330" width="100%" style="min-width:520px" role="img" aria-label="Pyramide de Keller appliquée à Red Bull">
+      <g font-size="12" fill="var(--ink)">
+        <path d="M320 15L395 85H245Z" fill="var(--rose)"/>
+        <text x="320" y="60" text-anchor="middle" fill="#fff" font-weight="700">Résonance</text>
+        <path d="M245 90H395L455 165H185Z" fill="var(--blush-2)"/>
+        <path d="M320 90V165" stroke="var(--bg)" stroke-width="3"/>
+        <text x="255" y="125" text-anchor="middle" font-weight="700">Jugements</text>
+        <text x="255" y="142" text-anchor="middle">(raison)</text>
+        <text x="385" y="125" text-anchor="middle" font-weight="700">Sentiments</text>
+        <text x="385" y="142" text-anchor="middle">(émotion)</text>
+        <path d="M185 170H455L520 245H120Z" fill="var(--blush)"/>
+        <path d="M320 170V245" stroke="var(--bg)" stroke-width="3"/>
+        <text x="235" y="205" text-anchor="middle" font-weight="700">Performance</text>
+        <text x="235" y="222" text-anchor="middle">(le produit)</text>
+        <text x="405" y="205" text-anchor="middle" font-weight="700">Imagerie</text>
+        <text x="405" y="222" text-anchor="middle">(l'univers)</text>
+        <path d="M120 250H520L580 315H60Z" fill="var(--paper)" stroke="var(--rose)" stroke-width="1.5"/>
+        <text x="320" y="280" text-anchor="middle" font-weight="700">Saillance (salience)</text>
+        <text x="320" y="298" text-anchor="middle">la marque vient-elle à l'esprit ?</text>
+        <g fill="var(--muted)" font-size="11.5">
+          <text x="410" y="40">4. Relation :</text><text x="410" y="55">« et nous ? »</text>
+          <text x="470" y="125">3. Réponse :</text><text x="470" y="140">« que penser de toi ? »</text>
+          <text x="535" y="205">2. Sens :</text><text x="535" y="220">« qu'es-tu ? »</text>
+          <text x="10" y="270">1. Identité :</text><text x="10" y="285">« qui es-tu ? »</text>
+        </g>
+      </g>
+    </svg></div>
+  </figure>
+  <div class="box ex"><span class="tag">Exemple · La pyramide de Red Bull</span>
+    <p><strong>Saillance :</strong> un logo distinctif (les deux taureaux) et un slogan connu de tous (« Red Bull donne des ailes »).<br>
+    <strong>Performance :</strong> boisson énergisante, canette élégante, petite gamme, prix premium.<br>
+    <strong>Imagerie :</strong> pour ceux qui veulent un coup de boost sur la route, en cours, au sport, en soirée.<br>
+    <strong>Jugements :</strong> la boisson énergisante n°1, réputation de qualité.<br>
+    <strong>Sentiments :</strong> fun, énergie, liberté, jeunesse, anticonformisme.<br>
+    <strong>Résonance :</strong> confiance, fidélité et une vraie communauté (sports extrêmes, Red Bull Stratos).</p>
+  </div>
+
+  <h3>4.7 Le prisme d'identité de Kapferer</h3>
+  <p>Le prisme décrit l'identité d'une marque en <strong>6 facettes</strong>. Il se lit selon deux axes : en haut l'<strong>émetteur</strong> (la marque), en bas le <strong>récepteur</strong> (le consommateur) ; à gauche l'<strong>extériorisation</strong> (ce qui se voit), à droite l'<strong>intériorisation</strong> (ce qui est dans l'esprit).</p>
+  <figure>
+    <div class="scroll">
+    <svg viewBox="0 0 600 360" width="100%" style="min-width:500px" role="img" aria-label="Prisme d'identité de Kapferer">
+      <g font-size="12.5" fill="var(--ink)">
+        <path d="M300 40L460 120V240L300 320L140 240V120Z" fill="var(--blush)" stroke="var(--rose)" stroke-width="2"/>
+        <path d="M300 40V320M140 140H460M140 220H460" stroke="var(--rose)" stroke-width="1" stroke-dasharray="5 4"/>
+        <text x="300" y="28" text-anchor="middle" font-weight="700" fill="var(--rose-deep)">ÉMETTEUR (la marque)</text>
+        <text x="300" y="345" text-anchor="middle" font-weight="700" fill="var(--rose-deep)">RÉCEPTEUR (le consommateur)</text>
+        <text x="70" y="175" text-anchor="middle" fill="var(--muted)">Extériorisation</text>
+        <text x="530" y="175" text-anchor="middle" fill="var(--muted)">Intériorisation</text>
+        <text x="225" y="105" text-anchor="middle" font-weight="700">Physique</text>
+        <text x="225" y="121" text-anchor="middle" font-size="11">couleurs, formes</text>
+        <text x="375" y="105" text-anchor="middle" font-weight="700">Personnalité</text>
+        <text x="375" y="121" text-anchor="middle" font-size="11">caractère, ton</text>
+        <text x="220" y="175" text-anchor="middle" font-weight="700">Relation</text>
+        <text x="220" y="191" text-anchor="middle" font-size="11">lien marque-client</text>
+        <text x="380" y="175" text-anchor="middle" font-weight="700">Culture</text>
+        <text x="380" y="191" text-anchor="middle" font-size="11">valeurs, principes</text>
+        <text x="225" y="250" text-anchor="middle" font-weight="700">Reflet</text>
+        <text x="225" y="266" text-anchor="middle" font-size="11">client type montré</text>
+        <text x="375" y="250" text-anchor="middle" font-weight="700">Mentalisation</text>
+        <text x="375" y="266" text-anchor="middle" font-size="11">image de soi</text>
+      </g>
+    </svg></div>
+  </figure>
+  <div class="tbl"><table>
+    <tr><th>Facette</th><th>Question</th><th>Red Bull</th></tr>
+    <tr><td>Physique</td><td>À quoi ressemble la marque ?</td><td>Canette bleue et argent, taureaux, rouge et jaune</td></tr>
+    <tr><td>Personnalité</td><td>Si c'était une personne ?</td><td>Audacieuse, osée, qui repousse les limites</td></tr>
+    <tr><td>Culture</td><td>Quelles valeurs ?</td><td>Énergie, extrême, dépassement</td></tr>
+    <tr><td>Relation</td><td>Quel lien avec moi ?</td><td>« Red Bull te donne des ailes », carburant intérieur</td></tr>
+    <tr><td>Reflet</td><td>Qui est montré dans les pubs ?</td><td>Des jeunes qui vivent à fond, des athlètes</td></tr>
+    <tr><td>Mentalisation</td><td>Comment je me vois en la consommant ?</td><td>Énergique, gagnant, passionné</td></tr>
+  </table></div>
+  <div class="box trap"><span class="tag">Piège</span>
+    <p><strong>Reflet</strong> et <strong>mentalisation</strong> se confondent facilement. Le <em>reflet</em> est l'image <strong>extérieure</strong> du client que montre la marque (Rolex montre Roger Federer). La <em>mentalisation</em> (self-image) est ce que le client <strong>ressent intérieurement</strong> en l'utilisant (« je suis quelqu'un qui réussit »).</p>
+  </div>
+
+  <h3>4.8 Les éléments du positionnement de marque, en images</h3>
+  <p>Le cours illustre chaque élément par une campagne célèbre :</p>
+  <div class="grid2">
+    <div class="card"><h4>Domaine (reflet)</h4><p><strong>Dove</strong> : « ridée ou magnifique ? », « grise ou superbe ? ». La marque montre toutes les femmes.</p></div>
+    <div class="card"><h4>Héritage (culture)</h4><p><strong>1664</strong> : « Le goût à la française », avec des monuments et paysages français. <strong>Burberry</strong> : l'élégance britannique.</p></div>
+    <div class="card"><h4>Valeurs (culture)</h4><p><strong>Benetton</strong> « Unhate » : des dirigeants ennemis qui s'embrassent ; tolérance et diversité (« United Colors »).</p></div>
+    <div class="card"><h4>Personnalité</h4><p><strong>Diesel</strong> « Be Stupid » : « Smart listens to the head, stupid listens to the heart ». Rebelle et provocante.</p></div>
+    <div class="card"><h4>Reflet (self-image)</h4><p><strong>Rolex</strong> : Plácido Domingo, Roger Federer. Le client s'identifie à l'excellence.</p></div>
+    <div class="card"><h4>Image perçue et image voulue</h4><p>On peut mesurer les deux : l'écart montre ce qu'il faut corriger.</p></div>
+  </div>
+  <div class="box"><span class="tag" style="background:var(--blush);color:var(--rose-deep)">Le twist digital</span>
+    <p>Les logos doivent fonctionner sur tous les écrans, d'où leur simplification (Google, Pizza Hut, Hershey's sont devenus plus plats). L'image se construit aussi via les avis, les communautés, les créateurs et le contenu généré par les utilisateurs : la marque contrôle moins ses associations.</p>
+  </div>
+  <div class="box key"><span class="tag">À retenir · Partie 4</span>
+    <ul>
+      <li>Une marque ajoute de la valeur au produit (Joshua Bell : 100 $ contre 32 $).</li>
+      <li>3 niveaux : produit central, réel, augmenté.</li>
+      <li>Identité = ce que la marque émet ; image = ce que le client perçoit.</li>
+      <li>Noms : ombrelle, individuelle, combinée.</li>
+      <li>Keller : saillance → performance + imagerie → jugements + sentiments → résonance.</li>
+      <li>Kapferer : physique, personnalité, culture, relation, reflet, mentalisation.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== PARTIE 4 ===================== -->
+<section class="part" id="p5">
+  <div class="part-head"><span class="part-num">5</span><div><div class="eyebrow">Séance 5 · How far can a brand stretch before it breaks?</div><h2>Jusqu'où peut-on étirer une marque ?</h2><div class="src">Faire grandir une marque sans détruire son capital</div></div></div>
+  <p>Trois enjeux : <strong>défendre</strong> le capital-marque, l'<strong>exploiter</strong> (extensions, co-branding) et le <strong>gérer dans le temps</strong> (gammes, cycle de vie).</p>
+
+  <h3>5.1 Défendre sa marque face aux marques de distributeur</h3>
+  <p>Les <strong>marques de distributeur</strong> (MDD, private labels) sont les marques des supermarchés (Marque Repère chez Leclerc, Carrefour Bio…). Elles copient souvent les grandes marques à prix plus bas. Face à elles, trois réponses :</p>
+  <div class="grid3">
+    <div class="card"><h4>1. Rivaliser</h4><p>Se différencier, innover, renforcer le capital-marque.</p></div>
+    <div class="card"><h4>2. Coopérer</h4><p>Fabriquer soi-même les produits MDD pour le distributeur.</p></div>
+    <div class="card"><h4>3. Contre-attaquer</h4><p>Lancer une <strong>marque de combat</strong> (fighter brand) moins chère, ou attaquer en justice si l'imitation va trop loin.</p></div>
+  </div>
+  <div class="box ex"><span class="tag">Exemples</span>
+    <p><strong>Air France</strong> a créé <strong>Transavia</strong>, sa marque low-cost, pour affronter easyJet sans abîmer l'image premium d'Air France : c'est une marque de combat. <strong>Oreo</strong> est entouré d'imitations en rayon (biscuits noirs fourrés de crème blanche) : il doit se défendre.</p>
+  </div>
+
+  <h3>5.2 Extension de marque ou étirement de marque ?</h3>
+  <div class="grid2">
+    <div class="card"><h4>Extension de marque</h4><p>(Brand extension) La marque lance un nouveau produit <strong>dans sa catégorie</strong> : nouvelle saveur, nouveau format.</p><p><em>Coca-Cola Light et Zero, Pepsi Max, les variantes de lessive Tide, la gamme Dove.</em></p></div>
+    <div class="card"><h4>Étirement de marque</h4><p>(Brand stretching) La marque va dans une <strong>catégorie différente</strong>.</p><p><em>Virgin : disques, avions, téléphonie, trains. Dyson : des aspirateurs aux sèche-cheveux, purificateurs, lampes, casques.</em></p></div>
+  </div>
+  <div class="pm">
+    <div class="plus"><h4>Avantages</h4><ul><li>Moins de risque pour le client et le distributeur (marque connue)</li><li>Coûts de publicité de lancement réduits</li><li>Économies d'échelle publicitaires</li><li>Renforcement mutuel entre marque mère et extensions</li></ul></div>
+    <div class="minus"><h4>Risques</h4><ul><li>Lancement sous-financé</li><li><strong>Cannibalisation</strong> : le nouveau produit vole les ventes de l'ancien</li><li><strong>Dilution</strong> : la marque ne veut plus rien dire</li><li>Un scandale touche tous les produits</li></ul></div>
+  </div>
+  <div class="box key" style="background:var(--rose);color:#fff"><span class="tag" style="background:#fff;color:var(--rose-deep)">Règle d'or</span><p style="font-weight:700">Plus on s'éloigne du produit d'origine, plus la cohérence perçue (perceived fit) devient critique.</p></div>
+  <div class="box ex"><span class="tag">Contre-exemple · Pierre Cardin</span>
+    <p>Pierre Cardin a mis son nom sur des milliers de produits sous licence : parfums, valises, costumes, stylos, poêles… Résultat : une marque de haute couture devenue banale. C'est l'exemple classique de <strong>dilution</strong>.</p>
+  </div>
+
+  <h3>5.3 Le co-branding : deux marques ensemble</h3>
+  <p>Deux marques s'associent pour créer un produit ou une campagne. Il en existe deux grandes familles :</p>
+  <h4>Co-branding produit</h4>
+  <div class="grid2">
+    <div class="card"><h4>Parallèle</h4><p>Deux marques de même niveau signent ensemble un produit.</p><p><em>Nike × LEGO (Dunk), adidas × Diesel, H&M × des créateurs (Glenn Martens, Magda Butrym en 2025) pour renouveler vite ses collections.</em></p></div>
+    <div class="card"><h4>Ingrédient</h4><p>Une marque devient un composant de l'autre.</p><p><em>Milka × Oreo, Milka × Tuc, Philadelphia × Milka, les capsules Tassimo Milka.</em></p></div>
+  </div>
+  <h4>Co-branding de communication</h4>
+  <p>Soutien mutuel, alliances promotionnelles et sponsoring.</p>
+  <div class="box ex"><span class="tag">Exemples</span>
+    <p><strong>Coca-Cola Zero × James Bond</strong>, <strong>Sony Vaio × Casino Royale</strong>, <strong>Volvo × Twilight</strong>.</p>
+    <p><strong>McDonald's × Minecraft (2025)</strong> : pour la sortie du film, menus en édition limitée, objets à collectionner et codes digitaux dans plus de 100 pays, prolongés par des expériences dans le jeu. Chaque marque gagne l'audience et la pertinence culturelle de l'autre.</p>
+    <p><strong>Sponsoring F1</strong> : 332 partenaires dans les écuries en 2025, et un sponsor-titre peut verser 90 à 100 M$ par an (HP chez Ferrari).</p>
+  </div>
+  <div class="pm">
+    <div class="plus"><h4>Avantages</h4><ul><li>Cumuler deux sources de capital-marque : plus de valeur, plus de différence</li><li>Positionner un produit sur une cible précise</li><li>Réduire le coût de lancement</li></ul></div>
+    <div class="minus"><h4>Risques</h4><ul><li>Mauvaise cohérence entre partenaires → dilution</li><li>Perte de contrôle</li><li>Un scandale du partenaire rejaillit sur toi</li></ul></div>
+  </div>
+  <p><strong>Formule à retenir :</strong> un co-branding fort = des capitaux de marque <strong>complémentaires</strong> + une association <strong>crédible</strong>.</p>
+
+  <h3>5.4 Gérer ses gammes de produits</h3>
+  <div class="box def"><span class="tag">Définitions</span>
+    <p><strong>Ligne de produits :</strong> groupe de produits proches (la ligne iPhone d'Apple, la ligne Galaxy de Samsung).<br>
+    <strong>Profondeur :</strong> le nombre de variantes <em>dans</em> une ligne.<br>
+    <strong>Portefeuille</strong> (product mix) : toutes les lignes et tous les produits de l'entreprise.<br>
+    <strong>Largeur :</strong> le nombre de lignes différentes.</p>
+  </div>
+  <div class="box ex"><span class="tag">Exemple · Renault</span>
+    <p>Renault a deux grandes lignes : véhicules particuliers et véhicules utilitaires (largeur = 2). Dans la ligne particuliers, il y a Twingo, Clio, Mégane, Scénic, Laguna… (profondeur = le nombre de modèles et versions).</p>
+  </div>
+
+  <h3>5.5 Le cycle de vie du produit</h3>
+  <p>Un produit passe par plusieurs phases, comme un être vivant. Attention : c'est un <strong>cadre utile, pas une prédiction</strong> ; tous les produits ne suivent pas cette courbe.</p>
+  <figure>
+    <div class="scroll">
+    <svg viewBox="0 0 640 300" width="100%" style="min-width:520px" role="img" aria-label="Courbe du cycle de vie du produit">
+      <g font-size="12.5" fill="var(--ink)">
+        <path d="M60 20V270M60 200H620" stroke="var(--muted)" stroke-width="1.5"/>
+        <text x="66" y="30" fill="var(--muted)">Ventes et profits</text>
+        <text x="618" y="190" text-anchor="end" fill="var(--muted)">Temps</text>
+        <text x="66" y="265" fill="var(--muted)">Pertes</text>
+        <path d="M60 200V30M150 30V270M250 30V270M380 30V270M500 30V270" stroke="var(--line)" stroke-width="1"/>
+        <path d="M150 198C190 195 220 170 250 120S330 45 400 42S470 70 500 110S560 170 610 185" fill="none" stroke="var(--rose)" stroke-width="3.5"/>
+        <path d="M60 200C90 215 120 240 150 245S210 230 250 195S330 120 380 115S460 140 500 175S570 205 610 205" fill="none" stroke="var(--plum)" stroke-width="2.5" stroke-dasharray="7 5"/>
+        <text x="420" y="34" fill="var(--rose-deep)" font-weight="700">Ventes</text>
+        <text x="330" y="112" fill="var(--plum)" font-weight="700">Profits</text>
+        <text x="105" y="290" text-anchor="middle">Développement</text>
+        <text x="200" y="290" text-anchor="middle">Introduction</text>
+        <text x="315" y="290" text-anchor="middle">Croissance</text>
+        <text x="440" y="290" text-anchor="middle">Maturité</text>
+        <text x="560" y="290" text-anchor="middle">Déclin</text>
+      </g>
+    </svg></div>
+    <figcaption>Pendant le développement, on perd de l'argent (investissements). Les profits deviennent positifs pendant la croissance et culminent en début de maturité.</figcaption>
+  </figure>
+  <div class="tbl"><table>
+    <tr><th></th><th>Introduction</th><th>Croissance</th><th>Maturité</th><th>Déclin</th></tr>
+    <tr><td><strong>Objectif</strong></td><td>Construire</td><td>Construire</td><td>Maintenir</td><td>Récolter ou abandonner</td></tr>
+    <tr><td><strong>Focus</strong></td><td>Développer le marché</td><td>Pénétrer le marché</td><td>Protéger ses parts, innover</td><td>Productivité</td></tr>
+    <tr><td><strong>Marque</strong></td><td>Notoriété, essai</td><td>Préférence</td><td>Fidélité</td><td>Exploitation</td></tr>
+    <tr><td><strong>Produit</strong></td><td>Basique</td><td>Différencié</td><td>Différencié</td><td>Rationalisé</td></tr>
+    <tr><td><strong>Communication</strong></td><td>Faire connaître, faire essayer</td><td>Faire connaître, faire racheter</td><td>Entretenir, faire racheter</td><td>Réduite ou supprimée</td></tr>
+    <tr><td><strong>Prix</strong></td><td>Élevé</td><td>Plus bas</td><td>Le plus bas</td><td>En hausse</td></tr>
+    <tr><td><strong>Distribution</strong></td><td>Limitée</td><td>Élargie</td><td>Intensive</td><td>Sélective</td></tr>
+  </table></div>
+  <div class="grid2">
+    <div class="box ex" style="margin:0"><span class="tag">Introduction · iPhone (2007)</span><p>Un produit nouveau, cher, qui doit être expliqué et essayé. Files d'attente devant les Apple Store.</p></div>
+    <div class="box ex" style="margin:0"><span class="tag">Croissance · Dacia Logan</span><p>300 000 Logan vendues depuis 2004. En 2006, nouvelles versions (break MCV) ; 6 modèles en 2009, dont un utilitaire. On passe d'un modèle à une gamme (Sandero, Duster).</p></div>
+  </div>
+  <div class="box" style="margin-top:16px"><span class="tag" style="background:var(--blush);color:var(--rose-deep)">Le twist digital</span>
+    <p><strong>La longue traîne :</strong> Netflix, Amazon ou Spotify peuvent proposer des millions de références, car le stockage en ligne ne coûte presque rien ; beaucoup de petites ventes de niche finissent par peser lourd.<br>
+    <strong>Diffusion plus rapide, déclin parfois plus rapide :</strong> le gobelet Stanley est devenu viral sur TikTok, puis l'effet de mode retombe aussi vite.<br>
+    <strong>Tester une extension en ligne</strong> coûte moins cher et réduit le risque.</p>
+  </div>
+  <div class="box key"><span class="tag">À retenir · Partie 5</span>
+    <ul>
+      <li>Face aux MDD : rivaliser, coopérer ou contre-attaquer (marque de combat).</li>
+      <li>Extension = même catégorie ; étirement = nouvelle catégorie. Plus c'est loin, plus la cohérence compte.</li>
+      <li>Risques : cannibalisation, dilution (Pierre Cardin).</li>
+      <li>Co-branding : produit (parallèle, ingrédient) ou communication. Formule : complémentarité + crédibilité.</li>
+      <li>Gamme : profondeur (variantes d'une ligne) et largeur (nombre de lignes).</li>
+      <li>Cycle de vie : introduction, croissance, maturité, déclin.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== PARTIE 6 ===================== -->
+<section class="part" id="p6">
+  <div class="part-head"><span class="part-num">6</span><div><div class="eyebrow">Séance 6 · How do you get someone to actually listen?</div><h2>La communication : capter l'attention de quelqu'un qui n'écoute plus</h2><div class="src">De l'attention à l'action : la psychologie d'un message</div></div></div>
+
+  <h3>6.1 À quoi sert la communication marketing ?</h3>
+  <div class="box def"><span class="tag">Définition</span>
+    <p>La <strong>communication marketing</strong> <strong>informe</strong>, <strong>persuade</strong> et <strong>rappelle</strong> au public la valeur qu'offre une marque, tout en construisant une relation dans le temps.</p>
+  </div>
+  <h4>Le processus de communication</h4>
+  <figure>
+    <div class="scroll">
+    <svg viewBox="0 0 720 230" width="100%" style="min-width:620px" role="img" aria-label="Le processus de communication">
+      <g font-size="12" fill="var(--ink)" text-anchor="middle">
+        <rect x="5" y="80" width="110" height="60" rx="10" fill="var(--blush)"/><text x="60" y="105" font-weight="700" fill="var(--rose-deep)">Émetteur</text><text x="60" y="122">la marque, l'agence</text>
+        <rect x="150" y="80" width="110" height="60" rx="10" fill="var(--blush)"/><text x="205" y="105" font-weight="700" fill="var(--rose-deep)">Codage</text><text x="205" y="122">idée → mots, images</text>
+        <rect x="295" y="80" width="130" height="60" rx="10" fill="var(--rose)"/><text x="360" y="105" font-weight="700" fill="#fff">Message + canal</text><text x="360" y="122" fill="#fff">pub TV, affiche, post</text>
+        <rect x="460" y="80" width="110" height="60" rx="10" fill="var(--blush)"/><text x="515" y="105" font-weight="700" fill="var(--rose-deep)">Décodage</text><text x="515" y="122">le public interprète</text>
+        <rect x="605" y="80" width="110" height="60" rx="10" fill="var(--blush)"/><text x="660" y="105" font-weight="700" fill="var(--rose-deep)">Récepteur</text><text x="660" y="122">le consommateur</text>
+        <path d="M115 110h32M260 110h32M425 110h32M570 110h32" stroke="var(--rose)" stroke-width="2.5"/>
+        <rect x="295" y="5" width="130" height="50" rx="10" fill="var(--paper)" stroke="var(--ko)" stroke-dasharray="5 4"/><text x="360" y="27" font-weight="700" fill="var(--ko)">Bruit</text><text x="360" y="44">autres pubs, amis…</text>
+        <path d="M360 55v22" stroke="var(--ko)" stroke-width="1.5" stroke-dasharray="4 3"/>
+        <rect x="295" y="170" width="130" height="50" rx="10" fill="var(--paper)" stroke="var(--plum)"/><text x="360" y="192" font-weight="700" fill="var(--plum)">Feedback</text><text x="360" y="209">réponse du récepteur</text>
+        <path d="M660 140C660 195 470 195 428 195M292 195C250 195 60 195 60 143" stroke="var(--plum)" stroke-width="1.5" fill="none"/>
+      </g>
+    </svg></div>
+    <figcaption>Le message passe de l'émetteur au récepteur, mais le « bruit » (les centaines d'autres messages) le brouille. Le feedback permet de savoir s'il a été compris.</figcaption>
+  </figure>
+  <div class="box ex"><span class="tag">Exemple · Marlboro</span>
+    <p>Marlboro était d'abord une cigarette pour femmes. Avec le cow-boy (« Come to where the flavor is »), le même produit est recodé en symbole de virilité et de liberté. Le produit n'a pas changé, c'est le message qui a tout changé.</p>
+  </div>
+
+  <h3>6.2 La communication marketing intégrée (IMC)</h3>
+  <div class="box def"><span class="tag">Définition</span>
+    <p>La <strong>communication marketing intégrée</strong> (Integrated Marketing Communications, IMC) coordonne les messages et les points de contact pour créer une expérience de marque <strong>claire, cohérente et convaincante</strong>. Il ne s'agit pas d'utiliser tous les canaux, mais de rendre <strong>cohérents et complémentaires</strong> ceux qui comptent.</p>
+  </div>
+  <div class="box ex"><span class="tag">Exemple · CeraVe × Michael Cera</span>
+    <p>Idée simple : le nom CeraVe ressemble au nom de l'acteur Michael Cera. La marque lance une fausse rumeur : « Michael Cera a-t-il créé CeraVe ? ». Le parcours : <strong>réseaux sociaux et créateurs</strong> → <strong>relations presse</strong> (les médias en parlent gratuitement) → <strong>révélation pendant le Super Bowl</strong>. Des canaux différents avec des rôles différents, mais une seule histoire.</p>
+  </div>
+
+  <h3>6.3 Les 5 étapes d'une communication efficace</h3>
+  <figure>
+    <div class="flow">
+      <div class="step"><b>1. Cible</b>À qui parle-t-on ?</div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>2. Objectifs</b>Quelle réponse veut-on ?</div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>3. Message</b>Quoi dire et comment ?</div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>4. Médias</b>Où ? (séance suivante)</div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>5. Source</b>Qui le dit ?</div>
+    </div>
+  </figure>
+  <p><strong>La cible vient toujours en premier</strong>, car elle décide de tout le reste : ce qui sera dit, comment, quand, où et par qui.</p>
+  <div class="box ex"><span class="tag">Même catégorie, cibles différentes</span>
+    <p><strong>Evian</strong> (« Live young ») parle de jeunesse, de bien-être, avec un ton premium et joueur. <strong>Liquid Death</strong> (« Murder your thirst ») vend aussi de l'eau, mais en canette, avec un ton rebelle, irrévérencieux et contre-culture. Même produit, deux publics, deux communications opposées.</p>
+  </div>
+
+  <h3>6.4 Fixer les objectifs : où est le public, où veut-on l'emmener ?</h3>
+  <p>Les <strong>étapes de préparation à l'achat</strong> (buyer-readiness stages) décrivent le chemin du client. Le but de la communication est de le faire avancer d'une marche. Attention, c'est une hiérarchie utile, pas forcément un parcours en ligne droite.</p>
+  <figure>
+    <div class="scroll">
+    <svg viewBox="0 0 720 120" width="100%" style="min-width:600px" role="img" aria-label="Les six étapes de préparation à l'achat">
+      <g font-size="12.5" text-anchor="middle">
+        <rect x="0" y="80" width="115" height="35" rx="6" fill="var(--rose)" fill-opacity=".25"/>
+        <rect x="120" y="65" width="115" height="50" rx="6" fill="var(--rose)" fill-opacity=".38"/>
+        <rect x="240" y="50" width="115" height="65" rx="6" fill="var(--rose)" fill-opacity=".52"/>
+        <rect x="360" y="35" width="115" height="80" rx="6" fill="var(--rose)" fill-opacity=".66"/>
+        <rect x="480" y="20" width="115" height="95" rx="6" fill="var(--rose)" fill-opacity=".82"/>
+        <rect x="600" y="5" width="115" height="110" rx="6" fill="var(--rose)"/>
+        <g fill="var(--ink)" font-weight="700">
+          <text x="57" y="102">Notoriété</text><text x="177" y="95">Connaissance</text><text x="297" y="88">Attirance</text><text x="417" y="80">Préférence</text>
+        </g>
+        <g fill="#fff" font-weight="700"><text x="537" y="72">Conviction</text><text x="657" y="65">Achat</text></g>
+      </g>
+    </svg></div>
+    <figcaption>Awareness → Knowledge → Liking → Preference → Conviction → Purchase.</figcaption>
+  </figure>
+  <h4>Les modèles de hiérarchie des réponses</h4>
+  <p>Le client passe par trois types de réactions : <strong>apprendre</strong> (cognitif, « je sais »), <strong>ressentir</strong> (affectif, « j'aime ») et <strong>agir</strong> (comportemental, « j'achète »). L'ordre dépend de son <strong>implication</strong> :</p>
+  <div class="tbl"><table>
+    <tr><th>Ordre</th><th>Quand ?</th><th>Exemple</th></tr>
+    <tr><td><strong>Apprendre → ressentir → agir</strong></td><td>Forte implication : achat cher, risqué, réfléchi</td><td>Une voiture : on se renseigne, on compare, on aime, on achète</td></tr>
+    <tr><td><strong>Ressentir → agir → apprendre</strong></td><td>Achat plaisir, émotionnel</td><td>Un parfum : coup de cœur, achat, puis on découvre ses notes</td></tr>
+    <tr><td><strong>Apprendre → agir → ressentir</strong></td><td>Faible implication : achat routinier</td><td>Une lessive : on la voit en promo, on essaie, on se fait un avis</td></tr>
+  </table></div>
+  <p>Le cours liste quatre objectifs de communication possibles : (1) créer le <strong>besoin pour la catégorie</strong>, (2) construire la <strong>notoriété</strong> de la marque, (3) construire une <strong>attitude</strong> favorable, (4) influencer l'<strong>intention d'achat</strong>.</p>
+
+  <h3>6.5 Concevoir le message</h3>
+  <div class="box def"><span class="tag">Le modèle AIDA</span>
+    <p>Un bon message doit successivement capter l'<strong>A</strong>ttention, susciter l'<strong>I</strong>ntérêt, éveiller le <strong>D</strong>ésir et provoquer l'<strong>A</strong>ction.</p>
+  </div>
+  <p>Pour construire le message, on répond à quatre questions :</p>
+  <div class="grid2">
+    <div class="card"><h4>Quoi dire ? → le contenu</h4><p>Un <strong>appel rationnel</strong> (l'intérêt du client : « 30 % moins cher »), <strong>émotionnel</strong> (peur, joie, humour, amour) ou <strong>moral et social</strong> (le sens du bien : sécurité routière).</p></div>
+    <div class="card"><h4>Comment l'organiser ? → la structure</h4><p>Conclusion explicite ou laissée au public ? Argument <strong>unilatéral</strong> (que les points forts) ou <strong>bilatéral</strong> (on admet un défaut, ce qui rend crédible) ? Argument le plus fort au début ou à la fin ?</p></div>
+    <div class="card"><h4>Comment l'exprimer ? → le format</h4><p>Le même message s'adapte au support : image, titre et couleurs en presse ; voix, musique et silence à la radio ; mouvement en vidéo ; premières secondes, sous-titres et format vertical sur les réseaux.</p></div>
+    <div class="card"><h4>Qui doit le dire ? → la source</h4><p>Une source efficace a de l'<strong>expertise</strong>, est <strong>digne de confiance</strong>, est <strong>attirante</strong> (on s'identifie à elle) et <strong>colle à la marque</strong>.</p></div>
+  </div>
+  <div class="box"><span class="tag" style="background:var(--blush);color:var(--rose-deep)">Mise en page d'une annonce presse</span>
+    <p>L'œil lit en <strong>Z</strong> : titre en haut, visuel, texte, puis marque et logo en bas à droite. Un bon <strong>titre</strong> promet un bénéfice, annonce une nouveauté, offre un service, raconte une histoire, pointe un problème ou cite un client satisfait. Le <strong>texte</strong> peut être long s'il est utile à la cible, mais avec des phrases courtes et beaucoup d'espace blanc.</p>
+  </div>
+  <div class="box ex"><span class="tag">La source dans CeraVe × Michael Cera</span>
+    <p>L'acteur apporte l'<strong>attention</strong>, le divertissement et la sympathie. Les <strong>dermatologues</strong> apportent l'expertise et la crédibilité. La célébrité attire le regard, les experts rendent la promesse croyable.</p>
+  </div>
+
+  <h3>6.6 La copy strategy : le cahier des charges du message</h3>
+  <p>La <strong>copy strategy</strong> traduit la stratégie marketing en consignes pour les créatifs. Elle dit <strong>ce qu'il faut communiquer</strong>, pas à quoi doit ressembler la pub.</p>
+  <div class="tbl"><table>
+    <tr><th>Rubrique</th><th>Orangina (agence Fred & Farid, 2008)</th></tr>
+    <tr><td>Contexte et objectif</td><td>Rajeunir la marque et renouer avec les jeunes</td></tr>
+    <tr><td>Cible et insight</td><td>Les jeunes qui veulent une boisson fun et différente</td></tr>
+    <tr><td>Promesse (bénéfice)</td><td>Naturel + fun intense</td></tr>
+    <tr><td>Preuve (reason why)</td><td>La vraie pulpe de fruit prouve le côté naturel</td></tr>
+    <tr><td>Ton et personnalité</td><td>Joueur, sexy, irrévérencieux, énergique</td></tr>
+  </table></div>
+  <p>Résultat : ventes en hausse de 50 % en valeur en cinq ans, sur un marché des sodas qui ne progressait que de 1 à 2 % par an. Le patron d'Orangina résume : « Dans notre marché, il faut créer un lien émotionnel avec le consommateur. »</p>
+
+  <div class="box"><span class="tag" style="background:var(--blush);color:var(--rose-deep)">Le twist digital</span>
+    <p>L'<strong>attention est fragmentée</strong> (algorithmes, notifications, contenu infini). Le public n'est plus seulement récepteur : il commente, remixe, crée et partage le sens de la marque. L'<strong>intégration</strong> est plus dure et plus importante : médias payés, possédés, gagnés (paid, owned, earned), réseaux sociaux et créateurs doivent ressembler à une seule marque. L'<strong>IA</strong> multiplie les contenus mais rend l'authenticité plus rare. Les questions de fond restent les mêmes : à qui parle-t-on, quelle réponse veut-on, quel message mérite l'attention ?</p>
+  </div>
+  <div class="box key"><span class="tag">À retenir · Partie 6</span>
+    <ul>
+      <li>Communiquer = informer, persuader, rappeler. Attention au bruit.</li>
+      <li>IMC : des canaux cohérents et complémentaires, une seule histoire (CeraVe).</li>
+      <li>5 étapes : cible → objectifs → message → médias → source.</li>
+      <li>Préparation à l'achat : notoriété, connaissance, attirance, préférence, conviction, achat.</li>
+      <li>AIDA ; message = contenu, structure, format, source.</li>
+      <li>Copy strategy : objectif, cible, promesse, preuve, ton (Orangina).</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== GLOSSAIRE ===================== -->
+<section class="part" id="glossaire">
+  <div class="part-head"><span class="part-num">✦</span><div><div class="eyebrow">Pour les cours en anglais</div><h2>Glossaire français / anglais</h2></div></div>
+  <dl class="glo">
+    <dt>Besoin / désir / demande</dt><dd>Need / want / demand</dd>
+    <dt>Valeur perçue</dt><dd>Customer-perceived value</dd>
+    <dt>Myopie marketing</dt><dd>Marketing myopia</dd>
+    <dt>Gestion de la relation client</dt><dd>Customer Relationship Management (CRM)</dd>
+    <dt>Part de client</dt><dd>Share of customer</dd>
+    <dt>Capital client / valeur vie</dt><dd>Customer equity / customer lifetime value</dd>
+    <dt>Segmentation, ciblage, positionnement</dt><dd>Segmentation, targeting, positioning (STP)</dd>
+    <dt>Point de différence</dt><dd>Point of difference</dd>
+    <dt>Déclaration de positionnement</dt><dd>Positioning statement</dd>
+    <dt>Carte perceptuelle</dt><dd>Perceptual map</dd>
+    <dt>Proposition de valeur</dt><dd>Value proposition</dd>
+    <dt>Capital-marque</dt><dd>Brand equity</dd>
+    <dt>Notoriété</dt><dd>Brand awareness</dd>
+    <dt>Fidélité à la marque</dt><dd>Brand loyalty</dd>
+    <dt>Marque ombrelle</dt><dd>Family / umbrella brand</dd>
+    <dt>Marque de distributeur (MDD)</dt><dd>Private label</dd>
+    <dt>Marque de combat</dt><dd>Fighter brand</dd>
+    <dt>Extension / étirement de marque</dt><dd>Brand extension / brand stretching</dd>
+    <dt>Cohérence perçue</dt><dd>Perceived fit</dd>
+    <dt>Ligne / portefeuille de produits</dt><dd>Product line / product mix (portfolio)</dd>
+    <dt>Cycle de vie du produit</dt><dd>Product Life Cycle (PLC)</dd>
+    <dt>Contenu généré par les utilisateurs</dt><dd>User-generated content (UGC)</dd>
+    <dt>Valeur vie client</dt><dd>Customer Lifetime Value (CLV)</dd>
+    <dt>Preuves matérielles</dt><dd>Physical evidence (7P des services)</dd>
+    <dt>Avantages recherchés</dt><dd>Benefits sought</dd>
+    <dt>Marketing indifférencié / différencié / concentré / personnalisé</dt><dd>Undifferentiated / differentiated / focused / customized marketing</dd>
+    <dt>Communication marketing intégrée</dt><dd>Integrated Marketing Communications (IMC)</dd>
+    <dt>Bruit</dt><dd>Noise, interference</dd>
+    <dt>Étapes de préparation à l'achat</dt><dd>Buyer-readiness stages</dd>
+    <dt>Appel rationnel / émotionnel / moral</dt><dd>Rational / emotional / moral appeal</dd>
+    <dt>Argument unilatéral / bilatéral</dt><dd>One-sided / two-sided argument</dd>
+    <dt>Promesse / preuve</dt><dd>Promise / reason why</dd>
+  </dl>
+</section>
+
+<!-- ===================== QUIZ ===================== -->
+<section class="part" id="quiz">
+  <div class="part-head"><span class="part-num">?</span><div><div class="eyebrow">Entraînement</div><h2>Quiz corrigé</h2></div></div>
+  <p>Clique sur une réponse : la bonne s'affiche en vert avec l'explication. Essaie de répondre sans relire la fiche, puis reviens sur les notions où tu t'es trompée.</p>
+  <div class="scorebar" role="status" aria-live="polite"><span>Score : <b id="score">0</b> / <span id="total">0</span> · <span id="done">0</span> répondues</span><button type="button" id="reset">Recommencer</button></div>
+  <div class="quiz" id="quizbox"></div>
+  <div class="box key result" id="result"><span class="tag">Ton résultat</span><p id="resultText"></p></div>
+</section>
+</main>
+</div>
+
+<script>
+const Q=[
+ {q:"Quelle est la bonne chaîne logique ?",o:["Désir → besoin → demande","Besoin → désir → demande","Demande → besoin → désir","Besoin → demande → désir"],a:1,e:"Le besoin est un manque (j'ai soif), le désir est la façon préférée de le satisfaire (j'ai envie d'un Coca), et la demande apparaît quand on a le pouvoir et le vouloir d'achat."},
+ {q:"Selon le cours, que fait Danone avec Actimel ?",o:["Il crée un besoin de santé qui n'existait pas","Il part du besoin d'être en bonne santé et crée le désir d'Actimel","Il baisse ses prix pour concurrencer les MDD","Il fait un co-branding avec une marque de médicaments"],a:1,e:"Le besoin (être en bonne santé) existait déjà. Danone a créé le désir pour sa marque grâce au format dose de 62,5 ml et au « geste santé du matin »."},
+ {q:"Kodak se voyait comme vendeur de pellicules alors que ses clients achetaient des souvenirs. C'est un exemple de :",o:["Cannibalisation","Myopie marketing","Optique vente","Dilution de marque"],a:1,e:"La myopie marketing consiste à se concentrer sur le produit plutôt que sur le bénéfice qu'il apporte au client."},
+ {q:"Une entreprise qui pousse le client à acheter parce qu'elle a trop de stock est dans l'optique :",o:["Production","Produit","Vente","Marketing"],a:2,e:"L'optique vente apparaît en situation de surcapacité : il faut stimuler le consommateur pour écouler la production. L'optique marketing, elle, part des besoins du client."},
+ {q:"La valeur perçue par le client, c'est :",o:["La somme de tous les bénéfices du produit","La qualité perçue du produit","Bénéfices perçus moins sacrifices perçus, comparés aux concurrents","Le prix payé par le client"],a:2,e:"La valeur perçue n'est ni une somme de bénéfices ni la seule qualité : c'est la balance bénéfices/sacrifices, toujours relative aux offres concurrentes."},
+ {q:"IKEA fait monter les meubles par le client lui-même. Quel levier de valeur utilise-t-il ?",o:["Augmenter les bénéfices perçus","Réduire les sacrifices perçus en modifiant la perception du prix","Développer des services associés","Valoriser la marque"],a:1,e:"En transférant une partie du travail au client, IKEA réduit ses coûts et donc son prix : le sacrifice monétaire perçu diminue."},
+ {q:"Dans le modèle de Kano, un paiement sécurisé sur un site marchand est une caractéristique :",o:["Basique","De performance","D'enchantement","Indifférente"],a:0,e:"C'est attendu d'office : son absence provoque l'insatisfaction, mais sa présence ne crée pas d'enthousiasme."},
+ {q:"Dans les 4C, le « P » de Prix devient :",o:["Le coût de production","Le sacrifice que le client est prêt à consentir","La concurrence","La commodité"],a:1,e:"Penser « consommateur », c'est se demander quel sacrifice (argent, temps, effort) le client est prêt à faire, et non partir des coûts de production."},
+ {q:"Un client dépense en moyenne 50 € par achat, achète 4 fois par an et reste fidèle 3 ans. Quelle est sa valeur vie (CLV) ?",o:["57 €","200 €","600 €","150 €"],a:2,e:"CLV = panier moyen × nombre d'achats × durée de fidélité = 50 × 4 × 3 = 600 €."},
+ {q:"Pour une entreprise de services, quels sont les 3 P ajoutés aux 4P classiques ?",o:["Packaging, Positioning, Profit","People, Process, Physical evidence","Partners, Planning, Performance","Public relations, Publicity, Push"],a:1,e:"Dans les services, on ajoute le personnel (People), le déroulement du service (Process) et les preuves matérielles (Physical evidence) : décor, uniforme, site web."},
+ {q:"Dans la pyramide de Maslow, quel besoin est à la base ?",o:["Estime","Sécurité","Physiologiques","Appartenance"],a:2,e:"Les besoins physiologiques (faim, soif) sont à la base. Viennent ensuite la sécurité, l'appartenance, l'estime, puis l'accomplissement au sommet."},
+ {q:"Dans l'analyse PESTEL, la loi Évin qui encadre la publicité pour l'alcool relève du facteur :",o:["Politique","Sociologique","Environnemental","Légal"],a:3,e:"C'est une loi, donc un facteur Légal. Le facteur Politique concerne plutôt la stabilité et les choix des gouvernements (droits de douane, par exemple)."},
+ {q:"Coca-Cola garde le même logo, la même recette et le même slogan dans tous les pays. C'est une stratégie de :",o:["Standardisation","Adaptation","Ciblage concentré","Repositionnement"],a:0,e:"Utiliser la même stratégie partout, c'est la standardisation : image cohérente et coûts réduits. Adapter les menus à chaque pays, comme McDonald's, c'est l'adaptation."},
+ {q:"Découper un marché en groupes de consommateurs homogènes s'appelle :",o:["Le ciblage","La segmentation","Le positionnement","La différenciation"],a:1,e:"La segmentation découpe le marché. Le ciblage, qui vient après, choisit les segments à servir."},
+ {q:"Segmenter les clients du dentifrice selon qu'ils veulent des dents blanches, un bon goût ou un prix bas, c'est une segmentation par :",o:["Critères démographiques","Avantages recherchés","Critères géographiques","Personnalité"],a:1,e:"C'est un critère comportemental : les avantages recherchés (benefits sought). Il est très utile car il explique pourquoi les gens achètent."},
+ {q:"« Le segment est-il assez grand pour gagner de l'argent ? » Ce critère de segmentation s'appelle :",o:["Mesurable","Accessible","Rentable","Actionnable"],a:2,e:"Rentable (profitable). Pour rappel : efficace, mesurable, accessible, actionnable, rentable."},
+ {q:"Renault lance la Twizy pour la ville, la Zoe pour les longs trajets et la Kangoo Z.E. pour les professionnels. Quelle stratégie de ciblage ?",o:["Indifférenciée","Différenciée","Concentrée","Personnalisée"],a:1,e:"Plusieurs segments, avec un mix marketing différent pour chacun : c'est le marketing différencié."},
+ {q:"Bang & Olufsen ne vise que les clients haut de gamme avec une seule offre. C'est un ciblage :",o:["Indifférencié","Différencié","Concentré","De masse"],a:2,e:"Un seul segment, un seul mix : c'est le marketing concentré, aussi appelé stratégie de niche."},
+ {q:"Dans l'ordre, la démarche STP signifie :",o:["Stratégie, tactique, prix","Segmentation, ciblage, positionnement","Segmentation, test, promotion","Sélection, tarification, promotion"],a:1,e:"Segmentation (découper le marché), Targeting (choisir les segments), Positioning (occuper une place distincte dans l'esprit de la cible)."},
+ {q:"Dans le positionnement de Dyson, quelle est la preuve du point de différence ?",o:["Le prix premium","La technologie Dual Cyclone, sans sac","La distribution sélective","La publicité humoristique"],a:1,e:"Le point de différence (performance supérieure) est prouvé par une caractéristique produit : la technologie Dual Cyclone qui supprime le sac."},
+ {q:"Dans la zone où le client veut quelque chose que ton concurrent fait mieux que toi, tu es en zone :",o:["Gagnante","Risquée","Perdante","Idiote"],a:2,e:"Zone perdante : le client le veut et c'est le concurrent qui le fait mieux. La zone gagnante est celle où toi seul réponds à ce que veut le client."},
+ {q:"Darty et son « contrat de confiance » se différencient surtout par :",o:["Le produit","Les services","L'image","La distribution"],a:1,e:"Darty vend les mêmes produits que ses concurrents ; sa différence tient au service (livraison, installation, réparation)."},
+ {q:"Scholl garde ses coussinets mais les vend à une nouvelle cible (jeunes femmes qui sortent danser) avec un nouveau packaging. Si le produit est identique et la cible nouvelle, c'est un repositionnement :",o:["D'image","Produit","Intangible","Tangible"],a:2,e:"Même produit + cible différente = repositionnement intangible. Si le produit ET la cible changeaient, ce serait tangible."},
+ {q:"Que démontre l'expérience de Joshua Bell dans le métro ?",o:["Que la qualité du produit fait tout","Que la marque et le contexte créent une grande partie de la valeur","Que le prix n'influence pas la perception","Que la distribution intensive est la meilleure"],a:1,e:"Même musicien, même violon : 100 $ la place en concert, 32 $ dans le métro. Sans la marque, la valeur perçue s'effondre."},
+ {q:"Procter & Gamble vend Ariel, Pampers et Gillette sous des noms différents. C'est une stratégie de :",o:["Marque ombrelle","Marque individuelle","Marque combinée","Co-branding"],a:1,e:"Chaque produit a son propre nom : c'est la marque individuelle. Philips (un nom pour tout) est une marque ombrelle ; Kellogg's Special K est une marque combinée."},
+ {q:"Quel est l'étage au sommet de la pyramide de Keller ?",o:["La saillance","La performance","Les sentiments","La résonance"],a:3,e:"La résonance (fidélité, attachement, communauté) est le sommet. La base est la saillance : la marque vient-elle à l'esprit ?"},
+ {q:"Dans le prisme de Kapferer, Rolex qui montre Roger Federer dans ses pubs relève surtout :",o:["Du physique","De la culture","Du reflet","De la relation"],a:2,e:"Le reflet est l'image du client type que la marque montre. La mentalisation serait ce que l'acheteur ressent intérieurement (« je réussis comme Federer »)."},
+ {q:"Dyson qui passe des aspirateurs aux sèche-cheveux et aux lampes fait :",o:["Une extension de marque","Un étirement de marque","Un co-branding ingrédient","Un repositionnement d'image"],a:1,e:"Aller dans une catégorie différente, c'est l'étirement (brand stretching). Une nouvelle saveur de Coca dans la même catégorie serait une extension."},
+ {q:"Air France crée Transavia pour affronter le low-cost. Transavia est :",o:["Une MDD","Une marque de combat","Une marque ombrelle","Un co-branding parallèle"],a:1,e:"Une marque de combat (fighter brand) attaque les concurrents à bas prix sans abîmer l'image premium de la marque principale."},
+ {q:"Milka × Oreo est un exemple de :",o:["Co-branding parallèle","Co-branding ingrédient","Sponsoring","Extension de marque"],a:1,e:"Oreo devient un ingrédient de la tablette Milka : c'est du co-branding ingrédient."},
+ {q:"Le principal risque de Pierre Cardin, qui a mis son nom sur des milliers de produits, est :",o:["La cannibalisation","La dilution de la marque","Le sous-financement","La perte de notoriété"],a:1,e:"À force d'être partout, la marque ne signifie plus rien de précis : c'est la dilution."},
+ {q:"Pendant quelle phase du cycle de vie le prix est-il généralement le plus bas et la distribution la plus intensive ?",o:["Introduction","Croissance","Maturité","Déclin"],a:2,e:"En maturité, la concurrence est forte : prix au plus bas, distribution intensive, objectif de fidélisation et de protection des parts de marché."},
+ {q:"La « longue traîne » de Netflix ou Amazon signifie :",o:["Que les produits vivent plus longtemps en ligne","Qu'on peut gagner beaucoup en vendant peu de chaque produit de niche, car le stockage en ligne coûte peu","Que la livraison prend plus de temps","Que les clients restent plus longtemps sur le site"],a:1,e:"Le catalogue en ligne presque illimité permet de vendre un peu de millions de références de niche, dont la somme pèse lourd."},
+ {q:"Dans le processus de communication, les autres publicités et les discussions entre amis qui brouillent le message s'appellent :",o:["Le feedback","Le codage","Le bruit","Le canal"],a:2,e:"Le bruit (interference) désigne tout ce qui perturbe la réception du message. Le feedback est la réponse du récepteur."},
+ {q:"La campagne CeraVe × Michael Cera (réseaux sociaux, puis presse, puis Super Bowl) illustre surtout :",o:["La communication marketing intégrée","Le co-branding ingrédient","Le ciblage indifférencié","Une marque de combat"],a:0,e:"Plusieurs canaux jouent des rôles différents, mais racontent une seule histoire cohérente : c'est l'IMC."},
+ {q:"Que signifie AIDA ?",o:["Analyse, Idée, Diffusion, Achat","Attention, Intérêt, Désir, Action","Audience, Impact, Diffusion, Attitude","Attention, Information, Décision, Achat"],a:1,e:"Un message doit capter l'Attention, susciter l'Intérêt, éveiller le Désir et provoquer l'Action."},
+ {q:"Quelle est la première étape pour développer une communication efficace ?",o:["Choisir les médias","Concevoir le message","Identifier la cible","Choisir la source"],a:2,e:"La cible vient toujours en premier, car elle détermine ce qu'on dit, comment, où, quand et par qui (Evian et Liquid Death vendent de l'eau mais parlent à des publics opposés)."},
+ {q:"Dans la copy strategy d'Orangina, « la vraie pulpe de fruit » correspond à :",o:["La promesse","La preuve (reason why)","Le ton","La cible"],a:1,e:"La promesse est « naturel + fun ». La pulpe est la preuve qui rend crédible le côté naturel."},
+ {q:"Un parfum acheté sur un coup de cœur suit plutôt l'ordre :",o:["Apprendre → ressentir → agir","Ressentir → agir → apprendre","Apprendre → agir → ressentir","Agir → apprendre → ressentir"],a:1,e:"Pour un achat émotionnel et plaisir, l'émotion vient d'abord, puis l'achat, et on apprend ensuite. Pour un achat très impliquant (voiture), on apprend d'abord."}
+];
+const box=document.getElementById('quizbox');
+let score=0,done=0;
+document.getElementById('total').textContent=Q.length;
+function render(){
+  box.innerHTML='';score=0;done=0;update();
+  document.getElementById('result').classList.remove('on');
+  Q.forEach((item,i)=>{
+    const d=document.createElement('div');d.className='q';
+    const h=document.createElement('h4');h.textContent=item.q;d.appendChild(h);
+    const opts=document.createElement('div');opts.className='opts';
+    item.o.forEach((t,j)=>{
+      const b=document.createElement('button');b.type='button';b.id='q'+i+'o'+j;
+      b.textContent=String.fromCharCode(65+j)+'. '+t;
+      b.addEventListener('click',()=>answer(i,j,opts,d));
+      opts.appendChild(b);
+    });
+    d.appendChild(opts);box.appendChild(d);
+  });
+}
+function answer(i,j,opts,d){
+  const item=Q[i];const btns=opts.querySelectorAll('button');
+  btns.forEach(b=>b.disabled=true);
+  btns[item.a].classList.add('right');
+  const ok=j===item.a;
+  if(!ok)btns[j].classList.add('wrong');else score++;
+  done++;
+  const ex=document.createElement('div');ex.className='expl';
+  ex.innerHTML=(ok?'<b class="v">Bonne réponse.</b> ':'<b class="x">Pas tout à fait.</b> La bonne réponse est '+String.fromCharCode(65+item.a)+'. ');
+  ex.appendChild(document.createTextNode(item.e));
+  d.appendChild(ex);update();
+  if(done===Q.length){
+    const r=document.getElementById('result');const t=document.getElementById('resultText');
+    const pct=score/Q.length;
+    t.textContent=score+' / '+Q.length+'. '+(pct>=.85?'Excellent, tu maîtrises le cours. Relis juste les explications des erreurs.':pct>=.6?'Bonne base. Relis les encadrés « À retenir » des parties où tu as fait des erreurs, puis recommence.':'Pas de panique, c\'est normal en partant de zéro. Relis une partie à la fois, puis refais le quiz.');
+    r.classList.add('on');
+  }
+}
+function update(){document.getElementById('score').textContent=score;document.getElementById('done').textContent=done}
+document.getElementById('reset').addEventListener('click',()=>{render();document.getElementById('quiz').scrollIntoView({behavior:'smooth'})});
+render();
+</script>

@@ -1,0 +1,557 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Management digital</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:ital,wght@0,400;0,600;0,700;1,400&display=swap">
+<style>
+/* Layout: une colonne de lecture (~68ch), sommaire collant sur grand écran, encadrés roses par rôle (définition, exemple, piège, à retenir) */
+:root{
+  --bg:#fff6f9; --paper:#ffffff; --ink:#3b1530; --muted:#7a5068;
+  --rose:#d6336c; --rose-deep:#a61e55; --blush:#fde0ea; --blush-2:#f9c4d6; --line:#f1c9d8;
+  --plum:#6b2a5a; --ok:#1f8a5b; --ok-bg:#e3f5ec; --ko:#c0392b; --ko-bg:#fde6e3;
+  --f-display:"Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+  --f-body:"Figtree", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#1d0f18; --paper:#28141f; --ink:#fbe6ee; --muted:#d3a7bb;
+  --rose:#ff6f9f; --rose-deep:#ff94b8; --blush:#3d1d2e; --blush-2:#5a2943; --line:#4a2539;
+  --plum:#e7a6cf; --ok:#5fd39b; --ok-bg:#163327; --ko:#ff8b7d; --ko-bg:#3a1a17; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#1d0f18; --paper:#28141f; --ink:#fbe6ee; --muted:#d3a7bb;
+  --rose:#ff6f9f; --rose-deep:#ff94b8; --blush:#3d1d2e; --blush-2:#5a2943; --line:#4a2539;
+  --plum:#e7a6cf; --ok:#5fd39b; --ok-bg:#163327; --ko:#ff8b7d; --ko-bg:#3a1a17; color-scheme:dark }
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.65;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;padding-block:32px 80px}
+@media (max-width:900px){.wrap{grid-template-columns:minmax(0,1fr);gap:0}.toc{display:none}}
+main{min-width:0;max-width:72ch}
+h1,h2,h3,h4{font-family:var(--f-display);text-wrap:balance;line-height:1.15;color:var(--ink)}
+h1{font-size:clamp(2.2rem,5.5vw,3.6rem);font-weight:800;margin:0 0 .3em;letter-spacing:-.02em}
+h1 em{font-style:normal;color:var(--rose)}
+h2{font-size:clamp(1.6rem,3.6vw,2.2rem);font-weight:800;margin:0 0 .4em}
+h3{font-size:1.3rem;font-weight:700;margin:2em 0 .5em;color:var(--rose-deep)}
+h4{font-size:1.05rem;margin:1.4em 0 .3em}
+p{margin:.6em 0}
+a{color:var(--rose-deep)}
+strong{color:var(--plum)}
+.eyebrow{font-family:var(--f-display);text-transform:uppercase;letter-spacing:.12em;font-size:.78rem;font-weight:700;color:var(--rose)}
+.lede{font-size:1.15rem;color:var(--muted)}
+
+/* Sommaire */
+.toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 24px);align-self:start;font-size:.92rem}
+.toc ol{list-style:none;padding:0;margin:.6em 0 0;display:grid;gap:2px}
+.toc a{display:block;padding:6px 10px;border-radius:8px;text-decoration:none;color:var(--muted)}
+.toc a:hover,.toc a:focus-visible{background:var(--blush);color:var(--ink)}
+.toc .sub{padding-left:22px;font-size:.86rem}
+
+/* Hero */
+.hero{padding-block:8px 28px;border-bottom:2px solid var(--line);margin-bottom:24px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.chip{background:var(--blush);color:var(--rose-deep);border-radius:999px;padding:4px 12px;font-size:.85rem;font-weight:600}
+
+/* Parties */
+section.part{padding-top:40px;margin-top:40px;border-top:2px solid var(--line)}
+.part-head{display:flex;gap:16px;align-items:flex-start;margin-bottom:8px}
+.part-num{font-family:var(--f-display);font-weight:800;font-size:3.2rem;line-height:1;color:var(--blush-2);flex:none}
+.part-head .src{font-size:.85rem;color:var(--muted)}
+
+/* Encadrés */
+.box{border-radius:14px;padding:14px 18px;margin:16px 0;border:1px solid var(--line);background:var(--paper)}
+.box > :first-child{margin-top:0}.box > :last-child{margin-bottom:0}
+.box .tag{display:inline-block;font-family:var(--f-display);font-weight:700;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;padding:2px 8px;border-radius:6px;margin-bottom:6px}
+.def{background:var(--blush);border-color:var(--blush-2)}
+.def .tag{background:var(--rose);color:var(--paper)}
+.ex .tag{background:var(--plum);color:var(--paper)}
+.ex{border-left:5px solid var(--plum)}
+.trap{border:1.5px dashed var(--rose)}
+.trap .tag{background:transparent;color:var(--rose);border:1.5px solid var(--rose)}
+.key{background:var(--ink);color:var(--bg);border:none}
+.key strong{color:var(--blush-2)}
+.key .tag{background:var(--rose);color:#fff}
+.key ul{margin:.3em 0;padding-left:1.2em}
+.simple{font-style:italic;color:var(--muted)}
+
+/* Tableaux */
+.tbl{overflow-x:auto;margin:16px 0;border-radius:12px;border:1px solid var(--line)}
+table{border-collapse:collapse;width:100%;font-size:.93rem;background:var(--paper)}
+th,td{padding:9px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+th{background:var(--blush);font-family:var(--f-display);font-weight:700;color:var(--rose-deep)}
+tr:last-child td{border-bottom:none}
+
+/* Schémas */
+figure{margin:20px 0;padding:16px;background:var(--paper);border:1px solid var(--line);border-radius:14px}
+figure .scroll{overflow-x:auto}
+figcaption{font-size:.85rem;color:var(--muted);margin-top:8px}
+svg text{font-family:var(--f-body)}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch}
+.flow .step{flex:1 1 120px;background:var(--blush);border-radius:12px;padding:10px 12px;font-size:.9rem;min-width:0}
+.flow .step b{display:block;font-family:var(--f-display);color:var(--rose-deep);font-size:.95rem}
+.flow .arrow{align-self:center;color:var(--rose);font-weight:800}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px 14px;min-width:0}
+.card h4{margin:0 0 4px;color:var(--rose-deep)}
+.card p{margin:.2em 0;font-size:.93rem}
+.pm{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+.pm > div{border-radius:12px;padding:12px 14px}
+.pm .plus{background:var(--ok-bg)}.pm .minus{background:var(--ko-bg)}
+.pm h4{margin:0 0 4px}.pm .plus h4{color:var(--ok)}.pm .minus h4{color:var(--ko)}
+.pm ul{margin:0;padding-left:1.1em;font-size:.93rem}
+
+/* Quiz */
+.quiz{counter-reset:q}
+.q{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:14px 0}
+.q h4{margin:0 0 10px;font-family:var(--f-body);font-weight:700}
+.q h4::before{counter-increment:q;content:"Q" counter(q) " · ";color:var(--rose);font-family:var(--f-display)}
+.opts{display:grid;gap:8px}
+.opts button{font:inherit;font-size:.95rem;text-align:left;padding:10px 14px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.opts button:hover:not(:disabled){border-color:var(--rose)}
+.opts button:focus-visible{outline:3px solid var(--rose);outline-offset:2px}
+.opts button.right{background:var(--ok-bg);border-color:var(--ok);font-weight:600}
+.opts button.wrong{background:var(--ko-bg);border-color:var(--ko)}
+.opts button:disabled{cursor:default}
+.expl{margin-top:10px;padding:10px 14px;border-radius:10px;background:var(--blush);font-size:.93rem}
+.expl b.v{color:var(--ok)}.expl b.x{color:var(--ko)}
+.scorebar{position:sticky;top:calc(env(safe-area-inset-top,0px) + 8px);z-index:5;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;background:var(--ink);color:var(--bg);border-radius:12px;padding:10px 16px;margin:16px 0}
+.scorebar b{font-family:var(--f-display);font-size:1.15rem;color:var(--blush-2)}
+.scorebar button{font:inherit;font-size:.88rem;background:var(--rose);color:#fff;border:none;border-radius:8px;padding:6px 12px;cursor:pointer}
+.result{display:none}
+.result.on{display:block}
+dl.glo{display:grid;grid-template-columns:minmax(120px,max-content) minmax(0,1fr);gap:6px 16px;font-size:.93rem}
+dl.glo dt{font-weight:700;color:var(--rose-deep)}
+dl.glo dd{margin:0}
+@media (max-width:520px){dl.glo{grid-template-columns:minmax(0,1fr)}dl.glo dd{margin-bottom:8px}}
+@media (prefers-reduced-motion:no-preference){.opts button{transition:background .15s,border-color .15s}}
+</style>
+<div class="wrap">
+<nav class="toc" aria-label="Sommaire">
+  <div class="eyebrow">Sommaire</div>
+  <ol>
+    <li><a href="#m1">1. Pourquoi le digital change tout</a></li>
+    <li><a href="#m2">2. Définir le management digital</a></li>
+    <li><a href="#m3">3. Un nouveau modèle managérial</a></li>
+    <li><a href="#m4">4. Méthode d'étude de cas</a></li>
+    <li><a href="#glossaire">Mots clés</a></li>
+    <li><a href="#quiz">Quiz corrigé</a></li>
+  </ol>
+</nav>
+
+<main>
+<header class="hero">
+  <div class="eyebrow">Management digital · CM · L3 Commerce International · UPEC</div>
+  <h1>Management <em>digital</em></h1>
+  <p class="lede">La technologie, l'extérieur et l'intérieur de l'entreprise. Cette fiche reprend le CM et la séance 2, explique chaque notion simplement et se termine par la méthode pour l'examen oral (étude de cas en groupe) et un quiz corrigé de 16 questions.</p>
+  <div class="chips">
+    <span class="chip">Révolution digitale</span>
+    <span class="chip">Système socio-technique</span>
+    <span class="chip">Horizontalisation</span>
+    <span class="chip">Résistance au changement</span>
+    <span class="chip">Étude de cas</span>
+  </div>
+  <div class="box" style="margin-top:20px">
+    <span class="tag" style="background:var(--blush);color:var(--rose-deep)">Comment lire cette fiche</span>
+    <p>Mêmes codes que la fiche de marketing : <strong>rose plein</strong> = définition ; <strong>bordure violette</strong> = exemple ; <strong>pointillés</strong> = piège ; <strong>fond sombre</strong> = à retenir. Les encadrés « pour mieux comprendre » ajoutent des exemples qui ne sont pas dans tes notes, pour t'aider à visualiser.</p>
+  </div>
+</header>
+
+<!-- ===================== PARTIE 1 ===================== -->
+<section class="part" id="m1">
+  <div class="part-head"><span class="part-num">1</span><div><div class="eyebrow">Introduction</div><h2>Pourquoi le digital change tout</h2></div></div>
+
+  <h3>1.1 Le point de départ</h3>
+  <p>Le management digital cherche ce que cherche tout management : la <strong>performance</strong>, un bon <strong>positionnement</strong>, un <strong>avantage concurrentiel</strong> et la <strong>croissance</strong>. C'est une discipline récente, encore complexe et souvent ambivalente.</p>
+  <p>Deux constats sont à l'origine du digital :</p>
+  <div class="grid2">
+    <div class="card"><h4>Internet fait partie de nos vies</h4><p>On l'utilise pour acheter, travailler et entrer en relation avec les autres.</p></div>
+    <div class="card"><h4>Le réseau est immense</h4><p>Environ 3,5 milliards de personnes connectées, très diverses.</p></div>
+  </div>
+  <div class="box def"><span class="tag">La révolution digitale</span>
+    <p>On parle parfois de <strong>3ᵉ révolution industrielle</strong> (Rifkin, 2012), plus souvent de <strong>4ᵉ révolution industrielle</strong> ou de <strong>révolution digitale</strong>. Les technologies digitales ont changé radicalement le comportement des consommateurs. Comme la <strong>demande change</strong>, l'<strong>offre doit s'adapter</strong>, et les entreprises changent à leur tour : c'est une <strong>spirale</strong> qui ne s'arrête pas.</p>
+  </div>
+  <figure>
+    <div class="flow">
+      <div class="step"><b>Nouvelles technologies</b>Smartphone, réseaux sociaux, plateformes.</div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>Le consommateur change</b>Il compare, lit des avis, achète en ligne.</div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>L'entreprise s'adapte</b>Nouvelle offre, nouveaux canaux, nouvelle organisation.</div>
+      <div class="arrow" aria-hidden="true">↺</div>
+    </div>
+    <figcaption>La spirale évolutive du digital : chaque adaptation de l'offre change à nouveau les habitudes des clients.</figcaption>
+  </figure>
+  <p>Le management digital ne parle donc pas que de technologie. Il parle aussi du <strong>comportement du consommateur</strong>, des <strong>canaux de distribution et d'achat</strong>, des <strong>plateformes</strong> (Amazon, Booking, TripAdvisor, LinkedIn, Facebook, X, BlaBlaCar, Uber), de nouvelles formes d'entreprise et de nouvelles façons de concevoir et d'exécuter la stratégie.</p>
+
+  <h3>1.2 La révolution digitale en 3 points</h3>
+  <figure>
+    <div class="scroll">
+    <svg viewBox="0 0 640 280" width="100%" style="min-width:500px" role="img" aria-label="Les trois piliers de la révolution digitale">
+      <g font-size="12.5" fill="var(--ink)" text-anchor="middle">
+        <circle cx="320" cy="140" r="58" fill="var(--rose)"/>
+        <text x="320" y="135" fill="#fff" font-weight="700">Données</text>
+        <text x="320" y="152" fill="#fff" font-size="11.5">matière première</text>
+        <rect x="10" y="20" width="190" height="78" rx="12" fill="var(--blush)"/>
+        <text x="105" y="45" font-weight="700" fill="var(--rose-deep)">① Interconnectivité</text>
+        <text x="105" y="64">les individus sont reliés :</text><text x="105" y="80">les données prolifèrent</text>
+        <rect x="440" y="20" width="190" height="78" rx="12" fill="var(--blush)"/>
+        <text x="535" y="45" font-weight="700" fill="var(--rose-deep)">② Recherche et</text>
+        <text x="535" y="62" font-weight="700" fill="var(--rose-deep)">recommandations</text>
+        <text x="535" y="80">la bonne info au bon moment</text>
+        <rect x="225" y="215" width="190" height="60" rx="12" fill="var(--blush)"/>
+        <text x="320" y="238" font-weight="700" fill="var(--rose-deep)">③ Stockage et exploitation</text>
+        <text x="320" y="256">Big Data, intelligence artificielle</text>
+        <path d="M200 70L268 115M440 70L372 115M320 198V213" stroke="var(--rose)" stroke-width="2.5"/>
+      </g>
+    </svg></div>
+    <figcaption>Les trois éléments se nourrissent : plus de connexions → plus de données → de meilleurs moteurs de recherche et de recommandation → encore plus d'usages.</figcaption>
+  </figure>
+
+  <h4>① L'interconnectivité des individus</h4>
+  <p>Comme tout le monde est connecté, les <strong>données prolifèrent</strong>. Les collecter, les réorganiser, les analyser et les exploiter (c'est le <strong>cycle de vie des connaissances</strong>, au cœur du <strong>knowledge management</strong> ou KM) devient central. Les données permettent de mieux connaître le client, son comportement et sa façon de décider. L'information et la connaissance sont la <strong>matière première</strong> de ces technologies, qu'on retrouve dans toutes les fonctions de la <strong>chaîne de valeur</strong> (production, logistique, vente, RH…).</p>
+
+  <h4>② La recherche et les recommandations</h4>
+  <p>La technologie de <strong>recherche</strong> permet de trouver la bonne information au bon moment dans une masse de données. Elle sert dans les deux sens : à l'entreprise (l'offre) comme au consommateur (la demande). C'est ce qui a le plus transformé le comportement du consommateur.</p>
+  <div class="box def"><span class="tag">Définition</span>
+    <p>Les <strong>recommandations</strong> sont les produits ou services qu'une plateforme propose à ses utilisateurs. Les <strong>moteurs de recommandation</strong> utilisent des algorithmes qui comparent ton comportement à celui d'un grand nombre d'autres personnes pour <strong>anticiper tes besoins</strong>. Ils <strong>segmentent</strong> donc la clientèle et proposent ce qui plaira le plus probablement à ton segment.</p>
+  </div>
+  <div class="box ex"><span class="tag">Pour mieux comprendre</span>
+    <p>« Les clients qui ont acheté cet article ont aussi acheté… » sur Amazon, ou la rubrique « Parce que vous avez regardé… » de Netflix : l'algorithme te range dans un groupe de personnes qui ont les mêmes goûts que toi et te propose ce que ce groupe a aimé. C'est la segmentation du cours de marketing, faite automatiquement.</p>
+  </div>
+
+  <h4>③ Le stockage, l'exploration et l'exploitation des données</h4>
+  <p>Une <strong>donnée brute est inerte</strong> : elle ne devient utile que lorsqu'on la structure. Les capacités de stockage et de traitement ont énormément augmenté, ce qui a fait naître le <strong>Big Data</strong> et l'<strong>intelligence artificielle</strong>. Ces outils renforcent à leur tour la prolifération des données, les moteurs de recherche et les moteurs de recommandation.</p>
+  <div class="box key"><span class="tag">Conclusion du cours</span>
+    <p>Ces trois éléments ont profondément <strong>restructuré le management</strong> des entreprises : c'est la <strong>technologie qui structure les pratiques</strong> et influence le nouveau management. Or les outils classiques du management n'ont pas été conçus pour ces situations.</p>
+  </div>
+
+  <h3>1.3 Le digital, c'est d'abord des humains</h3>
+  <p>Point essentiel du cours : <strong>le digital est avant tout une question d'individus, de comportements et d'émotions</strong>. Construire un management digital, c'est donc, dans cet ordre :</p>
+  <figure>
+    <div class="flow">
+      <div class="step"><b>1. D'abord, comprendre les gens</b>Le <strong>public externe</strong> (l'audience, les consommateurs) et le <strong>public interne</strong> (les collaborateurs de l'entreprise).</div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>2. Ensuite, la technologie</b>Utilisée comme un <strong>moyen</strong> (un vecteur de l'offre) au service des besoins et des émotions de l'audience.</div>
+    </div>
+    <figcaption>Bien comprendre l'audience ET ses propres collaborateurs permet un bon positionnement et un avantage concurrentiel.</figcaption>
+  </figure>
+  <div class="box trap"><span class="tag">Petit bémol à citer à l'oral</span>
+    <p>Il ne faut pas exagérer la place du digital : les <strong>pure players</strong> (entreprises 100 % en ligne) restent minoritaires, Amazon lui-même ouvre des magasins physiques aux États-Unis, et en France le <strong>e-commerce ne représente qu'environ 10 % du commerce de détail</strong>. Enfin, le digital ne sert pas qu'à vendre : il concerne <strong>toutes les fonctions</strong> de l'entreprise.</p>
+  </div>
+</section>
+
+<!-- ===================== PARTIE 2 ===================== -->
+<section class="part" id="m2">
+  <div class="part-head"><span class="part-num">2</span><div><div class="eyebrow">Définitions</div><h2>Ce qu'est (et n'est pas) le management digital</h2></div></div>
+
+  <h3>2.1 La définition</h3>
+  <div class="box def"><span class="tag">Définition à savoir</span>
+    <p><strong>Version simple</strong> (Timsit, 2018) : l'ensemble des <strong>méthodes et techniques digitales</strong> qui permettent à l'entreprise de construire un <strong>avantage concurrentiel</strong>.</p>
+    <p><strong>Version détaillée</strong> : « Digital management refers to the strategies and practices used to oversee digital resources, tools, and processes within an organization. » Autrement dit : les stratégies et pratiques pour piloter les ressources, outils et processus digitaux de l'organisation.</p>
+  </div>
+  <p>Le but reste d'identifier des opportunités pour <strong>créer de la valeur</strong>. On parle de <strong>positionnement dynamique</strong> de l'entreprise dans un environnement concurrentiel complexe.</p>
+  <figure>
+    <div class="scroll">
+    <svg viewBox="0 0 560 270" width="100%" style="min-width:440px" role="img" aria-label="La boucle du positionnement dynamique">
+      <g font-size="12.5" fill="var(--ink)" text-anchor="middle">
+        <circle cx="280" cy="135" r="95" fill="none" stroke="var(--rose)" stroke-width="2.5" stroke-dasharray="8 6"/>
+        <rect x="190" y="12" width="180" height="46" rx="10" fill="var(--blush)"/><text x="280" y="32" font-weight="700" fill="var(--rose-deep)">L'audience évolue</text><text x="280" y="49">nouveaux usages, attentes</text>
+        <rect x="380" y="112" width="175" height="46" rx="10" fill="var(--blush)"/><text x="467" y="132" font-weight="700" fill="var(--rose-deep)">L'entreprise s'adapte</text><text x="467" y="149">nouvelle proposition</text>
+        <rect x="190" y="212" width="180" height="46" rx="10" fill="var(--blush)"/><text x="280" y="232" font-weight="700" fill="var(--rose-deep)">Les concurrents réagissent</text><text x="280" y="249">l'offre globale évolue</text>
+        <rect x="5" y="112" width="175" height="46" rx="10" fill="var(--blush)"/><text x="92" y="132" font-weight="700" fill="var(--rose-deep)">Les choix de l'audience</text><text x="92" y="149">changent à leur tour</text>
+        <text x="280" y="132" font-family="var(--f-display)" font-weight="800" fill="var(--rose)">Positionnement</text>
+        <text x="280" y="150" font-family="var(--f-display)" font-weight="800" fill="var(--rose)">dynamique</text>
+      </g>
+    </svg></div>
+    <figcaption>Sur des marchés « systémiques », chaque action déclenche une série de réactions : le marché change sans arrêt et un nouveau cycle recommence (Carroll et al., 1998 et 2000).</figcaption>
+  </figure>
+
+  <h3>2.2 À ne pas confondre</h3>
+  <p>Le mot « digital » est utilisé partout, d'où un risque de confusion avec deux notions proches :</p>
+  <figure>
+    <div class="scroll">
+    <svg viewBox="0 0 600 250" width="100%" style="min-width:460px" role="img" aria-label="Le management digital englobe le marketing digital">
+      <g font-size="12.5" fill="var(--ink)">
+        <rect x="10" y="10" width="360" height="230" rx="16" fill="var(--blush)" stroke="var(--rose)" stroke-width="2"/>
+        <text x="30" y="36" font-weight="700" fill="var(--rose-deep)">Management digital</text>
+        <text x="30" y="54" font-size="11.5" fill="var(--muted)">toute l'entreprise · le QUOI (choix stratégiques)</text>
+        <rect x="40" y="80" width="180" height="120" rx="12" fill="var(--paper)" stroke="var(--plum)" stroke-width="1.5"/>
+        <text x="130" y="112" text-anchor="middle" font-weight="700" fill="var(--plum)">Marketing digital</text>
+        <text x="130" y="134" text-anchor="middle" font-size="11.5">l'offre et les clients</text>
+        <text x="130" y="150" text-anchor="middle" font-size="11.5">d'un marché précis</text>
+        <text x="130" y="172" text-anchor="middle" font-size="11.5">le COMMENT (tactique)</text>
+        <rect x="400" y="60" width="190" height="140" rx="12" fill="var(--paper)" stroke="var(--rose)" stroke-width="1.5" stroke-dasharray="6 4"/>
+        <text x="495" y="92" text-anchor="middle" font-weight="700" fill="var(--rose-deep)">Transformation</text>
+        <text x="495" y="108" text-anchor="middle" font-weight="700" fill="var(--rose-deep)">digitale</text>
+        <text x="495" y="132" text-anchor="middle" font-size="11.5">intégrer les technologies</text>
+        <text x="495" y="148" text-anchor="middle" font-size="11.5">dans les processus</text>
+        <text x="495" y="170" text-anchor="middle" font-size="11.5">= gestion du changement</text>
+        <path d="M372 130H396" stroke="var(--rose)" stroke-width="2"/>
+        <text x="384" y="122" text-anchor="middle" font-size="10.5" fill="var(--muted)">guide</text>
+      </g>
+    </svg></div>
+  </figure>
+  <div class="tbl"><table>
+    <tr><th></th><th>De quoi ça parle ?</th><th>Lien avec le management digital</th></tr>
+    <tr><td><strong>Management digital</strong></td><td>L'entreprise dans son ensemble, toutes fonctions, pour obtenir un avantage concurrentiel</td><td>C'est le cadre global : il décide <strong>quoi</strong> faire (stratégie)</td></tr>
+    <tr><td><strong>Marketing digital</strong></td><td>Seulement l'offre et les clients sur un marché précis</td><td>Il est <strong>inclus</strong> dans le management digital : c'est un outil <strong>tactique</strong> (le <strong>comment</strong>)</td></tr>
+    <tr><td><strong>Transformation digitale</strong></td><td>L'intégration des technologies digitales dans les processus de l'entreprise</td><td>C'est un <strong>processus de gestion du changement</strong>, guidé par le management mais distinct de lui</td></tr>
+  </table></div>
+  <div class="box ex"><span class="tag">Pour mieux comprendre</span>
+    <p>Une enseigne de mode décide de devenir « la marque la plus pratique pour les clientes pressées » : c'est un choix de <strong>management digital</strong>. Elle installe une appli, le click & collect et un nouveau logiciel de stock, et forme les vendeuses : c'est la <strong>transformation digitale</strong>. Elle lance des pubs Instagram ciblées et des e-mails personnalisés : c'est du <strong>marketing digital</strong>.</p>
+  </div>
+  <div class="box key"><span class="tag">À retenir · Parties 1 et 2</span>
+    <ul>
+      <li>Révolution digitale = interconnectivité + recherche et recommandations + stockage et exploitation des données.</li>
+      <li>Le digital, c'est d'abord des humains (audience externe et collaborateurs), ensuite de la technologie.</li>
+      <li>Management digital = méthodes et techniques digitales pour construire un avantage concurrentiel (Timsit, 2018).</li>
+      <li>Il inclut le marketing digital (tactique) et guide la transformation digitale (gestion du changement).</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== PARTIE 3 ===================== -->
+<section class="part" id="m3">
+  <div class="part-head"><span class="part-num">3</span><div><div class="eyebrow">Le système socio-technique, le changement</div><h2>Un nouveau modèle managérial</h2></div></div>
+
+  <h3>3.1 Le digital ne change pas que la technique</h3>
+  <p>Mettre en place la digitalisation, ce n'est <strong>pas seulement une transformation technologique</strong>. Le digital change la <strong>stratégie</strong> et la <strong>culture</strong> de l'entreprise.</p>
+  <div class="box def"><span class="tag">Le système socio-technique</span>
+    <p>Une transformation digitale porte toujours sur deux choses <strong>indissociables</strong> : une partie <strong>technique</strong> (la technologie digitale, le système d'information) et une partie <strong>sociale</strong> (les personnes, leurs connaissances métier, leurs relations, leur pouvoir). C'est ce <strong>système socio-technique</strong> que le management digital doit gérer.</p>
+  </div>
+  <figure>
+    <div class="flow">
+      <div class="step"><b>Technique</b>Le nouveau système d'information, les outils, les données.</div>
+      <div class="arrow" aria-hidden="true">+</div>
+      <div class="step"><b>Social</b>Les personnes, leurs compétences et connaissances, la culture, le pouvoir.</div>
+      <div class="arrow" aria-hidden="true">=</div>
+      <div class="step"><b>Système socio-technique</b>On ne peut pas changer l'un sans changer l'autre.</div>
+    </div>
+  </figure>
+
+  <h3>3.2 L'« horizontalisation » de l'entreprise</h3>
+  <p>D'un point de vue sociologique, le digital pousse vers <strong>plus d'horizontalité</strong> : la hiérarchie s'aplatit et ceux qui exécutent gagnent en autonomie.</p>
+  <figure>
+    <div class="scroll">
+    <svg viewBox="0 0 640 230" width="100%" style="min-width:520px" role="img" aria-label="Avant et après l'horizontalisation">
+      <g font-size="12" fill="var(--ink)" text-anchor="middle">
+        <text x="150" y="18" font-weight="700" fill="var(--muted)">AVANT : pyramide hiérarchique</text>
+        <rect x="120" y="30" width="60" height="26" rx="6" fill="var(--rose)"/><text x="150" y="47" fill="#fff">direction</text>
+        <rect x="70" y="80" width="60" height="26" rx="6" fill="var(--blush-2)"/><rect x="170" y="80" width="60" height="26" rx="6" fill="var(--blush-2)"/>
+        <text x="100" y="97" font-size="10.5">managers</text><text x="200" y="97" font-size="10.5">managers</text>
+        <g fill="var(--blush)"><rect x="30" y="135" width="44" height="24" rx="5"/><rect x="80" y="135" width="44" height="24" rx="5"/><rect x="130" y="135" width="44" height="24" rx="5"/><rect x="180" y="135" width="44" height="24" rx="5"/><rect x="230" y="135" width="44" height="24" rx="5"/></g>
+        <path d="M150 56L100 80M150 56L200 80M100 106L52 135M100 106L102 135M100 106L152 135M200 106L202 135M200 106L252 135" stroke="var(--muted)" stroke-width="1.2"/>
+        <text x="150" y="190">Chaque décision remonte</text><text x="150" y="206">à l'échelon supérieur</text>
+        <path d="M320 20V215" stroke="var(--line)" stroke-width="2"/>
+        <text x="485" y="18" font-weight="700" fill="var(--rose-deep)">APRÈS : organisation plus horizontale</text>
+        <rect x="455" y="30" width="60" height="26" rx="6" fill="var(--rose)"/><text x="485" y="47" fill="#fff">direction</text>
+        <rect x="380" y="95" width="210" height="34" rx="17" fill="var(--paper)" stroke="var(--rose)" stroke-width="1.5"/>
+        <text x="485" y="117" font-weight="700" fill="var(--rose-deep)">données partagées (SI digital)</text>
+        <g fill="var(--blush-2)"><rect x="370" y="150" width="44" height="24" rx="5"/><rect x="420" y="150" width="44" height="24" rx="5"/><rect x="470" y="150" width="44" height="24" rx="5"/><rect x="520" y="150" width="44" height="24" rx="5"/><rect x="570" y="150" width="44" height="24" rx="5"/></g>
+        <path d="M485 56V95M392 150V129M442 150V129M492 150V129M542 150V129M592 150V129" stroke="var(--rose)" stroke-width="1.5"/>
+        <text x="485" y="200">Les équipes ont l'information</text><text x="485" y="216">et décident plus seules</text>
+      </g>
+    </svg></div>
+  </figure>
+  <div class="grid3">
+    <div class="card"><h4>Niveaux inférieurs</h4><p>Ils gagnent en <strong>autonomie</strong> : le digital leur donne l'information pour décider sans demander à chaque fois à leur chef.</p></div>
+    <div class="card"><h4>Niveaux supérieurs</h4><p>Ils gagnent en <strong>efficacité</strong> : mieux informés, ils décident mieux et peuvent gérer plus de collaborateurs, même sur des sites éloignés.</p></div>
+    <div class="card"><h4>Niveaux intermédiaires</h4><p>Ils sont <strong>fortement impactés</strong> : leur rôle de relais d'information diminue.</p></div>
+  </div>
+  <div class="box def"><span class="tag">Idée clé</span>
+    <p>L'<strong>autorité</strong> repose de plus en plus sur la <strong>connaissance et les compétences</strong>, et plus seulement sur la <strong>position hiérarchique</strong>. On passe d'un pouvoir surtout <strong>formel</strong> (donné par le poste) à plus de pouvoir <strong>informel</strong> (donné par l'expertise et l'information).</p>
+  </div>
+
+  <h3>3.3 La résistance au changement</h3>
+  <p>La résistance au changement est <strong>indissociable</strong> de la transformation digitale, qui est une vraie « révolution ». Pourquoi ? Parce que la recherche d'efficacité et de rapidité transforme en même temps :</p>
+  <div class="grid3">
+    <div class="card"><h4>la culture</h4></div>
+    <div class="card"><h4>la stratégie</h4></div>
+    <div class="card"><h4>la structure</h4></div>
+    <div class="card"><h4>le style de management</h4></div>
+    <div class="card"><h4>les processus métier</h4></div>
+  </div>
+  <p>Certains acteurs doivent changer leurs habitudes. Tout changement que l'on <strong>subit sans l'avoir décidé</strong> provoque un sentiment de <strong>peur</strong>. L'intensité de la résistance varie d'une personne à l'autre et dépend de deux choses :</p>
+  <div class="grid2">
+    <div class="card"><h4>La perte ressentie</h4><p>Qu'est-ce que je perds ? Du pouvoir, un statut, des habitudes, mon expertise unique…</p></div>
+    <div class="card"><h4>Le degré d'incertitude</h4><p>Est-ce que je sais ce qui va m'arriver, à moi et à mon équipe ?</p></div>
+  </div>
+  <div class="box trap"><span class="tag">Piège</span>
+    <p>La résistance n'est pas un « caprice » des salariés : certaines catégories <strong>gagnent</strong> du pouvoir (formel ou informel) avec le digital, d'autres en <strong>perdent</strong>. Le management doit l'anticiper et la gérer, pas l'ignorer.</p>
+  </div>
+  <div class="box key"><span class="tag">À retenir · Partie 3</span>
+    <ul>
+      <li>Transformation digitale = technique + social : un système socio-technique.</li>
+      <li>Horizontalisation : plus d'autonomie en bas, plus d'efficacité en haut, niveaux intermédiaires fragilisés.</li>
+      <li>L'autorité vient de plus en plus de la compétence (pouvoir informel).</li>
+      <li>Résistance au changement : elle dépend de la perte ressentie et de l'incertitude.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== PARTIE 4 ===================== -->
+<section class="part" id="m4">
+  <div class="part-head"><span class="part-num">4</span><div><div class="eyebrow">Pour l'examen oral</div><h2>Comment analyser une étude de cas</h2><div class="src">Méthode vue en cours le 28/09, sur le cas d'une entreprise d'équipements télécoms</div></div></div>
+  <p>L'examen est un <strong>oral en groupe sur une étude de cas</strong>. Le cours donne une grille en 5 questions. Pose-les toujours dans cet ordre : chaque réponse prépare la suivante.</p>
+  <figure>
+    <div class="flow">
+      <div class="step"><b>1. Business model</b>Comment l'entreprise gagne-t-elle de l'argent ?</div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>2. Évolution</b>Quel changement (choisi ou subi) l'impacte ?</div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>3. Problème</b>Quel problème faut-il régler ?</div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>4. Solution</b>Quelle transformation digitale ?</div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>5. Résistance</b>Comment gérer la résistance au changement ?</div>
+    </div>
+  </figure>
+
+  <h3>4.1 Quel est le business model ?</h3>
+  <p>Un bon business model a <strong>3 caractéristiques</strong> :</p>
+  <ol>
+    <li>Il produit et livre de la <strong>valeur ajoutée</strong> au client.</li>
+    <li>Il <strong>accroche</strong> le client et le convainc de <strong>payer</strong>.</li>
+    <li>Il assure un <strong>profit</strong>.</li>
+  </ol>
+  <div class="box ex"><span class="tag">Le cas du cours</span>
+    <p>L'entreprise vend des <strong>équipements de télécommunication</strong>, mais aussi le savoir pour bien les utiliser (le support technique). C'est le « <strong>produit comme service</strong> » : on vend le produit puis une <strong>expertise</strong>, en grande partie <strong>tacite</strong>.</p>
+  </div>
+
+  <h3>4.2 Quelle évolution impacte l'entreprise ?</h3>
+  <p>Dans le cas étudié : de nombreuses et fréquentes <strong>fusions-acquisitions</strong>.</p>
+  <div class="box def"><span class="tag">Fusion-acquisition</span>
+    <p>C'est une stratégie de <strong>croissance externe</strong> : on grandit en rachetant d'autres entreprises plutôt qu'en se développant seul (croissance interne).</p>
+  </div>
+  <div class="pm">
+    <div class="plus"><h4>Avantages</h4><ul><li>Accès plus facile et plus rapide au marché</li><li>On récupère technologies, produits et clients</li></ul></div>
+    <div class="minus"><h4>Difficultés</h4><ul><li>Négociations complexes et parfois coûteuses</li><li>Surtout : difficultés d'<strong>intégration</strong> des produits, des technologies et des <strong>hommes</strong></li></ul></div>
+  </div>
+  <p>Ici, le rythme d'acquisition est très rapide : les employés n'ont pas le temps d'assimiler naturellement les nouvelles technologies et les nouveaux produits. Le management doit donc « forcer » ce processus.</p>
+
+  <h3>4.3 Quel est le problème à régler ?</h3>
+  <div class="box ex"><span class="tag">Le cas du cours</span>
+    <p><strong>Problème principal :</strong> tous les ingénieurs, quelle que soit leur entreprise d'origine, doivent pouvoir répondre <strong>vite et bien</strong> aux clients, sur <strong>tous</strong> les produits.</p>
+    <p><strong>Problème supplémentaire :</strong> les ingénieurs des entreprises rachetées <strong>hésitent à partager</strong> leurs connaissances sur leurs anciens produits. Ils pensent que garder ce savoir pour eux les protège d'un licenciement.</p>
+  </div>
+  <p>Les experts ont une connaissance <strong>verticale</strong> (une expertise pointue, souvent tacite) qui leur permet de répondre aux 10 000 questions des clients chaque mois. Ils ont un <strong>pouvoir formel</strong> (lié au poste) et un <strong>pouvoir informel</strong> (lié à leur expertise et à l'information qu'ils détiennent). Il s'agit donc d'un problème de <strong>management des connaissances</strong> (knowledge management) : bien gérer le cycle de vie des connaissances.</p>
+  <div class="grid2">
+    <div class="card"><h4>Connaissance explicite</h4><p>Elle peut s'écrire et se transmettre facilement : un manuel, une procédure, une fiche produit.</p></div>
+    <div class="card"><h4>Connaissance tacite</h4><p>Elle est dans la tête et l'expérience de la personne, difficile à formuler : « le coup de main » d'un ingénieur qui sait d'où vient une panne.</p></div>
+  </div>
+  <p class="simple">Les connaissances peuvent aussi être individuelles (une personne) ou collectives (partagées par une équipe). Le but du KM est de transformer le savoir tacite et individuel en savoir partagé.</p>
+
+  <h3>4.4 Quelle est la solution ? La transformation digitale</h3>
+  <p>C'est un changement complexe qui porte <strong>en même temps</strong> sur deux éléments indissociables (le système socio-technique) :</p>
+  <div class="grid2">
+    <div class="card"><h4>(1) La technologie digitale</h4><p>Un nouveau système d'information (SI), plus complexe.</p><p><strong>Pour quoi faire ?</strong> Ici, servir une stratégie de <strong>différenciation</strong> : améliorer et lancer de nouveaux services de meilleure qualité.</p><p><strong>Effet secondaire :</strong> horizontalisation. Les rôles des trois niveaux d'experts, leurs relations et leur pouvoir changent.</p></div>
+    <div class="card"><h4>(2) Les connaissances métier</h4><p>En partie explicites, en grande partie tacites.</p><p><strong>Buts :</strong> éviter la rétention et favoriser le <strong>partage</strong> entre tous les ingénieurs ; rationaliser le service client en donnant plus d'informations directement aux clients, avec des réponses <strong>meilleures</strong> et plus <strong>rapides</strong>.</p></div>
+  </div>
+
+  <h3>4.5 Évaluer et gérer la résistance au changement</h3>
+  <p>Repère qui gagne et qui perd du pouvoir avec le nouveau système, puis évalue pour chaque groupe la <strong>perte ressentie</strong> et l'<strong>incertitude</strong>. Ici, les experts qui tiraient leur pouvoir de leur savoir caché risquent de résister le plus.</p>
+  <div class="box ex"><span class="tag">Pour mieux comprendre · pistes à proposer à l'oral</span>
+    <p>Ces leviers ne sont pas dans tes notes, mais ils montrent au jury que tu sais passer à l'action : <strong>expliquer</strong> le pourquoi du changement, <strong>associer</strong> les experts à la conception de l'outil, <strong>valoriser</strong> ceux qui partagent (reconnaissance, rôle de référent), <strong>former</strong>, et <strong>rassurer</strong> sur l'emploi pour réduire l'incertitude.</p>
+  </div>
+  <div class="box key"><span class="tag">Trame pour ton oral</span>
+    <ul>
+      <li><strong>Business model :</strong> valeur pour le client + le client paie + profit.</li>
+      <li><strong>Évolution :</strong> ce qui change autour de l'entreprise (ex. fusions-acquisitions = croissance externe).</li>
+      <li><strong>Problème :</strong> souvent humain avant d'être technique (partage des connaissances).</li>
+      <li><strong>Solution :</strong> technologie + connaissances = système socio-technique, au service de la stratégie.</li>
+      <li><strong>Résistance :</strong> qui gagne, qui perd ? Perte ressentie et incertitude, puis leviers d'action.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== GLOSSAIRE ===================== -->
+<section class="part" id="glossaire">
+  <div class="part-head"><span class="part-num">✦</span><div><div class="eyebrow">Vocabulaire</div><h2>Mots clés</h2></div></div>
+  <dl class="glo">
+    <dt>Avantage concurrentiel</dt><dd>Ce qui permet à une entreprise de faire mieux que ses concurrents de façon durable.</dd>
+    <dt>Chaîne de valeur</dt><dd>L'ensemble des activités de l'entreprise qui créent de la valeur (production, logistique, vente, RH…).</dd>
+    <dt>Knowledge management (KM)</dt><dd>La gestion des connaissances : les collecter, les organiser, les partager et les exploiter.</dd>
+    <dt>Connaissance tacite / explicite</dt><dd>Savoir d'expérience difficile à formuler / savoir écrit et transmissible.</dd>
+    <dt>Moteur de recommandation</dt><dd>Algorithme qui propose des produits en comparant ton comportement à celui d'autres utilisateurs.</dd>
+    <dt>Big Data</dt><dd>Masses de données très volumineuses que l'on stocke et analyse.</dd>
+    <dt>Pure player</dt><dd>Entreprise qui vend uniquement en ligne.</dd>
+    <dt>Système d'information (SI)</dt><dd>Les outils et données qui font circuler l'information dans l'entreprise.</dd>
+    <dt>Système socio-technique</dt><dd>L'ensemble indissociable de la technologie et des personnes qui l'utilisent.</dd>
+    <dt>Horizontalisation</dt><dd>Aplatissement de la hiérarchie et autonomie accrue des exécutants.</dd>
+    <dt>Pouvoir formel / informel</dt><dd>Pouvoir donné par le poste / pouvoir donné par l'expertise et l'information.</dd>
+    <dt>Croissance externe</dt><dd>Grandir en rachetant ou en fusionnant avec d'autres entreprises.</dd>
+    <dt>Positionnement dynamique</dt><dd>Position de l'entreprise qui doit évoluer sans cesse sur des marchés en mouvement.</dd>
+  </dl>
+</section>
+
+<!-- ===================== QUIZ ===================== -->
+<section class="part" id="quiz">
+  <div class="part-head"><span class="part-num">?</span><div><div class="eyebrow">Entraînement</div><h2>Quiz corrigé</h2></div></div>
+  <p>Clique sur une réponse : la bonne s'affiche en vert avec l'explication.</p>
+  <div class="scorebar" role="status" aria-live="polite"><span>Score : <b id="score">0</b> / <span id="total">0</span> · <span id="done">0</span> répondues</span><button type="button" id="reset">Recommencer</button></div>
+  <div class="quiz" id="quizbox"></div>
+  <div class="box key result" id="result"><span class="tag">Ton résultat</span><p id="resultText"></p></div>
+</section>
+</main>
+</div>
+
+<script>
+const Q=[
+ {q:"Quels sont les 3 éléments qui résument la révolution digitale selon le cours ?",o:["Internet, smartphone, réseaux sociaux","Interconnectivité, recherche et recommandations, stockage et exploitation des données","Big Data, IA, cloud","Production, vente, marketing"],a:1,e:"Le cours résume la révolution digitale en trois points : l'interconnectivité des individus, la recherche et les recommandations, et le stockage, l'exploration et l'exploitation des données."},
+ {q:"Pourquoi parle-t-on de « spirale évolutive » autour du digital ?",o:["Parce que les technologies deviennent de plus en plus chères","Parce que la demande change, l'offre s'adapte, ce qui change à nouveau la demande","Parce que les entreprises rachètent leurs concurrents","Parce que la hiérarchie s'aplatit"],a:1,e:"Les technologies changent le comportement des consommateurs ; l'offre doit s'adapter ; cette nouvelle offre change encore les comportements, et ainsi de suite."},
+ {q:"Selon le cours, une donnée brute est :",o:["Directement utile à l'entreprise","Inerte : elle ne devient utile qu'une fois structurée","Toujours personnelle","Interdite par le RGPD"],a:1,e:"La donnée brute est inerte. C'est en la structurant qu'elle devient utile, d'où l'importance du Big Data et de l'IA."},
+ {q:"Comment fonctionne un moteur de recommandation ?",o:["Il propose les produits les plus chers","Il compare ton comportement à celui de nombreux autres utilisateurs pour anticiper tes besoins","Il affiche les produits au hasard","Il demande l'avis d'un vendeur"],a:1,e:"L'algorithme te range dans un segment de personnes au comportement proche et te propose ce qui plaît le plus à ce segment (Netflix, Amazon)."},
+ {q:"D'après le cours, construire le management digital, c'est d'abord :",o:["Acheter les meilleures technologies","Comprendre les comportements du public externe et du public interne","Supprimer les managers intermédiaires","Vendre en ligne"],a:1,e:"Le digital est avant tout une question d'individus, de comportements et d'émotions. La technologie vient ensuite, comme un moyen au service de l'audience."},
+ {q:"Quelle part du commerce de détail représente environ le e-commerce en France selon le cours ?",o:["Environ 10 %","Environ 30 %","Environ 50 %","Plus de 70 %"],a:0,e:"Environ 10 % : c'est le « petit bémol » du cours, avec le fait que les pure players restent minoritaires."},
+ {q:"Quelle est la définition simple du management digital (Timsit, 2018) ?",o:["La vente de produits sur Internet","L'ensemble des méthodes et techniques digitales qui permettent à l'entreprise de construire un avantage concurrentiel","L'installation d'un nouveau logiciel","La gestion des réseaux sociaux de la marque"],a:1,e:"Le management digital vise l'avantage concurrentiel grâce aux méthodes et techniques digitales, pour toute l'entreprise."},
+ {q:"Quel lien entre management digital et marketing digital ?",o:["Ce sont des synonymes","Le marketing digital inclut le management digital","Le management digital inclut le marketing digital, qui en est un outil tactique","Ils n'ont aucun lien"],a:2,e:"Le management digital concerne toute l'entreprise et fixe la stratégie (le quoi). Le marketing digital ne concerne que l'offre et les clients : c'est un outil tactique (le comment)."},
+ {q:"La transformation digitale, c'est :",o:["Le positionnement de l'entreprise pour obtenir un avantage concurrentiel","L'intégration des technologies digitales dans les processus, un processus de gestion du changement","Le marketing sur les réseaux sociaux","La création d'un site e-commerce uniquement"],a:1,e:"La transformation digitale intègre les technologies dans les processus. C'est une gestion du changement guidée par le management, mais distincte de lui."},
+ {q:"Que veut dire « horizontalisation » de l'entreprise ?",o:["L'entreprise s'installe dans plusieurs pays","La hiérarchie s'aplatit et les exécutants gagnent en autonomie","L'entreprise rachète ses fournisseurs","Tous les salariés ont le même salaire"],a:1,e:"Grâce à l'information partagée, les niveaux inférieurs décident plus seuls et les niveaux supérieurs gèrent plus efficacement."},
+ {q:"Quels niveaux hiérarchiques sont les plus fortement impactés par l'horizontalisation ?",o:["La direction générale","Les niveaux intermédiaires","Les stagiaires","Les clients"],a:1,e:"Les managers intermédiaires perdent une partie de leur rôle de relais de l'information, puisque le digital la fait circuler directement."},
+ {q:"Avec le digital, l'autorité du management repose de plus en plus sur :",o:["L'ancienneté","La position hiérarchique seule","La connaissance et les compétences","Le salaire"],a:2,e:"L'autorité s'appuie de plus en plus sur la compétence (pouvoir informel) et moins sur la seule hiérarchie (pouvoir formel)."},
+ {q:"De quoi dépend l'intensité de la résistance au changement ?",o:["De l'âge des salariés","De la perte ressentie et du degré d'incertitude","Du prix de la technologie","Du nombre de clients"],a:1,e:"La résistance varie selon ce que la personne pense perdre et selon l'incertitude sur ce qui va lui arriver, à titre individuel et collectif."},
+ {q:"Quelles sont les 3 caractéristiques d'un bon business model ?",o:["Être innovant, être international, être digital","Produire de la valeur pour le client, le convaincre de payer, assurer un profit","Avoir des locaux, des salariés et un site web","Baisser les prix, augmenter les ventes, réduire les coûts"],a:1,e:"Un bon business model livre de la valeur ajoutée, accroche le client pour qu'il paie, et dégage un profit."},
+ {q:"Racheter régulièrement d'autres entreprises est une stratégie de :",o:["Croissance interne","Croissance externe","Différenciation","Horizontalisation"],a:1,e:"Les fusions-acquisitions sont de la croissance externe : accès rapide au marché, mais difficultés d'intégration des produits, technologies et hommes."},
+ {q:"Dans le cas étudié, pourquoi les ingénieurs des entreprises rachetées ne partageaient-ils pas leurs connaissances ?",o:["Parce qu'ils n'avaient pas d'ordinateur","Parce qu'ils pensaient que ce savoir garantissait leur maintien dans l'entreprise","Parce que leurs clients le refusaient","Parce que la loi l'interdisait"],a:1,e:"Leur savoir tacite leur donnait du pouvoir informel. Le partager leur semblait risqué : c'est un problème de knowledge management, source de résistance au changement."}
+];
+const box=document.getElementById('quizbox');
+let score=0,done=0;
+document.getElementById('total').textContent=Q.length;
+function render(){
+  box.innerHTML='';score=0;done=0;update();
+  document.getElementById('result').classList.remove('on');
+  Q.forEach((item,i)=>{
+    const d=document.createElement('div');d.className='q';
+    const h=document.createElement('h4');h.textContent=item.q;d.appendChild(h);
+    const opts=document.createElement('div');opts.className='opts';
+    item.o.forEach((t,j)=>{
+      const b=document.createElement('button');b.type='button';b.id='q'+i+'o'+j;
+      b.textContent=String.fromCharCode(65+j)+'. '+t;
+      b.addEventListener('click',()=>answer(i,j,opts,d));
+      opts.appendChild(b);
+    });
+    d.appendChild(opts);box.appendChild(d);
+  });
+}
+function answer(i,j,opts,d){
+  const item=Q[i];const btns=opts.querySelectorAll('button');
+  btns.forEach(b=>b.disabled=true);
+  btns[item.a].classList.add('right');
+  const ok=j===item.a;
+  if(!ok)btns[j].classList.add('wrong');else score++;
+  done++;
+  const ex=document.createElement('div');ex.className='expl';
+  ex.innerHTML=(ok?'<b class="v">Bonne réponse.</b> ':'<b class="x">Pas tout à fait.</b> La bonne réponse est '+String.fromCharCode(65+item.a)+'. ');
+  ex.appendChild(document.createTextNode(item.e));
+  d.appendChild(ex);update();
+  if(done===Q.length){
+    const r=document.getElementById('result');const t=document.getElementById('resultText');
+    const pct=score/Q.length;
+    t.textContent=score+' / '+Q.length+'. '+(pct>=.85?'Excellent, tu maîtrises le cours. Relis juste les explications des erreurs.':pct>=.6?'Bonne base. Relis les encadrés « À retenir » des parties où tu as fait des erreurs, puis recommence.':'Pas de panique, c\'est normal en partant de zéro. Relis une partie à la fois, puis refais le quiz.');
+    r.classList.add('on');
+  }
+}
+function update(){document.getElementById('score').textContent=score;document.getElementById('done').textContent=done}
+document.getElementById('reset').addEventListener('click',()=>{render();document.getElementById('quiz').scrollIntoView({behavior:'smooth'})});
+render();
+</script>

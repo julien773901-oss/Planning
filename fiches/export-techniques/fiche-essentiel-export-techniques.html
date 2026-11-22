@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Export Techniques essentiel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout : colonne de lecture unique, sommaire collant en haut, encadrés typés (exemple, à retenir, piège) */
+:root{
+  --bg:#f7f4fc; --surface:#ffffff; --lav:#ece4f8; --lav-2:#ddd0f3;
+  --accent:#6f4fb0; --accent-soft:#b9a2e6; --fg:#2a2240; --muted:#6a6083; --line:#ddd3ee;
+  --seller:#b9a2e6; --buyer:#cdeadf; --buyer-ink:#24584a;
+  --ok:#2f7d5b; --ok-bg:#e1f3ea; --ko:#b0405a; --ko-bg:#fbe5ea; --warn-bg:#fdf1dd; --warn:#8a5a10;
+  --f-display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-mono:"JetBrains Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#18141f; --surface:#221c2e; --lav:#2c2440; --lav-2:#3a2f55;
+  --accent:#c8b3f4; --accent-soft:#6d55a8; --fg:#ece6f7; --muted:#a99fc0; --line:#3a3150;
+  --seller:#6a51a3; --buyer:#2c5a4d; --buyer-ink:#bfe8d8;
+  --ok:#8fd9b5; --ok-bg:#1d3a2e; --ko:#f2a1b3; --ko-bg:#45212b; --warn-bg:#3d3018; --warn:#f1cf8f;
+  color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#18141f; --surface:#221c2e; --lav:#2c2440; --lav-2:#3a2f55;
+  --accent:#c8b3f4; --accent-soft:#6d55a8; --fg:#ece6f7; --muted:#a99fc0; --line:#3a3150;
+  --seller:#6a51a3; --buyer:#2c5a4d; --buyer-ink:#bfe8d8;
+  --ok:#8fd9b5; --ok-bg:#1d3a2e; --ko:#f2a1b3; --ko-bg:#45212b; --warn-bg:#3d3018; --warn:#f1cf8f;
+  color-scheme:dark }
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:1.05rem;line-height:1.65;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:10;background:var(--bg)}
+.wrap{max-width:52rem;margin:0 auto;padding-block:2rem 4rem}
+h1,h2,h3,h4{font-family:var(--f-display);text-wrap:balance;line-height:1.15;margin:0}
+h1{font-size:clamp(2.2rem,6vw,3.4rem);font-weight:800;letter-spacing:-.02em}
+h2{font-size:clamp(1.6rem,4vw,2.1rem);font-weight:800;color:var(--accent)}
+h3{font-size:1.3rem;font-weight:700;margin-top:2rem}
+h4{font-size:1.05rem;font-weight:700}
+p{margin:.6rem 0}
+a{color:var(--accent)}
+strong{color:var(--fg)}
+.code{font-family:var(--f-mono);font-weight:700;font-size:.9em;color:var(--accent);letter-spacing:.02em}
+.en{font-style:italic;color:var(--muted)}
+
+/* hero */
+.hero{padding-block:1.5rem 1rem;display:grid;gap:.8rem}
+.eyebrow{font-family:var(--f-mono);font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+.hero p.lede{font-size:1.15rem;color:var(--muted);max-width:40rem}
+.meta{display:flex;flex-wrap:wrap;gap:.5rem}
+.pill{background:var(--lav);border-radius:999px;padding:.2rem .75rem;font-size:.85rem}
+
+/* sommaire */
+nav.toc{position:sticky;top:env(safe-area-inset-top, 0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);
+  margin-inline:calc(-1 * max(16px, env(safe-area-inset-left, 0px)));padding:.6rem max(16px, env(safe-area-inset-left, 0px))}
+.toc ul{list-style:none;margin:0 auto;padding:0;display:flex;gap:.4rem;overflow-x:auto;max-width:52rem;scrollbar-width:thin}
+.toc a{display:block;white-space:nowrap;text-decoration:none;color:var(--fg);font-size:.88rem;padding:.3rem .8rem;border-radius:999px;background:var(--lav)}
+.toc a:hover,.toc a:focus-visible{background:var(--lav-2);outline:none}
+
+section.chap{padding-top:3rem;scroll-margin-top:3.5rem}
+.chap-head{display:grid;gap:.3rem;border-bottom:3px solid var(--lav-2);padding-bottom:.8rem;margin-bottom:1rem}
+.chap-num{font-family:var(--f-mono);font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+/* encadrés */
+.box{border-radius:14px;padding:1rem 1.2rem;margin:1.2rem 0;break-inside:avoid}
+.box > :first-child{margin-top:0}
+.box .tag{font-family:var(--f-mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;font-weight:700;display:block;margin-bottom:.3rem}
+.retenir{background:var(--lav);border:1.5px solid var(--accent-soft)}
+.retenir .tag{color:var(--accent)}
+.exemple{background:var(--surface);border:1.5px dashed var(--accent-soft)}
+.exemple .tag{color:var(--accent)}
+.piege{background:var(--warn-bg)}
+.piege .tag{color:var(--warn)}
+.def{background:var(--surface);border-left:4px solid var(--accent);border-radius:0 14px 14px 0}
+.def .tag{color:var(--muted)}
+ul.clean{padding-left:1.2rem;margin:.4rem 0}
+ul.clean li{margin:.25rem 0}
+
+/* tableaux */
+.tbl{overflow-x:auto;margin:1rem 0;border-radius:12px;border:1px solid var(--line);background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{padding:.55rem .75rem;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+th{background:var(--lav);font-family:var(--f-display);font-weight:700}
+tr:last-child td{border-bottom:0}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.total td{font-weight:700;background:var(--lav)}
+
+/* frise chrono */
+.timeline{list-style:none;padding:0;margin:1rem 0;display:grid;gap:0;border-left:3px solid var(--accent-soft);margin-left:.5rem}
+.timeline li{position:relative;padding:.4rem 0 .9rem 1.4rem}
+.timeline li::before{content:"";position:absolute;left:-.55rem;top:.75rem;width:.8rem;height:.8rem;border-radius:50%;background:var(--accent);border:3px solid var(--bg)}
+.timeline .yr{font-family:var(--f-mono);font-weight:700;color:var(--accent)}
+
+/* SWOT */
+.swot{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.6rem;margin:1rem 0}
+.swot > div{border-radius:12px;padding:.8rem 1rem;min-width:0}
+.swot h4{font-size:1rem}
+.swot .s{background:var(--ok-bg)} .swot .w{background:var(--ko-bg)}
+.swot .o{background:var(--lav)} .swot .t{background:var(--warn-bg)}
+.swot small{display:block;font-family:var(--f-mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.swot ul{margin:.3rem 0 0;padding-left:1.1rem;font-size:.93rem}
+@media (max-width:520px){.swot{grid-template-columns:1fr}}
+
+/* modes d'entrée */
+.stairs{display:grid;gap:.5rem;margin:1rem 0}
+.step{display:grid;grid-template-columns:minmax(0,1fr);gap:.2rem;border-radius:12px;padding:.8rem 1rem;background:var(--surface);border:1px solid var(--line)}
+.step:nth-child(1){margin-right:30%} .step:nth-child(2){margin-left:15%;margin-right:15%;background:var(--lav)} .step:nth-child(3){margin-left:30%;background:var(--lav-2)}
+@media (max-width:560px){.step:nth-child(n){margin:0}}
+.step h4 span{font-family:var(--f-mono);font-size:.75rem;color:var(--muted);font-weight:500;margin-left:.4rem}
+.arrow-scale{display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:.75rem;color:var(--muted);border-top:2px solid var(--accent-soft);padding-top:.3rem}
+
+/* frise incoterms */
+.inco{overflow-x:auto;margin:1rem 0;border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:.8rem}
+.inco-grid{display:grid;grid-template-columns:4rem repeat(7,minmax(5.6rem,1fr));gap:3px;min-width:44rem;font-size:.78rem}
+.inco-grid .hd{font-family:var(--f-display);font-weight:700;text-align:center;padding:.3rem .2rem;line-height:1.2;color:var(--muted)}
+.inco-grid .lbl{font-family:var(--f-mono);font-weight:700;color:var(--accent);display:flex;align-items:center}
+.inco-grid .c{height:1.9rem;border-radius:4px;position:relative}
+.inco-grid .sel{background:var(--seller)} .inco-grid .buy{background:var(--buyer)}
+.inco-grid .risk::after{content:"";position:absolute;right:-7px;top:50%;transform:translateY(-50%);width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-bottom:12px solid var(--fg);z-index:2}
+.inco-grid .ins{font-family:var(--f-mono);font-size:.68rem;display:flex;align-items:center;justify-content:center;color:var(--fg)}
+.inco-grid .sep{grid-column:1/-1;font-family:var(--f-mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:.6rem 0 .1rem}
+.legend{display:flex;flex-wrap:wrap;gap:1rem;font-size:.85rem;margin-top:.7rem}
+.legend span{display:inline-flex;align-items:center;gap:.4rem}
+.sw{display:inline-block;width:1rem;height:.8rem;border-radius:3px}
+.tri{width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:10px solid var(--fg)}
+
+.families{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,11rem),1fr));gap:.6rem;margin:1rem 0}
+.fam{border-radius:12px;padding:.8rem 1rem;background:var(--surface);border:1px solid var(--line);min-width:0}
+.fam .big{font-family:var(--f-display);font-size:2rem;font-weight:800;color:var(--accent);line-height:1}
+.fam p{font-size:.92rem;margin:.3rem 0 0}
+
+/* exercices dépliables */
+details{background:var(--surface);border:1px solid var(--line);border-radius:12px;margin:.8rem 0;padding:.2rem 1rem}
+details[open]{padding-bottom:.8rem}
+summary{cursor:pointer;font-family:var(--f-display);font-weight:700;padding:.6rem 0;color:var(--accent)}
+summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+
+/* quiz */
+.quiz{display:grid;gap:1rem;margin-top:1rem}
+.q{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1rem 1.1rem;break-inside:avoid}
+.q .qn{font-family:var(--f-mono);font-size:.75rem;color:var(--muted);letter-spacing:.1em}
+.q h4{margin:.2rem 0 .7rem;font-family:var(--f-body);font-size:1.05rem}
+.opts{display:grid;gap:.4rem}
+.opt{font:inherit;font-size:.97rem;text-align:left;padding:.55rem .8rem;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg);cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--accent-soft)}
+.opt:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.opt:disabled{cursor:default}
+.opt.good{background:var(--ok-bg);border-color:var(--ok);color:var(--fg)}
+.opt.bad{background:var(--ko-bg);border-color:var(--ko);color:var(--fg)}
+.expl{margin-top:.7rem;padding:.7rem .9rem;border-radius:10px;background:var(--lav);font-size:.95rem}
+.expl b.v{color:var(--ok)} .expl b.x{color:var(--ko)}
+.calc{display:flex;flex-wrap:wrap;gap:.5rem}
+.calc input{font:inherit;font-variant-numeric:tabular-nums;padding:.5rem .8rem;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg);min-width:0;flex:1 1 10rem}
+.calc input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.calc input.good{border-color:var(--ok);background:var(--ok-bg)} .calc input.bad{border-color:var(--ko);background:var(--ko-bg)}
+.calc .opt{flex:0 0 auto}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.score{position:sticky;bottom:env(safe-area-inset-bottom, 0px);margin-top:1.2rem;background:var(--accent);color:var(--bg);border-radius:14px;padding:.8rem 1.1rem;display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;justify-content:space-between;font-weight:700}
+.score button{font:inherit;font-weight:700;border:0;border-radius:999px;padding:.4rem 1rem;background:var(--bg);color:var(--accent);cursor:pointer}
+.score button:focus-visible{outline:2px solid var(--bg);outline-offset:2px}
+
+footer{margin-top:3rem;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line);padding-top:1rem}
+
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+@media print{
+  nav.toc,.score{display:none}
+  body{background:#fff;color:#000;font-size:11pt}
+  section.chap{padding-top:1.2rem}
+  details{border:1px solid #ccc} details > *{display:block}
+  .expl[hidden]{display:block!important}
+  .inco{overflow:visible}
+}
+ol.clean{padding-left:1.4rem;margin:.4rem 0} ol.clean li{margin:.3rem 0}
+@media print{h2,h3,.chap-head{break-after:avoid;page-break-after:avoid} tr,.fam,.box{break-inside:avoid}}
+</style></head><body>
+<div class="wrap">
+<header class="hero">
+  <span class="eyebrow">L3 Commerce international · S5 · Export Technics · Essentiel examen</span>
+  <h1>Export Techniques : l'essentiel pour l'examen</h1>
+  <p class="lede">Seulement ce qui a le plus de chances de tomber. L'examen est en anglais, avec une partie QCM et une partie calcul : les Incoterms et leur schéma sont la priorité absolue.</p>
+  <div class="meta"><span class="pill">★★★ = tombe presque à coup sûr</span><span class="pill">QCM en anglais</span><span class="pill">6 calculs corrigés</span></div>
+</header>
+
+<nav class="toc" aria-label="Sommaire"><ul>
+  <li><a href="#top">Top 12</a></li>
+  <li><a href="#incoterms">Incoterms ★★★</a></li>
+  <li><a href="#change">Change ★★★</a></li>
+  <li><a href="#paiement">Paiement ★★</a></li>
+  <li><a href="#documents">Documents ★★</a></li>
+  <li><a href="#diagnostic">SWOT et marché ★★</a></li>
+  <li><a href="#omc">GATT / OMC ★★</a></li>
+  <li><a href="#quiz">Quiz</a></li>
+</ul></nav>
+
+<section class="chap" id="top">
+  <div class="chap-head"><span class="chap-num">À savoir par cœur</span><h2>Le top 12 en une page</h2></div>
+  <p>Si tu n'as que dix minutes avant l'examen, relis ce tableau.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>#</th><th>Notion</th><th>La phrase à retenir</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Incoterms 2020</td><td><b>11</b> règles : <b>7</b> tous modes (EXW FCA CPT CIP DAP DPU DDP), <b>4</b> maritimes (FAS FOB CFR CIF). Créés par la <b>CCI / ICC</b> en 1936.</td></tr>
+      <tr><td>2</td><td>Familles E F C D</td><td>De EXW à DDP, les obligations du vendeur augmentent. EXW = minimum vendeur, DDP = maximum vendeur.</td></tr>
+      <tr><td>3</td><td>Piège des C</td><td>CPT CIP CFR CIF : le vendeur <b>paie</b> le transport principal, mais le <b>risque</b> passe au départ.</td></tr>
+      <tr><td>4</td><td>Assurance</td><td>Seuls <b>CIF</b> (clauses C, minimum) et <b>CIP</b> (clauses A, tous risques) obligent le vendeur à assurer.</td></tr>
+      <tr><td>5</td><td>DPU / DDP</td><td>DPU = seul Incoterm où le vendeur <b>décharge</b>. DDP = seul où il paie les <b>droits d'import</b>.</td></tr>
+      <tr><td>6</td><td>Pays risqué</td><td>Choisir <b>EXW, FCA, FAS, FOB</b> : le risque passe tôt, dans le pays du vendeur.</td></tr>
+      <tr><td>7</td><td>Cotation</td><td>EUR/USD = 1,25 → <b>1 € = 1,25 $</b>. Dollars → euros : on <b>divise</b>.</td></tr>
+      <tr><td>8</td><td>Positions</td><td>Créance en devise (export) = <b>longue</b>, perd si EUR/USD monte. Dette en devise (import) = <b>courte</b>, gagne si EUR/USD monte.</td></tr>
+      <tr><td>9</td><td>Couverture</td><td><b>Put</b> = droit de vendre (exportateur). <b>Call</b> = droit d'acheter (importateur). <b>Forward</b> = obligatoire, taux figé.</td></tr>
+      <tr><td>10</td><td>Crédit documentaire</td><td>Irrévocable et confirmé = couvre <b>risque client + risque politique</b>. Documents présentés sous <b>21 jours</b> après expédition, avant la date de validité.</td></tr>
+      <tr><td>11</td><td>Connaissement</td><td>Le <b>bill of lading</b> est un <b>titre de propriété</b>. La LTA (air waybill) ne l'est pas.</td></tr>
+      <tr><td>12</td><td>Clause NPF</td><td>Un avantage accordé à un membre de l'OMC est étendu à <b>tous</b>. Exception : <b>article XXIV</b> du GATT (accords régionaux).</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="chap" id="incoterms">
+  <div class="chap-head"><span class="chap-num">Priorité n°1 · ★★★</span><h2>Les Incoterms 2020</h2></div>
+  <div class="box def"><span class="tag">Définition · International Commercial Terms</span>
+    <p>Des règles standardisées de la <b>CCI (ICC)</b> qui répartissent entre vendeur et acheteur <b>les coûts, les risques et les formalités</b> de la livraison. On écrit toujours l'Incoterm + le lieu + la version : <span class="code">FOB Le Havre Incoterms® 2020</span>.</p>
+    <p>Ils ne règlent <b>ni le prix, ni le paiement, ni le transfert de propriété</b>.</p>
+  </div>
+
+  <h3>La méthode des familles</h3>
+  <div class="families">
+    <div class="fam"><div class="big">E</div><p><b>EXW</b>. Le vendeur met la marchandise à disposition chez lui, sans la charger.</p></div>
+    <div class="fam"><div class="big">F</div><p><b>FCA FAS FOB</b>. Transport principal <b>non payé</b> : le vendeur remet au transporteur de l'acheteur.</p></div>
+    <div class="fam"><div class="big">C</div><p><b>CPT CIP CFR CIF</b>. Transport principal <b>payé</b> par le vendeur, mais risque transféré au départ.</p></div>
+    <div class="fam"><div class="big">D</div><p><b>DAP DPU DDP</b>. Le vendeur supporte coûts <b>et</b> risques jusqu'à destination.</p></div>
+  </div>
+
+  <h3>Le schéma à savoir redessiner</h3>
+  <div class="inco"><div class="inco-grid" id="incoGrid"></div>
+    <div class="legend"><span><i class="sw" style="background:var(--seller)"></i>payé par le vendeur</span><span><i class="sw" style="background:var(--buyer)"></i>payé par l'acheteur</span><span><i class="tri"></i>transfert du risque</span><span><b>+ass.</b> assurance obligatoire vendeur</span></div>
+  </div>
+
+  <h3>Chaque Incoterm en une ligne</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Code</th><th>Le vendeur paie jusqu'à…</th><th>Le risque passe…</th></tr></thead>
+    <tbody>
+      <tr><td class="code">EXW</td><td>ses locaux (sans charger)</td><td>chez le vendeur</td></tr>
+      <tr><td class="code">FCA</td><td>remise au transporteur + douane export</td><td>à la remise au transporteur</td></tr>
+      <tr><td class="code">FAS</td><td>le quai, le long du navire (départ)</td><td>le long du navire</td></tr>
+      <tr><td class="code">FOB</td><td>à bord du navire (départ)</td><td>à bord, port de départ</td></tr>
+      <tr><td class="code">CFR</td><td>le fret jusqu'au port d'arrivée</td><td><b>à bord, port de départ</b></td></tr>
+      <tr><td class="code">CIF</td><td>CFR + assurance (clauses C)</td><td><b>à bord, port de départ</b></td></tr>
+      <tr><td class="code">CPT</td><td>le transport jusqu'au lieu convenu</td><td><b>remise au 1er transporteur</b></td></tr>
+      <tr><td class="code">CIP</td><td>CPT + assurance (clauses A)</td><td><b>remise au 1er transporteur</b></td></tr>
+      <tr><td class="code">DAP</td><td>la destination, non déchargé</td><td>à destination</td></tr>
+      <tr><td class="code">DPU</td><td>la destination, <b>déchargé</b></td><td>à destination, après déchargement</td></tr>
+      <tr><td class="code">DDP</td><td>tout, <b>droits d'import compris</b></td><td>à destination</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="box piege"><span class="tag">Piège n°1 de l'examen</span>
+    <p>En <b>CFR Veracruz</b>, le vendeur paie le bateau jusqu'au Mexique, mais si la tempête abîme les cartons au milieu de l'Atlantique, c'est le problème de l'<b>acheteur</b> : le risque est passé à bord, au Havre. Coût et risque ne changent pas de mains au même endroit dans la famille C.</p>
+  </div>
+
+  <h3>« Justify this Incoterm / What are the risks for the seller? »</h3>
+  <p>C'est la question rédactionnelle type. La méthode en deux temps :</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Famille</th><th>Arguments (why choose it)</th><th>Risques pour le vendeur</th></tr></thead>
+    <tbody>
+      <tr><td><b>E · F</b><br>EXW FCA FAS FOB</td><td>Peu de travail et peu de risque pour le vendeur ; l'acheteur garde le choix du transport. Idéal vers un <b>pays risqué</b>.</td><td>Tout incident <b>avant</b> le point de remise (chargement, port) ; malentendu sur le lieu de transfert ; moins attractif pour l'acheteur.</td></tr>
+      <tr><td><b>C</b><br>CPT CIP CFR CIF</td><td>Service plus complet qui plaît à l'acheteur ; utile si le vendeur a de bons tarifs de fret. CIF/CIP rassurent grâce à l'assurance.</td><td>Le vendeur doit bien négocier le fret ; litiges sur les dommages en route et sur le <b>niveau d'assurance</b>.</td></tr>
+      <tr><td><b>D</b><br>DAP DPU DDP</td><td>« Clé en main » : argument commercial fort face à un concurrent qui vend EXW.</td><td>Tous les coûts et risques jusqu'à destination ; retards en douane ; en DDP, <b>hausse des droits</b> ou des règles du pays.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Calcul des coûts : la méthode</h3>
+  <div class="box retenir"><span class="tag">À retenir</span>
+    <p>On liste les postes dans l'ordre du voyage (produits, emballage, chargement usine, douane export, pré-acheminement, chargement à bord, fret, assurance, déchargement, droits d'import, livraison finale). Le vendeur paie <b>tous les postes jusqu'à son point d'arrêt</b> ; l'acheteur paie le reste. Total vendeur + total acheteur = coût total de l'opération.</p>
+  </div>
+  <div class="box exemple"><span class="tag">Exemple express</span>
+    <p>Produits 50 000 · emballage 500 · chargement usine 300 · douane export 400 · transport au port 700 · chargement à bord 600 · fret 3 000 · assurance 250.</p>
+    <p><b>FOB</b> vendeur = 50 000 + 500 + 300 + 400 + 700 + 600 = <b>52 500 €</b>. <b>CFR</b> = 52 500 + 3 000 = <b>55 500 €</b>. <b>CIF</b> = 55 500 + 250 = <b>55 750 €</b>.</p>
+  </div>
+</section>
+
+<section class="chap" id="change">
+  <div class="chap-head"><span class="chap-num">Priorité n°2 · ★★★ · partie calcul</span><h2>Le risque de change</h2></div>
+  <div class="box def"><span class="tag">Définitions</span>
+    <p><b>Taux de change</b> (exchange rate) : le prix d'une monnaie exprimé dans une autre (OCDE). <b>Risque de change</b> : risque de gain ou de perte dû aux variations du taux entre la vente et le paiement.</p>
+  </div>
+  <div class="box retenir"><span class="tag">La règle de lecture</span>
+    <p><span class="code">EUR/USD = 1,25</span> → 1 € = 1,25 $. La première monnaie est la base.</p>
+    <ul class="clean"><li>euros → dollars : <b>× 1,25</b></li><li>dollars → euros : <b>÷ 1,25</b></li><li>si EUR/USD monte, l'euro s'apprécie : les dollars reçus valent <b>moins</b> d'euros.</li></ul>
+  </div>
+
+  <h3>La méthode de calcul en 3 lignes</h3>
+  <div class="box exemple"><span class="tag">Exemple du cours (1 200 000 USD, frais 0,5 %)</span>
+    <ol class="clean">
+      <li><b>Référence</b> (paiement immédiat, taux 1,00) : 1 200 000 € − 0,5 % = <b>1 194 000 €</b>.</li>
+      <li><b>À 3 mois</b>, EUR/USD = 1,2 : 1 200 000 ÷ 1,2 = 1 000 000 € − 5 000 € = <b>995 000 €</b>.</li>
+      <li><b>Gain ou perte</b> = reçu − référence = 995 000 − 1 194 000 = <b>− 199 000 € (perte)</b>.</li>
+    </ol>
+  </div>
+  <div class="box piege"><span class="tag">Deux pièges</span>
+    <p>1. Le montant reçu n'est <b>pas</b> la perte : la perte est l'<b>écart</b> avec la référence.<br>
+    2. Lis bien l'énoncé : « 1 $ = 0,8 € » se <b>multiplie</b> (1 200 000 × 0,8), « EUR/USD = 1,2 » se <b>divise</b>. Le document de révision a corrigé l'exemple en multipliant (reçu 1 432 800 € ou 955 200 €, écart ± 238 800 €) : si l'énoncé de l'examen écrit le taux comme ça, suis sa logique.</p>
+  </div>
+
+  <h3>Positions de change</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Position</th><th>Situation</th><th>EUR/USD ↑</th><th>EUR/USD ↓</th></tr></thead>
+    <tbody>
+      <tr><td><b>Longue</b> (long)</td><td>Créance en $ : exportateur</td><td>Perte</td><td>Gain</td></tr>
+      <tr><td><b>Courte</b> (short)</td><td>Dette en $ : importateur</td><td>Gain</td><td>Perte</td></tr>
+      <tr><td>Fermée</td><td>Aucune opération en devise</td><td colspan="2">Aucun risque</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Se couvrir</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Outil</th><th>Principe</th></tr></thead>
+    <tbody>
+      <tr><td>Facturer en euros</td><td>L'exportateur n'a plus de risque : c'est l'acheteur qui le porte.</td></tr>
+      <tr><td>Couverture naturelle</td><td>Recettes et dépenses dans la même devise, qui se compensent.</td></tr>
+      <tr><td>Avance en devises</td><td>Emprunter la devise attendue, la convertir aujourd'hui, rembourser avec le paiement client.</td></tr>
+      <tr><td>Change à terme (forward)</td><td><b>Obligatoire</b> : taux fixé aujourd'hui pour une date future. Pas de surprise, pas de gain possible.</td></tr>
+      <tr><td>Option (put / call)</td><td>Un <b>droit</b>, pas une obligation, contre une <b>prime</b>. Exportateur → <b>put</b> (vendre ses $). Importateur → <b>call</b> (acheter des $).</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="chap" id="paiement">
+  <div class="chap-head"><span class="chap-num">★★</span><h2>Être payé : remise documentaire et crédit documentaire</h2></div>
+  <div class="tbl"><table>
+    <thead><tr><th></th><th>Remise documentaire</th><th>Crédit documentaire irrévocable et confirmé</th></tr></thead>
+    <tbody>
+      <tr><td><b>Principe</b></td><td>La banque remet les documents (dont le connaissement) à l'acheteur <b>contre paiement ou acceptation</b>.</td><td>La banque <b>s'engage à payer</b> dès que les documents conformes sont présentés.</td></tr>
+      <tr><td><b>Donneur d'ordre</b></td><td>L'<b>exportateur</b> (il mandate sa banque)</td><td>L'importateur (il ouvre le crédit, souvent à partir de la proforma)</td></tr>
+      <tr><td><b>Couvre</b></td><td>Rien de garanti : <b>ni risque client, ni change</b></td><td><b>Risque client + risque politique</b> (pas le change)</td></tr>
+      <tr><td><b>Délais</b></td><td>–</td><td>3 dates (expédition, présentation, validité) ; documents sous <b>21 jours</b> ; <b>5 jours ouvrés</b> par banque pour vérifier</td></tr>
+    </tbody>
+  </table></div>
+  <div class="box retenir"><span class="tag">SBLC · standby letter of credit</span><p>Une <b>garantie</b> de la banque de l'acheteur : on ne l'utilise que si l'acheteur ne paie pas.</p></div>
+  <p>Autres moyens : virement <b>SEPA</b> (en euros, en Europe), <b>SWIFT</b> (réseau mondial des banques, le standard hors Europe), billet à ordre (promesse écrite de payer), chèque (rare : lent et risqué).</p>
+  <p><b>Cartographie des risques</b> : risque pays, risque de non-paiement, risque de change, risque juridique, risques technologiques, transport.</p>
+</section>
+
+<section class="chap" id="documents">
+  <div class="chap-head"><span class="chap-num">★★</span><h2>Les documents d'export</h2></div>
+  <div class="tbl"><table>
+    <thead><tr><th>Document</th><th>À quoi il sert</th></tr></thead>
+    <tbody>
+      <tr><td>Facture <b>proforma</b></td><td>Devis provisoire = <b>proposition commerciale</b>. Engage le vendeur jusqu'à sa date de validité (qui protège l'importateur d'une hausse de prix), <b>pas l'acheteur</b>. Doit indiquer <b>devise + Incoterm</b>.</td></tr>
+      <tr><td>Facture <b>commerciale</b></td><td>Facture définitive, juridiquement contraignante.</td></tr>
+      <tr><td><b>Packing list</b></td><td>Contenu de l'envoi : poids net et brut, dimensions, nombre de colis.</td></tr>
+      <tr><td>Certificat d'<b>origine</b></td><td>Prouve où le produit a été fabriqué → droits réduits grâce aux accords commerciaux.</td></tr>
+      <tr><td><b>Bill of lading</b> (B/L)</td><td>Émis par la compagnie maritime. Preuve d'embarquement + <b>titre de propriété</b> négociable.</td></tr>
+      <tr><td><b>Air waybill</b> (LTA)</td><td>Reçu de la compagnie aérienne. <b>Pas</b> un titre de propriété, non négociable.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="box piege"><span class="tag">Identique sur tous les documents</span><p>Description des marchandises, poids net et brut, <b>nombre de colis</b> (pas le prix unitaire). Une seule différence et la banque ou la douane bloque.</p></div>
+</section>
+
+<section class="chap" id="diagnostic">
+  <div class="chap-head"><span class="chap-num">★★</span><h2>Diagnostic export : SWOT, étude de marché, mode d'entrée</h2></div>
+  <div class="swot">
+    <div class="s"><small>Interne · positif</small><h4>Strengths</h4><ul><li>équipe expérimentée et internationale</li><li>capacité de production disponible</li><li>bonne image, qualité</li></ul></div>
+    <div class="w"><small>Interne · négatif</small><h4>Weaknesses</h4><ul><li>équipe inexpérimentée</li><li>endettement, ventes en baisse</li><li>outil obsolète</li></ul></div>
+    <div class="o"><small>Externe · positif</small><h4>Opportunities</h4><ul><li>nouvel accord commercial</li><li>pays émergents</li><li>réseaux sociaux</li></ul></div>
+    <div class="t"><small>Externe · négatif</small><h4>Threats</h4><ul><li>volatilité du change</li><li>droits de douane élevés, barrières</li><li>risques politiques, concurrence</li></ul></div>
+  </div>
+  <div class="box piege"><span class="tag">Le test qui évite l'erreur</span><p>L'entreprise peut-elle le changer elle-même ? <b>Oui → interne</b> (force/faiblesse). <b>Non → externe</b> (opportunité/menace). Toujours <b>justifier</b> : un PDG âgé peut être une force (expérience) ou une faiblesse (retraite proche).</p></div>
+  <h3>Étude de marché : 3 critères + scoring</h3>
+  <p><b>Market potential</b> (taille, dynamique, revenus) · <b>market accessibility</b> (concurrence, distances, barrières, partenaires) · <b>market security</b> (paiements, risque politique, justice). On note chaque pays et on additionne : le plus gros marché n'est pas forcément le meilleur (Luxembourg 88 points devant Nigeria et Pakistan). Une note élevée = favorable.</p>
+  <h3>Modes d'entrée, du moins au plus engageant</h3>
+  <div class="tbl"><table>
+    <tbody>
+      <tr><td><b>Export</b></td><td>direct (on vend soi-même) / indirect (intermédiaire dans son propre pays)</td></tr>
+      <tr><td><b>Coopération</b></td><td>franchise (marque + savoir-faire, contre droits d'entrée et redevances) · <b>licence</b> (brevet, marque, technique contre paiement) · joint-venture</td></tr>
+      <tr><td><b>IDE / FDI</b></td><td>acquisition (racheter) · <b>greenfield</b> (créer sa filiale de zéro)</td></tr>
+    </tbody>
+  </table></div>
+  <p>Plus on s'engage, plus on contrôle, mais plus on investit et plus on prend de risques.</p>
+</section>
+
+<section class="chap" id="omc">
+  <div class="chap-head"><span class="chap-num">★★</span><h2>Le cadre du commerce mondial</h2></div>
+  <ul class="timeline">
+    <li><span class="yr">1776 / 1817</span> Smith : avantage <b>absolu</b>. Ricardo : avantage <b>comparatif</b> (se spécialiser là où le désavantage est le plus faible ; vin et drap).</li>
+    <li><span class="yr">30 oct. 1947</span> <b>GATT</b> signé par <b>23 pays à Genève</b>, pour en finir avec le protectionnisme d'avant-guerre (quotas).</li>
+    <li><span class="yr">1986-1994</span> Uruguay Round → accords de <b>Marrakech</b> (15 avril 1994, 123 pays).</li>
+    <li><span class="yr">1er janv. 1995</span> Naissance de l'<b>OMC / WTO</b> (Genève). 166 membres en 2024.</li>
+    <li><span class="yr">2001</span> Cycle de <b>Doha</b> : échec, faute de compromis sur l'<b>agriculture</b> (subventions US/UE) et parce qu'il faut le consensus de 160+ membres.</li>
+  </ul>
+  <div class="box retenir"><span class="tag">À retenir</span>
+    <p><b>Clause NPF (MFN)</b> : tout avantage accordé à un membre est étendu à tous. <b>Exception</b> : les accords commerciaux régionaux (RTAs), autorisés par l'<b>article XXIV</b> s'ils sont réciproques. L'<b>UE</b> est le plus gros utilisateur d'ACR. Depuis l'échec de Doha, les ACR explosent.</p>
+    <p>Premier exportateur mondial : les États-Unis en 1978, la <b>Chine</b> en 2017. Les États visent un <b>excédent commercial</b> ; les entreprises, rentabilité et supply chain ; les consommateurs, plus de choix.</p>
+  </div>
+</section>
+
+<section class="chap" id="quiz">
+  <div class="chap-head"><span class="chap-num">Entraînement au format de l'examen</span><h2>Quiz : 20 QCM + 6 calculs</h2></div>
+  <p>Questions en anglais comme à l'examen, corrections en français. Clique sur une réponse pour voir la correction.</p>
+  <h3>Part 1 · Multiple choice</h3>
+  <div class="quiz" id="quizBox"></div>
+  <h3>Part 2 · Calculation</h3>
+  <div class="box exemple"><span class="tag">Data for C1 to C4</span>
+    <p>A French company sells to a buyer in Bogotá. Sea shipment Le Havre → Cartagena, then truck.</p>
+    <div class="tbl"><table><tbody>
+      <tr><td>Goods</td><td class="num">80 000 €</td></tr><tr><td>Export packaging</td><td class="num">1 000 €</td></tr>
+      <tr><td>Loading at the factory</td><td class="num">500 €</td></tr><tr><td>Export customs formalities</td><td class="num">600 €</td></tr>
+      <tr><td>Carriage to Le Havre</td><td class="num">1 200 €</td></tr><tr><td>Loading on board</td><td class="num">800 €</td></tr>
+      <tr><td>Sea freight</td><td class="num">5 000 €</td></tr><tr><td>Insurance</td><td class="num">400 €</td></tr>
+      <tr><td>Unloading at Cartagena</td><td class="num">700 €</td></tr><tr><td>Import duties (Colombia)</td><td class="num">4 000 €</td></tr>
+      <tr><td>Delivery Cartagena → Bogotá</td><td class="num">1 300 €</td></tr><tr class="total"><td>Total</td><td class="num">95 500 €</td></tr>
+    </tbody></table></div>
+  </div>
+  <div class="quiz" id="calcBox"></div>
+  <div class="score"><span id="scoreTxt">Score : 0 / 26</span><button type="button" id="reset">Recommencer</button></div>
+</section>
+
+<footer>Fiche « essentiel examen » tirée du cours Export Technics (UPEC, 2026-2027) et de la fiche complète. Les données des calculs C1 à C6 sont inventées pour l'entraînement. Pour les détails et les exercices complets, voir la fiche complète Export Techniques.</footer>
+</div>
+<script>
+(function(){
+  var heads=["Usine du vendeur","Remise au transporteur + douane export","Le long du navire (quai départ)","À bord du navire","Transport principal","Arrivée et déchargement","Droits et douane import"];
+  var rows=[
+    {sep:"Tous modes de transport"},
+    {c:"EXW",cost:1,risk:1},{c:"FCA",cost:2,risk:2},{c:"CPT",cost:5,risk:2},{c:"CIP",cost:5,risk:2,ins:1},
+    {c:"DAP",cost:5,risk:5},{c:"DPU",cost:6,risk:6},{c:"DDP",cost:7,risk:7},
+    {sep:"Maritime et fluvial uniquement"},
+    {c:"FAS",cost:3,risk:3},{c:"FOB",cost:4,risk:4},{c:"CFR",cost:5,risk:4},{c:"CIF",cost:5,risk:4,ins:1}
+  ];
+  var g=document.getElementById("incoGrid"), h='<div></div>';
+  heads.forEach(function(t){h+='<div class="hd">'+t+'</div>'});
+  rows.forEach(function(r){
+    if(r.sep){h+='<div class="sep">'+r.sep+'</div>';return;}
+    h+='<div class="lbl">'+r.c+'</div>';
+    for(var i=1;i<=7;i++){
+      var cls='c '+(i<=r.cost?'sel':'buy')+(i===r.risk?' risk':'');
+      var inner=(r.ins&&i===5)?'<span class="ins">+ass.</span>':'';
+      h+='<div class="'+cls+(inner?' ins':'')+'">'+inner+'</div>';
+    }
+  });
+  g.innerHTML=h;
+
+  var Q=[
+    {q:"How many Incoterms 2020 are there, and how many are for sea and inland waterway only?",o:["13, of which 3","11, of which 4","11, of which 7","10, of which 4"],a:1,e:"11 au total : 7 tous modes et 4 maritimes (FAS, FOB, CFR, CIF)."},
+    {q:"Which organisation publishes the Incoterms?",o:["The WTO","The International Chamber of Commerce (ICC)","The IMF","The European Union"],a:1,e:"La CCI (ICC), depuis 1936. Version actuelle : 2020."},
+    {q:"Which Incoterm gives the seller the least responsibility?",o:["DDP","FOB","EXW","CIF"],a:2,e:"EXW : simple mise à disposition dans les locaux du vendeur, sans chargement."},
+    {q:"Under CFR, where does the risk transfer from seller to buyer?",o:["At the buyer's warehouse","On board the ship at the port of departure","At the port of destination","At the seller's premises"],a:1,e:"Piège des C : le vendeur paie le fret jusqu'à destination, mais le risque passe à bord, au port de départ."},
+    {q:"Which two Incoterms oblige the seller to buy insurance?",o:["CFR and CPT","CIF and CIP","DAP and DDP","FOB and FCA"],a:1,e:"Le « I » = Insurance. CIF : couverture minimale (clauses C). CIP : tous risques (clauses A)."},
+    {q:"Which Incoterm is the only one where the seller must unload the goods at destination?",o:["DAP","DDP","DPU","CIP"],a:2,e:"DPU = Delivered at Place Unloaded (il a remplacé le DAT en 2020)."},
+    {q:"Which Incoterms are most appropriate for exporting to a risky country?",o:["DAP, DPU, DDP","CPT, CIP","EXW, FCA, FAS, FOB","CFR, CIF only"],a:2,e:"Le vendeur transfère le risque tôt, dans son propre pays."},
+    {q:"Which is the main risk for the seller under DDP?",o:["The buyer handles import clearance","The seller handles import clearance and duties, and costs may rise","Risk transfers at the factory","There is no insurance"],a:1,e:"En DDP, le vendeur paie même les droits d'import : risque si les droits ou les règles du pays changent."},
+    {q:"EUR/USD = 1.25 means…",o:["1 USD = 1.25 EUR","1 EUR = 1.25 USD","1 EUR = 0.80 USD"],a:1,e:"La première monnaie est la base : 1 euro vaut 1,25 dollar. Pour convertir des dollars en euros, on divise."},
+    {q:"An exporter waiting for USD has a long position. If EUR/USD rises, it…",o:["Gains","Loses","Is not affected"],a:1,e:"L'euro s'apprécie : chaque dollar reçu vaut moins d'euros. Position longue + EUR/USD ↑ = perte."},
+    {q:"A company that must pay a supplier in USD in 3 months has…",o:["A long position","A short position","A closed position"],a:1,e:"Une dette en devise = position courte. Elle gagne si EUR/USD monte."},
+    {q:"An exporter expecting USD in 3 months fears the dollar will fall. Which option protects it?",o:["A call option on USD","A put option on USD","No option exists"],a:1,e:"Put = droit de vendre ses dollars à un taux fixé d'avance, contre une prime."},
+    {q:"Which hedging tool is a binding agreement to exchange currencies at a fixed rate on a future date?",o:["A call option","A foreign currency advance","A forward contract"],a:2,e:"Le change à terme (forward) : obligatoire, taux figé dès aujourd'hui."},
+    {q:"An exporter who invoices in its own currency…",o:["Is not subject to exchange rate risk","Must hedge against exchange rate risk","Gains if the EUR/currency rate increases"],a:0,e:"Il reçoit des euros : c'est l'acheteur qui porte le risque de change."},
+    {q:"What risks are NOT covered by a documentary remittance?",o:["Customer and country risks","Non-transfer and logistics risks","Exchange rate and customer risks"],a:2,e:"Les banques ne garantissent rien : ni le paiement (risque client), ni le change."},
+    {q:"An irrevocable and confirmed documentary credit covers…",o:["Political risk and customer risk","Exchange rate risk only","Transport risk only"],a:0,e:"La banque s'engage à payer contre documents conformes."},
+    {q:"Under a documentary credit, documents must be presented…",o:["Within 21 days after shipment and before the expiry date","Within 31 days after shipment","At any time"],a:0,e:"21 jours maximum après l'expédition, et avant la date de validité du crédit."},
+    {q:"Which document is a document of title to the goods?",o:["The air waybill","The bill of lading","The packing list","The pro-forma invoice"],a:1,e:"Le connaissement (B/L) est un titre de propriété négociable. La LTA ne l'est pas."},
+    {q:"Is a pro-forma invoice binding for the importer?",o:["No","Yes"],a:0,e:"Non. C'est une proposition commerciale qui engage seulement le vendeur jusqu'à sa date de validité."},
+    {q:"Regional Trade Agreements are an exemption from the MFN clause under…",o:["Article I of the GATT","Article XXIV of the GATT","The Marrakech Agreement","The Doha Round"],a:1,e:"L'article XXIV autorise les accords préférentiels réciproques. L'UE en est le plus gros utilisateur."}
+  ];
+  var C=[
+    {q:"C1 · FOB Le Havre: what is the total cost borne by the seller (goods included)?",a:84100,e:"Tout jusqu'à « à bord » : 80 000 + 1 000 + 500 + 600 + 1 200 + 800 = <b>84 100 €</b>."},
+    {q:"C2 · CIF Cartagena: what is the total cost borne by the seller (goods included)?",a:89500,e:"FOB + fret + assurance : 84 100 + 5 000 + 400 = <b>89 500 €</b>. Le risque passe quand même à bord au Havre."},
+    {q:"C3 · CFR Cartagena: what is the total of the costs paid by the buyer?",a:6400,e:"En CFR pas d'assurance vendeur : l'acheteur paie assurance 400 + déchargement 700 + droits 4 000 + livraison 1 300 = <b>6 400 €</b>."},
+    {q:"C4 · EXW: what is the total of the logistics costs paid by the buyer (goods and packaging excluded)?",a:14500,e:"Le vendeur fournit la marchandise emballée (81 000 €). L'acheteur paie le reste : 95 500 − 81 000 = <b>14 500 €</b> (chargement compris : en EXW le vendeur ne charge pas)."},
+    {q:"C5 · You will receive 300 000 USD. On the payment date EUR/USD = 1.20 and the bank charges 0.5% fees. How many euros do you receive?",a:248750,e:"1 € = 1,20 $ : on divise. 300 000 ÷ 1,20 = 250 000 € ; frais 0,5 % = 1 250 € ; reçu = <b>248 750 €</b>."},
+    {q:"C6 · Same contract: with immediate payment at EUR/USD = 1.00 (fees 0.5%) you would have received 298 500 EUR. What is your LOSS in euros?",a:49750,e:"Perte = référence − reçu = 298 500 − 248 750 = <b>49 750 €</b>. L'euro a monté : l'exportateur (position longue) perd."}
+  ];
+  var box=document.getElementById("quizBox"), cbox=document.getElementById("calcBox"), txt=document.getElementById("scoreTxt"), good=0, done=0, total=Q.length+C.length;
+  function upd(){txt.textContent="Score : "+good+" / "+total+(done===total?" · terminé !":"");}
+  function render(){
+    good=0;done=0;box.innerHTML="";cbox.innerHTML="";
+    Q.forEach(function(it,i){
+      var d=document.createElement("div");d.className="q";
+      var html='<span class="qn">QUESTION '+(i+1)+' / '+Q.length+'</span><h4>'+it.q+'</h4><div class="opts">';
+      it.o.forEach(function(o,j){html+='<button type="button" class="opt" data-j="'+j+'">'+o+'</button>'});
+      html+='</div><div class="expl" hidden><b class="v">Correct answer: '+it.o[it.a]+'.</b> '+it.e+'</div>';
+      d.innerHTML=html;
+      d.querySelectorAll(".opt").forEach(function(b){
+        b.addEventListener("click",function(){
+          var j=+b.dataset.j;
+          d.querySelectorAll(".opt").forEach(function(x){x.disabled=true});
+          d.querySelectorAll(".opt")[it.a].classList.add("good");
+          if(j===it.a){good++}else{b.classList.add("bad")}
+          done++;d.querySelector(".expl").hidden=false;upd();
+        });
+      });
+      box.appendChild(d);
+    });
+    C.forEach(function(it,i){
+      var d=document.createElement("div");d.className="q";
+      d.innerHTML='<span class="qn">CALCULATION '+(i+1)+' / '+C.length+'</span><h4>'+it.q+'</h4>'+
+        '<form class="calc"><label class="sr" for="c'+i+'">Ta réponse</label><input id="c'+i+'" inputmode="numeric" autocomplete="off" placeholder="Ex : 12500"><button type="submit" class="opt">Vérifier</button></form>'+
+        '<div class="expl" hidden></div>';
+      var f=d.querySelector("form"), inp=d.querySelector("input"), ex=d.querySelector(".expl");
+      f.addEventListener("submit",function(ev){
+        ev.preventDefault();
+        var v=parseFloat(inp.value.replace(/[\s€  ]/g,"").replace(",","."));
+        if(isNaN(v)){ex.hidden=false;ex.innerHTML="Tape un nombre, par exemple 12500.";return;}
+        var ok=Math.abs(v-it.a)<0.5;
+        inp.disabled=true;f.querySelector("button").disabled=true;
+        inp.classList.add(ok?"good":"bad");
+        if(ok)good++;done++;
+        ex.hidden=false;
+        ex.innerHTML=(ok?'<b class="v">Correct.</b> ':'<b class="x">Not quite.</b> Answer: '+it.a.toLocaleString("fr-FR")+' €. ')+it.e;
+        upd();
+      });
+      cbox.appendChild(d);
+    });
+    upd();
+  }
+  document.getElementById("reset").addEventListener("click",render);
+  render();
+  // Pour le PDF : affiche toutes les bonnes réponses
+  window.showAllAnswers=function(){
+    document.querySelectorAll("#quizBox .q").forEach(function(d,i){
+      d.querySelectorAll(".opt")[Q[i].a].classList.add("good");
+      d.querySelector(".expl").hidden=false;
+    });
+    document.querySelectorAll("#calcBox .q").forEach(function(d,i){
+      var inp=d.querySelector("input");inp.value=C[i].a;inp.classList.add("good");
+      var ex=d.querySelector(".expl");ex.hidden=false;ex.innerHTML='<b class="v">Answer: '+C[i].a.toLocaleString("fr-FR")+' €.</b> '+C[i].e;
+    });
+  };
+})();
+</script></body></html>

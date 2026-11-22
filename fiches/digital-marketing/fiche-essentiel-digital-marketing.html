@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Digital Marketing essentiel</title>
+<style>
+:root{
+  --bg:#fff7fa; --card:#ffffff; --ink:#2a1a22; --muted:#6b5560;
+  --rose:#d6336c; --rose-soft:#ffe3ec; --rose-line:#f5b5c9;
+  --violet:#7b4bb7; --violet-soft:#f1e9fb;
+  --ok:#1f8a4c; --ok-soft:#e3f6eb; --ko:#c0392b; --ko-soft:#fde8e6;
+  --dark:#3a1f2c; --gold:#c98a00;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:900px;margin:0 auto;padding:24px 16px 60px}
+header.hero{background:linear-gradient(135deg,#d6336c,#a61e4d);color:#fff;border-radius:18px;padding:26px 22px;margin-bottom:18px}
+.hero .kicker{font-size:12px;letter-spacing:.12em;text-transform:uppercase;opacity:.85}
+.hero h1{margin:6px 0 8px;font-size:30px;line-height:1.15}
+.hero p{margin:0;opacity:.95}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.legend span{background:rgba(255,255,255,.18);border-radius:999px;padding:4px 10px;font-size:13px}
+nav.toc{background:var(--card);border:1px solid var(--rose-line);border-radius:14px;padding:12px 14px;margin-bottom:18px}
+nav.toc a{display:inline-block;margin:3px 6px 3px 0;padding:4px 10px;border-radius:999px;background:var(--rose-soft);color:var(--rose);text-decoration:none;font-size:14px;font-weight:600}
+h2{font-size:23px;margin:34px 0 10px;display:flex;align-items:center;gap:10px}
+h2 .num{background:var(--rose);color:#fff;border-radius:10px;min-width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;font-size:18px}
+h3{font-size:18px;margin:20px 0 8px;color:var(--rose)}
+.stars{color:var(--gold);font-size:14px;letter-spacing:1px;white-space:nowrap}
+.card{background:var(--card);border:1px solid #f0d6df;border-radius:14px;padding:14px 16px;margin:10px 0}
+.def{background:var(--rose-soft);border-left:5px solid var(--rose);border-radius:10px;padding:12px 14px;margin:10px 0}
+.def b.lbl,.ex b.lbl,.trap b.lbl,.key b.lbl{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
+.def b.lbl{color:var(--rose)}
+.ex{border:2px solid var(--violet);background:var(--violet-soft);border-radius:10px;padding:10px 14px;margin:10px 0}
+.ex b.lbl{color:var(--violet)}
+.trap{border:2px dashed var(--ko);background:var(--ko-soft);border-radius:10px;padding:10px 14px;margin:10px 0}
+.trap b.lbl{color:var(--ko)}
+.key{background:var(--dark);color:#fff;border-radius:12px;padding:12px 16px;margin:14px 0}
+.key b.lbl{color:#ffb3cb}
+.key ul{margin:4px 0;padding-left:20px}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:15px;background:var(--card);border-radius:10px;overflow:hidden}
+th,td{border:1px solid #f0d6df;padding:7px 9px;text-align:left;vertical-align:top}
+th{background:var(--rose-soft);color:var(--rose)}
+.tbl{overflow-x:auto}
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:stretch;margin:10px 0}
+.flow .st{flex:1 1 120px;background:var(--card);border:2px solid var(--rose-line);border-radius:12px;padding:8px 10px;font-size:14px}
+.flow .st b{display:block;color:var(--rose)}
+.flow .ar{align-self:center;color:var(--rose);font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin:10px 0}
+.grid .cell{background:var(--card);border:1px solid #f0d6df;border-top:4px solid var(--rose);border-radius:10px;padding:10px 12px;font-size:14.5px}
+.grid .cell b{color:var(--rose)}
+.formula{font-family:ui-monospace,Menlo,Consolas,monospace;background:#fff;border:2px solid var(--rose);border-radius:10px;padding:10px 12px;text-align:center;font-weight:700;margin:10px 0}
+.pyr{display:flex;flex-direction:column;align-items:center;gap:4px;margin:12px 0}
+.pyr div{background:var(--rose);color:#fff;border-radius:6px;padding:6px 8px;text-align:center;font-size:14px}
+svg{max-width:100%;height:auto;display:block;margin:10px auto}
+.qcard{background:var(--card);border:1px solid #f0d6df;border-radius:14px;padding:14px 16px;margin:12px 0}
+.qcard .qt{font-weight:700;margin-bottom:8px}
+.opt{display:block;width:100%;text-align:left;background:#fff;border:2px solid #f0d6df;border-radius:10px;padding:8px 12px;margin:6px 0;font:inherit;color:inherit;cursor:pointer}
+.opt:hover{border-color:var(--rose)}
+.opt.good{background:var(--ok-soft);border-color:var(--ok)}
+.opt.wrong{background:var(--ko-soft);border-color:var(--ko)}
+.expl{display:none;margin-top:8px;background:var(--rose-soft);border-radius:10px;padding:8px 12px;font-size:15px}
+.expl.show{display:block}
+.scorebar{position:sticky;bottom:10px;background:var(--dark);color:#fff;border-radius:999px;padding:8px 16px;display:flex;justify-content:space-between;align-items:center;margin-top:16px}
+.scorebar button{background:var(--rose);color:#fff;border:0;border-radius:999px;padding:6px 12px;font:inherit;cursor:pointer}
+details{background:var(--card);border:1px solid #f0d6df;border-radius:12px;padding:10px 14px;margin:10px 0}
+details summary{cursor:pointer;font-weight:700;color:var(--rose)}
+.small{font-size:13.5px;color:var(--muted)}
+@media (max-width:560px){.hero h1{font-size:24px} .flow .ar{display:none}}
+@media print{.toc,.scorebar{display:none} body{background:#fff} .card,.qcard,.def,.ex,.trap,.key,table,details{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <div class="kicker">Digital Marketing · L3 Commerce International · UPEC · séances 1 à 6</div>
+  <h1>L'essentiel pour l'examen</h1>
+  <p>Seulement les notions qui reviennent tout le temps dans le cours : les définitions, les modèles et les exemples à citer. Si tu ne dois réviser qu'une fiche la veille, c'est celle-ci.</p>
+  <div class="legend">
+    <span>★★★ quasi sûr de tomber</span><span>★★ très probable</span><span>Rose = définition</span><span>Violet = exemple à citer</span><span>Pointillés = piège</span>
+  </div>
+</header>
+
+<nav class="toc">
+  <a href="#top10">Top 10</a><a href="#p1">1 · Marketing et désir</a><a href="#p2">2 · Segmentation</a><a href="#p3">3 · Positionnement</a><a href="#p4">4 · Marque</a><a href="#p5">5 · Extension</a><a href="#p6">6 · Communication</a><a href="#qr">Questions de cours</a><a href="#quiz">QCM</a>
+</nav>
+
+<section id="top10">
+<h2><span class="num">★</span>Le top 10 à savoir par cœur</h2>
+<div class="card">
+<table>
+<tr><th>#</th><th>Notion</th><th>En une ligne</th></tr>
+<tr><td>1</td><td>Besoin → désir → demande</td><td>Le marketing ne crée pas le besoin, il oriente le désir vers sa marque (Actimel).</td></tr>
+<tr><td>2</td><td>Valeur perçue</td><td>Bénéfices perçus − sacrifices perçus, comparés aux concurrents.</td></tr>
+<tr><td>3</td><td>4P → 4C et 7P</td><td>Produit, Prix, Promotion, Place ; services : + People, Process, Physical evidence.</td></tr>
+<tr><td>4</td><td>STP</td><td>Segmenter → cibler → positionner.</td></tr>
+<tr><td>5</td><td>4 stratégies de ciblage</td><td>Indifférencié, différencié, concentré, personnalisé.</td></tr>
+<tr><td>6</td><td>Positionnement</td><td>Cible + catégorie + point de différence prouvé (Dyson).</td></tr>
+<tr><td>7</td><td>Capital-marque et Keller</td><td>Saillance → performance/imagerie → jugements/sentiments → résonance.</td></tr>
+<tr><td>8</td><td>Prisme de Kapferer</td><td>Physique, personnalité, culture, relation, reflet, mentalisation.</td></tr>
+<tr><td>9</td><td>Extension, étirement, co-branding</td><td>Même catégorie / autre catégorie / deux marques ensemble. Risque : dilution.</td></tr>
+<tr><td>10</td><td>Communication : 5 étapes, AIDA, copy strategy</td><td>Cible → objectifs → message → médias → source ; promesse + preuve.</td></tr>
+</table>
+</div>
+</section>
+
+<!-- PARTIE 1 -->
+<section id="p1">
+<h2><span class="num">1</span>Le marketing crée-t-il nos envies ?</h2>
+
+<h3>Définition du marketing <span class="stars">★★★</span></h3>
+<div class="def"><b class="lbl">Définition</b>Le marketing est la fonction de l'organisation qui définit les <b>clients cibles</b> et la meilleure façon de satisfaire leurs <b>besoins et désirs</b>, de manière <b>compétitive</b> (mieux que les concurrents) et <b>rentable</b>.</div>
+
+<h3>Besoin, désir, demande <span class="stars">★★★</span></h3>
+<div class="flow">
+  <div class="st"><b>Besoin</b>Un manque. « J'ai soif. »</div><div class="ar">→</div>
+  <div class="st"><b>Désir</b>Le moyen préféré de le satisfaire, selon la culture. « J'ai envie d'un Coca. »</div><div class="ar">→</div>
+  <div class="st"><b>Demande</b>Désir + pouvoir d'achat + vouloir d'achat. « J'achète un Coca à 1,50 €. »</div>
+</div>
+<div class="ex"><b class="lbl">Exemple à citer · Actimel (Danone)</b>Besoin de départ : être en bonne santé. Danone crée le <b>désir</b> d'Actimel avec une bouteille de 62,5 ml qui ressemble à une dose de médicament et un « geste santé du matin ».</div>
+<div class="trap"><b class="lbl">Piège</b>Ne dis jamais « le marketing crée des besoins ». Réponse attendue : il <b>révèle et oriente</b> des besoins qui existent déjà, et <b>crée des désirs</b> pour une marque.</div>
+
+<h3>Myopie marketing <span class="stars">★★</span></h3>
+<div class="def"><b class="lbl">Définition</b>Erreur qui consiste à regarder le <b>produit</b> plutôt que le <b>bénéfice</b> qu'il apporte (Theodore Levitt, 1960).</div>
+<div class="ex"><b class="lbl">Exemple</b>Kodak se voyait vendeur de pellicules alors que ses clients achetaient des souvenirs : il a raté le numérique. « On n'achète pas une perceuse, on achète un trou dans le mur. »</div>
+
+<h3>La démarche marketing en 5 étapes <span class="stars">★★</span></h3>
+<div class="flow">
+  <div class="st"><b>1. Comprendre</b>le marché, les besoins</div><div class="ar">→</div>
+  <div class="st"><b>2. Concevoir</b>la stratégie (STP)</div><div class="ar">→</div>
+  <div class="st"><b>3. Élaborer</b>l'offre (4P)</div><div class="ar">→</div>
+  <div class="st"><b>4. Engager</b>la relation client</div><div class="ar">→</div>
+  <div class="st"><b>5. Capter</b>la valeur en retour</div>
+</div>
+<p class="small">Les étapes 1 à 4 créent de la valeur <b>pour</b> le client ; l'étape 5 récupère de la valeur <b>en retour</b> (profits, clients fidèles).</p>
+
+<h3>Les optiques (histoire du marketing) <span class="stars">★★</span></h3>
+<div class="tbl"><table>
+<tr><th>Optique</th><th>Idée</th><th>Exemple</th></tr>
+<tr><td>Production</td><td>Produire beaucoup et pas cher (demande &gt; offre)</td><td>Ford T « pourvu qu'elle soit noire »</td></tr>
+<tr><td>Produit</td><td>Faire le meilleur produit technique</td><td>Concorde</td></tr>
+<tr><td>Vente</td><td>Pousser à acheter pour écouler les stocks</td><td>Démarchage téléphonique</td></tr>
+<tr><td>Marketing</td><td>Partir des besoins du client</td><td>Netflix et ses recommandations</td></tr>
+</table></div>
+
+<h3>4P, 4C et 7P <span class="stars">★★★</span></h3>
+<div class="tbl"><table>
+<tr><th>4P (entreprise)</th><th>4C (client)</th></tr>
+<tr><td>Produit</td><td>Quels bénéfices recherche le client ?</td></tr>
+<tr><td>Prix</td><td>Quel sacrifice est-il prêt à consentir ?</td></tr>
+<tr><td>Promotion</td><td>Comment s'informe-t-il ?</td></tr>
+<tr><td>Place (distribution)</td><td>Où veut-il trouver le produit ?</td></tr>
+</table></div>
+<div class="def"><b class="lbl">7P des services</b>On ajoute <b>People</b> (personnel), <b>Process</b> (déroulement du service) et <b>Physical evidence</b> (décor, uniforme, site). Exemple : Singapore Airlines.</div>
+
+<h3>Valeur perçue <span class="stars">★★★</span></h3>
+<svg viewBox="0 0 520 190" role="img" aria-label="Balance de la valeur perçue">
+  <line x1="260" y1="40" x2="260" y2="170" stroke="#3a1f2c" stroke-width="4"/>
+  <polygon points="235,170 285,170 260,150" fill="#3a1f2c"/>
+  <line x1="80" y1="60" x2="440" y2="40" stroke="#3a1f2c" stroke-width="4"/>
+  <rect x="20" y="65" width="150" height="95" rx="10" fill="#ffe3ec" stroke="#d6336c" stroke-width="2"/>
+  <text x="95" y="86" text-anchor="middle" font-size="15" font-weight="700" fill="#d6336c">+ Bénéfices</text>
+  <text x="95" y="107" text-anchor="middle" font-size="12.5" fill="#2a1a22">produit, services</text>
+  <text x="95" y="124" text-anchor="middle" font-size="12.5" fill="#2a1a22">relation, image</text>
+  <rect x="370" y="45" width="140" height="95" rx="10" fill="#f1e9fb" stroke="#7b4bb7" stroke-width="2"/>
+  <text x="440" y="66" text-anchor="middle" font-size="15" font-weight="700" fill="#7b4bb7">− Sacrifices</text>
+  <text x="440" y="87" text-anchor="middle" font-size="12.5" fill="#2a1a22">prix, temps</text>
+  <text x="440" y="104" text-anchor="middle" font-size="12.5" fill="#2a1a22">effort, risque</text>
+  <text x="260" y="22" text-anchor="middle" font-size="13" fill="#6b5560">comparé aux concurrents</text>
+</svg>
+<div class="formula">Valeur perçue = bénéfices perçus − sacrifices perçus (par rapport aux concurrents)</div>
+<p>Deux leviers : <b>augmenter les bénéfices</b> (innovation, design, services, marque : Nespresso) ou <b>réduire les sacrifices</b> (prix, temps, effort : IKEA fait monter les meubles par le client).</p>
+<div class="trap"><b class="lbl">Piège</b>La valeur perçue n'est ni la somme des bénéfices, ni la qualité seule. Elle est toujours <b>relative aux concurrents</b> et varie selon les personnes.</div>
+
+<h3>Satisfaction et modèle de Kano <span class="stars">★★</span></h3>
+<p>Satisfaction = performance perçue comparée aux attentes (inférieure : déçu ; égale : satisfait ; supérieure : enchanté).</p>
+<div class="grid">
+  <div class="cell"><b>Basiques</b><br>Attendues d'office : leur absence mécontente. Paiement sécurisé.</div>
+  <div class="cell"><b>De performance</b><br>Plus il y en a, plus on est satisfait. Livraison rapide.</div>
+  <div class="cell"><b>D'enchantement</b><br>Inattendues, elles ravissent. Petit mot manuscrit.</div>
+</div>
+
+<h3>Valeur vie client (CLV) <span class="stars">★★★</span></h3>
+<div class="formula">CLV = panier moyen × nombre d'achats par an × durée de fidélité (années)</div>
+<div class="ex"><b class="lbl">Calcul type</b>Cliente Sephora : 40 € × 6 achats/an × 5 ans = <b>1 200 €</b>. Conclusion à écrire : mieux vaut bien la traiter que la perdre pour 5 €.</div>
+
+<details><summary>Aussi utile si on te demande d'analyser un marché (★★)</summary>
+<p><b>Maslow</b> (de la base au sommet) : physiologiques, sécurité, appartenance, estime, accomplissement.</p>
+<p><b>PESTEL</b> : Politique, Économique, Sociologique, Technologique, Environnemental, Légal (loi Évin, RGPD = Légal).</p>
+<p><b>Standardisation</b> (même stratégie partout : Coca-Cola) contre <b>adaptation</b> (menus McDonald's locaux).</p>
+</details>
+</section>
+
+<!-- PARTIE 2 -->
+<section id="p2">
+<h2><span class="num">2</span>Segmentation et ciblage</h2>
+
+<h3>Définitions <span class="stars">★★★</span></h3>
+<div class="def"><b class="lbl">Segmentation</b>Découper le marché en groupes de clients qui se ressemblent (homogènes à l'intérieur, différents entre eux).</div>
+<div class="def"><b class="lbl">Ciblage</b>Choisir <b>quels</b> segments et <b>combien</b> de segments on va servir.</div>
+
+<h3>Les critères de segmentation <span class="stars">★★</span></h3>
+<div class="grid">
+  <div class="cell"><b>Comportementaux</b> (ce que la personne fait)<br>Avantages recherchés, occasion d'achat, fidélité, usage.</div>
+  <div class="cell"><b>Psychographiques</b> (ce qu'elle est)<br>Style de vie, personnalité.</div>
+  <div class="cell"><b>Profil</b> (qui elle est)<br>Âge, genre, revenu, CSP, géographie.</div>
+</div>
+<div class="ex"><b class="lbl">Exemple à citer · dentifrice</b>Segmentation par <b>avantages recherchés</b> : prix bas, anti-caries, dents blanches, goût. La plus utile car elle explique <b>pourquoi</b> on achète.</div>
+
+<h3>Une bonne segmentation : EMAAR <span class="stars">★★</span></h3>
+<p><b>E</b>fficace (besoins vraiment différents), <b>M</b>esurable, <b>A</b>ccessible (on peut les toucher), <b>A</b>ctionnable (on a les moyens), <b>R</b>entable (assez grand).</p>
+
+<h3>Les 4 stratégies de ciblage <span class="stars">★★★</span></h3>
+<svg viewBox="0 0 640 150" role="img" aria-label="Quatre stratégies de ciblage">
+  <g font-size="13" text-anchor="middle" fill="#2a1a22">
+    <text x="80" y="18" font-weight="700" fill="#d6336c">Indifférencié</text>
+    <rect x="20" y="30" width="120" height="70" rx="8" fill="#ffe3ec" stroke="#d6336c"/>
+    <text x="80" y="70">1 mix → tout</text>
+    <text x="240" y="18" font-weight="700" fill="#d6336c">Différencié</text>
+    <rect x="180" y="30" width="36" height="70" rx="6" fill="#d6336c"/><rect x="222" y="30" width="36" height="70" rx="6" fill="#d6336c"/><rect x="264" y="30" width="36" height="70" rx="6" fill="#d6336c"/>
+    <text x="240" y="120">1 mix par segment</text>
+    <text x="400" y="18" font-weight="700" fill="#d6336c">Concentré</text>
+    <rect x="340" y="30" width="36" height="70" rx="6" fill="#d6336c"/><rect x="382" y="30" width="36" height="70" rx="6" fill="#f5d3df"/><rect x="424" y="30" width="36" height="70" rx="6" fill="#f5d3df"/>
+    <text x="400" y="120">1 mix, 1 segment</text>
+    <text x="560" y="18" font-weight="700" fill="#d6336c">Personnalisé</text>
+    <g fill="#d6336c"><circle cx="515" cy="45" r="7"/><circle cx="545" cy="45" r="7"/><circle cx="575" cy="45" r="7"/><circle cx="605" cy="45" r="7"/><circle cx="515" cy="80" r="7"/><circle cx="545" cy="80" r="7"/><circle cx="575" cy="80" r="7"/><circle cx="605" cy="80" r="7"/></g>
+    <text x="560" y="120">1 mix par client</text>
+  </g>
+</svg>
+<div class="tbl"><table>
+<tr><th>Stratégie</th><th>Principe</th><th>Exemple du cours</th></tr>
+<tr><td>Indifférenciée</td><td>Un mix pour tout le marché</td><td>Coca-Cola des débuts</td></tr>
+<tr><td>Différenciée</td><td>Un mix par segment visé</td><td>Renault électrique : Twizy, Zoe, Kangoo Z.E.</td></tr>
+<tr><td>Concentrée (niche)</td><td>Un seul mix, un seul segment</td><td>Bang &amp; Olufsen</td></tr>
+<tr><td>Personnalisée</td><td>Un mix par client ou zone</td><td>M&amp;M's avec ton prénom</td></tr>
+</table></div>
+<div class="trap"><b class="lbl">Piège</b>Différenciée = plusieurs segments, plusieurs mix. Concentrée = un seul segment. Et on segmente <b>avant</b> de cibler.</div>
+</section>
+
+<!-- PARTIE 3 -->
+<section id="p3">
+<h2><span class="num">3</span>Le positionnement (Dyson)</h2>
+
+<div class="flow">
+  <div class="st"><b>S · Segmentation</b>repérer les groupes</div><div class="ar">→</div>
+  <div class="st"><b>T · Targeting</b>choisir sa cible</div><div class="ar">→</div>
+  <div class="st"><b>P · Positioning</b>occuper une place claire dans l'esprit</div>
+</div>
+
+<h3>Définition et 3 éléments <span class="stars">★★★</span></h3>
+<div class="def"><b class="lbl">Définition</b>Le positionnement, c'est concevoir l'offre pour qu'elle occupe une <b>place claire et distincte dans l'esprit de la cible</b> : quand le client pense à ce besoin, ta marque vient en premier (« posséder un mot dans sa tête » : Volvo = sécurité).</div>
+<div class="grid">
+  <div class="cell"><b>1. Cible</b><br>Qui ? Ses besoins.</div>
+  <div class="cell"><b>2. Catégorie</b><br>Contre quels concurrents ?</div>
+  <div class="cell"><b>3. Point de différence</b><br>Pourquoi moi ? Bénéfice + preuve.</div>
+</div>
+<div class="ex"><b class="lbl">Phrase type à savoir réécrire (cas pratique fréquent)</b>
+<i>Pour [cible] qui [besoin], la marque X est une marque de [catégorie] qui remplace [concurrents], qui apporte [bénéfice], grâce à [preuve].</i><br><br>
+<b>Dyson :</b> pour les foyers urbains aisés qui veulent un appareil performant, innovant et design, Dyson est une marque d'électroménager qui remplace Hoover, Philips, Rowenta ou Calor, grâce à la technologie <b>Dual Cyclone</b> (aspirateur sans sac aux performances supérieures). Dyson se bat sur l'innovation, jamais sur le prix.</div>
+
+<h3>4 conditions d'un bon positionnement <span class="stars">★★</span></h3>
+<p><b>Clarté</b> (une phrase), <b>crédibilité</b> (preuve), <b>cohérence</b> (les 4P vont dans le même sens), <b>compétitivité</b> (vrai avantage).</p>
+
+<h3>5 axes de différenciation <span class="stars">★★</span></h3>
+<p><b>Produit</b> (Dyson), <b>services</b> (Darty, contrat de confiance), <b>personnel</b> (Singapore Airlines), <b>distribution</b> (Coca-Cola partout), <b>image</b> (le rouge Coca).</p>
+<div class="trap"><b class="lbl">Identité ≠ image</b>Identité = ce que la marque <b>émet</b>. Image = ce que le public <b>perçoit</b>. Le but est que les deux coïncident.</div>
+
+<h3>Repositionnement <span class="stars">★★</span></h3>
+<div class="tbl"><table>
+<tr><th></th><th>Même produit</th><th>Produit différent</th></tr>
+<tr><th>Même cible</th><td>D'image (on change la com)</td><td>Produit</td></tr>
+<tr><th>Cible différente</th><td>Intangible (Scholl Party Feet)</td><td>Tangible</td></tr>
+</table></div>
+
+<details><summary>Aussi utile : carte perceptuelle et zones de différence (★)</summary>
+<p><b>Carte perceptuelle</b> : on place les marques sur deux axes (prix, innovation…). Dyson est seul dans le coin « innovant et cher ».</p>
+<p><b>Zones</b> : gagnante (le client le veut, toi seul le fais bien), perdante (le concurrent le fait mieux), risquée (vous le faites tous les deux), idiote (le client s'en moque).</p>
+</details>
+</section>
+
+<!-- PARTIE 4 -->
+<section id="p4">
+<h2><span class="num">4</span>La marque (Nike)</h2>
+
+<div class="ex"><b class="lbl">Accroche à citer · Joshua Bell</b>Le violoniste joue 100 $ la place en concert ; incognito dans le métro avec le même violon, il gagne 32 $. Sans la marque, la valeur s'effondre : <b>la marque crée de la valeur</b>.</div>
+
+<h3>Capital-marque <span class="stars">★★★</span></h3>
+<div class="def"><b class="lbl">Définition</b>Le capital-marque (brand equity) est la <b>valeur ajoutée qu'apporte le nom de marque</b> à un produit. Modèle d'Aaker : fidélité, notoriété, qualité perçue, associations, autres actifs (brevets).</div>
+
+<h3>Les 3 niveaux de produit <span class="stars">★★</span></h3>
+<p><b>Central</b> (le bénéfice : se dépasser) → <b>réel</b> (la chaussure, le swoosh) → <b>augmenté</b> (appli Nike Run Club, retours gratuits).</p>
+
+<h3>Stratégies de nom <span class="stars">★★</span></h3>
+<div class="grid">
+  <div class="cell"><b>Ombrelle</b><br>Un nom pour tout : Philips.</div>
+  <div class="cell"><b>Individuelle</b><br>Un nom par produit : P&amp;G (Ariel, Pampers).</div>
+  <div class="cell"><b>Combinée</b><br>Entreprise + produit : Kellogg's Special K.</div>
+</div>
+
+<h3>Pyramide de Keller <span class="stars">★★★</span></h3>
+<div class="pyr">
+  <div style="width:30%">Résonance<br><small>« et nous ? »</small></div>
+  <div style="width:55%">Jugements (raison) · Sentiments (émotion)<br><small>« que penser de toi ? »</small></div>
+  <div style="width:78%">Performance (produit) · Imagerie (univers)<br><small>« qu'es-tu ? »</small></div>
+  <div style="width:100%">Saillance<br><small>« qui es-tu ? » la marque vient-elle à l'esprit ?</small></div>
+</div>
+<div class="ex"><b class="lbl">Red Bull</b>Saillance : les taureaux, « donne des ailes ». Performance : boisson énergisante premium. Imagerie : boost au sport, en soirée. Jugements : n°1. Sentiments : liberté, énergie. Résonance : communauté sports extrêmes (Red Bull Stratos).</div>
+
+<h3>Prisme d'identité de Kapferer <span class="stars">★★★</span></h3>
+<svg viewBox="0 0 520 250" role="img" aria-label="Prisme de Kapferer">
+  <polygon points="150,30 370,30 450,125 370,220 150,220 70,125" fill="#ffe3ec" stroke="#d6336c" stroke-width="2"/>
+  <line x1="260" y1="30" x2="260" y2="220" stroke="#d6336c" stroke-dasharray="4 4"/>
+  <line x1="70" y1="125" x2="450" y2="125" stroke="#d6336c" stroke-dasharray="4 4"/>
+  <g font-size="14" font-weight="700" fill="#2a1a22" text-anchor="middle">
+    <text x="190" y="70">Physique</text><text x="330" y="70">Personnalité</text>
+    <text x="165" y="118">Relation</text><text x="355" y="118">Culture</text>
+    <text x="190" y="185">Reflet</text><text x="330" y="185">Mentalisation</text>
+  </g>
+  <g font-size="12" fill="#6b5560" text-anchor="middle">
+    <text x="260" y="20">ÉMETTEUR (la marque)</text><text x="260" y="242">RÉCEPTEUR (le client)</text>
+  </g>
+  <g font-size="12" fill="#6b5560"><text x="4" y="150">Extériorisation</text><text x="430" y="150">Intériorisation</text></g>
+</svg>
+<div class="tbl"><table>
+<tr><th>Facette</th><th>Question</th><th>Red Bull</th></tr>
+<tr><td>Physique</td><td>À quoi elle ressemble ?</td><td>Canette bleue et argent, taureaux</td></tr>
+<tr><td>Personnalité</td><td>Si c'était une personne ?</td><td>Audacieuse, repousse les limites</td></tr>
+<tr><td>Culture</td><td>Quelles valeurs ?</td><td>Énergie, dépassement</td></tr>
+<tr><td>Relation</td><td>Quel lien avec moi ?</td><td>« Te donne des ailes »</td></tr>
+<tr><td>Reflet</td><td>Qui est montré ?</td><td>Jeunes qui vivent à fond, athlètes</td></tr>
+<tr><td>Mentalisation</td><td>Comment je me vois ?</td><td>Énergique, gagnant</td></tr>
+</table></div>
+<div class="trap"><b class="lbl">Piège</b><b>Reflet</b> = le client type que la marque <b>montre</b> (Rolex montre Federer). <b>Mentalisation</b> = ce que le client <b>ressent</b> en l'utilisant (« je réussis »).</div>
+</section>
+
+<!-- PARTIE 5 -->
+<section id="p5">
+<h2><span class="num">5</span>Extension de marque et co-branding</h2>
+
+<h3>Extension ou étirement ? <span class="stars">★★★</span></h3>
+<div class="grid">
+  <div class="cell"><b>Extension</b> (brand extension)<br>Nouveau produit dans la <b>même catégorie</b> : Coca-Cola Zero, Pepsi Max.</div>
+  <div class="cell"><b>Étirement</b> (brand stretching)<br>Nouveau produit dans une <b>autre catégorie</b> : Virgin (disques, avions, trains), Dyson (sèche-cheveux).</div>
+</div>
+<div class="tbl"><table>
+<tr><th>Avantages</th><th>Risques</th></tr>
+<tr><td>Marque déjà connue = moins de risque ; pub de lancement moins chère ; renforcement mutuel</td><td><b>Cannibalisation</b> (le nouveau vole l'ancien) ; <b>dilution</b> (la marque ne veut plus rien dire) ; un scandale touche tout</td></tr>
+</table></div>
+<div class="key"><b class="lbl">Règle d'or</b>Plus on s'éloigne du produit d'origine, plus la <b>cohérence perçue</b> (perceived fit) est critique. Contre-exemple : <b>Pierre Cardin</b>, des milliers de licences, marque diluée.</div>
+
+<h3>Face aux MDD (marques de distributeur) <span class="stars">★★</span></h3>
+<p><b>Rivaliser</b> (innover), <b>coopérer</b> (fabriquer la MDD), <b>contre-attaquer</b> avec une <b>marque de combat</b> : Air France crée Transavia contre easyJet.</p>
+
+<h3>Co-branding <span class="stars">★★★</span></h3>
+<div class="grid">
+  <div class="cell"><b>Parallèle</b><br>Deux marques de même niveau signent un produit : Nike × LEGO, H&amp;M × créateurs.</div>
+  <div class="cell"><b>Ingrédient</b><br>Une marque devient composant de l'autre : Milka × Oreo.</div>
+  <div class="cell"><b>De communication</b><br>Alliance promo, sponsoring : McDonald's × Minecraft, Coca Zero × James Bond.</div>
+</div>
+<div class="formula">Co-branding fort = capitaux de marque complémentaires + association crédible</div>
+
+<h3>Gamme et cycle de vie <span class="stars">★★</span></h3>
+<p><b>Largeur</b> = nombre de lignes ; <b>profondeur</b> = nombre de variantes dans une ligne (Renault : 2 lignes, particuliers et utilitaires).</p>
+<svg viewBox="0 0 560 190" role="img" aria-label="Cycle de vie du produit">
+  <line x1="40" y1="150" x2="540" y2="150" stroke="#3a1f2c" stroke-width="2"/>
+  <line x1="40" y1="20" x2="40" y2="150" stroke="#3a1f2c" stroke-width="2"/>
+  <path d="M40,148 C110,146 150,120 200,85 C250,45 300,30 360,30 C420,30 460,60 530,110" fill="none" stroke="#d6336c" stroke-width="4"/>
+  <g stroke="#f5b5c9" stroke-dasharray="4 4"><line x1="140" y1="20" x2="140" y2="150"/><line x1="260" y1="20" x2="260" y2="150"/><line x1="420" y1="20" x2="420" y2="150"/></g>
+  <g font-size="13" text-anchor="middle" fill="#2a1a22" font-weight="700">
+    <text x="90" y="172">Introduction</text><text x="200" y="172">Croissance</text><text x="340" y="172">Maturité</text><text x="480" y="172">Déclin</text>
+  </g>
+  <text x="50" y="16" font-size="12" fill="#6b5560">Ventes</text>
+</svg>
+<div class="tbl"><table>
+<tr><th></th><th>Introduction</th><th>Croissance</th><th>Maturité</th><th>Déclin</th></tr>
+<tr><td>Prix</td><td>Élevé</td><td>Plus bas</td><td><b>Le plus bas</b></td><td>En hausse</td></tr>
+<tr><td>Distribution</td><td>Limitée</td><td>Élargie</td><td><b>Intensive</b></td><td>Sélective</td></tr>
+<tr><td>Exemple</td><td>iPhone 2007</td><td>Dacia Logan</td><td>—</td><td>—</td></tr>
+</table></div>
+</section>
+
+<!-- PARTIE 6 -->
+<section id="p6">
+<h2><span class="num">6</span>La communication</h2>
+
+<div class="def"><b class="lbl">Définition</b>La communication marketing <b>informe, persuade et rappelle</b> au public la valeur d'une marque, en construisant une relation dans le temps.</div>
+
+<h3>Le processus de communication <span class="stars">★★</span></h3>
+<div class="flow">
+  <div class="st"><b>Émetteur</b>la marque</div><div class="ar">→</div>
+  <div class="st"><b>Codage</b>idée → mots, images</div><div class="ar">→</div>
+  <div class="st"><b>Message + canal</b>pub, post</div><div class="ar">→</div>
+  <div class="st"><b>Décodage</b>interprétation</div><div class="ar">→</div>
+  <div class="st"><b>Récepteur</b>le public</div>
+</div>
+<p>Le <b>bruit</b> (autres pubs, amis) brouille le message ; le <b>feedback</b> est la réponse du récepteur. Exemple : Marlboro, d'abord cigarette pour femmes, recodée en symbole viril avec le cow-boy.</p>
+
+<h3>IMC : communication marketing intégrée <span class="stars">★★★</span></h3>
+<div class="def"><b class="lbl">Définition</b>Coordonner les messages et les points de contact pour une expérience de marque <b>claire, cohérente et convaincante</b>. Pas tous les canaux : ceux qui comptent, cohérents et complémentaires.</div>
+<div class="ex"><b class="lbl">CeraVe × Michael Cera</b>Fausse rumeur « Michael Cera a créé CeraVe ? » : réseaux sociaux et créateurs → presse → révélation au Super Bowl. Des canaux différents, <b>une seule histoire</b>. L'acteur attire l'attention, les dermatologues apportent la crédibilité.</div>
+
+<h3>Les 5 étapes d'une communication efficace <span class="stars">★★★</span></h3>
+<div class="flow">
+  <div class="st"><b>1. Cible</b>à qui ?</div><div class="ar">→</div>
+  <div class="st"><b>2. Objectifs</b>quelle réponse ?</div><div class="ar">→</div>
+  <div class="st"><b>3. Message</b>quoi, comment ?</div><div class="ar">→</div>
+  <div class="st"><b>4. Médias</b>où ?</div><div class="ar">→</div>
+  <div class="st"><b>5. Source</b>qui le dit ?</div>
+</div>
+<p class="small">La cible d'abord, car elle décide de tout : Evian (« Live young », premium) et Liquid Death (« Murder your thirst », rebelle) vendent de l'eau à des publics opposés.</p>
+
+<h3>Étapes de préparation à l'achat <span class="stars">★★</span></h3>
+<p>Notoriété → connaissance → attirance → préférence → conviction → achat. L'ordre apprendre / ressentir / agir dépend de l'implication : voiture = apprendre d'abord ; parfum coup de cœur = ressentir d'abord ; lessive = apprendre → agir → ressentir.</p>
+
+<h3>AIDA et le message <span class="stars">★★★</span></h3>
+<div class="grid">
+  <div class="cell"><b>A</b>ttention</div><div class="cell"><b>I</b>ntérêt</div><div class="cell"><b>D</b>ésir</div><div class="cell"><b>A</b>ction</div>
+</div>
+<p>Appel <b>rationnel</b> (« 30 % moins cher »), <b>émotionnel</b> (peur, humour, amour) ou <b>moral</b> (sécurité routière). Argument <b>bilatéral</b> = on admet un défaut, ce qui rend crédible. Une bonne <b>source</b> : expertise, confiance, attirance.</p>
+
+<h3>Copy strategy <span class="stars">★★★</span></h3>
+<div class="tbl"><table>
+<tr><th>Rubrique</th><th>Orangina (Fred &amp; Farid, 2008)</th></tr>
+<tr><td>Objectif</td><td>Rajeunir la marque</td></tr>
+<tr><td>Cible</td><td>Les jeunes qui veulent une boisson fun et différente</td></tr>
+<tr><td>Promesse</td><td>Naturel + fun intense</td></tr>
+<tr><td>Preuve (reason why)</td><td>La vraie pulpe de fruit</td></tr>
+<tr><td>Ton</td><td>Joueur, sexy, irrévérencieux</td></tr>
+</table></div>
+<p class="small">Résultat : +50 % de ventes en valeur en 5 ans. Médias à connaître : payés, possédés, gagnés (paid, owned, earned).</p>
+</section>
+
+<!-- QUESTIONS DE COURS -->
+<section id="qr">
+<h2><span class="num">?</span>Questions de cours probables</h2>
+<p class="small">Entraîne-toi à répondre à voix haute, puis ouvre le corrigé.</p>
+<details><summary>Le marketing crée-t-il nos besoins ?</summary>
+<p>Non. Le besoin (manque) existe sans le marketing. Le marketing révèle et oriente ce besoin, crée un <b>désir</b> pour une marque, et transforme ce désir en <b>demande</b>. Exemple : Actimel part du besoin d'être en bonne santé et crée le désir d'Actimel (dose de 62,5 ml, geste santé du matin).</p></details>
+<details><summary>Rédige le positionnement d'une marque de ton choix.</summary>
+<p>Utilise la phrase type : « Pour [cible] qui [besoin], X est une marque de [catégorie] qui remplace [concurrents], qui apporte [bénéfice], grâce à [preuve]. » Puis vérifie les 4 conditions : clarté, crédibilité, cohérence du mix, compétitivité. Dyson est le modèle à citer.</p></details>
+<details><summary>Quelles stratégies de ciblage existent ? Donne un exemple pour chacune.</summary>
+<p>Indifférenciée (Coca-Cola des débuts), différenciée (Renault Twizy, Zoe, Kangoo), concentrée (Bang &amp; Olufsen), personnalisée (M&amp;M's au prénom).</p></details>
+<details><summary>Qu'est-ce que le capital-marque et comment le construire ?</summary>
+<p>La valeur ajoutée par le nom de marque (Joshua Bell : 100 $ contre 32 $). On le construit avec la pyramide de Keller : saillance, puis performance et imagerie, puis jugements et sentiments, jusqu'à la résonance (fidélité, communauté). Exemple : Red Bull.</p></details>
+<details><summary>Quels sont les risques d'une extension de marque ?</summary>
+<p>Cannibalisation, dilution (Pierre Cardin), lancement sous-financé, un scandale qui touche toute la marque. Plus on s'éloigne de la catégorie d'origine (étirement), plus la cohérence perçue est critique.</p></details>
+<details><summary>Explique l'IMC avec un exemple.</summary>
+<p>Coordonner les canaux pour qu'ils racontent une seule histoire cohérente. CeraVe × Michael Cera : réseaux sociaux, presse, puis Super Bowl ; chaque canal a son rôle, le message reste le même.</p></details>
+<details><summary>Calcule une CLV : 25 € par achat, 10 achats par an, 4 ans.</summary>
+<p>CLV = 25 × 10 × 4 = <b>1 000 €</b>.</p></details>
+</section>
+
+<!-- QUIZ -->
+<section id="quiz">
+<h2><span class="num">✓</span>QCM d'entraînement (25 questions)</h2>
+<p class="small">Clique sur une réponse : la bonne s'affiche en vert avec l'explication.</p>
+<div id="quizBox"></div>
+<div class="scorebar"><span id="score">Score : 0 / 0</span><button id="reset" type="button">Recommencer</button></div>
+</section>
+
+</div>
+<script>
+const Q=[
+{q:"Quelle est la bonne chaîne logique ?",o:["Désir → besoin → demande","Besoin → désir → demande","Demande → besoin → désir","Besoin → demande → désir"],a:1,e:"Le besoin est un manque, le désir est la façon préférée de le satisfaire, la demande apparaît avec le pouvoir et le vouloir d'achat."},
+{q:"Selon le cours, que fait Danone avec Actimel ?",o:["Il crée un besoin de santé qui n'existait pas","Il part du besoin d'être en bonne santé et crée le désir d'Actimel","Il baisse ses prix face aux MDD","Il fait un co-branding avec un laboratoire"],a:1,e:"Le besoin existait déjà ; Danone a créé le désir pour sa marque (dose de 62,5 ml, geste santé du matin)."},
+{q:"Kodak se voyait vendeur de pellicules alors que ses clients achetaient des souvenirs. C'est :",o:["La cannibalisation","La myopie marketing","L'optique vente","La dilution"],a:1,e:"La myopie marketing (Levitt, 1960) : regarder le produit plutôt que le bénéfice client."},
+{q:"La valeur perçue, c'est :",o:["La somme des bénéfices","La qualité du produit","Bénéfices perçus − sacrifices perçus, comparés aux concurrents","Le prix payé"],a:2,e:"C'est une balance bénéfices/sacrifices, toujours relative aux offres concurrentes."},
+{q:"IKEA fait monter les meubles par le client. Quel levier de valeur ?",o:["Augmenter les bénéfices","Réduire les sacrifices perçus (prix)","Ajouter des services","Valoriser la marque"],a:1,e:"Le client fait une partie du travail, le prix baisse : le sacrifice monétaire diminue."},
+{q:"Dans les 4C, le P de Prix devient :",o:["Le coût de production","Le sacrifice que le client est prêt à consentir","La concurrence","La commodité"],a:1,e:"Penser client : quel sacrifice (argent, temps, effort) est-il prêt à faire ?"},
+{q:"Les 3 P ajoutés pour les services sont :",o:["Packaging, Positioning, Profit","People, Process, Physical evidence","Partners, Planning, Performance","Public relations, Publicity, Push"],a:1,e:"Personnel, déroulement du service et preuves matérielles (décor, uniforme, site)."},
+{q:"50 € par achat, 4 achats par an, fidèle 3 ans. CLV ?",o:["57 €","200 €","600 €","150 €"],a:2,e:"CLV = 50 × 4 × 3 = 600 €."},
+{q:"Modèle de Kano : le paiement sécurisé sur un site marchand est une caractéristique :",o:["Basique","De performance","D'enchantement","Indifférente"],a:0,e:"Attendue d'office : son absence mécontente, sa présence ne crée pas d'enthousiasme."},
+{q:"Découper un marché en groupes homogènes s'appelle :",o:["Le ciblage","La segmentation","Le positionnement","La différenciation"],a:1,e:"La segmentation découpe ; le ciblage choisit ensuite les segments."},
+{q:"Segmenter le dentifrice selon dents blanches, goût ou prix bas, c'est une segmentation par :",o:["Critères démographiques","Avantages recherchés","Critères géographiques","Personnalité"],a:1,e:"Critère comportemental : les avantages recherchés, qui expliquent pourquoi on achète."},
+{q:"Renault lance Twizy, Zoe et Kangoo Z.E. pour des clients différents. Ciblage :",o:["Indifférencié","Différencié","Concentré","Personnalisé"],a:1,e:"Plusieurs segments, un mix pour chacun : marketing différencié."},
+{q:"Bang & Olufsen ne vise que le haut de gamme avec une seule offre. Ciblage :",o:["Indifférencié","Différencié","Concentré","De masse"],a:2,e:"Un seul segment, un seul mix : marketing concentré (niche)."},
+{q:"Dans le positionnement de Dyson, la preuve du point de différence est :",o:["Le prix premium","La technologie Dual Cyclone sans sac","La distribution sélective","La pub humoristique"],a:1,e:"Le bénéfice (performance supérieure) est prouvé par une caractéristique produit : Dual Cyclone."},
+{q:"Darty et son « contrat de confiance » se différencie surtout par :",o:["Le produit","Les services","L'image","La distribution"],a:1,e:"Même produits que les concurrents ; la différence tient au service."},
+{q:"Scholl garde le même produit mais vise une nouvelle cible (Party Feet). Repositionnement :",o:["D'image","Produit","Intangible","Tangible"],a:2,e:"Même produit + cible différente = repositionnement intangible."},
+{q:"L'expérience Joshua Bell démontre que :",o:["La qualité fait tout","La marque et le contexte créent une grande partie de la valeur","Le prix n'influence pas la perception","La distribution intensive est la meilleure"],a:1,e:"Même violon : 100 $ la place en concert, 32 $ dans le métro."},
+{q:"P&G vend Ariel, Pampers et Gillette sous des noms différents. C'est une stratégie de marque :",o:["Ombrelle","Individuelle","Combinée","Co-branding"],a:1,e:"Un nom par produit = marque individuelle. Philips = ombrelle ; Kellogg's Special K = combinée."},
+{q:"Le sommet de la pyramide de Keller est :",o:["La saillance","La performance","Les sentiments","La résonance"],a:3,e:"Résonance (fidélité, communauté) au sommet ; saillance à la base."},
+{q:"Kapferer : Rolex montre Roger Federer dans ses pubs. Facette :",o:["Physique","Culture","Reflet","Relation"],a:2,e:"Le reflet est le client type montré. La mentalisation serait ce que l'acheteur ressent (« je réussis »)."},
+{q:"Dyson passe des aspirateurs aux sèche-cheveux. C'est :",o:["Une extension de marque","Un étirement de marque","Un co-branding ingrédient","Un repositionnement d'image"],a:1,e:"Autre catégorie = étirement (brand stretching). Même catégorie = extension."},
+{q:"Milka × Oreo est un co-branding :",o:["Parallèle","Ingrédient","De communication","De combat"],a:1,e:"Oreo devient un ingrédient de la tablette Milka."},
+{q:"Pierre Cardin, présent sur des milliers de produits, illustre :",o:["La cannibalisation","La dilution de la marque","Le sous-financement","La marque de combat"],a:1,e:"À force d'être partout, la marque ne signifie plus rien : dilution."},
+{q:"La campagne CeraVe × Michael Cera illustre surtout :",o:["La communication marketing intégrée (IMC)","Le co-branding ingrédient","Le ciblage indifférencié","Une marque de combat"],a:0,e:"Plusieurs canaux, rôles différents, une seule histoire cohérente : IMC."},
+{q:"Dans la copy strategy d'Orangina, « la vraie pulpe de fruit » est :",o:["La promesse","La preuve (reason why)","Le ton","La cible"],a:1,e:"La promesse est « naturel + fun » ; la pulpe est la preuve qui rend le naturel crédible."}
+];
+const box=document.getElementById('quizBox');let answered=0,good=0;
+function render(){box.innerHTML='';answered=0;good=0;upd();
+Q.forEach((it,i)=>{const d=document.createElement('div');d.className='qcard q';
+d.innerHTML='<div class="qt">Q'+(i+1)+' · '+it.q+'</div>'+it.o.map((t,j)=>'<button class="opt" data-j="'+j+'" type="button">'+'ABCD'[j]+'. '+t+'</button>').join('')+'<div class="expl"></div>';
+d.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{if(d.dataset.done)return;d.dataset.done=1;answered++;const j=+b.dataset.j;
+d.querySelectorAll('.opt')[it.a].classList.add('good');if(j===it.a)good++;else b.classList.add('wrong');
+const ex=d.querySelector('.expl');ex.textContent=(j===it.a?'Bravo ! ':'Réponse '+'ABCD'[it.a]+'. ')+it.e;ex.classList.add('show');upd();});
+box.appendChild(d);});}
+function upd(){document.getElementById('score').textContent='Score : '+good+' / '+answered+' (sur '+Q.length+')';}
+document.getElementById('reset').onclick=render;
+window.showAllAnswers=function(){document.querySelectorAll('#quizBox .q').forEach((d,i)=>{const it=Q[i];d.querySelectorAll('.opt')[it.a].classList.add('good');const ex=d.querySelector('.expl');ex.textContent='Réponse '+'ABCD'[it.a]+'. '+it.e;ex.classList.add('show');});};
+render();
+</script>
+</body>
+</html>

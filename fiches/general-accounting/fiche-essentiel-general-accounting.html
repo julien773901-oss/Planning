@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>General Accounting essentiel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6faf7; --card:#ffffff; --ink:#1d2b24; --muted:#5b6d63; --line:#d6e5db;
+  --accent:#2f7d57; --accent-2:#4fa77a; --soft:#e5f3ea; --soft-2:#f0f8f3;
+  --warn:#b4552d; --warn-soft:#fbece4; --ok:#2f7d57; --ok-soft:#dff2e6; --bad:#b83b3b; --bad-soft:#f9e3e3;
+  --star:#d39a1c;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#111915; --card:#18231d; --ink:#e3eee7; --muted:#9db3a6; --line:#2b3d33;
+    --accent:#6cc799; --accent-2:#4fa77a; --soft:#1f3329; --soft-2:#1b2b22;
+    --warn:#f0a07a; --warn-soft:#3a2720; --ok:#6cc799; --ok-soft:#1f3a2b; --bad:#f08b8b; --bad-soft:#3d2222; --star:#f2c14e;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#111915; --card:#18231d; --ink:#e3eee7; --muted:#9db3a6; --line:#2b3d33;
+  --accent:#6cc799; --accent-2:#4fa77a; --soft:#1f3329; --soft-2:#1b2b22;
+  --warn:#f0a07a; --warn-soft:#3a2720; --ok:#6cc799; --ok-soft:#1f3a2b; --bad:#f08b8b; --bad-soft:#3d2222; --star:#f2c14e;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.6 Inter,system-ui,sans-serif}
+.wrap{max-width:900px;margin:0 auto;padding:28px 16px 80px}
+h1,h2,h3{font-family:Lora,Georgia,serif;line-height:1.25}
+h1{font-size:2.1rem;margin:.2em 0 .3em;color:var(--accent)}
+h2{font-size:1.45rem;margin:0 0 .5em}
+h3{font-size:1.08rem;margin:1.2em 0 .4em;color:var(--accent)}
+.kicker{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.lead{color:var(--muted);max-width:680px}
+section{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 22px 18px;margin:22px 0;break-inside:auto}
+.prob{display:inline-block;font-size:.72rem;font-weight:700;padding:2px 9px;border-radius:999px;background:var(--soft);color:var(--accent);margin-left:6px;vertical-align:middle;font-family:Inter,sans-serif;letter-spacing:.02em}
+.prob.max{background:var(--star);color:#1d1a10}
+.f{background:var(--soft-2);border-left:4px solid var(--accent);border-radius:8px;padding:10px 14px;margin:10px 0;font-family:"JetBrains Mono",monospace;font-size:.92rem;overflow-x:auto;white-space:pre-wrap}
+.f b{font-family:Inter,sans-serif;display:block;font-size:.78rem;color:var(--muted);letter-spacing:.04em;text-transform:uppercase;margin-bottom:2px}
+.box{border-radius:10px;padding:12px 14px;margin:12px 0}
+.box.key{background:var(--soft);}
+.box.trap{background:var(--warn-soft);border-left:4px solid var(--warn)}
+.box .t{font-weight:700;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;display:block;margin-bottom:4px}
+.box.trap .t{color:var(--warn)} .box.key .t{color:var(--accent)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:640px){.grid2{grid-template-columns:1fr}}
+table{width:100%;border-collapse:collapse;font-size:.9rem;margin:8px 0}
+th,td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:var(--soft);font-weight:600}
+td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tbl{overflow-x:auto}
+.top10{counter-reset:t;list-style:none;padding:0;margin:0}
+.top10 li{counter-increment:t;position:relative;padding:7px 0 7px 40px;border-bottom:1px dashed var(--line)}
+.top10 li::before{content:counter(t);position:absolute;left:0;top:7px;width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;font-weight:700;display:grid;place-items:center;font-size:.85rem}
+svg{max-width:100%;height:auto;display:block;margin:10px auto}
+svg text{font-family:Inter,sans-serif;fill:var(--ink)}
+.toc{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0}
+.toc a{font-size:.82rem;text-decoration:none;color:var(--accent);background:var(--soft);padding:4px 10px;border-radius:999px}
+details{background:var(--soft-2);border-radius:8px;padding:8px 12px;margin:8px 0}
+summary{cursor:pointer;font-weight:600;color:var(--accent)}
+em{color:var(--muted)}
+/* quiz */
+.q{border:1px solid var(--line);border-radius:12px;padding:14px;margin:12px 0;background:var(--card)}
+.q .qh{font-size:.72rem;color:var(--muted);font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.q .qt{font-weight:600;margin:4px 0 8px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media(max-width:640px){.opts{grid-template-columns:1fr}}
+.opt{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:8px;padding:8px 10px;text-align:left;font:inherit;font-size:.92rem;cursor:pointer}
+.opt:hover{border-color:var(--accent)}
+.opt.right{background:var(--ok-soft);border-color:var(--ok)}
+.opt.wrong{background:var(--bad-soft);border-color:var(--bad)}
+.opt:disabled{cursor:default}
+.expl{display:none;margin-top:8px;font-size:.92rem;background:var(--soft-2);border-radius:8px;padding:8px 12px}
+.q.done .expl{display:block}
+.scorebar{position:sticky;top:0;z-index:5;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}
+.scorebar button{font:inherit;font-size:.85rem;border:1px solid var(--accent);color:var(--accent);background:transparent;border-radius:8px;padding:4px 10px;cursor:pointer}
+.result{font-weight:600;color:var(--accent);margin-top:10px}
+@media print{
+  body{background:#fff;font-size:12.5px}
+  section{border:none;padding:6px 0;margin:8px 0}
+  .toc,.scorebar,.result{display:none!important}
+  .q{break-inside:avoid}
+  .box,.f,table{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="kicker">Fiche « essentiel examen » · L3 Commerce international · UPEC · M. Desban · CM + TD</div>
+<h1>General Accounting &amp; International Business</h1>
+<p class="lead">Seulement ce qui a le plus de chances de tomber : les formules, les raisonnements et les exercices types du cours, avec les chiffres de Jacobs Golf &amp; Tennis (TD 1) et de Global Conglomerate (CM, en M$). Les étiquettes <span class="prob max">★ quasi sûr</span> et <span class="prob">probable</span> indiquent la priorité de révision.</p>
+
+<nav class="toc">
+  <a href="#top10">Top 10</a><a href="#s1">1 · Équation comptable</a><a href="#s2">2 · Engagement</a><a href="#s3">3 · États financiers</a><a href="#s4">4 · Cash flow</a><a href="#s5">5 · Valeur</a><a href="#s6">6 · Ratios</a><a href="#s7">7 · Levier</a><a href="#s8">8 · Obligations</a><a href="#s9">9 · IFRS</a><a href="#pieges">Pièges</a><a href="#quiz">Quiz</a>
+</nav>
+
+<section id="top10">
+<h2>Le top 10 à savoir la veille</h2>
+<ol class="top10">
+  <li><b>Actif = Dettes + Capitaux propres</b>, vrai après chaque opération.</li>
+  <li><b>CP fin = CP début + Apports − Retraits + Résultat net</b> (résultat = produits − charges).</li>
+  <li>Les CP ne bougent que par <b>apport, retrait, produit ou charge</b>. Le reste déplace des montants entre actif et dettes.</li>
+  <li><b>Produit ≠ encaissement, charge ≠ décaissement</b> : comptabilité d'engagement (<em>accrual accounting</em>).</li>
+  <li>L'<b>amortissement</b> est une charge <b>sans sortie de cash</b> (« I am not a cash item! »).</li>
+  <li>Flux opérationnel : on part du résultat net, <b>+ amortissements, − hausse créances, − hausse stocks, + hausse dettes fournisseurs</b>.</li>
+  <li><b>EV = Market cap + Dette − Cash</b> ; M/B = Market cap / Book equity.</li>
+  <li><b>DuPont</b> : ROE = marge nette × rotation de l'actif × equity multiplier.</li>
+  <li><b>Levier positif si ROCE &gt; i</b> ; sinon effet massue.</li>
+  <li>Obligations : <b>prix et taux varient en sens inverse</b> ; coupon &gt; YTM → prime, coupon &lt; YTM → décote.</li>
+</ol>
+</section>
+
+<section id="s1">
+<h2>1 · L'équation comptable et les capitaux propres <span class="prob max">★ quasi sûr</span></h2>
+<svg viewBox="0 0 560 170" role="img" aria-label="Schéma du bilan : actif à gauche, dettes et capitaux propres à droite">
+  <rect x="20" y="20" width="250" height="130" rx="10" fill="var(--soft)" stroke="var(--accent)"/>
+  <text x="145" y="55" text-anchor="middle" font-weight="700">ACTIF · Assets</text>
+  <text x="145" y="80" text-anchor="middle" font-size="13">Ce que l'entreprise possède</text>
+  <text x="145" y="100" text-anchor="middle" font-size="12" fill="var(--muted)">cash, créances, stocks, machines</text>
+  <rect x="290" y="20" width="250" height="60" rx="10" fill="var(--warn-soft)" stroke="var(--warn)"/>
+  <text x="415" y="45" text-anchor="middle" font-weight="700">DETTES · Liabilities</text>
+  <text x="415" y="66" text-anchor="middle" font-size="12">ce qu'on doit à des tiers</text>
+  <rect x="290" y="90" width="250" height="60" rx="10" fill="var(--ok-soft)" stroke="var(--accent)"/>
+  <text x="415" y="115" text-anchor="middle" font-weight="700">CAPITAUX PROPRES · Equity</text>
+  <text x="415" y="136" text-anchor="middle" font-size="12">apports + bénéfices conservés</text>
+  <text x="280" y="90" text-anchor="middle" font-size="22" font-weight="700" fill="var(--accent)">=</text>
+</svg>
+<div class="f"><b>Formule 1 · à chaque date</b>Actif = Dettes + Capitaux propres   ⇔   CP = Actif − Dettes</div>
+<div class="f"><b>Formule 2 · sur l'année</b>CP fin = CP début + Apports − Retraits + Résultat net</div>
+
+<h3>Exercice type du TD : trouver les montants manquants</h3>
+<p>Méthode : commence par l'inconnue qui est <b>seule</b> dans une formule, puis enchaîne.</p>
+<div class="tbl"><table>
+<tr><th>Situation 1</th><th>Donnée</th><th>Calcul</th></tr>
+<tr><td>Dettes début (A)</td><td>Actif 5 000, CP 3 000</td><td>5 000 − 3 000 = <b>2 000</b></td></tr>
+<tr><td>CP fin (B)</td><td>Actif 8 000, dettes 3 000</td><td>8 000 − 3 000 = <b>5 000</b></td></tr>
+<tr><td>Résultat (D)</td><td>Produits 20 000, charges 18 500</td><td><b>1 500</b></td></tr>
+<tr><td>Retraits (C)</td><td>3 000 + 1 000 − C + 1 500 = 5 000</td><td><b>C = 500</b></td></tr>
+</table></div>
+</section>
+
+<section id="s2">
+<h2>2 · Enregistrer une opération : la logique d'engagement <span class="prob max">★ quasi sûr</span></h2>
+<p>Pour chaque opération : 1) quels postes bougent (toujours au moins deux) ; 2) dans quel sens ; 3) l'équation tient-elle encore ?</p>
+<div class="tbl"><table>
+<tr><th>Opération JG&amp;T</th><th>Effet</th><th>Pourquoi</th></tr>
+<tr><td>Apport de Harry 50 000</td><td>Cash +, Capital +</td><td>Apport du propriétaire</td></tr>
+<tr><td>Emprunt 20 000 à 8 %</td><td>Cash +, Emprunt +</td><td>Pas de produit, juste une dette</td></tr>
+<tr><td>Loyer d'un an payé d'avance 12 000</td><td>Cash −, Loyer payé d'avance +</td><td>C'est un <b>actif</b>, pas encore une charge</td></tr>
+<tr><td>Stock acheté à crédit 30 000</td><td>Stock +, Dettes fournisseurs +</td><td>Aucun effet sur les CP</td></tr>
+<tr><td>Cours de golf 600 (200 encaissés)</td><td>Cash +200, Créances +400, CP +600</td><td>Service rendu = produit, même non payé</td></tr>
+<tr><td>Avance client 100</td><td>Cash +, Produits constatés d'avance +</td><td>Service pas rendu = <b>dette</b> (<em>unearned revenue</em>)</td></tr>
+<tr><td>Électricité de janvier non payée 120</td><td>Dette +, CP −</td><td>Consommée en janvier = charge du mois</td></tr>
+<tr><td>Vente à crédit 4 000, coût 2 200</td><td>Créances +4 000, Stock −2 200, CP +1 800</td><td>Produit − coût des marchandises vendues</td></tr>
+<tr><td>Intérêts de janvier</td><td>Intérêts à payer +133, CP −133</td><td>20 000 × 8 % × 1/12</td></tr>
+<tr><td>Loyer consommé</td><td>Loyer payé d'avance −1 000, CP −1 000</td><td>12 000 / 12</td></tr>
+<tr><td>Amortissement de l'équipement 25 000 sur 10 ans</td><td>Équipement −208, CP −208</td><td>2 500 / an ÷ 12 ; aucun cash</td></tr>
+<tr><td>Retrait de Harry 100</td><td>Cash −, Capital −</td><td><b>Pas une charge</b> : ne touche pas le résultat</td></tr>
+</table></div>
+<div class="grid2">
+  <div class="box key"><span class="t">Produit ≠ cash</span>Cours de golf : produit 600, cash 200. Avance client : cash 100, produit 0.</div>
+  <div class="box key"><span class="t">Charge ≠ cash</span>Électricité et intérêts : charges sans paiement. Loyer d'avance et équipement : paiement sans charge immédiate.</div>
+</div>
+<div class="f"><b>Les 3 calculs à savoir refaire</b>Intérêts = Capital × Taux annuel × Durée  (20 000 × 8 % × 1/12 ≈ 133)
+Loyer du mois = 12 000 / 12 = 1 000
+Amortissement linéaire = Coût / Durée = 25 000 / 10 = 2 500 par an ≈ 208 par mois</div>
+<p>Bilan au 31 janvier : <b>Actif 100 492 = Dettes 50 303 + CP 50 189</b>. Résultat net de janvier : 4 650 de produits − 4 361 de charges = <b>289</b>. CP : 0 + 50 000 + 289 − 100 = 50 189.</p>
+</section>
+
+<section id="s3">
+<h2>3 · Les états financiers <span class="prob max">★ quasi sûr</span></h2>
+<div class="grid2">
+  <div class="box key"><span class="t">Bilan · Balance sheet</span>Une <b>photo</b> à une date : ce qu'on possède et ce qu'on doit.</div>
+  <div class="box key"><span class="t">Compte de résultat · Income statement</span>Un <b>film</b> sur une période : est-elle rentable ?</div>
+</div>
+<div class="box key"><span class="t">Tableau des flux · Cash flows</span>Le film du cash réel : a-t-elle de l'argent ? Les 5 documents d'une société cotée : bilan, compte de résultat, tableau des flux, variation des capitaux propres, notes annexes.</div>
+
+<h3>Le bilan : courant ou long terme ? (seuil = 1 an)</h3>
+<div class="f"><b>Fonds de roulement net</b>NWC = Current Assets − Current Liabilities      Global 2015 : 57 − 48 = 9 M$</div>
+<div class="f"><b>Valeur comptable d'un actif</b>Book Value = Coût d'acquisition − Amortissements cumulés</div>
+<p><b>Goodwill</b> : prix payé pour racheter une société − valeur de ses actifs (25 − 5 = 20 M$ chez Global). Il représente marque, clientèle, brevets.</p>
+<p>Les CP comptables mesurent mal la vraie valeur : actifs au <b>coût historique</b>, et beaucoup de richesses (savoir-faire, réputation) n'apparaissent pas au bilan.</p>
+
+<h3>Le compte de résultat en escalier (Global 2015, M$)</h3>
+<div class="tbl"><table>
+<tr><td>Chiffre d'affaires</td><td class="n">186,7</td></tr>
+<tr><td>− Coût des ventes</td><td class="n">153,4</td></tr>
+<tr><th>= Marge brute (Gross profit)</th><th class="n">33,3</th></tr>
+<tr><td>− SG&amp;A, R&amp;D, amortissements</td><td class="n">22,9</td></tr>
+<tr><th>= Résultat d'exploitation = EBIT</th><th class="n">10,4</th></tr>
+<tr><td>− Intérêts</td><td class="n">7,7</td></tr>
+<tr><th>= Résultat avant impôt (Pretax income)</th><th class="n">2,7</th></tr>
+<tr><td>− Impôt</td><td class="n">0,7</td></tr>
+<tr><th>= Résultat net (Net income)</th><th class="n">2,0</th></tr>
+</table></div>
+<div class="f"><b>Bénéfice par action</b>EPS = Net Income / Nombre d'actions = 2,0 / 3,6 = 0,556 $</div>
+</section>
+
+<section id="s4">
+<h2>4 · Le tableau des flux de trésorerie <span class="prob max">★ quasi sûr</span></h2>
+<svg viewBox="0 0 600 150" role="img" aria-label="Les trois parties du tableau des flux">
+  <rect x="10" y="20" width="185" height="110" rx="10" fill="var(--soft)" stroke="var(--accent)"/>
+  <text x="102" y="45" text-anchor="middle" font-weight="700" font-size="13">1 · Opérationnel</text>
+  <text x="102" y="68" text-anchor="middle" font-size="12">Résultat net</text>
+  <text x="102" y="86" text-anchor="middle" font-size="12">+ amortissements</text>
+  <text x="102" y="104" text-anchor="middle" font-size="12">± variation du BFR</text>
+  <rect x="207" y="20" width="185" height="110" rx="10" fill="var(--soft)" stroke="var(--accent)"/>
+  <text x="300" y="45" text-anchor="middle" font-weight="700" font-size="13">2 · Investissement</text>
+  <text x="300" y="72" text-anchor="middle" font-size="12">− CAPEX (machines…)</text>
+  <text x="300" y="92" text-anchor="middle" font-size="12">− acquisitions</text>
+  <rect x="404" y="20" width="185" height="110" rx="10" fill="var(--soft)" stroke="var(--accent)"/>
+  <text x="496" y="45" text-anchor="middle" font-weight="700" font-size="13">3 · Financement</text>
+  <text x="496" y="68" text-anchor="middle" font-size="12">− dividendes</text>
+  <text x="496" y="86" text-anchor="middle" font-size="12">± actions émises/rachetées</text>
+  <text x="496" y="104" text-anchor="middle" font-size="12">± emprunts</text>
+</svg>
+<div class="tbl"><table>
+<tr><th>Variation</th><th>Dans le flux opérationnel</th><th>Bon sens</th></tr>
+<tr><td>Créances clients ↑</td><td><b>On retire</b></td><td>Tu as prêté à ton client</td></tr>
+<tr><td>Stocks ↑</td><td><b>On retire</b></td><td>Cash parti, pas encore en charge</td></tr>
+<tr><td>Dettes fournisseurs ↑</td><td><b>On ajoute</b></td><td>Ton fournisseur te prête</td></tr>
+<tr><td>Amortissement</td><td><b>On ajoute</b></td><td>Charge sans sortie de cash</td></tr>
+</table></div>
+<p>Global : créances +5,3 → malgré 2 M$ de bénéfice, flux opérationnel <b>−1,2 M$</b>. Le cash n'augmente que grâce à de nouveaux emprunts : signal inquiétant.</p>
+<div class="f"><b>Résultat mis en réserve</b>Retained Earnings = Net Income − Dividends = 2 − 1 = 1 M$
+ΔCP = Résultat net − Dividendes + Émissions − Rachats d'actions</div>
+<div class="box key"><span class="t">Exercice type : +1 M$ d'amortissement, impôt 26 %</span>
+Résultat avant impôt −1 → impôt −0,26 → <b>résultat net −0,74</b>.<br>
+Cash : −0,74 + 1 (on rajoute l'amortissement) = <b>+0,26 M$</b>, c'est l'économie d'impôt.<br>
+Plus d'amortissement = moins de bénéfice, mais plus de cash.</div>
+</section>
+
+<section id="s5">
+<h2>5 · Valeur comptable, valeur de marché, valeur d'entreprise <span class="prob max">★ quasi sûr</span></h2>
+<div class="f"><b>Capitalisation</b>Market Cap = Nb d'actions × Cours = 3,6 × 14 = 50,4 M$</div>
+<div class="f"><b>Market-to-Book</b>M/B = Market Cap / Book Equity = 50,4 / 22,2 = 2,27</div>
+<p>M/B faible → <b>value stock</b> ; M/B élevé → <b>growth stock</b>.</p>
+<div class="f"><b>Valeur d'entreprise</b>EV = Market Cap + Dette − Cash = 50,4 + 116,7 − 21,2 = 145,9 M$</div>
+<p>Dette financière = notes payable + part CT de la dette LT + dette LT = 3,5 + 13,3 + 99,9 = 116,7 (les dettes fournisseurs <b>ne comptent pas</b>, elles ne portent pas d'intérêts). Lecture de l'EV : tu rachètes les actions, tu rembourses les dettes, tu récupères le cash.</p>
+</section>
+
+<section id="s6">
+<h2>6 · Les ratios <span class="prob max">★ quasi sûr</span></h2>
+<div class="tbl"><table>
+<tr><th>Famille</th><th>Ratio</th><th>Formule</th><th>Global 2015</th></tr>
+<tr><td rowspan="3">Rentabilité</td><td>Gross margin</td><td>Gross profit / Sales</td><td class="n">17,8 %</td></tr>
+<tr><td>Operating margin</td><td>Operating income / Sales</td><td class="n">5,57 %</td></tr>
+<tr><td>Net margin</td><td>Net income / Sales</td><td class="n">1,07 %</td></tr>
+<tr><td rowspan="3">Liquidité</td><td>Current</td><td>Current assets / Current liab.</td><td class="n">1,19</td></tr>
+<tr><td>Quick</td><td>(Cash + A/R) / Current liab.</td><td class="n">0,83</td></tr>
+<tr><td>Cash</td><td>Cash / Current liab.</td><td class="n">0,44</td></tr>
+<tr><td rowspan="3">BFR</td><td>A/R days</td><td>A/R / Sales × 365</td><td class="n">36,2 j</td></tr>
+<tr><td>A/P days</td><td>A/P / Cost of sales × 365</td><td class="n">–</td></tr>
+<tr><td>Inventory turnover</td><td>Cost of sales / Inventory</td><td class="n">≈ 10×</td></tr>
+<tr><td rowspan="2">Couverture</td><td>EBIT / Interest</td><td>&gt; 5 bon ; &lt; 1,5 doute</td><td class="n">1,35</td></tr>
+<tr><td>EBITDA / Interest</td><td>EBITDA = EBIT + D&amp;A</td><td class="n">1,51</td></tr>
+<tr><td rowspan="3">Endettement</td><td>D/E comptable</td><td>Debt / Book equity</td><td class="n">5,3</td></tr>
+<tr><td>Net debt</td><td>Debt − Cash</td><td class="n">95,5</td></tr>
+<tr><td>Debt-to-EV</td><td>Net debt / EV</td><td class="n">65,5 %</td></tr>
+<tr><td>Valorisation</td><td>P/E</td><td>Market cap / NI = Price / EPS</td><td class="n">25,2</td></tr>
+<tr><td rowspan="3">Rendement</td><td>ROE</td><td>NI / Book equity</td><td class="n">9,0 %</td></tr>
+<tr><td>ROA</td><td>(NI + Interest) / Assets</td><td class="n">5,5 %</td></tr>
+<tr><td>ROIC</td><td>EBIT(1 − τ) / (Equity + Net debt)</td><td class="n">6,5 %</td></tr>
+</table></div>
+<div class="box trap"><span class="t">Comparer ce qui est comparable</span>Market cap et cours → résultat net ou EPS (actionnaires seuls). Chiffre d'affaires, EBIT, EBITDA → <b>valeur d'entreprise</b> (prêteurs + actionnaires), par exemple EV / EBITDA.</div>
+<p>Liquidité, du moins strict au plus strict : current → quick (sans les stocks, difficiles à vendre vite) → cash.</p>
+
+<h3>L'identité de DuPont <span class="prob">probable</span></h3>
+<div class="f"><b>DuPont</b>ROE = (NI / Sales) × (Sales / Assets) × (Assets / Equity)
+    = marge nette × rotation de l'actif × equity multiplier
+Global : 1,07 % × 1,05 × 8 ≈ 9,0 %</div>
+<p>Lecture : marge faible, le ROE de Global tient surtout grâce à un <b>endettement très élevé</b> (multiplicateur de 8). Marge × rotation = ROA.</p>
+</section>
+
+<section id="s7">
+<h2>7 · L'effet de levier financier <span class="prob max">★ quasi sûr</span></h2>
+<div class="grid2">
+  <div class="box key"><span class="t">ROCE · rentabilité économique</span>Résultat d'exploitation / Actif économique. Ce que rapporte l'activité.</div>
+  <div class="box key"><span class="t">ROE · rentabilité financière</span>Résultat net / Capitaux propres. Ce que touchent les actionnaires.</div>
+</div>
+<div class="f"><b>Définition du cours</b>Effet de levier = ROE − ROCE
+ROCE &gt; i (coût de la dette) → levier positif, le ROE monte
+ROCE &lt; i → effet massue, le ROE s'effondre</div>
+<h3>Entreprise ψ : actif 1 000, impôt 33,33 %</h3>
+<div class="tbl"><table>
+<tr><th></th><th class="n">Scén. 1</th><th class="n">Scén. 2</th><th class="n">Scén. 3</th><th class="n">Scén. 4</th></tr>
+<tr><td>ROCE</td><td class="n">20 %</td><td class="n">20 %</td><td class="n">20 %</td><td class="n">6 %</td></tr>
+<tr><td>EBIT</td><td class="n">200</td><td class="n">200</td><td class="n">200</td><td class="n">60</td></tr>
+<tr><td>CP / Dette</td><td class="n">1 000 / 0</td><td class="n">500 / 500</td><td class="n">300 / 700</td><td class="n">300 / 700</td></tr>
+<tr><td>i</td><td class="n">–</td><td class="n">5 %</td><td class="n">8 %</td><td class="n">8 %</td></tr>
+<tr><td>Intérêts</td><td class="n">0</td><td class="n">25</td><td class="n">56</td><td class="n">56</td></tr>
+<tr><td>Résultat avant impôt</td><td class="n">200</td><td class="n">175</td><td class="n">144</td><td class="n">4</td></tr>
+<tr><td>Résultat net</td><td class="n">134</td><td class="n">118</td><td class="n">97</td><td class="n">2,7</td></tr>
+<tr><th>ROE</th><th class="n">13,4 %</th><th class="n">23,6 %</th><th class="n">32,3 %</th><th class="n">0,9 %</th></tr>
+</table></div>
+<p>Méthode (scénario 2) : EBIT = 1 000 × 20 % = 200 → intérêts = 500 × 5 % = 25 → avant impôt 175 → net ≈ 118 → ROE = 118 / 500 = 23,6 %.</p>
+<div class="box trap"><span class="t">À retenir</span>Les intérêts sont <b>fixes</b>, le résultat d'exploitation varie : la dette amplifie les bonnes comme les mauvaises années. <b>Effet ciseaux</b> : plus de dette → plus de risque → les banques montent le taux → le levier se réduit. Pour se désendetter (effet boule de neige) : réduire stocks et créances, ralentir les investissements.</div>
+</section>
+
+<section id="s8">
+<h2>8 · Les obligations (Debt market) <span class="prob max">★ quasi sûr</span></h2>
+<div class="f"><b>Valeur actuelle</b>PV = Montant futur / (1 + r)^N        105 / 1,05 = 100 €</div>
+<div class="f"><b>Coupon</b>CPN = Coupon rate × Face value / nb de coupons par an     1 000 × 10 % / 2 = 50 $</div>
+<div class="f"><b>YTM d'un zéro-coupon</b>YTM = (FV / P)^(1/N) − 1        100 000 / 96 618,36 − 1 = 3,5 %</div>
+<div class="f"><b>Prix d'une obligation à coupons</b>P = CPN × 1/y × (1 − 1/(1+y)^N) + FV/(1+y)^N</div>
+<div class="tbl"><table>
+<tr><th>Situation</th><th>Prix</th><th>Exemple (30 ans, YTM 5 %, nominal 100)</th></tr>
+<tr><td>Coupon &gt; YTM</td><td>&gt; nominal : <b>prime</b></td><td>coupon 10 % → 176,86</td></tr>
+<tr><td>Coupon = YTM</td><td>= nominal : <b>au pair</b></td><td>coupon 5 % → 100</td></tr>
+<tr><td>Coupon &lt; YTM</td><td>&lt; nominal : <b>décote</b></td><td>coupon 3 % → 69,26</td></tr>
+</table></div>
+<svg viewBox="0 0 420 150" role="img" aria-label="Le prix d'une obligation baisse quand le taux monte">
+  <line x1="50" y1="120" x2="390" y2="120" stroke="var(--muted)"/>
+  <line x1="50" y1="15" x2="50" y2="120" stroke="var(--muted)"/>
+  <path d="M60 25 Q150 95 380 110" fill="none" stroke="var(--accent)" stroke-width="3"/>
+  <text x="220" y="142" text-anchor="middle" font-size="12">Taux du marché (YTM) ↑</text>
+  <text x="18" y="70" font-size="12" transform="rotate(-90 18 70)" text-anchor="middle">Prix ↓</text>
+  <text x="250" y="60" font-size="12" fill="var(--accent)">Taux ↑ ⇒ prix ↓</text>
+</svg>
+<div class="box trap"><span class="t">Risque de crédit</span>Le YTM d'une obligation risquée suppose que tout sera payé : il est <b>toujours supérieur au rendement espéré</b>. Avant Corp. : défaut certain avec 90 % remboursés → prix 900 / 1,04 = 865,38, YTM 15,56 %, mais rendement réel 4 %.</div>
+<p>Si le YTM ne change pas, le prix d'un zéro-coupon <b>monte</b> en approchant l'échéance (23,14 → 29,53 en 5 ans), et le rendement reste égal au YTM. Une obligation à coupons perd le montant du coupon juste après son versement.</p>
+</section>
+
+<section id="s9">
+<h2>9 · Normes comptables (question de cours) <span class="prob">probable</span></h2>
+<div class="tbl"><table>
+<tr><th>Date</th><th>Fait</th></tr>
+<tr><td>1973</td><td>10 pays créent l'<b>IASC</b></td></tr>
+<tr><td>2001</td><td>L'IASC devient l'<b>IASB</b> (Londres), qui publie les <b>IFRS</b></td></tr>
+<tr><td>2005</td><td>IFRS obligatoires dans l'UE pour les comptes consolidés des sociétés cotées (décision de 2002)</td></tr>
+<tr><td>2012</td><td>Plus de 120 juridictions</td></tr>
+</table></div>
+<p>Exceptions : <b>États-Unis et Japon</b> gardent leurs GAAP. L'<b>auditeur</b> est un tiers neutre et obligatoire qui certifie les comptes.</p>
+</section>
+
+<section id="pieges">
+<h2>Les pièges qui coûtent des points</h2>
+<div class="grid2">
+  <div class="box trap"><span class="t">Avance client = produit</span>Faux : c'est une dette tant que le service n'est pas rendu.</div>
+  <div class="box trap"><span class="t">Retrait = salaire</span>Faux : baisse directe du capital, pas une charge.</div>
+  <div class="box trap"><span class="t">Oublier le prorata</span>Taux annuel sur un mois → × 1/12.</div>
+  <div class="box trap"><span class="t">Inverser le BFR</span>Hausse créances ou stocks : on retire. Hausse dettes fournisseurs : on ajoute.</div>
+  <div class="box trap"><span class="t">Dettes fournisseurs dans la dette nette</span>Non : seulement la dette financière.</div>
+  <div class="box trap"><span class="t">YTM = rendement garanti</span>Pour une obligation risquée, c'est un maximum.</div>
+</div>
+</section>
+
+<section id="quiz">
+<h2>Quiz d'entraînement (26 questions, corrigé expliqué)</h2>
+<div class="scorebar"><span id="score">Score : 0 / 0</span><button id="reset" type="button">Recommencer</button></div>
+<div id="qz"></div>
+<div class="result" id="result"></div>
+</section>
+
+</div>
+<script>
+const Q=[
+{c:"Équation",q:"Actif au 31/12 : 8 000 $ ; dettes : 3 000 $. Capitaux propres ?",o:["11 000 $","5 000 $","3 000 $","8 000 $"],a:1,e:"CP = Actif − Dettes = 8 000 − 3 000 = 5 000 $."},
+{c:"Équation",q:"CP début 3 000, apports 1 000, résultat 1 500, CP fin 5 000. Retraits ?",o:["0","500","1 500","2 500"],a:1,e:"3 000 + 1 000 − R + 1 500 = 5 000 → R = 500 (situation 1 du TD)."},
+{c:"Engagement",q:"Un client paie 100 $ d'avance pour des cours pas encore donnés. C'est :",o:["Un produit de 100 $","Une dette (unearned revenue)","Une créance","Un apport en capital"],a:1,e:"Tant que le service n'est pas rendu, JG&T doit donner les cours ou rembourser : c'est une dette."},
+{c:"Engagement",q:"JG&T paie 12 000 $ de loyer pour l'année le 1er janvier. Ce jour-là :",o:["Charge de 12 000","Cash −12 000 et actif « loyer payé d'avance » +12 000","Cash −12 000 et capital −12 000","Dette de 12 000"],a:1,e:"C'est un actif (droit d'occuper le local), qui devient une charge de 1 000 $ par mois."},
+{c:"Engagement",q:"Vente à crédit de 4 000 $ de marchandises qui avaient coûté 2 200 $. Effet sur les CP ?",o:["+4 000","+2 200","+1 800","0"],a:2,e:"Produit 4 000 − coût des marchandises vendues 2 200 = +1 800."},
+{c:"Engagement",q:"Emprunt de 20 000 $ à 8 %/an. Intérêts du seul mois de janvier ?",o:["1 600 $","160 $","133 $","8 $"],a:2,e:"20 000 × 8 % × 1/12 ≈ 133 $ : taux annuel, période d'un mois."},
+{c:"Engagement",q:"Harry retire 100 $ pour ses dépenses personnelles. C'est :",o:["Une charge de salaire","Un retrait de capital, sans effet sur le résultat","Un produit","Une dette envers Harry"],a:1,e:"Le retrait est l'inverse d'un apport : capital −100, cash −100, résultat inchangé."},
+{c:"Engagement",q:"Facture d'électricité de janvier (120 $) reçue mais non payée au 31/01 :",o:["Aucun effet","Dette +120 et CP −120","Cash −120 et CP −120","Dette +120 et cash +120"],a:1,e:"Consommée en janvier : charge du mois, même sans paiement. Une dette apparaît en face."},
+{c:"États financiers",q:"Quel document est une « photo » à une date précise ?",o:["Compte de résultat","Tableau des flux","Bilan","Notes annexes"],a:2,e:"Le bilan est une photo ; compte de résultat et tableau des flux décrivent une période."},
+{c:"États financiers",q:"Current assets 57, current liabilities 48. Le fonds de roulement net vaut :",o:["105","9","1,19","−9"],a:1,e:"NWC = CA − CL = 57 − 48 = 9 M$ (1,19 serait le current ratio)."},
+{c:"États financiers",q:"EBIT − charges d'intérêts = ?",o:["Résultat d'exploitation","Marge brute","Résultat avant impôt","Résultat net"],a:2,e:"EBIT − intérêts = pretax income ; on retire ensuite l'impôt pour obtenir le résultat net."},
+{c:"Cash flow",q:"Dans le flux opérationnel, une hausse des créances clients :",o:["S'ajoute","Se déduit","Est ignorée","Va en investissement"],a:1,e:"Le client n'a pas payé : moins de cash, on la déduit."},
+{c:"Cash flow",q:"Dans le flux opérationnel, une hausse des dettes fournisseurs :",o:["S'ajoute","Se déduit","Est ignorée","Va en financement"],a:0,e:"Le fournisseur te prête : tu gardes ton cash, on l'ajoute."},
+{c:"Cash flow",q:"+1 M$ d'amortissement, impôt 26 %. Effet sur la trésorerie ?",o:["−1 M$","−0,74 M$","0","+0,26 M$"],a:3,e:"Résultat net −0,74, puis on rajoute l'amortissement (non-cash) : −0,74 + 1 = +0,26 M$, l'économie d'impôt."},
+{c:"Valeur",q:"3,6 M d'actions à 14 $, capitaux propres comptables 22,2 M$. Market-to-book ?",o:["0,44","1,58","2,27","3,60"],a:2,e:"Market cap = 50,4 ; M/B = 50,4 / 22,2 = 2,27."},
+{c:"Valeur",q:"Market cap 50,4, dette 116,7, cash 21,2. Valeur d'entreprise ?",o:["145,9","167,1","188,3","95,5"],a:0,e:"EV = 50,4 + 116,7 − 21,2 = 145,9 M$ (95,5 est la dette nette)."},
+{c:"Ratios",q:"Cash 21,2, créances 18,5, stocks 15,3, current liabilities 48. Quick ratio ?",o:["1,19","0,83","0,44","1,15"],a:1,e:"(21,2 + 18,5) / 48 = 0,83. Les stocks sont exclus car difficiles à vendre vite."},
+{c:"Ratios",q:"Market cap 50,4 M$, résultat net 2,0 M$. P/E ?",o:["2,27","9,0","25,2","40,3"],a:2,e:"P/E = 50,4 / 2,0 = 25,2 (ou 14 / 0,556)."},
+{c:"Ratios",q:"L'EBITDA se compare dans un ratio de valorisation à :",o:["La capitalisation","La valeur d'entreprise","Le cours de l'action","Les CP comptables"],a:1,e:"L'EBITDA revient à toute l'entreprise (prêteurs + actionnaires) : EV / EBITDA."},
+{c:"Ratios",q:"Marge nette 1,07 %, rotation de l'actif 1,05, equity multiplier 8. ROE ?",o:["1,1 %","5,5 %","9,0 %","13,4 %"],a:2,e:"DuPont : 1,07 % × 1,05 × 8 ≈ 9,0 %."},
+{c:"Levier",q:"L'effet de levier est positif quand :",o:["ROE < ROCE","ROCE > i","ROCE < i","La dette est nulle"],a:1,e:"Si l'activité rapporte plus que la dette ne coûte, l'endettement fait monter le ROE."},
+{c:"Levier",q:"Actif 1 000, ROCE 20 %, dette 500 à 5 %, impôt 1/3 (net ≈ 118). ROE ?",o:["13,4 %","23,6 %","32,3 %","0,9 %"],a:1,e:"EBIT 200 − intérêts 25 = 175 ; net ≈ 118 ; ROE = 118 / 500 = 23,6 %."},
+{c:"Levier",q:"Les banquiers relèvent le taux quand l'endettement augmente, ce qui réduit le levier :",o:["Effet boule de neige","Effet ciseaux","Effet massue","Effet de rotation"],a:1,e:"Plus de dette → plus de risque → taux plus élevé → levier réduit : effet ciseaux."},
+{c:"Obligations",q:"Zéro-coupon 1 an, nominal 100 000 $, prix 96 618,36 $. YTM ?",o:["3,38 %","3,5 %","4 %","96,6 %"],a:1,e:"100 000 / 96 618,36 = 1,035 → YTM = 3,5 %."},
+{c:"Obligations",q:"Coupon 3 %, YTM du marché 5 %. L'obligation cote :",o:["Au pair","Avec une prime","Avec une décote","On ne sait pas"],a:2,e:"Coupon < YTM → prix < nominal : décote (69,26 pour 100 dans le cours)."},
+{c:"Obligations",q:"Pour une obligation d'entreprise risquée, le YTM est :",o:["Égal au rendement espéré","Inférieur au rendement espéré","Supérieur au rendement espéré","Égal au taux sans risque"],a:2,e:"Le YTM utilise les flux promis, pas les flux attendus : il est supérieur au rendement espéré."}
+];
+const L="ABCD", box=document.getElementById('qz');
+let ans=0, good=0;
+function upd(){document.getElementById('score').textContent=`Score : ${good} / ${ans}`;
+  document.getElementById('result').textContent= ans===Q.length ? (good>=21?`Bravo, ${good}/${Q.length} : tu es prête.`:`${good}/${Q.length} : relis les parties où tu t'es trompée.`):'';}
+function render(){
+  box.innerHTML=''; ans=0; good=0;
+  Q.forEach((x,i)=>{
+    const d=document.createElement('div'); d.className='q';
+    d.innerHTML=`<div class="qh">Question ${i+1} / ${Q.length} · ${x.c}</div><div class="qt">${x.q}</div><div class="opts"></div><div class="expl"></div>`;
+    const op=d.querySelector('.opts');
+    x.o.forEach((t,j)=>{const b=document.createElement('button');b.type='button';b.className='opt';b.textContent=`${L[j]}. ${t}`;
+      b.onclick=()=>{ if(d.classList.contains('done'))return; d.classList.add('done'); ans++;
+        const bs=op.querySelectorAll('.opt'); bs.forEach(z=>z.disabled=true); bs[x.a].classList.add('right');
+        if(j===x.a){good++;}else{b.classList.add('wrong');}
+        d.querySelector('.expl').innerHTML=`<b>${j===x.a?'Juste !':'Raté.'} Réponse ${L[x.a]}.</b> ${x.e}`; upd();};
+      op.appendChild(b);});
+    box.appendChild(d);});
+  upd();
+}
+window.showAllAnswers=function(){document.querySelectorAll('.q').forEach((d,i)=>{const x=Q[i];d.classList.add('done');
+  const bs=d.querySelectorAll('.opt');bs.forEach(z=>{z.disabled=true;z.classList.remove('wrong')});bs[x.a].classList.add('right');
+  d.querySelector('.expl').innerHTML=`<b>Réponse ${L[x.a]}.</b> ${x.e}`;});};
+document.getElementById('reset').onclick=render;
+render();
+</script>
+</body>
+</html>

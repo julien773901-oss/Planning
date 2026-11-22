@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Essentiel International Management</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Public+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap">
+<style>
+:root{
+  --bg:#fcf7f9; --paper:#ffffff; --ink:#3b1e2c; --muted:#7d5468;
+  --ac:#dcb0c8; --ac-deep:#8a2f58; --hot:#c98aac; --cream:#f8ebf1; --cream-2:#ebcbdb; --line:#f0dde6;
+  --lil:#e6dbf3; --lil-deep:#6b4a93;
+  --teal:#2f6f73; --teal-bg:#e3f2f1; --ok:#1f8a5b; --ok-bg:#e3f5ec; --ko:#c0262d; --ko-bg:#fde4e2;
+  --a1:#f1d0e0; --a2:#d9a9c4; --a3:#ece3f6; --a4:#cfe7e4;
+  --f-display:"Bricolage Grotesque","Arial Black",system-ui,sans-serif;
+  --f-body:"Public Sans","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#1c0f16; --paper:#26141e; --ink:#f8e9f0; --muted:#d0a7bb;
+  --ac:#c98bab; --ac-deep:#f0b6d0; --hot:#d995b8; --cream:#3a1d2c; --cream-2:#64304a; --line:#45283a;
+  --lil:#2f2440; --lil-deep:#c9b2ea;
+  --teal:#6fd6cc; --teal-bg:#12302e; --ok:#5fd39b; --ok-bg:#163327; --ko:#ff8b7d; --ko-bg:#3a1a17;
+  --a1:#6a3550; --a2:#9a5579; --a3:#3a2d4f; --a4:#1f5c55; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#1c0f16; --paper:#26141e; --ink:#f8e9f0; --muted:#d0a7bb;
+  --ac:#c98bab; --ac-deep:#f0b6d0; --hot:#d995b8; --cream:#3a1d2c; --cream-2:#64304a; --line:#45283a;
+  --lil:#2f2440; --lil-deep:#c9b2ea;
+  --teal:#6fd6cc; --teal-bg:#12302e; --ok:#5fd39b; --ok-bg:#163327; --ko:#ff8b7d; --ko-bg:#3a1a17;
+  --a1:#6a3550; --a2:#9a5579; --a3:#3a2d4f; --a4:#1f5c55; color-scheme:dark }
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.6;padding:0 16px}
+.wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:220px minmax(0,1fr);gap:44px;padding-block:28px 80px}
+@media (max-width:900px){.wrap{grid-template-columns:minmax(0,1fr);gap:0}.toc{display:none}}
+main{min-width:0;max-width:78ch}
+h1,h2,h3,h4{font-family:var(--f-display);text-wrap:balance;line-height:1.12;color:var(--ink)}
+h1{font-size:clamp(2.1rem,6vw,3.4rem);font-weight:800;margin:0 0 .3em;letter-spacing:-.02em;color:#3b1e2c}
+h2{font-size:clamp(1.5rem,3.4vw,2.1rem);font-weight:800;margin:0 0 .3em}
+h3{font-size:1.22rem;font-weight:750;margin:1.6em 0 .4em;color:var(--ac-deep)}
+h4{font-size:1.02rem;margin:1em 0 .25em}
+p{margin:.5em 0} a{color:var(--ac-deep)} ul,ol{padding-left:1.3em} li{margin:.18em 0}
+.eyebrow{font-family:var(--f-display);text-transform:uppercase;letter-spacing:.12em;font-size:.76rem;font-weight:800;color:var(--ac-deep)}
+.en{font-style:italic;color:var(--muted)}
+.toc{position:sticky;top:24px;align-self:start;font-size:.9rem;max-height:calc(100vh - 48px);overflow-y:auto}
+.toc ol{list-style:none;padding:0;margin:.6em 0 0;display:grid;gap:2px}
+.toc a{display:block;padding:5px 10px;border-radius:8px;text-decoration:none;color:var(--muted)}
+.toc a:hover{background:var(--cream);color:var(--ink)}
+.hero{background:linear-gradient(130deg,#f6e1eb 0%,#e9c8dc 48%,#d9bde0 100%);color:#3b1e2c;border-radius:22px;padding:26px 24px;margin-bottom:24px}
+.hero .eyebrow{color:#7a2850}
+.hero .lede{font-size:1.08rem;color:#4a2638;max-width:62ch}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;font-size:.86rem}
+.legend span{background:rgba(255,255,255,.65);border-radius:999px;padding:3px 11px;font-weight:600;color:#5a1d3a}
+section.part{padding-top:34px;margin-top:34px;border-top:3px solid var(--line)}
+.part-head{display:flex;gap:14px;align-items:flex-start;margin-bottom:6px}
+.part-num{font-family:var(--f-display);font-weight:800;font-size:2.4rem;line-height:1;color:#5a1d3a;background:linear-gradient(135deg,#f3d6e4,#d8b0cf);border-radius:12px;padding:6px 12px;flex:none;box-shadow:0 4px 0 #c493b4}
+.stars{color:#b0306a;letter-spacing:.05em;font-size:.95rem;white-space:nowrap}
+.box{border-radius:14px;padding:12px 16px;margin:14px 0;border:1px solid var(--line);background:var(--paper)}
+.box > :first-child{margin-top:0}.box > :last-child{margin-bottom:0}
+.tag{display:inline-block;font-family:var(--f-display);font-weight:800;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;padding:2px 8px;border-radius:6px;margin-bottom:4px}
+.def{background:var(--cream);border-color:var(--cream-2)} .def .tag{background:var(--ac);color:#3b1e2c}
+.ex{border-left:6px solid var(--teal)} .ex .tag{background:var(--teal);color:var(--paper)}
+.trap{border:1.5px dashed var(--ko)} .trap .tag{color:var(--ko);border:1.5px solid var(--ko)}
+.exam{background:linear-gradient(135deg,var(--cream),var(--paper));border:2px solid var(--ac)} .exam .tag{background:var(--hot);color:#3b1e2c}
+.top{border:3px solid var(--ac);background:var(--paper)}
+.top ol{margin:.3em 0;padding-left:1.4em}
+.top li{margin:.35em 0}
+.tbl{overflow-x:auto;margin:14px 0;border-radius:12px;border:1px solid var(--line)}
+table{border-collapse:collapse;width:100%;font-size:.9rem;background:var(--paper)}
+th,td{padding:7px 10px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+th{background:var(--cream);font-family:var(--f-display);font-weight:800;color:var(--ac-deep)}
+tr:last-child td{border-bottom:none}
+figure{margin:16px 0;padding:14px;background:var(--paper);border:1px solid var(--line);border-radius:14px}
+figure svg{display:block;width:100%;height:auto;max-width:560px;margin:0 auto}
+figcaption{font-size:.84rem;color:var(--muted);margin-top:6px}
+svg text{font-family:var(--f-body);fill:var(--ink);font-size:13px}
+svg .mut{fill:var(--muted)} svg .b{font-weight:700} svg .big{font-family:var(--f-display);font-weight:800;font-size:15px}
+svg .ln{stroke:var(--ink);stroke-width:1.5;fill:none}
+svg .f1{fill:var(--a1)} svg .f2{fill:var(--a2)} svg .f3{fill:var(--a3)} svg .f4{fill:var(--a4)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin:12px 0}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:10px 13px;min-width:0}
+.card h4{margin:0 0 3px;color:var(--ac-deep)} .card p,.card ul{margin:.15em 0;font-size:.92rem} .card ul{padding-left:1.1em}
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:stretch;margin:12px 0}
+.flow .step{flex:1 1 110px;background:var(--cream);border-radius:12px;padding:8px 11px;font-size:.88rem;min-width:0}
+.flow .step b{display:block;font-family:var(--f-display);color:var(--ac-deep)}
+.mem{font-family:var(--f-display);font-weight:700;background:var(--cream);border-radius:10px;padding:9px 13px;margin:12px 0}
+/* quiz */
+.q{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:13px 16px;margin:12px 0}
+.q .qt{font-size:.72rem;font-family:var(--f-display);font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.q .qq{font-weight:700;margin:.2em 0 .5em}
+.opts{display:grid;gap:6px}
+.opts button{font:inherit;font-size:.94rem;text-align:left;background:var(--bg);color:var(--ink);border:1.5px solid var(--line);border-radius:10px;padding:7px 12px;cursor:pointer}
+.opts button:hover:not(:disabled){border-color:var(--ac)}
+.opts button.right{background:var(--ok-bg);border-color:var(--ok);font-weight:700}
+.opts button.wrong{background:var(--ko-bg);border-color:var(--ko)}
+.opts button:disabled{cursor:default}
+.expl{display:none;margin-top:8px;padding:8px 12px;border-radius:10px;background:var(--cream);font-size:.92rem}
+.expl.on{display:block}
+.scorebar{position:sticky;bottom:12px;background:var(--ink);color:var(--bg);border-radius:999px;padding:8px 16px;display:flex;gap:12px;align-items:center;justify-content:space-between;margin-top:18px;font-weight:700;font-size:.92rem}
+.scorebar button{font:inherit;background:var(--ac);color:#3b1e2c;border:0;border-radius:999px;padding:4px 12px;cursor:pointer}
+@media print{body{font-size:14.5px}.toc,.scorebar{display:none}.wrap{display:block}main{max-width:none}section.part{margin-top:18px;padding-top:18px}.q,figure,.box,.card,table{break-inside:avoid}.opts button{padding:3px 9px;font-size:.86rem}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="toc" aria-label="Sommaire">
+  <div class="eyebrow">Sommaire</div>
+  <ol>
+    <li><a href="#top10">Le top 12</a></li>
+    <li><a href="#p1">1 · Mondialisation & MNC</a></li>
+    <li><a href="#p2">2 · Politique & droit</a></li>
+    <li><a href="#p3">3 · Éthique & RSE</a></li>
+    <li><a href="#p4">4 · Cultures (EPRG)</a></li>
+    <li><a href="#p5">5 · Culture d'entreprise</a></li>
+    <li><a href="#p6">6 · Communication</a></li>
+    <li><a href="#p7">7 · Négociation</a></li>
+    <li><a href="#p8">8 · Stratégie</a></li>
+    <li><a href="#methode">Rédiger une réponse</a></li>
+    <li><a href="#quiz">QCM corrigé</a></li>
+  </ol>
+</nav>
+<main>
+<header class="hero">
+  <div class="eyebrow">International Management · L3 Commerce international · UPEC · S5</div>
+  <h1>L'essentiel pour l'examen</h1>
+  <p class="lede">Seulement ce qui a le plus de chances de tomber, tiré de ton cours complet (Luthans &amp; Doh, chap. 1, 2, 3, 5, 6, 7, 8). Les définitions sont en anglais, comme au CM : apprends-les presque mot pour mot. La fiche complète reste là pour les détails.</p>
+  <div class="legend"><span>★★★ tombe presque à coup sûr</span><span>★★ très probable</span><span>★ à connaître en une phrase</span></div>
+</header>
+
+<section id="top10" class="box top">
+  <span class="tag" style="background:var(--ink);color:var(--bg)">Si tu n'as qu'une heure</span>
+  <h2 style="margin-top:.2em">Le top 12 à savoir par cœur</h2>
+  <ol>
+    <li><b>MNC</b> : 3 critères (operations in more than one country, international sales, nationality mix of managers and owners).</li>
+    <li><b>Offshoring ≠ outsourcing</b> : changer de pays ≠ changer d'entreprise.</li>
+    <li><b>La matrice global integration / local responsiveness</b> et ses 4 stratégies : global, multidomestic, transnational, international, avec un exemple chacune.</li>
+    <li><b>Les 4 familles de droit</b> : common, civil (code), Islamic, socialist.</li>
+    <li><b>Les principes du droit international</b> : sovereignty, jurisdiction (nationality, territoriality, protective), comity, act of state.</li>
+    <li><b>CSR</b>, <b>NGO</b>, <b>FCPA</b> (1977) et les 4 thèmes du <b>UN Global Compact</b>.</li>
+    <li><b>EPRG</b> : ethnocentric, polycentric, regiocentric, geocentric.</li>
+    <li><b>Parochialism vs simplification</b>.</li>
+    <li><b>Les 4 dimensions de Hofstede</b> et les <b>4 cultures de Trompenaars</b> (family, Eiffel Tower, guided missile, incubator).</li>
+    <li><b>High context vs low context</b> et le non verbal : kinesics, proxemics, chronemics, chromatics.</li>
+    <li><b>Négociation</b> : distributive vs integrative, les 5 étapes, la <b>BATNA</b>.</li>
+    <li><b>Stratégie</b> : les 4 imperatives (economic, political, quality, administrative) et les 3 étapes de la planification ; BOP et born global.</li>
+  </ol>
+</section>
+
+<!-- ============ 1 ============ -->
+<section id="p1" class="part">
+  <div class="part-head"><div class="part-num">1</div><div><div class="eyebrow">Chapitre 1 · Globalization</div><h2>Mondialisation et multinationales</h2></div></div>
+
+  <h3>Les définitions <span class="stars">★★★</span></h3>
+  <div class="box def"><span class="tag">International management</span>
+    <p>« Process of applying management concepts and techniques in a multinational environment and adapting management practices to different economic, political, and cultural environments. »</p>
+    <p class="en">Le management, mais adapté à l'économie, à la politique et à la culture de chaque pays.</p></div>
+  <div class="box def"><span class="tag">MNC</span>
+    <p>« A firm having operations in more than one country, international sales, and a nationality mix of managers and owners. »</p>
+    <p class="en">Trois critères. La taille ou la nationalité du siège n'en font pas partie. Ex. : Apple, Coca-Cola, Walmart, Total.</p></div>
+  <div class="box def"><span class="tag">Globalization</span>
+    <p>« The process of social, political, economic, cultural, and technological integration among countries around the world. »</p>
+    <p class="en">Moteurs : trade, capital flows, migration, technology, communications, transport.</p></div>
+
+  <div class="grid2">
+    <div class="card"><h4>Offshoring <span class="stars">★★★</span></h4><p>L'entreprise fait l'activité <b>elle-même</b>, mais <b>dans un autre pays</b>.</p><p>Ex. : une banque ouvre son propre centre informatique au Portugal.</p></div>
+    <div class="card"><h4>Outsourcing <span class="stars">★★★</span></h4><p>L'entreprise <b>confie</b> l'activité à <b>une autre entreprise</b>.</p><p>Ex. : Apple fait assembler l'iPhone par Foxconn.</p></div>
+  </div>
+  <div class="box trap"><span class="tag">Piège</span><p>Les deux peuvent se cumuler : confier son service client à un prestataire marocain = offshoring <b>et</b> outsourcing.</p></div>
+
+  <h3>La matrice des 4 stratégies <span class="stars">★★★</span></h3>
+  <p>Deux pressions opposées : <b>global integration</b> (même produit partout, coûts bas) et <b>local responsiveness</b> (s'adapter à chaque pays). Ce schéma revient aux chapitres 1 et 8 : c'est le plus important du cours.</p>
+  <figure>
+    <svg viewBox="0 0 520 345" role="img" aria-label="Matrice intégration mondiale / réactivité locale">
+      <rect x="90" y="20" width="200" height="130" rx="10" class="f1"/>
+      <rect x="300" y="20" width="200" height="130" rx="10" class="f2"/>
+      <rect x="90" y="160" width="200" height="130" rx="10" class="f3"/>
+      <rect x="300" y="160" width="200" height="130" rx="10" class="f4"/>
+      <text x="190" y="70" text-anchor="middle" class="big">GLOBAL</text>
+      <text x="190" y="92" text-anchor="middle">même produit partout</text>
+      <text x="190" y="110" text-anchor="middle" class="mut">Apple, Intel, Pfizer</text>
+      <text x="400" y="70" text-anchor="middle" class="big">TRANSNATIONAL</text>
+      <text x="400" y="92" text-anchor="middle">coûts bas ET adaptation</text>
+      <text x="400" y="110" text-anchor="middle" class="mut">IKEA, Unilever</text>
+      <text x="190" y="210" text-anchor="middle" class="big">INTERNATIONAL</text>
+      <text x="190" y="232" text-anchor="middle">on exporte son savoir-faire</text>
+      <text x="190" y="250" text-anchor="middle" class="mut">Harley-Davidson, vin</text>
+      <text x="400" y="210" text-anchor="middle" class="big">MULTIDOMESTIC</text>
+      <text x="400" y="232" text-anchor="middle">une filiale adaptée par pays</text>
+      <text x="400" y="250" text-anchor="middle" class="mut">Nestlé (Nescafé)</text>
+      <text x="190" y="315" text-anchor="middle" class="b">LOW</text>
+      <text x="400" y="315" text-anchor="middle" class="b">HIGH</text>
+      <text x="295" y="338" text-anchor="middle" class="mut">Local responsiveness (pression d'adaptation) →</text>
+      <text x="70" y="88" text-anchor="end" class="b">HIGH</text>
+      <text x="70" y="228" text-anchor="end" class="b">LOW</text>
+      <text x="20" y="155" transform="rotate(-90 20 155)" text-anchor="middle" class="mut">Global integration (pression sur les coûts) →</text>
+    </svg>
+    <figcaption>Bartlett et Ghoshal. Moyen mnémotechnique : <b>global</b> = haut gauche, <b>multidomestic</b> = l'inverse (bas droite), <b>transnational</b> = tout fort, <b>international</b> = tout faible.</figcaption>
+  </figure>
+
+  <h3>À citer en une phrase <span class="stars">★★</span></h3>
+  <ul>
+    <li><b>Critiques de la mondialisation</b> : manifestations contre l'OMC/FMI, offshoring of jobs, growing trade deficit, slow wage growth, lack of accountability (ex. Rana Plaza, Bangladesh, 2013).</li>
+    <li><b>WTO (OMC)</b> : arbitre mondial du commerce, créé par l'<b>Uruguay Round</b>, en place depuis <b>1995</b> (le GATT de 1947 était son prédécesseur).</li>
+    <li><b>NAFTA</b> : États-Unis, Canada, Mexique (remplacé par l'USMCA en 2020). <b>CAFTA-DR</b> : États-Unis + Amérique centrale + République dominicaine. <b>UE</b> : communauté politique et économique.</li>
+    <li><b>Nouveaux acteurs</b> : Inde, Brésil, Chine (Lenovo, Tata, Embraer, Cemex, Haier).</li>
+    <li>« The act of <b>barter</b> is the forerunner of modern international trade. »</li>
+  </ul>
+</section>
+
+<!-- ============ 2 ============ -->
+<section id="p2" class="part">
+  <div class="part-head"><div class="part-num">2</div><div><div class="eyebrow">Chapitre 2 · Political, legal, technological environment</div><h2>Politique, droit, technologie</h2></div></div>
+
+  <h3>Les systèmes politiques <span class="stars">★★</span></h3>
+  <p>On les juge sur <b>deux dimensions</b> : les droits des citoyens (de <b>democratic</b> à <b>totalitarian</b>) et le centre de gravité (<b>individualism</b> ou <b>collectivism</b>).</p>
+  <div class="mem">« Democratic tend to emphasize individualism and totalitarian lean towards collectivism. »</div>
+  <div class="grid2">
+    <div class="card"><h4>Individualism</h4><p>Liberté économique, propriété privée, proche du capitalisme (États-Unis).</p></div>
+    <div class="card"><h4>Collectivism / socialism</h4><p>La société avant l'individu ; l'État possède les institutions. Communism = forme extrême du socialisme.</p></div>
+    <div class="card"><h4>Democracy</h4><p>Au moins deux partis, élus responsables devant les électeurs.</p></div>
+    <div class="card"><h4>Totalitarianism</h4><p>Parti unique, opposition supprimée, censure.</p></div>
+  </div>
+
+  <h3>Les 4 familles de droit <span class="stars">★★★</span></h3>
+  <div class="tbl"><table>
+    <tr><th>Famille</th><th>Origine</th><th>Pays</th><th>À retenir</th></tr>
+    <tr><td><b>Common law</b></td><td>Droit anglais</td><td>États-Unis, Royaume-Uni, Canada, Australie</td><td>Le juge et les précédents (jurisprudence) ; contrats très longs</td></tr>
+    <tr><td><b>Civil / code law</b></td><td>Droit romain</td><td>France, Amérique latine, Louisiane, Québec</td><td>Des codes écrits ; contrats plus courts</td></tr>
+    <tr><td><b>Islamic law</b></td><td>Coran et enseignements du Prophète</td><td>Moyen-Orient, Asie centrale</td><td>Pas de prêt à intérêt</td></tr>
+    <tr><td><b>Socialist law</b></td><td>Marxisme</td><td>Chine, Vietnam, Cuba, ex-URSS</td><td>La plupart des biens appartiennent à l'État</td></tr>
+  </table></div>
+
+  <h3>Les principes du droit international <span class="stars">★★★</span></h3>
+  <div class="grid2">
+    <div class="card"><h4>Sovereignty</h4><p>« Governments have the right to rule themselves as they see fit. » + <b>sovereign immunity</b> : on ne poursuit pas un État devant les tribunaux d'un autre.</p></div>
+    <div class="card"><h4>International jurisdiction</h4><ul><li><b>Nationality</b> : un pays juge ses citoyens où qu'ils soient.</li><li><b>Territoriality</b> : ce qui se passe sur son sol.</li><li><b>Protective</b> : les actes à l'étranger qui menacent sa sécurité (fausse monnaie).</li></ul></div>
+    <div class="card"><h4>Doctrine of comity</h4><p>Respect mutuel des lois et institutions des autres pays.</p></div>
+    <div class="card"><h4>Act of state doctrine</h4><p>Les tribunaux américains tiennent pour valides les actes d'un gouvernement étranger, même illégaux en droit américain (ex. une nationalisation à Cuba).</p></div>
+  </div>
+  <p><b>À citer aussi</b> : treatment of aliens (un pays peut refuser ou expulser des étrangers) ; forum for settling disputes (choisir le tribunal le plus logique).</p>
+
+  <h3>Technologie <span class="stars">★</span></h3>
+  <p>E-business : <b>B2B</b> (entreprise → entreprise), <b>B2C</b> (entreprise → particulier, Amazon), e-tailing, e-cash. La technologie permet aux pays émergents de « sauter des étapes » (M-Pesa au Kenya) et rend le travail « portable » (offshoring de la comptabilité).</p>
+</section>
+
+<!-- ============ 3 ============ -->
+<section id="p3" class="part">
+  <div class="part-head"><div class="part-num">3</div><div><div class="eyebrow">Chapitre 3 · Ethics and social responsibility</div><h2>Éthique et RSE</h2></div></div>
+
+  <h3>Les définitions <span class="stars">★★★</span></h3>
+  <div class="box def"><span class="tag">Ethics</span><p>« Study of morality and standards of conduct. » Les dilemmes naissent quand les standards diffèrent entre pays, surtout dans les pratiques d'emploi (ex. Nike et les sweatshops en Asie).</p></div>
+  <div class="box def"><span class="tag">CSR</span><p>« Actions of a firm to benefit society beyond requirements of law and direct interests of firm. »</p><p class="en">Le mot clé : <b>volontaire</b>, au-delà de la loi.</p></div>
+  <div class="box def"><span class="tag">Sustainability</span><p>« Development that meets humanity's needs without harming future generations. » Triple bottom line : <b>People, Planet, Profit</b>.</p></div>
+  <div class="box def"><span class="tag">NGO</span><p>« Private, not-for-profit organization that seeks to serve society's interests » (pauvreté, éducation, santé, environnement). Ex. : Oxfam, WWF, Save the Children. Ce sont les leaders les plus dignes de confiance (56 %), loin devant les dirigeants de MNC (33 %).</p></div>
+
+  <h3>Les 3 grands problèmes éthiques <span class="stars">★★</span></h3>
+  <p><b>Employment and business practices</b> (conditions de travail, heures), <b>human rights</b> (pas de standard universel), <b>corruption</b> (omniprésente). MNC critiquées : <b>Nike, Levi's, Chiquita</b>. Leur réponse : codes de conduite, mêmes standards chez soi et à l'étranger, coopération avec les ONG.</p>
+
+  <h3>UN Global Compact <span class="stars">★★</span></h3>
+  <p>10 principes en <b>4 thèmes</b> : <b>Human rights</b>, <b>Labor</b>, <b>Environment</b>, <b>Anti-corruption</b>.</p>
+
+  <h3>Corporate governance <span class="stars">★★</span></h3>
+  <p>« The system by which business corporations are directed and controlled. »</p>
+  <div class="grid2">
+    <div class="card"><h4>Insider systems</h4><p>Europe continentale (France, Allemagne) : actionnariat <b>concentré</b> (familles, banques, holdings). Ex. : famille Arnault chez LVMH.</p></div>
+    <div class="card"><h4>Outsider systems</h4><p>États-Unis, Royaume-Uni : actionnariat <b>dispersé</b> (fonds, petits porteurs). Ex. : Apple.</p></div>
+  </div>
+
+  <h3>Lutter contre la corruption <span class="stars">★★★</span></h3>
+  <div class="box def"><span class="tag">FCPA (1977)</span><p>Loi américaine : illégal pour les entreprises américaines d'influencer des fonctionnaires étrangers par des paiements personnels ou des contributions politiques, même déguisés en « entertainment » ou « consulting fees ».</p></div>
+  <p>Complément : la <b>convention de l'OCDE</b> (limite : elle n'interdit pas la plupart des paiements aux dirigeants de partis politiques). Arrêter les pots-de-vin ne fait pas baisser les ventes.</p>
+</section>
+
+<!-- ============ 4 ============ -->
+<section id="p4" class="part">
+  <div class="part-head"><div class="part-num">4</div><div><div class="eyebrow">Chapitre 5 · Managing across cultures</div><h2>Manager à travers les cultures</h2></div></div>
+
+  <h3>Le modèle EPRG <span class="stars">★★★</span></h3>
+  <div class="flow">
+    <div class="step"><b>Ethnocentric</b>Les valeurs de la <b>maison mère</b> guident tout ; les cadres du siège dirigent partout ; profits rapatriés.</div>
+    <div class="step"><b>Polycentric</b>Décisions <b>adaptées à chaque pays</b> ; des locaux dirigent ; profits gardés sur place.</div>
+    <div class="step"><b>Regiocentric</b>On mélange intérêts du siège et des filiales <b>par région</b> (Europe, Asie…).</div>
+    <div class="step"><b>Geocentric</b>Une approche <b>mondiale intégrée</b> : les meilleurs, d'où qu'ils viennent.</div>
+  </div>
+  <div class="box def"><span class="tag">Définitions à réciter</span>
+    <p><b>Ethnocentric</b> : « a nationalistic philosophy of management whereby the values and interests of the parent company guide strategic decisions. »</p>
+    <p><b>Polycentric</b> : « strategic decisions are tailored to suit the cultures of the countries where the MNC operates. »</p>
+    <p><b>Regiocentric</b> : « the firm tries to blend its own interests with those of its subsidiaries on a regional basis. »</p>
+    <p><b>Geocentric</b> : « the company tries to integrate a global systems approach to decision making. »</p></div>
+  <div class="box ex"><span class="tag">Exemple</span><p>Une maison de luxe qui garde toute la création à Paris et nomme des Français à l'étranger = ethnocentric. Nestlé qui adapte ses produits par pays = polycentric. Toyota Motor Europe (siège régional à Bruxelles) = regiocentric. Unilever qui recrute ses dirigeants partout = geocentric.</p></div>
+
+  <h3>Globalisation ou adaptation ? <span class="stars">★★</span></h3>
+  <p><b>Globalization imperative</b> : « belief that one worldwide approach to doing business is key to efficiency and effectiveness. » Mais les normes, les goûts locaux, le « buy local » obligent souvent à s'adapter (ex. publicité : factuelle en Allemagne, émotionnelle en France, humoristique au Royaume-Uni).</p>
+
+  <h3>Les deux erreurs à éviter <span class="stars">★★★</span></h3>
+  <div class="grid2">
+    <div class="card"><h4>Parochialism</h4><p>« The tendency to view the world through one's own eyes and perspectives. » Ex. : croire que tout le monde parle anglais.</p></div>
+    <div class="card"><h4>Simplification</h4><p>« The process of exhibiting the same orientation toward different cultural groups. » Ex. : négocier au Japon comme au Brésil.</p></div>
+  </div>
+
+  <h3>Les 4 dimensions de Hofstede <span class="stars">★★★</span></h3>
+  <div class="tbl"><table>
+    <tr><th>Dimension</th><th>Sens</th><th>Exemple</th></tr>
+    <tr><td><b>Power distance</b></td><td>Acceptation d'un pouvoir inégalement réparti</td><td>Forte : Mexique, Malaisie, France · faible : Danemark</td></tr>
+    <tr><td><b>Individualism</b></td><td>L'individu avant le groupe</td><td>Fort : États-Unis, Royaume-Uni · faible : Asie</td></tr>
+    <tr><td><b>Masculinity</b></td><td>Réussite, compétition, argent (vs qualité de vie)</td><td>Fort : Japon, Allemagne · faible : France, pays nordiques</td></tr>
+    <tr><td><b>Uncertainty avoidance</b></td><td>Besoin de règles pour éviter l'imprévu</td><td>Fort : Japon, France · faible : Singapour, Danemark</td></tr>
+  </table></div>
+  <p><b>Kluckhohn et Strodtbeck</b> <span class="stars">★</span> : 6 questions que se pose toute culture (nature des gens, rapport à la nature, aux autres, activité, temps, espace). Les États-Unis : dominer la nature, « doing », futur, individualiste, espace privé.</p>
+
+  <h3>Faire des affaires : un réflexe par pays <span class="stars">★★</span></h3>
+  <div class="tbl"><table>
+    <tr><th>Pays</th><th>La règle d'or</th></tr>
+    <tr><td>Chine</td><td>Ne pas faire perdre la face (intermédiaires), réciprocité, relation à long terme, pas d'émotion.</td></tr>
+    <tr><td>Russie</td><td>Relations personnelles (le droit protège mal), patience, ne pas céder trop vite.</td></tr>
+    <tr><td>Inde</td><td>Ponctualité, titres, main droite, marchandage normal.</td></tr>
+    <tr><td>France</td><td>Ponctualité, pas d'argent à table, pas de familiarité rapide, logique et précision.</td></tr>
+    <tr><td>Pays arabes</td><td>Pas de vantardise, relations, patience, décisions en personne au sommet.</td></tr>
+    <tr><td>Brésil</td><td>Contact physique, relation avant les affaires, réunions en retard, patience.</td></tr>
+  </table></div>
+</section>
+
+<!-- ============ 5 ============ -->
+<section id="p5" class="part">
+  <div class="part-head"><div class="part-num">5</div><div><div class="eyebrow">Chapitre 6 · Organizational cultures and diversity</div><h2>Culture d'entreprise et diversité</h2></div></div>
+
+  <div class="box def"><span class="tag">Organizational culture</span><p>« Shared values and beliefs enabling members to understand their roles and the norms of the organization. »</p></div>
+  <div class="box exam"><span class="tag">L'idée clé du chapitre <span class="stars">★★★</span></span><p>La <b>culture nationale est plus forte que la culture d'entreprise</b> : les Allemands deviennent « encore plus allemands » dans une MNC américaine. La MNC ne peut pas imposer sa culture, elle doit s'adapter.</p></div>
+
+  <h3>Les 4 cultures de Trompenaars <span class="stars">★★★</span></h3>
+  <figure>
+    <svg viewBox="0 0 520 320" role="img" aria-label="Les quatre cultures d'entreprise de Trompenaars">
+      <rect x="90" y="20" width="200" height="130" rx="10" class="f3"/>
+      <rect x="300" y="20" width="200" height="130" rx="10" class="f4"/>
+      <rect x="90" y="160" width="200" height="130" rx="10" class="f1"/>
+      <rect x="300" y="160" width="200" height="130" rx="10" class="f2"/>
+      <text x="190" y="70" text-anchor="middle" class="big">INCUBATOR</text>
+      <text x="190" y="92" text-anchor="middle">fulfillment-oriented</text>
+      <text x="190" y="110" text-anchor="middle" class="mut">s'épanouir, créer (start-up)</text>
+      <text x="400" y="70" text-anchor="middle" class="big">GUIDED MISSILE</text>
+      <text x="400" y="92" text-anchor="middle">project-oriented</text>
+      <text x="400" y="110" text-anchor="middle" class="mut">atteindre l'objectif (USA)</text>
+      <text x="190" y="210" text-anchor="middle" class="big">FAMILY</text>
+      <text x="190" y="232" text-anchor="middle">power-oriented</text>
+      <text x="190" y="250" text-anchor="middle" class="mut">le chef = un parent (Japon)</text>
+      <text x="400" y="210" text-anchor="middle" class="big">EIFFEL TOWER</text>
+      <text x="400" y="232" text-anchor="middle">role-oriented</text>
+      <text x="400" y="250" text-anchor="middle" class="mut">chacun à sa place (Allemagne)</text>
+      <text x="190" y="312" text-anchor="middle" class="b">PERSON</text>
+      <text x="400" y="312" text-anchor="middle" class="b">TASK</text>
+      <text x="75" y="88" text-anchor="end" class="b">EQUITY</text>
+      <text x="75" y="228" text-anchor="end" class="b">HIERARCHY</text>
+    </svg>
+    <figcaption>Égalité en haut, hiérarchie en bas ; personnes à gauche, tâche à droite.</figcaption>
+  </figure>
+  <div class="grid2">
+    <div class="card"><h4>Family</h4><p>Hiérarchie + personnes. Chef bienveillant, protège l'emploi.</p></div>
+    <div class="card"><h4>Eiffel Tower</h4><p>Hiérarchie + tâche. Postes bien définis, étroit au sommet, large à la base, relations liées au poste.</p></div>
+    <div class="card"><h4>Guided missile</h4><p>Égalité + tâche. Équipes projet, loyauté au métier et au projet.</p></div>
+    <div class="card"><h4>Incubator</h4><p>Égalité + personnes. Peu de structure, épanouissement, innovation.</p></div>
+  </div>
+
+  <h3>Multiculturalisme et diversité <span class="stars">★★</span></h3>
+  <p><b>Domestic multiculturalism</b> : une main-d'œuvre diverse <b>dans le pays d'origine</b> (pas besoin d'aller à l'étranger). <b>Group multiculturalism</b> : groupes <b>homogeneous</b> (une culture), <b>token</b> (tous pareils sauf un), <b>bicultural</b> (deux cultures bien représentées), <b>multicultural</b> (trois ou plus).</p>
+  <div class="grid2">
+    <div class="card"><h4>Problèmes</h4><p>Stéréotypes (perception), mauvaise communication, perceptions du temps, manque de cohésion.</p></div>
+    <div class="card"><h4>Avantages</h4><p>Créativité, meilleures décisions, solutions originales, pas de <b>groupthink</b>.</p></div>
+  </div>
+  <p><b>Rendre l'équipe efficace</b> : choisir pour les compétences, reconnaître les différences, objectif commun fixé par le chef, pouvoir égal selon la compétence, respect mutuel, feedback positif.</p>
+</section>
+
+<!-- ============ 6 ============ -->
+<section id="p6" class="part">
+  <div class="part-head"><div class="part-num">6</div><div><div class="eyebrow">Chapitre 7 · Cross-cultural communication</div><h2>La communication interculturelle</h2></div></div>
+
+  <div class="box def"><span class="tag">Communication</span><p>« The process of transferring meanings from sender to receiver. » Verbale ou non verbale ; le sens reçu passe par un filtre culturel.</p></div>
+
+  <h3>High context vs low context <span class="stars">★★★</span></h3>
+  <div class="grid2">
+    <div class="card"><h4>High context</h4><p>Messages <b>implicites, indirects</b> ; le ton, le statut, le silence comptent. Japon, pays arabes, Amérique latine. Un « c'est difficile » japonais = non.</p></div>
+    <div class="card"><h4>Low context</h4><p>Messages <b>explicites</b> : « the speaker says precisely what s/he means ». Allemagne, Suisse, Scandinavie, États-Unis.</p></div>
+  </div>
+  <figure>
+    <svg viewBox="0 0 540 112" role="img" aria-label="Échelle du contexte, du plus implicite au plus explicite">
+      <defs><linearGradient id="gctx" x1="0" x2="1"><stop offset="0" stop-color="#d9a9c4"/><stop offset="1" stop-color="#cfe7e4"/></linearGradient></defs>
+      <rect x="10" y="40" width="520" height="22" rx="11" fill="url(#gctx)"/>
+      <text x="10" y="28" class="b">HIGH context (implicite)</text>
+      <text x="530" y="28" text-anchor="end" class="b">LOW context (explicite)</text>
+      <text x="36" y="84" text-anchor="middle">Japonais</text><text x="88" y="102" text-anchor="middle">Arabes</text><text x="140" y="84" text-anchor="middle">Latino-Am.</text><text x="192" y="102" text-anchor="middle">Italiens</text><text x="244" y="84" text-anchor="middle">Anglais</text><text x="296" y="102" text-anchor="middle" class="b">Français</text><text x="348" y="84" text-anchor="middle">Nord-Am.</text><text x="400" y="102" text-anchor="middle">Scandinaves</text><text x="452" y="84" text-anchor="middle">Allemands</text><text x="504" y="102" text-anchor="middle">Suisses al.</text>
+    </svg>
+    <figcaption>D'après Rösch. La France est au milieu, un peu plus implicite que les États-Unis.</figcaption>
+  </figure>
+
+  <h3>Les styles verbaux <span class="stars">★★</span></h3>
+  <p>4 paires : <b>indirect / direct</b> · <b>elaborate / exacting / succinct</b> · <b>contextual / personal</b> · <b>affective / instrumental</b>.</p>
+  <div class="mem">Anglo-saxons et nordiques : direct, exacting, personal, instrumental. Arabes : indirect, elaborate, contextual, affective. Japon/Corée : pareil que les Arabes, mais succinct.</div>
+
+  <h3>Le non verbal <span class="stars">★★★</span></h3>
+  <div class="grid2">
+    <div class="card"><h4>Kinesics</h4><p>Le corps et le visage : regard (<b>oculesics</b>), posture, gestes.</p></div>
+    <div class="card"><h4>Proxemics</h4><p>L'espace physique. Distances américaines : intime 0-45 cm, personnelle 45 cm-1,2 m, sociale 1,2-2,4 m (affaires), publique 2,4-3 m. Plus proche au Moyen-Orient et en Amérique latine.</p></div>
+    <div class="card"><h4>Chronemics</h4><p>Le temps. <b>Monochronic</b> : une chose à la fois, horaire sacré (Allemagne, États-Unis). <b>Polychronic</b> : plusieurs choses, la relation d'abord (Amérique latine, Moyen-Orient).</p></div>
+    <div class="card"><h4>Chromatics</h4><p>Les couleurs : le blanc = mariage en France, deuil en Chine ; le rouge = danger en Occident, chance en Chine.</p></div>
+  </div>
+  <p><b>Barrières</b> <span class="stars">★</span> : langue, culture, perception (« a person's view of reality »), non verbal. <b>Solutions</b> : feedback, formation linguistique et culturelle, flexibilité. Parler à un non-natif : mots simples, pas d'argot ni d'images (« it's a piece of cake »), reformuler.</p>
+</section>
+
+<!-- ============ 7 ============ -->
+<section id="p7" class="part">
+  <div class="part-head"><div class="part-num">7</div><div><div class="eyebrow">Chapitre 7 · Cross-cultural negotiation</div><h2>La négociation interculturelle</h2></div></div>
+
+  <div class="box def"><span class="tag">Negotiation</span><p>« The process of bargaining with one or more parties to arrive at a solution acceptable to all. »</p></div>
+
+  <h3>Distributive vs integrative <span class="stars">★★★</span></h3>
+  <div class="tbl"><table>
+    <tr><th></th><th>Distributive</th><th>Integrative</th></tr>
+    <tr><td>But</td><td>Prendre le max de valeur (claim)</td><td>Créer puis partager la valeur</td></tr>
+    <tr><td>Intérêts</td><td>Divergents</td><td>Qui se recoupent</td></tr>
+    <tr><td>Relation</td><td>Court terme</td><td>Long terme</td></tr>
+    <tr><td>Résultat</td><td><b>Win-lose</b></td><td><b>Win-win</b></td></tr>
+    <tr><td>Exemple</td><td>Voiture d'occasion entre inconnus</td><td>Alliance Renault-Nissan</td></tr>
+  </table></div>
+
+  <h3>Les 5 étapes <span class="stars">★★★</span></h3>
+  <div class="flow">
+    <div class="step"><b>1 Planning</b>objectifs, BATNA (en interne)</div>
+    <div class="step"><b>2 Relationship building</b>se connaître</div>
+    <div class="step"><b>3 Exchanging information</b>chacun expose sa position</div>
+    <div class="step"><b>4 Persuasion</b>concessions</div>
+    <div class="step"><b>5 Agreement</b>accord final</div>
+  </div>
+  <div class="box trap"><span class="tag">Piège classique</span><p>Les Américains sautent vite l'étape 2 (« let's get down to business »). Japonais, Arabes, Mexicains y passent beaucoup de temps : sans confiance, pas d'accord.</p></div>
+
+  <h3>BATNA et principes de Fisher et Ury <span class="stars">★★★</span></h3>
+  <div class="box def"><span class="tag">BATNA</span><p><b>Best Alternative To a Negotiated Agreement</b> : ce que tu obtiens si la négociation échoue. Si l'offre est moins bonne que ta BATNA, tu pars. Ex. : stage proposé à 600 €, tu as une offre écrite à 700 € ailleurs → BATNA = 700 €.</p></div>
+  <ol>
+    <li>Separate the <b>people</b> from the problem.</li>
+    <li>Focus on <b>interests</b>, not positions.</li>
+    <li>Generate a variety of <b>options</b>.</li>
+    <li>Insist on <b>objective criteria</b>.</li>
+    <li><b>Stand your ground</b> : jamais pire que sa BATNA.</li>
+  </ol>
+
+  <h3>Styles par culture <span class="stars">★★</span></h3>
+  <div class="tbl"><table>
+    <tr><th></th><th>Américains</th><th>Japonais</th><th>Arabes</th><th>Mexicains</th></tr>
+    <tr><td>Relation</td><td>Courte</td><td>Longue (harmonie)</td><td>Longue (confiance)</td><td>Longue (famille)</td></tr>
+    <tr><td>1re offre</td><td>Juste ±5-10 %</td><td>±10-20 %</td><td>±20-50 %</td><td>Juste</td></tr>
+    <tr><td>Décision</td><td>Équipe de direction</td><td>Consensus</td><td>Dirigeant senior</td><td>Dirigeant senior</td></tr>
+  </table></div>
+  <p><b>Tactiques</b> <span class="stars">★</span> : location (lieu neutre), time limits (la partie pressée cède), buyer-seller relationship (au Japon, l'acheteur est roi).</p>
+</section>
+
+<!-- ============ 8 ============ -->
+<section id="p8" class="part">
+  <div class="part-head"><div class="part-num">8</div><div><div class="eyebrow">Chapitre 8 · Strategy formulation and implementation</div><h2>Formuler et mettre en œuvre la stratégie</h2></div></div>
+
+  <div class="box def"><span class="tag">Strategic management</span><p>« The process of determining an organization's basic mission and long-term objectives and then implementing a plan of action for pursuing the mission and attaining these objectives. »</p></div>
+
+  <h3>Les 4 approches (imperatives) <span class="stars">★★★</span></h3>
+  <div class="grid2">
+    <div class="card"><h4>Economic imperative</h4><p>Stratégie mondiale de coûts, différenciation, segmentation. Produits génériques, valeur en amont (pneus, acier, composants).</p></div>
+    <div class="card"><h4>Political imperative</h4><p>Stratégies country-responsive pour protéger des niches locales ; valeur en aval (marketing, ventes). Proche du multidomestic.</p></div>
+    <div class="card"><h4>Quality imperative</h4><p>Attentes de qualité plus élevées + amélioration continue : le <b>TQM</b> (ex. Toyota Production System).</p></div>
+    <div class="card"><h4>Administrative coordination</h4><p>Décider au cas par cas, avec souplesse. L'approche la moins courante.</p></div>
+  </div>
+
+  <h3>Global integration vs national responsiveness <span class="stars">★★★</span></h3>
+  <p><b>Global integration</b> : « production and distribution of products and services of a homogenous type and quality on a worldwide basis ». <b>National responsiveness</b> : comprendre les goûts locaux et respecter les normes de chaque pays. On retrouve la <a href="#p1">matrice de la partie 1</a> (global, multidomestic, transnational, international).</p>
+
+  <h3>Les étapes de la planification <span class="stars">★★★</span></h3>
+  <div class="flow">
+    <div class="step"><b>1 Environmental scanning</b>l'extérieur : opportunités et menaces (marché, technologie, réglementation, économie, société, politique)</div>
+    <div class="step"><b>2 Internal resource analysis</b>l'intérieur : forces et faiblesses, Key Success Factors</div>
+    <div class="step"><b>3 Goal setting</b>profitabilité et marketing dominent</div>
+    <div class="step"><b>→ Implementation</b>« provides goods and services in accord with plan of action »</div>
+  </div>
+  <p>C'est l'équivalent d'une analyse <b>SWOT</b>.</p>
+
+  <h3>Mise en œuvre <span class="stars">★★</span></h3>
+  <p><b>Location</b> : 1) le pays (taille du marché, contrôle de l'État, avantages fiscaux), 2) le lieu précis (accès au marché, transports, concurrents). Les fonctions : <b>marketing</b> (4 P), <b>production</b> (pensée à l'échelle mondiale), <b>finance</b> (risque de change).</p>
+
+  <h3>Stratégies spécialisées <span class="stars">★★★</span></h3>
+  <div class="grid2">
+    <div class="card"><h4>Emerging markets</h4><p>BRIC(S). Risques : corruption, contrats mal appliqués, red tape. <b>First mover</b> : avantage d'entrer le premier (Volkswagen en Chine dès 1984).</p></div>
+    <div class="card"><h4>Base of the Pyramid</h4><p>4 à 5 milliards de personnes à moins de 2 000 $/an (Prahalad). Petits formats (sachets Unilever en Inde), partenariats ONG, leapfrog technologies (M-Pesa).</p></div>
+    <div class="card"><h4>Frontier markets</h4><p>Marchés pré-émergents : gains et risques élevés (Vietnam, Kenya). Souvent en joint venture.</p></div>
+    <div class="card"><h4>Born-global firms</h4><p>« Firms that engage in significant international activity a short time after being established. » Ex. : Skype, Spotify, BlaBlaCar.</p></div>
+  </div>
+</section>
+
+<!-- ============ méthode ============ -->
+<section id="methode" class="part">
+  <div class="part-head"><div class="part-num">✎</div><div><div class="eyebrow">Méthode</div><h2>Rédiger une réponse qui rapporte</h2></div></div>
+  <div class="box exam"><span class="tag">La recette en 3 temps</span>
+    <ol>
+      <li><b>Définir</b> la notion avec la phrase anglaise du cours.</li>
+      <li><b>Expliquer</b> en 2-3 lignes ce que ça change pour une MNC.</li>
+      <li><b>Illustrer</b> par un exemple du cours (Nike, Nestlé, IKEA, Unilever, Renault-Nissan, Foxconn…).</li>
+    </ol>
+  </div>
+  <h3>Les questions ouvertes les plus probables</h3>
+  <ul>
+    <li>Define the four predispositions (EPRG). Which one for a firm entering Europe through France? → <i>regiocentric</i> (marché unique européen).</li>
+    <li>Global integration vs local responsiveness: are they opposed? → vrai pour global et multidomestic, mais la <i>transnational</i> cherche les deux (IKEA).</li>
+    <li>Why are MNCs involved in CSR? → pression des ONG et des consommateurs (Nike) + « doing well by doing good » (Toyota Prius).</li>
+    <li>How do sovereignty, nationality, territoriality, protective and comity principles affect MNCs?</li>
+    <li>Explicit vs implicit: comment dire « you are still making too many mistakes » à un Américain et à un Japonais.</li>
+    <li>Les 5 étapes de négociation et ce que fait une équipe japonaise (consensus, silence, 1re offre ±10-20 %).</li>
+    <li>Dans quelle culture Trompenaars seraient à l'aise Américains (guided missile) et Japonais (family) ?</li>
+  </ul>
+</section>
+
+<!-- ============ quiz ============ -->
+<section id="quiz" class="part">
+  <div class="part-head"><div class="part-num">?</div><div><div class="eyebrow">Entraînement</div><h2>QCM corrigé : 30 questions</h2></div></div>
+  <p>Une seule bonne réponse. Clique pour voir la correction expliquée.</p>
+  <div id="qz"></div>
+  <div class="scorebar"><span id="score">0 / 30</span><button id="reset" type="button">Recommencer</button></div>
+</section>
+</main>
+</div>
+
+<script>
+const Q=[
+{t:"Ch. 1 · MNC",q:"Selon le cours, une MNC se définit par :",o:["Des activités dans plus d'un pays, des ventes internationales et des dirigeants/actionnaires de nationalités diverses","Un chiffre d'affaires supérieur à 1 milliard de dollars","Un siège aux États-Unis","Le fait d'exporter au moins un produit"],e:"Trois critères : operations in more than one country, international sales, nationality mix of managers and owners. Ni la taille ni le pays du siège."},
+{t:"Ch. 1 · Mondialisation",q:"Une banque française confie son service client à une entreprise indépendante au Maroc. C'est :",o:["De l'offshoring et de l'outsourcing à la fois","De l'outsourcing seulement","De l'offshoring seulement","De la privatization"],e:"Changement de pays (offshoring) ET d'entreprise (outsourcing). Si la banque ouvrait son propre centre au Maroc, ce serait de l'offshoring seulement."},
+{t:"Ch. 1 · Mondialisation",q:"Apple confie l'assemblage de l'iPhone à Foxconn. Le mot du cours est :",o:["Outsourcing","Offshoring","Internationalization","Sovereignty"],e:"Outsourcing = confier à une autre entreprise une activité qu'on faisait soi-même."},
+{t:"Ch. 1 · Stratégies",q:"Coûts bas ET forte adaptation à chaque pays : quelle stratégie ?",o:["Transnational","Global","Multidomestic","International"],e:"Transnational = les deux pressions fortes (IKEA, Unilever). La plus difficile."},
+{t:"Ch. 1 · Stratégies",q:"Nestlé adapte le goût du Nescafé, ses marques et sa pub à chaque pays. Stratégie :",o:["Multidomestic","Global","International","Transnational"],e:"Forte adaptation locale, faible intégration mondiale = multidomestic."},
+{t:"Ch. 1 · Stratégies",q:"Harley-Davidson exporte son image « made in USA » sans changer le produit. Stratégie :",o:["International","Global","Multidomestic","Transnational"],e:"Les deux pressions sont faibles : on vend à l'étranger un savoir-faire du pays d'origine."},
+{t:"Ch. 1 · OMC",q:"L'OMC (WTO) a été créée par :",o:["L'Uruguay Round, en place depuis 1995","Le GATT de 1947","Le Kennedy Round","Le Tokyo Round"],e:"L'Uruguay Round (1986-1994) crée l'OMC, qui fonctionne depuis le 1er janvier 1995. Le GATT était son prédécesseur."},
+{t:"Ch. 2 · Politique",q:"Quelle affirmation est conforme au cours ?",o:["Les démocraties tendent vers l'individualisme, les régimes totalitaires vers le collectivisme","Une démocratie peut fonctionner avec un seul parti","Le socialisme est la forme extrême du communisme","Les démocraties tendent vers le collectivisme"],e:"« Democratic tend to emphasize individualism and totalitarian lean towards collectivism. » Le communisme est la forme extrême du socialisme."},
+{t:"Ch. 2 · Droit",q:"La common law se caractérise par :",o:["Un droit fondé sur les décisions des juges (précédents), d'origine anglaise","Des codes écrits d'origine romaine","Le Coran comme source du droit","La propriété d'État de la plupart des biens"],e:"Common law = droit anglais, jurisprudence (États-Unis, Royaume-Uni). Les codes écrits = civil law (France)."},
+{t:"Ch. 2 · Droit",q:"Quel territoire des États-Unis relève de la civil (code) law ?",o:["La Louisiane","Le Texas","La Californie","New York"],e:"La Louisiane, ancienne colonie française, a gardé un code inspiré du Code Napoléon."},
+{t:"Ch. 2 · Droit international",q:"Un pays juge ses ressortissants pour des actes commis à l'étranger. C'est le principe :",o:["De nationalité (nationality principle)","De territorialité","De protection","De comity"],e:"Nationality principle : « every country has jurisdiction over its citizens no matter where they are located »."},
+{t:"Ch. 2 · Droit international",q:"Un tribunal américain refuse de juger illégale une nationalisation décidée à Cuba. C'est :",o:["L'act of state doctrine","La doctrine of comity","Le protective principle","Le treatment of aliens"],e:"Act of state : les tribunaux américains tiennent pour valides les actes d'un gouvernement étranger, même illégaux en droit américain."},
+{t:"Ch. 3 · RSE",q:"La CSR se définit comme :",o:["Les actions d'une entreprise pour la société au-delà de ce qu'exigent la loi et ses intérêts directs","Le respect strict de la loi du pays d'accueil","La maximisation du profit pour les actionnaires","Le financement des ONG par l'État"],e:"« Beyond requirements of law » : la RSE est volontaire."},
+{t:"Ch. 3 · ONG",q:"D'après la figure du cours, quels leaders inspirent le plus confiance ?",o:["Les dirigeants d'ONG (56 %)","Les dirigeants de MNC","Les chefs religieux","Les dirigeants américains"],e:"ONG 56 %, ONU 42 %, religieux 41 %, MNC 33 %, États-Unis 27 %."},
+{t:"Ch. 3 · Corruption",q:"Le FCPA (1977) interdit aux entreprises américaines :",o:["D'influencer des fonctionnaires étrangers par des paiements personnels ou contributions politiques","D'exporter vers des pays en guerre","D'employer des enfants à l'étranger","De délocaliser des emplois"],e:"Foreign Corrupt Practices Act : corruption d'agents publics étrangers, même déguisée en frais de « consulting » ou d'« entertainment »."},
+{t:"Ch. 3 · Gouvernance",q:"Un actionnariat concentré dans les mains de familles et de banques correspond au système :",o:["Insider (Europe continentale)","Outsider (États-Unis, Royaume-Uni)","Socialiste","Polycentrique"],e:"Insider : France, Allemagne (famille Arnault chez LVMH). Outsider : actionnariat dispersé (Apple)."},
+{t:"Ch. 5 · EPRG",q:"« The values and interests of the parent company guide strategic decisions » définit l'orientation :",o:["Ethnocentric","Polycentric","Regiocentric","Geocentric"],e:"Ethnocentric : philosophie nationaliste, le siège décide selon ses valeurs."},
+{t:"Ch. 5 · EPRG",q:"Une MNC qui recrute les meilleurs, d'où qu'ils viennent, pour tous les postes clés est :",o:["Geocentric","Ethnocentric","Polycentric","Regiocentric"],e:"Geocentric : approche mondiale intégrée de la décision et des personnes."},
+{t:"Ch. 5 · Erreurs",q:"Négocier au Japon exactement comme au Brésil, c'est :",o:["De la simplification","Du parochialism","De l'ethnocentrisme","Du groupthink"],e:"Simplification : « exhibiting the same orientation toward different cultural groups ». Le parochialism = voir le monde avec ses propres yeux."},
+{t:"Ch. 5 · Hofstede",q:"La dimension « uncertainty avoidance » mesure :",o:["Le besoin de règles pour éviter l'imprévu","L'acceptation des inégalités de pouvoir","L'importance de la compétition et de l'argent","La primauté de l'individu"],e:"Forte au Japon et en France (on aime les règles), faible à Singapour et au Danemark."},
+{t:"Ch. 6 · Culture",q:"Selon le cours, quelle culture est la plus forte ?",o:["La culture nationale, plus forte que la culture d'entreprise","La culture d'entreprise, qui efface la culture nationale","Les deux ont le même poids","La culture du siège régional"],e:"Les employés gardent et renforcent leur culture nationale : les Allemands deviennent « encore plus allemands » dans une MNC américaine."},
+{t:"Ch. 6 · Trompenaars",q:"Hiérarchie forte + orientation tâche, postes bien définis : c'est la culture :",o:["Eiffel Tower","Family","Guided missile","Incubator"],e:"Eiffel Tower : role-oriented, étroite au sommet, large à la base."},
+{t:"Ch. 6 · Trompenaars",q:"Égalité + orientation tâche, équipes projet : c'est la culture :",o:["Guided missile","Incubator","Family","Eiffel Tower"],e:"Guided missile : project-oriented, typique des Américains."},
+{t:"Ch. 6 · Diversité",q:"Un groupe où tous ont la même culture sauf un membre est un groupe :",o:["Token","Homogeneous","Bicultural","Multicultural"],e:"Token group : une seule personne d'une autre culture."},
+{t:"Ch. 7 · Communication",q:"Lequel de ces pays est le plus « high context » ?",o:["Japon","Allemagne","États-Unis","Suisse alémanique"],e:"Japon (puis Arabes, Latino-Américains). Allemands et Suisses alémaniques sont les plus « low context »."},
+{t:"Ch. 7 · Non verbal",q:"L'usage de l'espace physique pour communiquer s'appelle :",o:["Proxemics","Kinesics","Chronemics","Chromatics"],e:"Proxemics = espace ; kinesics = corps ; chronemics = temps ; chromatics = couleurs."},
+{t:"Ch. 7 · Non verbal",q:"Faire plusieurs choses à la fois et privilégier la relation sur l'horaire, c'est être :",o:["Polychronic","Monochronic","Low context","Instrumental"],e:"Polychronic : Amérique latine, Moyen-Orient. Monochronic : Allemagne, Suisse, États-Unis."},
+{t:"Ch. 7 · Négociation",q:"Une négociation win-win, où l'on crée de la valeur avant de la partager, est :",o:["Integrative","Distributive","Competitive","Positional"],e:"Integrative (ex. alliance Renault-Nissan). Distributive = win-lose."},
+{t:"Ch. 7 · Négociation",q:"La BATNA, c'est :",o:["La meilleure solution de rechange si la négociation échoue","La première offre faite à l'autre partie","Le prix plancher de l'adversaire","L'étape où l'on fait des concessions"],e:"Best Alternative To a Negotiated Agreement : ton seuil. En dessous, tu pars."},
+{t:"Ch. 8 · Stratégie",q:"Une MNC qui protège des niches locales grâce au marketing et au service suit l'impératif :",o:["Political","Economic","Quality","Administrative coordination"],e:"Political imperative : stratégies country-responsive, valeur en aval. L'economic imperative vise les coûts sur des produits génériques."}
+];
+// mélange déterministe des options
+function rng(s){return function(){s=(s*9301+49297)%233280;return s/233280}}
+const R=rng(7);
+Q.forEach(x=>{const idx=x.o.map((_,i)=>i);for(let i=idx.length-1;i>0;i--){const j=Math.floor(R()*(i+1));[idx[i],idx[j]]=[idx[j],idx[i]]}x.opts=idx.map(i=>x.o[i]);x.a=idx.indexOf(0)});
+const L="ABCD";let score=0,done=0;
+function render(){score=0;done=0;const z=document.getElementById('qz');z.innerHTML='';
+ Q.forEach((x,i)=>{const d=document.createElement('div');d.className='q';
+  d.innerHTML='<div class="qt">'+x.t+'</div><div class="qq">Q'+(i+1)+' · '+x.q+'</div><div class="opts">'+x.opts.map((o,k)=>'<button type="button" data-k="'+k+'">'+L[k]+'. '+o+'</button>').join('')+'</div><div class="expl"></div>';
+  d.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>answer(i,+b.dataset.k,d)));z.appendChild(d)});upd()}
+function answer(i,k,d){const x=Q[i];const bs=d.querySelectorAll('.opts button');if(bs[0].disabled)return;
+ bs.forEach(b=>b.disabled=true);bs[x.a].classList.add('right');if(k!==x.a)bs[k].classList.add('wrong');else score++;done++;
+ const ex=d.querySelector('.expl');ex.innerHTML=(k===x.a?'<b>Bonne réponse.</b> ':'<b>Réponse '+L[x.a]+'.</b> ')+x.e;ex.classList.add('on');upd()}
+function upd(){document.getElementById('score').textContent=score+' / '+Q.length+(done?' ('+done+' répondues)':'')}
+document.getElementById('reset').addEventListener('click',render);
+window.showAllAnswers=function(){document.querySelectorAll('.q').forEach((d,i)=>{const x=Q[i];const bs=d.querySelectorAll('.opts button');bs.forEach(b=>b.disabled=true);bs[x.a].classList.add('right');const ex=d.querySelector('.expl');ex.innerHTML='<b>Réponse '+L[x.a]+'.</b> '+x.e;ex.classList.add('on')})};
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Business Law essentiel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:ital,wght@0,400;0,600;0,700;1,400&display=swap">
+<style>
+:root{
+  --bg:#f3f7fd; --paper:#ffffff; --ink:#122848; --muted:#4f6383;
+  --acc:#2563c9; --acc-deep:#1a4793; --soft:#e0ebfb; --soft-2:#b9d0f4; --line:#cbdbf2;
+  --plum:#3d3f9e; --ok:#1f8a5b; --ok-bg:#e3f5ec; --ko:#c0392b; --ko-bg:#fde6e3; --warn:#b45309; --warn-bg:#fff4e0;
+  --f-display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;
+  --f-body:"Figtree","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0c1727; --paper:#132139; --ink:#e5eefb; --muted:#9db2d2;
+  --acc:#6aa0ff; --acc-deep:#93baff; --soft:#1b2f4f; --soft-2:#2a4672; --line:#253b5e;
+  --plum:#aab0f7; --ok:#5fd39b; --ok-bg:#163327; --ko:#ff8b7d; --ko-bg:#3a1a17; --warn:#fbbf6a; --warn-bg:#3a2a12; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#0c1727; --paper:#132139; --ink:#e5eefb; --muted:#9db2d2;
+  --acc:#6aa0ff; --acc-deep:#93baff; --soft:#1b2f4f; --soft-2:#2a4672; --line:#253b5e;
+  --plum:#aab0f7; --ok:#5fd39b; --ok-bg:#163327; --ko:#ff8b7d; --ko-bg:#3a1a17; --warn:#fbbf6a; --warn-bg:#3a2a12; color-scheme:dark }
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16.5px;line-height:1.6;padding:0 16px}
+main{max-width:860px;margin:0 auto;padding:32px 0 80px}
+h1,h2,h3{font-family:var(--f-display);line-height:1.15;text-wrap:balance}
+h1{font-size:clamp(2rem,5vw,3rem);font-weight:800;margin:.2em 0 .3em;letter-spacing:-.02em}
+h1 em{font-style:normal;color:var(--acc)}
+h2{font-size:clamp(1.4rem,3.2vw,1.9rem);font-weight:800;margin:2.2em 0 .5em;display:flex;gap:.5em;align-items:baseline}
+h2 .n{display:inline-grid;place-items:center;min-width:1.7em;height:1.7em;border-radius:10px;background:var(--acc);color:#fff;font-size:.8em}
+h3{font-size:1.12rem;margin:1.4em 0 .4em;color:var(--acc-deep)}
+p{margin:.5em 0}
+strong{color:var(--plum)}
+.eyebrow{font-family:var(--f-display);text-transform:uppercase;letter-spacing:.12em;font-size:.78rem;font-weight:700;color:var(--acc)}
+.lede{font-size:1.08rem;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.chip{background:var(--soft);border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:.88rem;font-weight:600}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:16px 20px;margin:14px 0}
+.law{border-left:5px solid var(--acc);background:var(--soft);border-radius:12px;padding:12px 16px;margin:12px 0}
+.law .t{font-family:var(--f-display);font-weight:700;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--acc-deep)}
+.law q{font-style:italic}
+.ex{border-left:5px solid var(--plum);background:var(--paper);border-radius:12px;padding:12px 16px;margin:12px 0;border-top:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.ex .t,.trap .t,.key .t{font-family:var(--f-display);font-weight:700;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase}
+.ex .t{color:var(--plum)}
+.trap{border:2px dashed var(--warn);background:var(--warn-bg);border-radius:12px;padding:12px 16px;margin:12px 0}
+.trap .t{color:var(--warn)}
+.key{background:var(--acc-deep);color:#fff;border-radius:14px;padding:14px 18px;margin:16px 0}
+.key strong{color:#fff}
+.key ul{margin:.4em 0 0;padding-left:1.2em}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .key{background:#1d3a6b}}
+.tbl{width:100%;overflow-x:auto;margin:12px 0}
+table{border-collapse:collapse;width:100%;font-size:.93rem;background:var(--paper);border-radius:12px;overflow:hidden}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--soft);font-family:var(--f-display)}
+td.art{font-weight:700;color:var(--acc-deep);white-space:nowrap}
+.top{counter-reset:t;list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.top li{counter-increment:t;display:grid;grid-template-columns:2.2em 1fr;gap:10px;align-items:start;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.top li::before{content:counter(t);display:grid;place-items:center;width:2em;height:2em;border-radius:50%;background:var(--acc);color:#fff;font-weight:800;font-family:var(--f-display)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.box{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.box h4{margin:0 0 .3em;font-family:var(--f-display);color:var(--acc-deep)}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch;margin:12px 0}
+.flow .step{flex:1 1 150px;background:var(--paper);border:2px solid var(--acc);border-radius:12px;padding:10px 12px;font-size:.93rem}
+.flow .step b{display:block;font-family:var(--f-display);color:var(--acc-deep)}
+.flow .arr{align-self:center;font-weight:800;color:var(--acc)}
+svg text{font-family:var(--f-body)}
+/* Quiz */
+.q{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:12px 0}
+.q .qt{font-weight:700;margin-bottom:8px}
+.q button{display:block;width:100%;text-align:left;margin:6px 0;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;cursor:pointer}
+.q button:hover:not(:disabled){border-color:var(--acc)}
+.q button.good{background:var(--ok-bg);border-color:var(--ok);font-weight:700}
+.q button.bad{background:var(--ko-bg);border-color:var(--ko)}
+.q button:disabled{cursor:default}
+.expl{display:none;margin-top:8px;padding:10px 12px;border-radius:10px;background:var(--soft);font-size:.94rem}
+.q.done .expl{display:block}
+.score{position:sticky;bottom:12px;margin:20px auto 0;width:max-content;max-width:100%;background:var(--acc-deep);color:#fff;border-radius:999px;padding:8px 18px;font-weight:700;box-shadow:0 6px 20px rgba(0,0,0,.18)}
+.score button{margin-left:10px;border:0;border-radius:999px;padding:4px 12px;font:inherit;font-weight:700;cursor:pointer;background:#fff;color:var(--acc-deep)}
+footer{margin-top:40px;color:var(--muted);font-size:.88rem}
+@media print{ .score{display:none} body{padding:0} .card,.q,.law,.ex,.trap,.key,.box,.top li,table{break-inside:avoid} h2,h3{break-after:avoid} tr{break-inside:avoid} }
+</style>
+</head>
+<body>
+<main>
+<div class="eyebrow">Business Law · CM · L3 Commerce international · UPEC</div>
+<h1>Business Law : <em>l'essentiel pour l'examen</em></h1>
+<p class="lede">Seulement ce qui revient sans cesse dans le cours (droit français des contrats, Code civil 1100 et s.) : les articles marqués « à connaître par cœur », les exemples du prof et les pièges classiques. Si tu maîtrises ces pages, tu as l'essentiel.</p>
+<div class="chips"><span class="chip">10 points clés</span><span class="chip">Tableaux comparatifs</span><span class="chip">3 cas pratiques corrigés</span><span class="chip">QCM 20 questions corrigé</span></div>
+
+<!-- TOP 10 -->
+<h2><span class="n">★</span>Les 10 choses à savoir par cœur</h2>
+<ol class="top">
+  <li><div><strong>Art. 1101 :</strong> le contrat est un <b>accord de volontés</b> entre deux ou plusieurs personnes destiné à <b>créer, modifier, transmettre ou éteindre</b> des obligations.</div></li>
+  <li><div><strong>Les 3 piliers :</strong> liberté contractuelle (<b>1102</b>), force obligatoire (<b>1103</b>, « les contrats légalement formés tiennent lieu de loi à ceux qui les ont faits »), bonne foi à chaque étape (<b>1104</b>, d'ordre public).</div></li>
+  <li><div><strong>Art. 1128 :</strong> 3 conditions de validité <b>cumulatives</b> : consentement, capacité, contenu licite et certain.</div></li>
+  <li><div><strong>Vices du consentement (1130) :</strong> erreur (je me trompe), dol (on me trompe), violence (on me force), s'ils sont <b>déterminants</b>. Sanction : nullité <b>relative</b> (1131).</div></li>
+  <li><div><strong>Formation :</strong> offre + acceptation conforme (<b>1113</b>). Acceptation modifiée = contre-offre (<b>1118</b>). Le silence ne vaut pas acceptation (<b>1120</b>). Négociation libre, mais rupture fautive = on rembourse les frais, pas le gain espéré (<b>1112</b>).</div></li>
+  <li><div><strong>Règle impérative vs supplétive :</strong> l'impérative s'impose malgré le contrat ; la supplétive s'applique seulement si le contrat ne dit rien (ex. <b>1583</b> → clause de réserve de propriété possible).</div></li>
+  <li><div><strong>Déséquilibre :</strong> <b>1168</b> mauvaise affaire = valable ; <b>1169</b> contrepartie illusoire ou dérisoire = nul ; <b>1170</b> (Chronopost) et <b>1171</b> (contrat d'adhésion) = clause <b>réputée non écrite</b>.</div></li>
+  <li><div><strong>Nullité (1178) :</strong> prononcée par le juge (ou d'un commun accord), <b>rétroactive</b>, avec restitutions. Absolue (intérêt général) / relative (intérêt privé).</div></li>
+  <li><div><strong>Imprévision (1195) vs force majeure (1218) :</strong> exécution ruineuse → renégocier en continuant d'exécuter ; exécution impossible (hors contrôle + imprévisible + inévitable) → suspension ou résolution.</div></li>
+  <li><div><strong>Méthode du cas pratique :</strong> faits qualifiés → règle (article + conditions) → application condition par condition → conclusion.</div></li>
+</ol>
+
+<!-- 1 PRINCIPES -->
+<h2><span class="n">1</span>Les 3 grands principes du contrat</h2>
+<div class="grid3">
+  <div class="box"><h4>Liberté · 1102</h4>Libre de contracter ou non, de choisir son cocontractant, le contenu et la forme… <b>dans les limites de la loi</b> et sans déroger à l'ordre public.</div>
+  <div class="box"><h4>Force obligatoire · 1103</h4>Un contrat valable = une loi pour les parties (<i>pacta sunt servanda</i>). Modifier ou révoquer : seulement <b>d'un commun accord</b> ou pour une cause légale (1193).</div>
+  <div class="box"><h4>Bonne foi · 1104</h4>Négocier, former et exécuter de bonne foi. Règle <b>d'ordre public</b> : aucune clause ne peut l'écarter.</div>
+</div>
+<div class="ex"><div class="t">Exemple du cours : le tunnel dans les Alpes</div>
+Une entreprise dépense 1 M€ en études pour un tunnel ; le ministère abandonne le projet sans raison. Il avait le droit de ne pas signer, mais pas de <b>rompre sans motif sérieux</b> : l'entreprise obtient le remboursement de ses frais (1104 et 1112), <b>pas</b> le bénéfice qu'elle aurait fait.</div>
+<div class="key"><div class="t">Phrase à placer</div>Chacun est libre de ne pas conclure un contrat, mais personne ne peut rompre une négociation sans motif sérieux.</div>
+
+<h3>Règle impérative ou supplétive</h3>
+<div class="tbl"><table>
+<tr><th></th><th>Impérative (mandatory)</th><th>Supplétive (default rule)</th></tr>
+<tr><td>Principe</td><td>S'applique toujours ; une clause contraire est sans effet.</td><td>S'applique seulement si le contrat n'a rien prévu.</td></tr>
+<tr><td>Exemples</td><td>Bonne foi 1104, ordre public 1162, droit de la consommation, garanties de la construction.</td><td>1583 (transfert de propriété), 1195 (imprévision), 1218 (force majeure).</td></tr>
+</table></div>
+<div class="ex"><div class="t">Exemple : la clause de réserve de propriété</div>
+Art. 1583 : l'acheteur est propriétaire <b>dès l'accord sur la chose et le prix</b>, même sans livraison ni paiement. Comme 1583 est supplétif, la Fnac peut prévoir une <b>clause de réserve de propriété</b> : elle reste propriétaire jusqu'au paiement complet et peut récupérer l'ordinateur si Peter ne paie pas. Rappel : <i>res perit domino</i>, le propriétaire supporte les risques (1196).</div>
+
+<h3>Conditions générales (1119) : la bataille des formulaires</h3>
+<div class="grid3">
+  <div class="box"><h4>①</h4>Les CG n'engagent l'autre que s'il les a <b>connues et acceptées</b>.</div>
+  <div class="box"><h4>②</h4>CG des deux parties contradictoires → les clauses incompatibles sont <b>sans effet</b> : on applique la loi.</div>
+  <div class="box"><h4>③</h4>Conditions <b>particulières</b> &gt; conditions générales.</div>
+</div>
+
+<!-- 2 FORMATION -->
+<h2><span class="n">2</span>Former le contrat : offre et acceptation</h2>
+<svg viewBox="0 0 640 170" width="100%" role="img" aria-label="Après une offre : refus, contre-offre ou acceptation">
+  <rect x="170" y="6" width="300" height="44" rx="10" fill="var(--acc)"/>
+  <text x="320" y="26" text-anchor="middle" fill="#fff" font-weight="700" font-size="15">OFFRE (1114)</text>
+  <text x="320" y="43" text-anchor="middle" fill="#fff" font-size="12">éléments essentiels + volonté d'être lié</text>
+  <path d="M320 50 L100 90 M320 50 L320 90 M320 50 L540 90" stroke="var(--acc)" stroke-width="2" fill="none"/>
+  <g font-size="13">
+  <rect x="10" y="90" width="180" height="70" rx="10" fill="var(--paper)" stroke="var(--line)"/>
+  <text x="100" y="112" text-anchor="middle" fill="var(--ink)" font-weight="700">« Non merci »</text>
+  <text x="100" y="134" text-anchor="middle" fill="var(--muted)">Refus</text>
+  <text x="100" y="152" text-anchor="middle" fill="var(--muted)">Pas de contrat</text>
+  <rect x="230" y="90" width="180" height="70" rx="10" fill="var(--warn-bg)" stroke="var(--warn)"/>
+  <text x="320" y="112" text-anchor="middle" fill="var(--ink)" font-weight="700">« Oui, mais… »</text>
+  <text x="320" y="134" text-anchor="middle" fill="var(--ink)">Contre-offre (1118)</text>
+  <text x="320" y="152" text-anchor="middle" fill="var(--ink)">= nouvelle offre</text>
+  <rect x="450" y="90" width="180" height="70" rx="10" fill="var(--ok-bg)" stroke="var(--ok)"/>
+  <text x="540" y="112" text-anchor="middle" fill="var(--ink)" font-weight="700">« Oui, d'accord »</text>
+  <text x="540" y="134" text-anchor="middle" fill="var(--ink)">CONTRAT FORMÉ</text>
+  <text x="540" y="152" text-anchor="middle" fill="var(--ink)">dès réception (1121)</text>
+  </g>
+</svg>
+<div class="tbl"><table>
+<tr><th>Art.</th><th>À retenir</th><th>Exemple du cours</th></tr>
+<tr><td class="art">1114</td><td>Sans éléments essentiels (le prix pour une vente) ni volonté d'être lié = simple <b>invitation à négocier</b>.</td><td>« J'ai 50 CD de Beethoven à vendre, ça t'intéresse ? » : pas de prix, pas d'offre.</td></tr>
+<tr><td class="art">1118</td><td>Accepter 4 points sur 5, ou ajouter un 6e = contre-offre.</td><td>Ajout d'une clause « tribunal de Paris » : pas de contrat.</td></tr>
+<tr><td class="art">1120</td><td>Le silence ne vaut pas acceptation, <b>sauf</b> loi, usages, relations d'affaires, circonstances particulières.</td><td>Colis non commandé : rien. Deux entreprises qui travaillent ainsi depuis des années : oui.</td></tr>
+<tr><td class="art">1121</td><td>Contrat conclu <b>quand et où</b> l'acceptation parvient à l'offrant.</td><td>Offre de Paris acceptée à Bordeaux : conclu à Paris.</td></tr>
+<tr><td class="art">1172</td><td>Principe : contrat <b>consensuel</b> (l'accord suffit, même oral). Exception : solennel (écrit/notaire, sinon nul) et réel (remise d'une chose).</td><td>Baguette = consensuel ; hypothèque = acte notarié.</td></tr>
+</table></div>
+<div class="trap"><div class="t">Piège</div>Négocier n'est pas contracter : tant qu'aucune offre n'est acceptée, il n'y a pas de contrat. Et le délai de rétractation de 14 jours vient du <b>Code de la consommation</b> (pro → consommateur, à distance ou hors établissement), pas du Code civil.</div>
+
+<!-- 3 VALIDITE -->
+<h2><span class="n">3</span>Le contrat est-il valable ? (art. 1128)</h2>
+<div class="law"><div class="t">Article 1128 · par cœur</div><q>Sont nécessaires à la validité d'un contrat : 1° Le consentement des parties ; 2° Leur capacité de contracter ; 3° Un contenu licite et certain.</q></div>
+
+<h3>Les 3 vices du consentement</h3>
+<div class="tbl"><table>
+<tr><th>Vice</th><th>Définition</th><th>Exemple</th><th>Attention</th></tr>
+<tr><td><b>Erreur</b> (mistake)<br>1132-1136</td><td>Je me trompe <b>seule</b> sur les qualités essentielles de la prestation ou du cocontractant.</td><td>Table crue en bois massif, en fait en plastique.</td><td>Pas de nullité si erreur <b>inexcusable</b>, sur la <b>valeur</b> (1136) ou sur un <b>motif</b> (1135).</td></tr>
+<tr><td><b>Dol</b> (fraud)<br>1137-1139</td><td>L'autre me trompe <b>volontairement</b> : mensonge, manœuvre ou silence intentionnel (réticence dolosive).</td><td>Le vendeur sait que la table est en plastique et la vend comme du chêne.</td><td>Erreur provoquée par un dol = <b>toujours excusable</b>, même sur la valeur (1139).</td></tr>
+<tr><td><b>Violence</b> (duress)<br>1140-1143</td><td>On me force par la peur d'un mal considérable (moi, mes biens, mes proches).</td><td>« Signe ou je m'en prends à ta famille. »</td><td>Menacer d'un procès n'est pas une violence, sauf abus (1141). Abus de dépendance économique = violence (1143).</td></tr>
+</table></div>
+<p>Le vice doit être <b>déterminant</b> (1130), apprécié <b>in concreto</b> (machine à laver à 1 000 tours au lieu de 1 200 : déterminant pour une laverie, beaucoup moins pour un particulier). Délai pour agir : <b>5 ans</b> à partir de la découverte (ou de la fin de la violence).</p>
+
+<h3>Capacité et représentation</h3>
+<p>Incapables (1146) : mineurs non émancipés et majeurs protégés (sauf actes courants). Sanction : nullité relative. Une société agit par un <b>représentant</b> :</p>
+<div class="grid2">
+  <div class="box"><h4>Dans ses pouvoirs · 1154</h4>Seul le <b>représenté</b> est engagé.</div>
+  <div class="box"><h4>Sans pouvoir ou au-delà · 1156</h4>Acte <b>inopposable</b> au représenté, sauf <b>mandat apparent</b> (le tiers y a légitimement cru) ou <b>ratification</b>. Ex. : mandat d'acheter un camion à 50 000 € max, achat à 80 000 €.</div>
+</div>
+
+<h3>Contenu licite et certain</h3>
+<p><b>Licite</b> (1162) : pas contraire à l'ordre public, ni par ses clauses ni par son <b>but</b>, même si une seule partie le connaissait (vente d'armes destinées à un crime). <b>Certain</b> (1163) : prestation possible et <b>déterminée ou déterminable</b> (prix du vin fixé tous les 6 mois selon une méthode prévue).</p>
+
+<h3>Le déséquilibre : 1168 · 1169 · 1170 · 1171 (tombe très souvent)</h3>
+<div class="tbl"><table>
+<tr><th>Art.</th><th>Règle</th><th>Sanction</th></tr>
+<tr><td class="art">1168</td><td>Prestations non équivalentes (vélo de 100 € payé 10 000 €) : simple mauvaise affaire.</td><td>Aucune, contrat valable.</td></tr>
+<tr><td class="art">1169</td><td>Contrepartie <b>illusoire ou dérisoire</b> au moment de la formation (entreprise vendue 1 €).</td><td><b>Nullité</b> de tout le contrat.</td></tr>
+<tr><td class="art">1170</td><td>Clause qui <b>prive de sa substance l'obligation essentielle</b> du débiteur.</td><td>Clause <b>réputée non écrite</b>.</td></tr>
+<tr><td class="art">1171</td><td>Dans un <b>contrat d'adhésion</b>, clause non négociable créant un <b>déséquilibre significatif</b> (ni le prix ni l'objet principal ne sont jugés). Vaut aussi entre entreprises.</td><td>Clause <b>réputée non écrite</b>.</td></tr>
+</table></div>
+<div class="ex"><div class="t">L'arrêt Chronopost (Cass. com., 22 octobre 1996)</div>
+Chronopost promet une livraison le lendemain avant midi, livre en retard, et sa clause limite l'indemnité au prix du transport. La Cour de cassation écarte la clause : elle vide de sa substance l'<b>obligation essentielle</b> (livrer à temps). Jurisprudence reprise en 2016 dans l'<b>article 1170</b> : l'exemple parfait d'une jurisprudence devenue loi.</div>
+<div class="trap"><div class="t">Piège : « nul » ou « réputé non écrit » ?</div><b>Nul</b> = tout le contrat disparaît (1169, vices, incapacité). <b>Réputé non écrit</b> = seule la clause est effacée, le contrat continue (1170, 1171).</div>
+
+<!-- 4 NULLITE -->
+<h2><span class="n">4</span>La nullité (art. 1178 à 1184)</h2>
+<div class="flow">
+  <div class="step"><b>Condition 1128 manquante</b>ex. dol prouvé</div><div class="arr">→</div>
+  <div class="step"><b>Prononcée</b>par le juge, ou constatée d'un commun accord</div><div class="arr">→</div>
+  <div class="step"><b>Rétroactive</b>le contrat est censé n'avoir jamais existé</div><div class="arr">→</div>
+  <div class="step"><b>Restitutions</b>en nature, ou en valeur pour un service (1352-8)</div>
+</div>
+<div class="tbl"><table>
+<tr><th></th><th>Nullité absolue (1180)</th><th>Nullité relative (1181)</th></tr>
+<tr><td>Protège</td><td>L'intérêt <b>général</b></td><td>Un intérêt <b>privé</b></td></tr>
+<tr><td>Exemples</td><td>Contenu illicite, contraire à l'ordre public</td><td>Vices du consentement, incapacité</td></tr>
+<tr><td>Qui agit ?</td><td>Toute personne intéressée + ministère public</td><td>Seule la partie protégée</td></tr>
+<tr><td>Confirmation ?</td><td>Impossible</td><td>Possible (1182) ; l'autre peut forcer le choix par l'action interrogatoire, 6 mois (1183)</td></tr>
+</table></div>
+<p><b>1184 :</b> si seule une clause est nulle, seule la clause tombe, sauf si elle était <b>déterminante</b> de l'engagement : alors tout le contrat tombe.</p>
+
+<!-- 5 EFFETS -->
+<h2><span class="n">5</span>Les effets du contrat</h2>
+<div class="tbl"><table>
+<tr><th>Art.</th><th>Règle</th><th>En une phrase</th></tr>
+<tr><td class="art">1193</td><td>Modification ou révocation : consentement mutuel ou cause légale.</td><td>Une seule volonté ne défait pas ce que deux ont fait (contrat à 10 : unanimité, sauf clause).</td></tr>
+<tr><td class="art">1194</td><td>Le contrat oblige aussi aux suites que lui donnent l'<b>équité, l'usage ou la loi</b>.</td><td>Obligation de sécurité du transporteur (jurisprudence 1911).</td></tr>
+<tr><td class="art">1188-1192</td><td>Clause claire : on n'interprète pas (1192) ; sinon <b>intention commune</b>, puis sens d'une <b>personne raisonnable</b> (1188). Doute : contre le créancier (gré à gré) ou contre le rédacteur (adhésion) (1190).</td><td>Le juge qui interprète une clause claire la dénature.</td></tr>
+<tr><td class="art">1196 / 1583</td><td>Propriété <b>et risques</b> transférés dès la conclusion, sauf clause contraire.</td><td><i>Res perit domino</i>.</td></tr>
+<tr><td class="art">1199</td><td><b>Effet relatif</b> : le contrat ne lie que les parties. Exception : stipulation pour autrui (1205, assurance-vie).</td><td>Les tiers ne peuvent ni exiger ni être forcés.</td></tr>
+<tr><td class="art">1217</td><td>Inexécution : exception d'inexécution, exécution forcée, réduction du prix, résolution, dommages-intérêts (cumulables si compatibles).</td><td>« Tu ne livres pas, je ne paie pas. »</td></tr>
+</table></div>
+
+<!-- 6 IMPREVISION / FM -->
+<h2><span class="n">6</span>Imprévision ou force majeure ? (tombe presque toujours)</h2>
+<div class="law"><div class="t">Article 1218 · les 3 conditions cumulatives</div>Un événement ① <b>échappant au contrôle du débiteur</b>, ② <b>qui ne pouvait être raisonnablement prévu</b> lors de la conclusion, ③ <b>dont les effets ne peuvent être évités</b> par des mesures appropriées, et qui <b>empêche l'exécution</b>.</div>
+<div class="tbl"><table>
+<tr><th></th><th>Imprévision · 1195</th><th>Force majeure · 1218</th></tr>
+<tr><td>Situation</td><td>Exécution <b>possible mais excessivement onéreuse</b> (matières premières +40 %)</td><td>Exécution <b>impossible</b> (seule usine détruite, aucune alternative)</td></tr>
+<tr><td>Conditions</td><td>Changement imprévisible + excessivement onéreux + risque non accepté</td><td>Hors contrôle + imprévisible + effets inévitables</td></tr>
+<tr><td>Pendant ce temps</td><td>On <b>continue d'exécuter</b></td><td>Exécution suspendue</td></tr>
+<tr><td>Effet</td><td>Renégociation → résolution amiable ou adaptation par le juge (demande commune) → à défaut, le juge révise ou met fin</td><td>Temporaire : <b>suspension</b>. Définitive : <b>résolution de plein droit</b>, pas de dommages-intérêts</td></tr>
+<tr><td>Écartable ?</td><td>Oui, supplétif (clause de hardship)</td><td>Oui, supplétif (clause de force majeure)</td></tr>
+</table></div>
+<div class="trap"><div class="t">Piège</div>Une seule condition manque = pas de force majeure, et le débiteur est responsable (1103). Grève interne : ① manque. Pandémie déjà connue à la signature : ② manque. Autre transport possible : ③ manque. Avant 2016, l'imprévision était refusée (arrêt <b>Canal de Craponne</b>, 1876). Les anciens manuels parlent d'« extériorité » : critère remplacé.</div>
+
+<!-- 7 BASES -->
+<h2><span class="n">7</span>Les bases qui tombent en question de cours</h2>
+<div class="grid2">
+  <div class="box"><h4>Law / rights</h4>Droit objectif (law) = ensemble des règles d'un pays. Droit subjectif (right) = prérogative qu'elles donnent (propriété : usus, fructus, abusus, art. 544).</div>
+  <div class="box"><h4>Règlement / directive UE (288 TFUE)</h4>Règlement : obligatoire et <b>directement applicable</b> (RGPD). Directive : résultat imposé, <b>à transposer</b>.</div>
+  <div class="box"><h4>Jurisprudence</h4>En théorie pas une vraie source (le juge tranche un litige précis, art. 5 C. civ.), en pratique très suivie et elle inspire la loi (Chronopost → 1170).</div>
+  <div class="box"><h4>Sources des obligations (1100)</h4>Actes juridiques (volonté : contrat), faits juridiques (accident, 1240), autorité de la loi (impôts).</div>
+  <div class="box"><h4>Personnes</h4>Physique (capacité à 18 ans) / morale (99 ans max, capacité limitée par l'objet social). Entreprise = notion économique ; société = personne juridique. Succursale = pas de personnalité ; filiale = société distincte contrôlée.</div>
+  <div class="box"><h4>Responsabilité</h4>Limitée (SARL, SAS, SA) : biens perso protégés. Illimitée (SNC) : biens perso saisissables. Le débiteur répond sur tous ses biens (2284).</div>
+  <div class="box"><h4>Classifications</h4>Synallagmatique / unilatéral (1106), onéreux / gratuit (1107), gré à gré / adhésion (1110), instantané / successif (1111-1). Le juge qualifie selon le <b>contenu</b>, pas le titre. Vente (prix) ≠ échange (bien contre bien).</div>
+  <div class="box"><h4>Litiges</h4>Amiables : négociation (seuls), médiation (tiers facilite), conciliation (tiers propose) → transaction (2044). Juridictionnels : juge (1re instance, appel, cassation = droit seulement) ou <b>arbitrage</b> (privé, sentence obligatoire, clause compromissoire).</div>
+</div>
+
+<!-- 8 CAS PRATIQUE -->
+<h2><span class="n">8</span>Le cas pratique : méthode + 3 corrigés types</h2>
+<div class="flow">
+  <div class="step"><b>① Faits</b>Je résume les faits utiles et je qualifie (vente ? dol ? force majeure ?).</div><div class="arr">→</div>
+  <div class="step"><b>② Règle</b>Je cite l'article et ses conditions.</div><div class="arr">→</div>
+  <div class="step"><b>③ Application + conclusion</b>Condition par condition, puis la conséquence juridique.</div>
+</div>
+<div class="ex"><div class="t">Cas 1 · Force majeure : le pâtissier</div>
+<b>Faits :</b> un pâtissier doit livrer un gâteau à Nice, son vol est annulé, il ne livre pas ; il invoque la force majeure.<br>
+<b>Règle :</b> art. 1218, 3 conditions cumulatives.<br>
+<b>Application :</b> ① l'annulation échappe à son contrôle ✓ ; ② difficilement prévisible ✓ ; ③ il pouvait prendre un autre vol ou un train ✗.<br>
+<b>Conclusion :</b> pas de force majeure, il doit indemniser le client.</div>
+<div class="ex"><div class="t">Cas 2 · Vice du consentement : la table</div>
+<b>Faits :</b> Léa achète une table présentée par le vendeur comme du chêne massif ; elle est en plastique et le vendeur le savait.<br>
+<b>Règle :</b> art. 1128 (consentement) et 1137 (dol : tromperie volontaire), déterminant (1130).<br>
+<b>Application :</b> mensonge volontaire ✓ ; sans lui, Léa n'aurait pas acheté ✓.<br>
+<b>Conclusion :</b> nullité <b>relative</b> (1131), que seule Léa peut demander dans les 5 ans de la découverte ; restitutions (table contre prix) et dommages-intérêts possibles.</div>
+<div class="ex"><div class="t">Cas 3 · Clause limitative : le transporteur</div>
+<b>Faits :</b> un transporteur express livre en retard un dossier d'appel d'offres ; son contrat limite l'indemnité au prix du transport.<br>
+<b>Règle :</b> art. 1170 (arrêt Chronopost).<br>
+<b>Application :</b> livrer à l'heure est l'obligation essentielle ; la clause la vide de sa substance.<br>
+<b>Conclusion :</b> clause réputée non écrite, le contrat reste ; le client est indemnisé selon le droit commun s'il prouve son préjudice (perte de chance).</div>
+
+<!-- QUIZ -->
+<h2><span class="n">?</span>QCM d'entraînement corrigé</h2>
+<p>Clique sur une réponse : la bonne s'affiche en vert avec l'explication.</p>
+<div id="quiz"></div>
+<div class="score" id="score">Score : <span id="sc">0</span> / <span id="tot">0</span><button type="button" id="reset">Recommencer</button></div>
+
+<footer>Fiche « essentiel examen » tirée de la fiche complète Business Law (CM, droit des contrats, Code civil 1100 et s.). Pour les détails et les 61 questions, voir la fiche complète.</footer>
+</main>
+<script>
+const Q=[
+["Que dit l'article 1103 du Code civil ?",["Chacun est libre de contracter ou non","Les contrats légalement formés tiennent lieu de loi à ceux qui les ont faits","Les contrats doivent être exécutés de bonne foi","Le contrat est un accord de volontés"],1,"C'est la force obligatoire (pacta sunt servanda). 1102 = liberté, 1104 = bonne foi, 1101 = définition du contrat."],
+["Les conditions de validité de l'article 1128 sont :",["Offre, acceptation, signature","Consentement, capacité, contenu licite et certain","Écrit, notaire, enregistrement","Prix, chose, livraison"],1,"Trois conditions cumulatives : s'il en manque une seule, le contrat est nul (1178)."],
+["« J'ai 50 CD de Beethoven à vendre, ça t'intéresse ? » Tu réponds oui. Y a-t-il contrat ?",["Oui, l'acceptation a été donnée","Non, ce n'est pas une offre faute de prix (élément essentiel) : c'est une invitation à négocier","Oui, mais seulement s'il est écrit","Non, car le silence ne vaut pas acceptation"],1,"Art. 1114 : l'offre doit contenir les éléments essentiels et la volonté d'être lié. Sans prix, pas d'offre de vente."],
+["B accepte les 5 points de l'offre de A mais ajoute « tribunal de Paris compétent ». Résultat ?",["Contrat formé sur 5 points","Contrat formé sur 6 points","Pas de contrat : c'est une contre-offre","Le juge choisit"],2,"Art. 1118 : une acceptation qui modifie l'offre est une nouvelle offre (contre-offre)."],
+["Le silence vaut-il acceptation ?",["Toujours","Jamais","En principe non, sauf loi, usages, relations d'affaires ou circonstances particulières","Seulement entre particuliers"],2,"Art. 1120. Entre deux entreprises qui travaillent ainsi depuis des années, le silence peut valoir acceptation."],
+["Une entreprise rompt sans motif sérieux des négociations très avancées. Que peut obtenir l'autre ?",["Rien, la négociation est libre","Le remboursement de ses frais, mais pas le gain espéré du contrat","L'exécution forcée du contrat","Le bénéfice qu'elle aurait fait"],1,"Art. 1112 : la rupture fautive engage la responsabilité, mais la réparation ne couvre pas la perte des avantages attendus du contrat non conclu (tunnel dans les Alpes)."],
+["Quelle est la différence entre l'erreur et le dol ?",["Aucune","L'erreur : je me trompe seule ; le dol : l'autre me trompe volontairement","Le dol ne concerne que la valeur","L'erreur est toujours excusable"],1,"Erreur = je me trompe ; dol = on me trompe ; violence = on me force (1130 et s.)."],
+["J'ai payé trop cher, sans mensonge du vendeur. Puis-je obtenir la nullité pour erreur ?",["Oui, toujours","Non : l'erreur sur la valeur n'est pas une cause de nullité (1136)","Oui, si le prix est le double","Seulement entre professionnels"],1,"1136. En revanche, si le vendeur a menti pour obtenir ce prix, c'est un dol et l'erreur provoquée est toujours prise en compte, même sur la valeur (1139)."],
+["« Si tu ne signes pas, je porte plainte contre toi. » Est-ce une violence ?",["Oui, toujours","Non, menacer d'une action en justice n'est pas une violence, sauf abus (avantage manifestement excessif)","Oui, si la plainte est fondée","Non, la violence est forcément physique"],1,"Art. 1141 (Peter et Charles). Ça devient une violence si on détourne la voie de droit pour obtenir un avantage manifestement excessif."],
+["Les vices du consentement sont sanctionnés par :",["La nullité absolue","La nullité relative","Une clause réputée non écrite","Rien"],1,"Art. 1131 : ils ne concernent qu'un intérêt privé ; seule la victime peut agir, dans les 5 ans de la découverte."],
+["Mandaté pour acheter un camion à 50 000 € maximum, B en achète un à 80 000 €. A est-il engagé ?",["Oui, toujours","Non, sauf ratification ou mandat apparent","Oui, mais à moitié","Seul B est engagé, dans tous les cas"],1,"Art. 1156 : l'acte hors pouvoirs est inopposable au représenté, sauf si le tiers a légitimement cru aux pouvoirs ou si A ratifie."],
+["Peter paie 10 000 € un vélo qui en vaut 100, sans erreur, dol ni violence. Le contrat est :",["Nul (1169)","Valable (1168) : c'est une mauvaise affaire","Réputé non écrit","Résolu"],1,"1168 : le défaut d'équivalence n'est pas une cause de nullité. 1169 vise une contrepartie illusoire ou dérisoire (entreprise vendue 1 €)."],
+["L'arrêt Chronopost (1996) a donné naissance à quel article ?",["1103","1170","1195","1218"],1,"1170 : la clause qui prive de sa substance l'obligation essentielle du débiteur est réputée non écrite."],
+["Une clause « réputée non écrite » :",["Rend tout le contrat nul","Disparaît seule, le contrat continue","Doit être réécrite par le juge","Vaut seulement entre consommateurs"],1,"Différence clé : nul = tout le contrat tombe ; réputé non écrit = seule la clause est effacée (1170, 1171)."],
+["Qui peut agir en nullité absolue ?",["Seule la victime","Toute personne qui y a intérêt et le ministère public","Seulement le juge","Personne"],1,"Nullité absolue (1180) : protège l'intérêt général. La nullité relative (1181) n'est ouverte qu'à la partie protégée et peut être confirmée."],
+["Les CGV du vendeur prévoient une réserve de propriété, les CG d'achat de l'acheteur disent l'inverse. Que se passe-t-il ?",["Les CGV du vendeur l'emportent","Les CG de l'acheteur l'emportent","Les deux clauses sont sans effet, on applique la loi (1583 : acheteur propriétaire dès l'accord)","Le contrat est nul"],2,"Art. 1119 al. 2 : la bataille des formulaires. Le vendeur perd sa protection."],
+["L'article 1583 (propriété transférée dès l'accord sur la chose et le prix) est :",["Impératif","Supplétif : on peut l'écarter par une clause de réserve de propriété","D'ordre public","Abrogé"],1,"Une règle supplétive s'applique si le contrat ne dit rien. La clause de réserve de propriété garde la propriété au vendeur jusqu'au paiement complet."],
+["Le prix des matières premières augmente de 40 % : livrer reste possible mais ruineux. Quel mécanisme ?",["Force majeure (1218)","Imprévision (1195) : demander une renégociation en continuant d'exécuter","Nullité (1178)","Dol"],1,"L'exécution n'est pas impossible, elle est excessivement onéreuse : c'est l'imprévision."],
+["Quelles sont les 3 conditions de la force majeure depuis 2016 ?",["Extériorité, imprévisibilité, irrésistibilité","Événement échappant au contrôle du débiteur, imprévisible à la conclusion, effets inévitables","Faute, dommage, lien de causalité","Consentement, capacité, contenu"],1,"Art. 1218. « Extériorité » est l'ancien critère. Faute + dommage + lien = responsabilité délictuelle (1240)."],
+["Quelle différence entre médiation et conciliation ?",["Aucune","Le médiateur facilite le dialogue ; le conciliateur propose en plus une solution","Le conciliateur impose sa décision","La médiation est obligatoire"],1,"Aucun des deux n'impose de décision. Seuls le juge et l'arbitre tranchent (sentence arbitrale obligatoire)."]
+];
+const box=document.getElementById('quiz');let score=0,done=0;
+document.getElementById('tot').textContent=Q.length;
+function render(){box.innerHTML='';score=0;done=0;document.getElementById('sc').textContent=0;
+Q.forEach((q,i)=>{const d=document.createElement('div');d.className='q';
+d.innerHTML='<div class="qt">Q'+(i+1)+' · '+q[0]+'</div>';
+q[1].forEach((o,j)=>{const b=document.createElement('button');b.type='button';b.textContent=String.fromCharCode(65+j)+'. '+o;
+b.onclick=()=>{if(d.classList.contains('done'))return;d.classList.add('done');done++;
+if(j===q[2]){score++;}else{b.classList.add('bad');}
+d.querySelectorAll('button')[q[2]].classList.add('good');d.querySelectorAll('button').forEach(x=>x.disabled=true);
+document.getElementById('sc').textContent=score;};d.appendChild(b);});
+const e=document.createElement('div');e.className='expl';e.innerHTML='<b>Réponse '+String.fromCharCode(65+q[2])+'.</b> '+q[3];d.appendChild(e);box.appendChild(d);});}
+window.showAllAnswers=()=>{document.querySelectorAll('.q').forEach((d,i)=>{d.classList.add('done');const bs=d.querySelectorAll('button');bs[Q[i][2]].classList.add('good');bs.forEach(x=>x.disabled=true);});};
+document.getElementById('reset').onclick=render;render();
+</script>
+</body>
+</html>

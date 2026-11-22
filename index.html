@@ -1,4 +1,4 @@
-<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="Planning"><meta name="theme-color" content="#FFF6F9"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="apple-touch-icon.png"><link rel="icon" href="icon-192.png"><style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}[hidden]{display:none!important}</style></head><body><title>Planning de Marlène</title>
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="Planning"><meta name="theme-color" content="#FFF6F9"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="apple-touch-icon.png"><link rel="icon" href="icon-192.png"><style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}[hidden]{display:none!important}</style><link rel="stylesheet" href="extra.css?v=1"></head><body><title>Planning de Marlène</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Yeseva+One&display=swap">
@@ -881,4 +881,14 @@ document.addEventListener("contextmenu",e=>{if(e.target.closest("[data-drag]"))e
 rebuild();initView();render();
 })();
 </script>
+<section class="pane" id="pane-anglais" hidden><header class="top x"><div class="wrap"><div class="brand"><h1>Tests d'<span>anglais</span> ✿</h1></div></div></header><main class="wrap" id="en-main"></main></section>
+<section class="pane" id="pane-cours" hidden><header class="top x"><div class="wrap"><div class="brand"><h1>Mes <span>cours</span> ✿</h1></div></div></header><main class="wrap" id="cours-main"></main></section>
+<section class="pane" id="pane-sport" hidden><header class="top x"><div class="wrap"><div class="brand"><h1>Mon <span>sport</span> ✿</h1></div></div></header><main class="wrap" id="sport-main"></main></section>
+<nav class="bnav" role="tablist" aria-label="Espaces de l'appli">
+  <button role="tab" data-pane="planning" aria-selected="true"><span class="ic">🗓️</span><span>Planning</span></button>
+  <button role="tab" data-pane="anglais" aria-selected="false"><span class="ic">🇬🇧</span><span>Anglais</span></button>
+  <button role="tab" data-pane="cours" aria-selected="false"><span class="ic">📚</span><span>Mes cours</span></button>
+  <button role="tab" data-pane="sport" aria-selected="false"><span class="ic">💪</span><span>Sport</span></button>
+</nav>
+<script src="anglais-bank-1.js?v=1"></script><script src="anglais-bank-2.js?v=1"></script><script src="anglais-bank-3.js?v=1"></script><script src="cours-pdf.js?v=1"></script><script src="extra.js?v=1"></script>
 </body></html>

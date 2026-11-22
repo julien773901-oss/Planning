@@ -1,0 +1,1382 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Business Law contrats</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:ital,wght@0,400;0,600;0,700;1,400&display=swap">
+<style>
+/* Layout: une colonne de lecture (~68ch), sommaire collant sur grand écran, encadrés bleus par rôle (définition, exemple, piège, à retenir) */
+:root{
+  --bg:#f3f7fd; --paper:#ffffff; --ink:#122848; --muted:#4f6383;
+  --rose:#2563c9; --rose-deep:#1a4793; --blush:#e0ebfb; --blush-2:#b9d0f4; --line:#cbdbf2;
+  --plum:#3d3f9e; --ok:#1f8a5b; --ok-bg:#e3f5ec; --ko:#c0392b; --ko-bg:#fde6e3;
+  --f-display:"Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+  --f-body:"Figtree", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0c1727; --paper:#132139; --ink:#e5eefb; --muted:#9db2d2;
+  --rose:#6aa0ff; --rose-deep:#93baff; --blush:#1b2f4f; --blush-2:#2a4672; --line:#253b5e;
+  --plum:#aab0f7; --ok:#5fd39b; --ok-bg:#163327; --ko:#ff8b7d; --ko-bg:#3a1a17; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#0c1727; --paper:#132139; --ink:#e5eefb; --muted:#9db2d2;
+  --rose:#6aa0ff; --rose-deep:#93baff; --blush:#1b2f4f; --blush-2:#2a4672; --line:#253b5e;
+  --plum:#aab0f7; --ok:#5fd39b; --ok-bg:#163327; --ko:#ff8b7d; --ko-bg:#3a1a17; color-scheme:dark }
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.65;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;padding-block:32px 80px}
+@media (max-width:900px){.wrap{grid-template-columns:minmax(0,1fr);gap:0}.toc{display:none}}
+main{min-width:0;max-width:72ch}
+h1,h2,h3,h4{font-family:var(--f-display);text-wrap:balance;line-height:1.15;color:var(--ink)}
+h1{font-size:clamp(2.2rem,5.5vw,3.6rem);font-weight:800;margin:0 0 .3em;letter-spacing:-.02em}
+h1 em{font-style:normal;color:var(--rose)}
+h2{font-size:clamp(1.6rem,3.6vw,2.2rem);font-weight:800;margin:0 0 .4em}
+h3{font-size:1.3rem;font-weight:700;margin:2em 0 .5em;color:var(--rose-deep)}
+h4{font-size:1.05rem;margin:1.4em 0 .3em}
+p{margin:.6em 0}
+a{color:var(--rose-deep)}
+strong{color:var(--plum)}
+.eyebrow{font-family:var(--f-display);text-transform:uppercase;letter-spacing:.12em;font-size:.78rem;font-weight:700;color:var(--rose)}
+.lede{font-size:1.15rem;color:var(--muted)}
+
+/* Sommaire */
+.toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 24px);align-self:start;font-size:.92rem}
+.toc ol{list-style:none;padding:0;margin:.6em 0 0;display:grid;gap:2px}
+.toc a{display:block;padding:6px 10px;border-radius:8px;text-decoration:none;color:var(--muted)}
+.toc a:hover,.toc a:focus-visible{background:var(--blush);color:var(--ink)}
+.toc .sub{padding-left:22px;font-size:.86rem}
+
+/* Hero */
+.hero{padding-block:8px 28px;border-bottom:2px solid var(--line);margin-bottom:24px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.chip{background:var(--blush);color:var(--rose-deep);border-radius:999px;padding:4px 12px;font-size:.85rem;font-weight:600}
+
+/* Parties */
+section.part{padding-top:40px;margin-top:40px;border-top:2px solid var(--line)}
+.part-head{display:flex;gap:16px;align-items:flex-start;margin-bottom:8px}
+.part-num{font-family:var(--f-display);font-weight:800;font-size:3.2rem;line-height:1;color:var(--blush-2);flex:none}
+.part-head .src{font-size:.85rem;color:var(--muted)}
+
+/* Encadrés */
+.box{border-radius:14px;padding:14px 18px;margin:16px 0;border:1px solid var(--line);background:var(--paper)}
+.box > :first-child{margin-top:0}.box > :last-child{margin-bottom:0}
+.box .tag{display:inline-block;font-family:var(--f-display);font-weight:700;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;padding:2px 8px;border-radius:6px;margin-bottom:6px}
+.def{background:var(--blush);border-color:var(--blush-2)}
+.def .tag{background:var(--rose);color:var(--paper)}
+.ex .tag{background:var(--plum);color:var(--paper)}
+.ex{border-left:5px solid var(--plum)}
+.trap{border:1.5px dashed var(--rose)}
+.trap .tag{background:transparent;color:var(--rose);border:1.5px solid var(--rose)}
+.key{background:var(--ink);color:var(--bg);border:none}
+.key strong{color:var(--blush-2)}
+.key .tag{background:var(--rose);color:#fff}
+.key ul{margin:.3em 0;padding-left:1.2em}
+.simple{font-style:italic;color:var(--muted)}
+
+/* Tableaux */
+.tbl{overflow-x:auto;margin:16px 0;border-radius:12px;border:1px solid var(--line)}
+table{border-collapse:collapse;width:100%;font-size:.93rem;background:var(--paper)}
+th,td{padding:9px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+th{background:var(--blush);font-family:var(--f-display);font-weight:700;color:var(--rose-deep)}
+tr:last-child td{border-bottom:none}
+
+/* Schémas */
+figure{margin:20px 0;padding:16px;background:var(--paper);border:1px solid var(--line);border-radius:14px}
+figure .scroll{overflow-x:auto}
+figcaption{font-size:.85rem;color:var(--muted);margin-top:8px}
+svg text{font-family:var(--f-body)}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch}
+.flow .step{flex:1 1 120px;background:var(--blush);border-radius:12px;padding:10px 12px;font-size:.9rem;min-width:0}
+.flow .step b{display:block;font-family:var(--f-display);color:var(--rose-deep);font-size:.95rem}
+.flow .arrow{align-self:center;color:var(--rose);font-weight:800}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px 14px;min-width:0}
+.card h4{margin:0 0 4px;color:var(--rose-deep)}
+.card p{margin:.2em 0;font-size:.93rem}
+.pm{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+.pm > div{border-radius:12px;padding:12px 14px}
+.pm .plus{background:var(--ok-bg)}.pm .minus{background:var(--ko-bg)}
+.pm h4{margin:0 0 4px}.pm .plus h4{color:var(--ok)}.pm .minus h4{color:var(--ko)}
+.pm ul{margin:0;padding-left:1.1em;font-size:.93rem}
+
+/* Quiz */
+.quiz{counter-reset:q}
+.q{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:14px 0}
+.q h4{margin:0 0 10px;font-family:var(--f-body);font-weight:700}
+.q h4::before{counter-increment:q;content:"Q" counter(q) " · ";color:var(--rose);font-family:var(--f-display)}
+.opts{display:grid;gap:8px}
+.opts button{font:inherit;font-size:.95rem;text-align:left;padding:10px 14px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.opts button:hover:not(:disabled){border-color:var(--rose)}
+.opts button:focus-visible{outline:3px solid var(--rose);outline-offset:2px}
+.opts button.right{background:var(--ok-bg);border-color:var(--ok);font-weight:600}
+.opts button.wrong{background:var(--ko-bg);border-color:var(--ko)}
+.opts button:disabled{cursor:default}
+.expl{margin-top:10px;padding:10px 14px;border-radius:10px;background:var(--blush);font-size:.93rem}
+.expl b.v{color:var(--ok)}.expl b.x{color:var(--ko)}
+.scorebar{position:sticky;top:calc(env(safe-area-inset-top,0px) + 8px);z-index:5;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;background:var(--ink);color:var(--bg);border-radius:12px;padding:10px 16px;margin:16px 0}
+.scorebar b{font-family:var(--f-display);font-size:1.15rem;color:var(--blush-2)}
+.scorebar button{font:inherit;font-size:.88rem;background:var(--rose);color:#fff;border:none;border-radius:8px;padding:6px 12px;cursor:pointer}
+.result{display:none}
+.result.on{display:block}
+dl.glo{display:grid;grid-template-columns:minmax(120px,max-content) minmax(0,1fr);gap:6px 16px;font-size:.93rem}
+dl.glo dt{font-weight:700;color:var(--rose-deep)}
+dl.glo dd{margin:0}
+@media (max-width:520px){dl.glo{grid-template-columns:minmax(0,1fr)}dl.glo dd{margin-bottom:8px}}
+@media (prefers-reduced-motion:no-preference){.opts button{transition:background .15s,border-color .15s}}
+.fix{background:var(--ko-bg);border-color:var(--ko)}
+.fix .tag{background:var(--ko);color:#fff}
+.law{background:var(--paper);border-left:5px solid var(--rose)}
+.law .tag{background:var(--blush);color:var(--rose-deep)}
+.law blockquote{margin:.4em 0;padding:0;font-style:italic}
+.art{display:inline-block;font-family:var(--f-display);font-weight:700;font-size:.8rem;background:var(--blush);color:var(--rose-deep);border-radius:6px;padding:0 6px;white-space:nowrap}
+</style>
+<div class="wrap">
+<nav class="toc" aria-label="Sommaire">
+  <div class="eyebrow">Sommaire</div>
+  <ol>
+    <li><a href="#p0">Mode d'emploi</a></li>
+    <li><a href="#p1">1. Les bases du droit</a></li>
+    <li><a href="#p2">2. Les acteurs</a></li>
+    <li><a href="#p3">3. Le contrat : principes</a></li>
+    <li><a href="#p4">4. Former un contrat</a></li>
+    <li><a href="#p5">5. Les 3 conditions de validité</a></li>
+    <li><a href="#p6">6. La nullité</a></li>
+    <li><a href="#p7">7. Les effets du contrat</a></li>
+    <li><a href="#p8">8. Le temps : imprévision et force majeure</a></li>
+    <li><a href="#p9">9. Les grands contrats d'affaires</a></li>
+    <li><a href="#p10">10. Régler un litige</a></li>
+    <li><a href="#glossaire">Glossaire FR / EN</a></li>
+    <li><a href="#quiz">Quiz corrigé</a></li>
+  </ol>
+</nav>
+
+<main>
+<header class="hero">
+  <div class="eyebrow">Business Law · CM · L3 Commerce International · UPEC</div>
+  <h1>Le droit des <em>contrats</em>, depuis zéro</h1>
+  <p class="lede">Le cours est en anglais, mais il porte sur le droit français : le Code civil, articles 1101 et suivants. Cette fiche reprend tout le cours en français, avec les termes anglais à côté, des exemples et un quiz pour vérifier que tu as compris.</p>
+  <div class="chips"><span class="chip">Code civil art. 1100 à 1240</span><span class="chip">Réforme de 2016</span><span class="chip">Cas pratique en 3 étapes</span><span class="chip">Glossaire FR/EN</span><span class="chip">Quiz de 61 questions</span></div>
+</header>
+
+<section id="p0">
+  <h2>Mode d'emploi</h2>
+  <p>Le droit des contrats tient en quelques grandes questions. Si tu sais y répondre, tu as compris le cours :</p>
+  <figure>
+    <div class="flow">
+      <div class="step"><b>1. Y a-t-il un contrat ?</b>Offre + acceptation, pas seulement une négociation.</div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>2. Est-il valable ?</b>Consentement, capacité, contenu licite et certain (art. 1128).</div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>3. Que dit-il ?</b>Clauses, loi, usages, interprétation.</div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>4. Que se passe-t-il si ça tourne mal ?</b>Nullité, imprévision, force majeure, litige.</div>
+    </div>
+    <figcaption>Le fil rouge de la fiche : chaque partie répond à une de ces questions.</figcaption>
+  </figure>
+  <div class="box def"><span class="tag">Les encadrés</span>
+    <p><strong>Définition</strong> en bleu clair, <strong>Exemple</strong> avec une barre violette, <strong>Article</strong> pour le texte de loi, <strong>Piège</strong> en pointillés, et <strong>À retenir</strong> en foncé.</p>
+  </div>
+</section>
+
+<!-- ============ PARTIE 1 ============ -->
+<section class="part" id="p1">
+  <div class="part-head"><span class="part-num">1</span><div><div class="eyebrow">Introduction du cours</div><h2>Les bases du droit</h2></div></div>
+
+  <h3>1.1 « Droit » a deux sens : law et rights</h3>
+  <p>En français, on utilise le même mot « droit » pour deux choses différentes. En anglais, il y a deux mots, ce qui aide à comprendre.</p>
+  <div class="grid2">
+    <div class="card"><h4>Droit objectif = <em>Law</em></h4><p>L'ensemble des règles en vigueur <strong>dans un pays donné, à un moment donné</strong>. On dit aussi « droit positif ».</p><p>On ne dit jamais « la loi dit que… » en général : il faut toujours préciser <strong>quel pays</strong>. La peine de mort existe dans certains pays et pas dans d'autres.</p></div>
+    <div class="card"><h4>Droit subjectif = <em>Right</em></h4><p>Une <strong>prérogative individuelle</strong> accordée à une personne par la loi, sous certaines conditions.</p><p>Exemples : droit de propriété, droit de vote, droit de grève, droits et devoirs nés du mariage.</p></div>
+  </div>
+  <p><strong>Le lien entre les deux</strong> : le droit objectif est la <strong>source</strong> des droits subjectifs. La loi crée d'abord le droit, puis fixe son contenu et ses limites. Sans loi, pas de droits.</p>
+  <div class="box law"><span class="tag">Article 544 Code civil</span>
+    <blockquote>« La propriété est le droit de jouir et disposer des choses de la manière la plus absolue, pourvu qu'on n'en fasse pas un usage prohibé par les lois ou par les règlements. »</blockquote>
+    <p>La loi donne le droit (« la manière la plus absolue ») et pose sa limite dans la même phrase (« pourvu que… »).</p>
+  </div>
+  <div class="box ex"><span class="tag">Exemple : les 3 pouvoirs du propriétaire</span>
+    <p>Tu possèdes un appartement. Tu peux <strong>l'habiter</strong> (<em>usus</em> : l'usage), <strong>le louer</strong> et toucher les loyers (<em>fructus</em> : les fruits), <strong>le vendre</strong> ou le démolir (<em>abusus</em> : en disposer).</p>
+  </div>
+  <p>Une règle de droit « meurt » quand elle est <strong>abrogée</strong> (<em>repealed</em>). En France, on ne peut pas avoir deux règles contradictoires sur exactement le même point.</p>
+
+  <h3>1.2 Les sources du droit : d'où viennent les règles ?</h3>
+  <p>Les sources du droit sont les « canaux » officiels par lesquels les règles sont créées. Si n'importe qui pouvait inventer la loi, ce serait l'anarchie.</p>
+  <figure>
+    <div class="scroll">
+    <svg viewBox="0 0 640 300" width="100%" style="min-width:480px" role="img" aria-label="Pyramide des sources du droit français">
+      <g font-size="13" text-anchor="middle" fill="var(--ink)">
+        <polygon points="320,10 400,80 240,80" fill="var(--rose)"/>
+        <text x="320" y="62" fill="#fff" font-weight="700">Constitution</text>
+        <polygon points="240,84 400,84 460,140 180,140" fill="var(--rose-deep)"/>
+        <text x="320" y="110" fill="#fff" font-weight="700">Traités internationaux et droit de l'UE</text>
+        <text x="320" y="128" fill="#fff" font-size="11.5">TUE, TFUE, règlements, directives</text>
+        <polygon points="180,144 460,144 520,200 120,200" fill="var(--plum)"/>
+        <text x="320" y="170" fill="#fff" font-weight="700">La loi (statute)</text>
+        <text x="320" y="188" fill="#fff" font-size="11.5">votée par le Parlement : Assemblée nationale + Sénat</text>
+        <polygon points="120,204 520,204 580,262 60,262" fill="var(--blush-2)"/>
+        <text x="320" y="230" font-weight="700" fill="var(--ink)">Règlements : décrets, ordonnances, arrêtés</text>
+        <text x="320" y="248" font-size="11.5" fill="var(--ink)">pris par le Gouvernement (pouvoir réglementaire)</text>
+        <rect x="60" y="270" width="520" height="26" rx="8" fill="var(--blush)" stroke="var(--rose)" stroke-dasharray="5 4"/>
+        <text x="320" y="288" font-size="12" fill="var(--rose-deep)">À côté : la jurisprudence (case law), qui interprète les textes</text>
+      </g>
+    </svg></div>
+    <figcaption>Plus on monte, plus la règle est forte : une règle inférieure ne peut pas contredire une règle supérieure.</figcaption>
+  </figure>
+  <div class="tbl"><table>
+    <tr><th>Source</th><th>Qui la fait ?</th><th>Exemple</th></tr>
+    <tr><td><strong>La loi</strong> (<em>statute</em>)</td><td>Le Parlement (Assemblée nationale + Sénat)</td><td>La loi qui a ratifié la réforme du droit des contrats en 2018</td></tr>
+    <tr><td><strong>Les règlements</strong> (<em>regulations, decrees, ordinances</em>)</td><td>Le Gouvernement, sur les sujets qui ne sont pas réservés au Parlement</td><td>L'<strong>ordonnance du 10 février 2016</strong> qui a réécrit le droit des contrats (art. 1100 et s.)</td></tr>
+    <tr><td><strong>La jurisprudence</strong> (<em>case law</em>)</td><td>Les juges : l'ensemble des décisions rendues sur une question donnée</td><td>L'arrêt <strong>Chronopost</strong> (1996), devenu l'article 1170</td></tr>
+    <tr><td><strong>Le droit de l'UE</strong></td><td>Les traités (sources primaires) et les institutions européennes (sources dérivées)</td><td>Le RGPD (un règlement), les directives sur la protection des consommateurs</td></tr>
+  </table></div>
+  <div class="box trap"><span class="tag">Piège : la jurisprudence</span>
+    <p>En théorie, en France, <strong>le juge ne crée pas la loi</strong> : il tranche le litige entre A et B, sa décision ne vaut que pour eux (l'article 5 du Code civil lui interdit de poser des règles générales). C'est pourquoi le cours dit que la jurisprudence n'est « pas vraiment » une source du droit.</p>
+    <p>En pratique, elle compte énormément : les tribunaux suivent presque toujours la <strong>Cour de cassation</strong> (la plus haute juridiction judiciaire), même s'ils n'y sont pas juridiquement obligés. Et des solutions de jurisprudence finissent souvent dans le Code (Chronopost → art. 1170).</p>
+  </div>
+  <h4>Règlement européen ou directive européenne ? (art. 288 TFUE)</h4>
+  <div class="grid2">
+    <div class="card"><h4>Règlement (<em>Regulation</em>)</h4><p>« A une portée générale, est obligatoire dans tous ses éléments et <strong>directement applicable</strong> dans tout État membre. »</p><p>Il s'applique tel quel, le jour de son entrée en vigueur, sans loi française. Ex. : le RGPD.</p></div>
+    <div class="card"><h4>Directive (<em>Directive</em>)</h4><p>« Lie tout État membre quant au <strong>résultat à atteindre</strong>, en laissant aux instances nationales la compétence quant à la forme et aux moyens. »</p><p>Chaque État doit la <strong>transposer</strong> dans sa propre loi. Ex. : les directives sur les droits des consommateurs.</p></div>
+  </div>
+  <p class="simple">Image simple : le règlement est un plat déjà cuisiné, la directive est une recette avec le résultat imposé, chaque pays choisit ses ustensiles.</p>
+  <p>Les <strong>traités</strong> (TUE et TFUE) sont les sources <strong>primaires</strong> : des accords entre États. Les règlements et directives sont les sources <strong>dérivées</strong>, produites par les institutions de l'UE depuis la création de la CEE en 1957.</p>
+
+  <h3>1.3 Toute règle de droit a deux parties : un fait et un effet</h3>
+  <p>C'est la <strong>structure dualiste</strong> de la règle de droit, l'idée la plus utile de tout le cours. Chaque article dit : « <strong>Si</strong> telle situation se produit (le fait), <strong>alors</strong> telle conséquence juridique s'applique (l'effet) ». Comme « s'il pleut, je suis mouillée ».</p>
+  <figure>
+    <div class="flow">
+      <div class="step"><b>Hypothèse de fait</b><em>Factual situation</em>. « Tout fait quelconque de l'homme, qui cause à autrui un dommage… par sa faute »</div>
+      <div class="arrow" aria-hidden="true">⇒</div>
+      <div class="step"><b>Effet juridique</b><em>Legal consequence</em>. « …oblige celui par la faute duquel il est arrivé à le réparer. »</div>
+    </div>
+    <figcaption>L'article 1240 du Code civil (responsabilité civile délictuelle, <em>tort law</em>) découpé en fait et effet.</figcaption>
+  </figure>
+  <p>Même découpage pour l'article 1103 : <strong>fait</strong> = « les contrats légalement formés » ; <strong>effet</strong> = « tiennent lieu de loi à ceux qui les ont faits ».</p>
+  <div class="box def"><span class="tag">Définition : la faute (art. 1240-1241)</span>
+    <p>La faute, c'est un comportement fautif : un acte volontaire, une <strong>négligence</strong> ou une <strong>imprudence</strong>. Sans faute, l'article 1240 ne s'applique pas et la victime n'est pas indemnisée sur ce fondement.</p>
+  </div>
+
+  <h3>1.4 La méthode du cas pratique en 3 étapes</h3>
+  <p>À l'examen, on te donne une petite histoire et tu dois dire qui a raison. On applique toujours la même méthode (le <strong>syllogisme juridique</strong>) :</p>
+  <figure>
+    <div class="flow">
+      <div class="step"><b>① Les faits</b>Je résume les faits utiles et je les <strong>qualifie</strong> juridiquement (c'est une vente ? un dol ? une force majeure ?).</div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>② La règle</b>Je cite la règle de droit applicable (l'article) et ses conditions.</div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>③ La conclusion</b>J'applique la règle aux faits, condition par condition, et j'en tire la conséquence juridique.</div>
+    </div>
+    <figcaption>Analyse les faits, applique la règle, tire la conclusion (<em>understand and characterize the facts, determine the rule, draw the consequences</em>).</figcaption>
+  </figure>
+  <div class="box ex"><span class="tag">Exemple corrigé</span>
+    <p><strong>Faits :</strong> un pâtissier doit livrer un gâteau à Nice. Son vol Air France est annulé, il ne livre pas. Le client demande des dommages-intérêts. Le pâtissier invoque la force majeure.</p>
+    <p><strong>① Qualification :</strong> il y a un contrat, et une obligation non exécutée (la livraison). La question est : l'annulation du vol est-elle un cas de force majeure ?</p>
+    <p><strong>② Règle :</strong> article 1218 du Code civil. Il y a force majeure si l'événement (1) échappe au contrôle du débiteur, (2) n'était pas raisonnablement prévisible lors de la conclusion du contrat, et (3) ses effets ne pouvaient pas être évités par des mesures appropriées. Les 3 conditions sont <strong>cumulatives</strong>.</p>
+    <p><strong>③ Application :</strong> (1) l'annulation échappe bien au pâtissier ; (2) elle était difficile à prévoir ; mais (3) il pouvait prendre un autre vol, un train ou un transporteur. La 3<sup>e</sup> condition manque, donc <strong>pas de force majeure</strong> : le pâtissier est responsable et doit indemniser le client.</p>
+  </div>
+  <div class="box key"><span class="tag">À retenir</span>
+    <ul>
+      <li><strong>Law</strong> (droit objectif) = toutes les règles d'un pays ; <strong>rights</strong> (droits subjectifs) = les prérogatives qu'elles donnent.</li>
+      <li>Sources : loi, règlements, droit de l'UE ; la jurisprudence interprète (et inspire le Code).</li>
+      <li>Règlement UE = directement applicable ; directive = résultat imposé, à transposer.</li>
+      <li>Toute règle = <strong>un fait + un effet</strong>.</li>
+      <li>Cas pratique : <strong>faits qualifiés → règle → conclusion</strong>.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ PARTIE 2 ============ -->
+<section class="part" id="p2">
+  <div class="part-head"><span class="part-num">2</span><div><div class="eyebrow">Chapter 1 · Actors in business law</div><h2>Les acteurs : qui peut contracter ?</h2></div></div>
+
+  <h3>2.1 Deux catégories de « personnes » en droit</h3>
+  <p>En droit, une « personne » (un <strong>sujet de droit</strong>), c'est quelqu'un qui peut avoir des droits et des obligations. Il y en a deux sortes :</p>
+  <div class="tbl"><table>
+    <tr><th></th><th>Personne physique (<em>individual, natural person</em>)</th><th>Personne morale (<em>legal entity, legal person</em>)</th></tr>
+    <tr><td><strong>Qui ?</strong></td><td>Un être humain</td><td>Une société, une association, l'État…</td></tr>
+    <tr><td><strong>Naissance</strong></td><td>Sujet de droit dès la naissance</td><td>Création juridique : naît d'un contrat (les statuts) et de son immatriculation</td></tr>
+    <tr><td><strong>Durée</strong></td><td>La vie</td><td><strong>99 ans maximum</strong> pour une société, renouvelables</td></tr>
+    <tr><td><strong>Capacité</strong></td><td>Pleine capacité à la <strong>majorité (18 ans)</strong></td><td>Limitée par son <strong>objet social</strong> (ce que disent les statuts)</td></tr>
+  </table></div>
+  <div class="box trap"><span class="tag">Piège : entreprise ≠ société</span>
+    <p><strong>L'entreprise</strong> (<em>business, enterprise</em>) est une notion <strong>économique</strong> : une activité. Elle n'a pas, en soi, de personnalité juridique. <strong>La société</strong> (<em>company</em>) est une notion <strong>juridique</strong> : une personne morale qui existe grâce à la loi d'un pays. Une boulangère qui travaille seule a une entreprise, mais pas forcément de société.</p>
+  </div>
+  <p>Distinction classique : le <strong>civil</strong> (Code civil) et le <strong>commerçant</strong> (Code de commerce), c'est-à-dire celui qui fait des <strong>actes de commerce</strong> (par exemple acheter pour revendre) à titre de <strong>profession habituelle et indépendante</strong>. Aujourd'hui, on oppose surtout le <strong>professionnel</strong> et le <strong>consommateur</strong>, que la loi protège davantage.</p>
+
+  <h3>2.2 Nationalité des sociétés : siège, succursale, filiale</h3>
+  <p>Une société a <strong>une seule nationalité</strong> : celle du pays de son <strong>siège social</strong>. Air France est une société française, même si elle vole dans le monde entier. Mais ses <strong>contrats</strong> peuvent être soumis à une autre loi (un contrat entre Air France et l'aéroport de Lima peut être régi par le droit péruvien).</p>
+  <div class="grid2">
+    <div class="card"><h4>Succursale (<em>branch</em>)</h4><p>Un simple établissement (bureau, entrepôt). <strong>Pas de personnalité juridique</strong> : elle reste juridiquement la société mère.</p></div>
+    <div class="card"><h4>Filiale (<em>subsidiary</em>)</h4><p>Une <strong>vraie société</strong>, avec sa propre personnalité et sa propre nationalité, mais <strong>contrôlée</strong> par la société mère.</p></div>
+  </div>
+
+  <h3>2.3 Responsabilité limitée ou illimitée</h3>
+  <p>Pourquoi les affaires se font-elles surtout par des sociétés ? Pour <strong>protéger le patrimoine personnel</strong>.</p>
+  <figure>
+    <div class="scroll">
+    <svg viewBox="0 0 640 220" width="100%" style="min-width:480px" role="img" aria-label="Comparaison responsabilité limitée et illimitée">
+      <g font-size="12.5" text-anchor="middle" fill="var(--ink)">
+        <text x="160" y="22" font-weight="700" fill="var(--rose-deep)">Responsabilité LIMITÉE (SARL, SAS, SA)</text>
+        <text x="480" y="22" font-weight="700" fill="var(--rose-deep)">Responsabilité ILLIMITÉE (SNC, entrepreneur seul*)</text>
+        <rect x="40" y="40" width="240" height="50" rx="10" fill="var(--blush)"/><text x="160" y="70">Créanciers de la société</text>
+        <rect x="40" y="120" width="110" height="50" rx="10" fill="var(--rose)"/><text x="95" y="150" fill="#fff">Biens de la société</text>
+        <rect x="170" y="120" width="110" height="50" rx="10" fill="var(--paper)" stroke="var(--line)"/><text x="225" y="143">Biens perso</text><text x="225" y="160">des associés</text>
+        <path d="M100 90V118" stroke="var(--rose)" stroke-width="3"/><path d="M220 90L225 118" stroke="var(--muted)" stroke-width="2" stroke-dasharray="4 4"/>
+        <text x="225" y="195" fill="var(--ok)" font-weight="700">✗ protégés</text>
+        <rect x="360" y="40" width="240" height="50" rx="10" fill="var(--blush)"/><text x="480" y="70">Créanciers de la société</text>
+        <rect x="360" y="120" width="110" height="50" rx="10" fill="var(--rose)"/><text x="415" y="150" fill="#fff">Biens de la société</text>
+        <rect x="490" y="120" width="110" height="50" rx="10" fill="var(--rose-deep)"/><text x="545" y="143" fill="#fff">Biens perso</text><text x="545" y="160" fill="#fff">des associés</text>
+        <path d="M420 90V118M540 90L545 118" stroke="var(--rose)" stroke-width="3"/>
+        <text x="545" y="195" fill="var(--ko)" font-weight="700">✓ peuvent être saisis</text>
+      </g>
+    </svg></div>
+    <figcaption>Si la société ne peut pas payer ses dettes, jusqu'où peuvent aller les créanciers ? (*l'entrepreneur individuel bénéficie aujourd'hui d'une protection partielle de ses biens personnels.)</figcaption>
+  </figure>
+  <p>Vocabulaire du cours : les sociétés à responsabilité limitée sont souvent appelées <strong>sociétés de capitaux</strong> (<em>limited companies</em>) : la perte de chaque associé est limitée à son <strong>apport</strong>. Les sociétés à responsabilité illimitée sont les <strong>sociétés de personnes</strong> (<em>unlimited companies</em>) : aucune limite aux pertes que les associés peuvent supporter.</p>
+  <div class="box def"><span class="tag">Pourquoi le risque est plus fort à l'international</span>
+    <p>Entre deux sociétés françaises, on parle la même langue et on connaît le même droit : le résultat d'un litige est plus prévisible. À l'international, les langues et les droits diffèrent, l'issue est moins certaine : le <strong>risque est plus élevé</strong>. D'où l'intérêt de bien choisir sa structure (responsabilité limitée) et de bien rédiger ses contrats.</p>
+  </div>
+
+  <div class="box def"><span class="tag">La SNC</span>
+    <p>La société à responsabilité illimitée est risquée pour les associés, mais elle existe : la <strong>SNC</strong> (société en nom collectif) sert quand les associés se font une <strong>grande confiance mutuelle</strong>. Elle rassure les banques et les fournisseurs, puisque les associés répondent sur leurs propres biens.</p>
+  </div>
+
+  <h3>2.4 D'où viennent les obligations ? (art. 1100)</h3>
+  <div class="box law"><span class="tag">Article 1100 al. 1</span>
+    <blockquote>« Les obligations naissent d'actes juridiques, de faits juridiques ou de l'autorité seule de la loi. »</blockquote>
+  </div>
+  <p>Seules les obligations <strong>juridiques</strong> comptent pour le droit. Dire bonjour à quelqu'un est une obligation <strong>morale</strong> (de politesse) : aucune sanction juridique si on ne le fait pas.</p>
+  <div class="grid2">
+    <div class="card"><h4>Art. 1100-1 : l'acte juridique</h4><p>« Les actes juridiques sont des manifestations de volonté destinées à produire des effets de droit. Ils peuvent être conventionnels ou unilatéraux. » Ce sont les plus nombreux : on les a <strong>voulus</strong>. Ils obéissent en principe aux règles des contrats.</p></div>
+    <div class="card"><h4>Art. 1100-2 : le fait juridique</h4><p>« Les faits juridiques sont des agissements ou des événements auxquels la loi attache des effets de droit. » Exemple : la société A diffuse de fausses informations sur la société B (concurrence déloyale, art. 1240).</p></div>
+  </div>
+  <div class="grid3">
+    <div class="card"><h4>Actes juridiques</h4><p>Une <strong>volonté</strong> de produire un effet de droit. Unilatéral (un père reconnaît son enfant) ou à plusieurs volontés (un <strong>contrat</strong>).</p></div>
+    <div class="card"><h4>Faits juridiques</h4><p>Un événement <strong>non voulu</strong> pour ses effets, auquel la loi attache une conséquence : un accident, un dommage causé à autrui (art. 1240).</p></div>
+    <div class="card"><h4>La loi seule</h4><p>L'obligation vient directement de la loi : payer ses impôts, par exemple.</p></div>
+  </div>
+  <p><strong>Créancier</strong> (<em>creditor</em>) : celui qui peut exiger. <strong>Débiteur</strong> (<em>debtor</em>) : celui qui doit. Attention, chacun peut être les deux : dans une vente, le vendeur est débiteur de la livraison et créancier du prix.</p>
+  <h4>Le débiteur répond de ses dettes sur tous ses biens</h4>
+  <div class="box law"><span class="tag">Articles 2284 et 2285</span>
+    <p><strong>2284 :</strong> « Quiconque s'est obligé personnellement, est tenu de remplir son engagement sur tous ses biens mobiliers et immobiliers, présents et à venir. »</p>
+    <p><strong>2285 :</strong> les biens du débiteur sont le « gage commun » de ses créanciers, et le prix se partage entre eux au prorata, sauf causes légitimes de préférence.</p>
+  </div>
+  <div class="box ex"><span class="tag">Exemple</span>
+    <p>Un débiteur doit 100 000 € et n'a pas d'argent, mais il a une maison qui vaut 150 000 €. Ses créanciers peuvent, à certaines conditions, la faire saisir et vendre pour se payer. Dans l'Antiquité romaine, le débiteur pouvait devenir l'esclave du créancier : aujourd'hui, on ne répond plus qu'avec ses <strong>biens</strong> (responsabilité patrimoniale), pas avec sa personne.</p>
+  </div>
+  <p class="simple">Pourquoi la loi protège autant les créanciers ? Sinon, plus personne ne prêterait ni ne vendrait à crédit, et l'économie s'arrêterait.</p>
+  <div class="box key"><span class="tag">À retenir</span>
+    <ul>
+      <li>Personne physique (majeure à 18 ans) / personne morale (99 ans max, capacité limitée par l'objet social).</li>
+      <li>Entreprise = notion économique ; société = personne juridique.</li>
+      <li>Succursale = pas de personnalité ; filiale = vraie société contrôlée.</li>
+      <li>Obligations : actes juridiques, faits juridiques, loi (art. 1100).</li>
+      <li>On répond de ses dettes sur tous ses biens (art. 2284).</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ PARTIE 3 ============ -->
+<section class="part" id="p3">
+  <div class="part-head"><span class="part-num">3</span><div><div class="eyebrow">Chapter 2 · General rules</div><h2>Le contrat : définition et grands principes</h2></div></div>
+
+  <h3>3.1 Qu'est-ce qu'un contrat ? (art. 1101)</h3>
+  <div class="box law"><span class="tag">Article 1101</span>
+    <blockquote>« Le contrat est un accord de volontés entre deux ou plusieurs personnes destiné à créer, modifier, transmettre ou éteindre des obligations. »</blockquote>
+  </div>
+  <div class="grid2">
+    <div class="card"><h4>Créer</h4><p>Le cas le plus courant. Acheter un café, prendre le métro, acheter une maison : entre deux personnes sans lien, on crée des obligations nouvelles.</p></div>
+    <div class="card"><h4>Modifier</h4><p>A et B ont un contrat de fourniture de 5 ans. Par un 2<sup>e</sup> contrat (un avenant), ils changent le prix de la 3<sup>e</sup> année. Le premier contrat reste, avec des éléments modifiés.</p></div>
+    <div class="card"><h4>Transmettre</h4><p>A (fournisseur) et B (client). B cède sa place à C : on a désormais un contrat entre A et C (cession de contrat).</p></div>
+    <div class="card"><h4>Éteindre</h4><p>Un contrat de 10 ans sans clause de sortie : les parties signent un nouveau contrat qui met fin au premier.</p></div>
+  </div>
+  <h4>Pourquoi un accord n'est jamais évident</h4>
+  <p>L'acheteur et le vendeur ont des <strong>intérêts opposés</strong>. Ils finissent par s'entendre parce qu'ils y ont intérêt (ou sous la pression du marché).</p>
+  <div class="grid2">
+    <div class="card"><h4>Sur le prix et la qualité</h4><p>L'acheteur veut un produit très sophistiqué au prix le plus bas ; le vendeur veut vendre le plus cher possible un produit bon mais peu coûteux à fabriquer.</p></div>
+    <div class="card"><h4>Sur la garantie</h4><p>L'acheteur veut une garantie longue (3 ou 5 ans) ; le vendeur la veut la plus courte possible, car chaque année de garantie, ce sont des réparations et des litiges possibles.</p></div>
+  </div>
+  <div class="box ex"><span class="tag">Exemple du cours : Michelin, le contrat comme outil de gestion du risque</span>
+    <p>Michelin vend des pneus dans le monde entier et garantit ses pneus <strong>2 ans</strong>. Cette clause a un coût immédiat : remplacer les pneus défectueux, et surtout indemniser les accidents. Michelin s'assure contre ce risque, et le coût de l'assurance est intégré dans le <strong>prix</strong> du pneu. Une garantie de 3 ans coûterait plus cher qu'une garantie de 2 ans.</p>
+    <p>Leçon : une clause n'est jamais « que des mots ». Chaque clause a des <strong>conséquences juridiques et économiques</strong>. Un contrat bien utilisé est un <strong>outil de gestion du risque</strong>. Les grandes entreprises ont des juristes pour bien négocier ; les petites entreprises familiales, souvent non, et signent des contrats mal rédigés. C'est la responsabilité de chacun de bien négocier.</p>
+  </div>
+  <div class="box trap"><span class="tag">Piège : négocier, ce n'est pas contracter</span>
+    <p>La <strong>négociation</strong> (<em>negotiation</em>) est une discussion pour <strong>chercher</strong> un accord. Elle peut durer des mois. Tant qu'on négocie, il n'y a <strong>pas de contrat</strong> : on est libre de rompre. Le <strong>contrat</strong> existe quand on arrive au bout : une offre est acceptée. Rompre une négociation n'est donc pas la même chose que rompre un contrat.</p>
+  </div>
+
+  <h3>3.2 Les 3 piliers : liberté, force obligatoire, bonne foi</h3>
+  <figure>
+    <div class="scroll">
+    <svg viewBox="0 0 640 210" width="100%" style="min-width:480px" role="img" aria-label="Les trois piliers du droit des contrats">
+      <g font-size="12.5" text-anchor="middle" fill="var(--ink)">
+        <rect x="20" y="10" width="600" height="40" rx="10" fill="var(--rose)"/>
+        <text x="320" y="35" fill="#fff" font-weight="700" font-size="14">Le droit des contrats (Code civil, art. 1101 et s.)</text>
+        <rect x="45" y="60" width="160" height="110" rx="10" fill="var(--blush)"/>
+        <text x="125" y="85" font-weight="700" fill="var(--rose-deep)">Art. 1102</text>
+        <text x="125" y="105" font-weight="700">Liberté</text><text x="125" y="125">contractuelle</text><text x="125" y="150" font-size="11.5">je choisis</text>
+        <rect x="240" y="60" width="160" height="110" rx="10" fill="var(--blush)"/>
+        <text x="320" y="85" font-weight="700" fill="var(--rose-deep)">Art. 1103</text>
+        <text x="320" y="105" font-weight="700">Force</text><text x="320" y="125">obligatoire</text><text x="320" y="150" font-size="11.5">je suis lié(e)</text>
+        <rect x="435" y="60" width="160" height="110" rx="10" fill="var(--blush)"/>
+        <text x="515" y="85" font-weight="700" fill="var(--rose-deep)">Art. 1104</text>
+        <text x="515" y="105" font-weight="700">Bonne foi</text><text x="515" y="125">à chaque étape</text><text x="515" y="150" font-size="11.5">je suis loyal(e)</text>
+        <rect x="20" y="180" width="600" height="24" rx="8" fill="var(--plum)"/>
+        <text x="320" y="197" fill="#fff" font-size="12">Limite commune : l'ordre public et les règles impératives (art. 1102 al. 2, 1162)</text>
+      </g>
+    </svg></div>
+    <figcaption>Les trois grands principes posés au début du Code civil, et leur limite.</figcaption>
+  </figure>
+
+  <h4>① La liberté contractuelle (art. 1102)</h4>
+  <div class="box law"><span class="tag">Article 1102</span>
+    <blockquote>« Chacun est libre de contracter ou de ne pas contracter, de choisir son cocontractant et de déterminer le contenu et la forme du contrat dans les limites fixées par la loi. La liberté contractuelle ne permet pas de déroger aux règles qui intéressent l'ordre public. »</blockquote>
+  </div>
+  <div class="tbl"><table>
+    <tr><th>La liberté de…</th><th>Ce que ça veut dire</th><th>Exemple / limite</th></tr>
+    <tr><td><strong>Contracter ou non</strong></td><td>Personne n'est obligé de signer. On contracte quand on y trouve un intérêt.</td><td>Après des mois de négociation, on peut renoncer.</td></tr>
+    <tr><td><strong>Choisir son cocontractant</strong></td><td>On choisit avec qui on s'engage.</td><td>Exception : une entreprise en monopole (la RATP) doit accepter tous les clients.</td></tr>
+    <tr><td><strong>Fixer le contenu</strong></td><td>La plus importante : on rédige les clauses qu'on veut.</td><td>Sauf ce qui est contraire à l'ordre public (vendre de la drogue).</td></tr>
+    <tr><td><strong>Choisir la forme</strong></td><td>Oral, écrit simple (acte sous signature privée), acte notarié.</td><td>Sauf contrats solennels (voir 4.4).</td></tr>
+  </table></div>
+  <div class="box ex"><span class="tag">Exemple : pas de contrat, mais quand même responsable</span>
+    <p>L'entreprise A diffuse publiquement de fausses informations sur les produits de son concurrent B. Il n'y a aucun contrat entre eux. B peut quand même demander des dommages-intérêts, sur le fondement de la <strong>responsabilité délictuelle</strong> (art. 1240, <em>tort law</em>) : c'est la <strong>concurrence déloyale</strong> (<em>unfair competition</em>).</p>
+  </div>
+
+  <h4>② La force obligatoire (art. 1103)</h4>
+  <div class="box law"><span class="tag">Article 1103 (à connaître par cœur)</span>
+    <blockquote>« Les contrats légalement formés tiennent lieu de loi à ceux qui les ont faits. »</blockquote>
+    <p>En anglais : <em>Lawfully formed contracts have the force of law for those who made them</em>. En latin : <em>pacta sunt servanda</em>.</p>
+  </div>
+  <p>Un contrat <strong>valable</strong> est aussi obligatoire qu'une loi pour les parties : elles doivent le respecter, et le juge peut les y contraindre. Le mot clé est « <strong>légalement formés</strong> » : seul un contrat valable (art. 1128) a cette force.</p>
+  <p>Pourquoi c'est vital pour l'économie ? Sans l'article 1103, aucun contrat ne serait obligatoire : pourquoi fournir un service si mon client n'est pas obligé de me payer ? L'économie s'arrêterait. Grâce à lui, celui qui n'exécute pas engage sa <strong>responsabilité contractuelle</strong>.</p>
+  <div class="grid2">
+    <div class="card"><h4>Contrat</h4><p>Valable et <strong>obligatoire</strong> : la loi aide le créancier si le débiteur ne s'exécute pas. C'est la <strong>sécurité juridique</strong>.</p></div>
+    <div class="card"><h4>Gentleman's agreement</h4><p>Un accord qui repose seulement sur la <strong>parole d'honneur</strong> des parties. La loi n'intervient pas : si l'autre ne respecte pas sa parole, on n'a rien pour aller au tribunal.</p></div>
+  </div>
+
+  <h4>③ La bonne foi (art. 1104)</h4>
+  <p>« Les contrats doivent être <strong>négociés, formés et exécutés de bonne foi</strong>. Cette disposition est d'ordre public. » La loyauté s'impose donc à chaque étape.</p>
+  <ul>
+    <li><strong>Avant 2016</strong>, le Code (ancien art. 1134 al. 3) disait seulement que les contrats « doivent être <strong>exécutés</strong> de bonne foi ». Pour la négociation, c'étaient les juges qui imposaient la loyauté.</li>
+    <li><strong>Depuis 2016</strong>, la bonne foi est écrite dans la loi pour les 3 étapes : négociation, formation, exécution.</li>
+    <li>C'est une règle <strong>impérative</strong> (« d'ordre public ») : une clause « les parties ne sont pas tenues par l'article 1104 » serait sans effet.</li>
+    <li>Être loyal, c'est être correct, ne rien cacher d'important, mais <strong>pas oublier ses propres intérêts</strong> : chacun cherche le meilleur accord pour lui.</li>
+  </ul>
+  <div class="box ex"><span class="tag">Exemple du cours : le tunnel dans les Alpes</span>
+    <p>Le ministère des Transports veut une nouvelle ligne de train entre la France et l'Italie et demande des devis très précis aux grandes entreprises de construction. L'une d'elles dépense <strong>1 million d'euros</strong> en études (géologues, experts) pour chiffrer un tunnel de 15 km. Puis, du jour au lendemain, le ministère abandonne le projet sans raison.</p>
+    <p>Le ministère avait le droit de ne pas conclure : la bonne foi n'oblige jamais à signer. Mais elle interdit de <strong>rompre une négociation sans motif sérieux</strong>. L'entreprise peut donc demander au juge le remboursement de ses frais d'études (art. 1104 et 1112).</p>
+    <p><strong>Motifs sérieux</strong> qui justifieraient la rupture : une baisse soudaine et <strong>imprévisible</strong> du budget (si elle était prévisible, ce n'est pas une excuse), ou la découverte qu'un partenaire n'est pas fiable.</p>
+  </div>
+  <div class="box key"><span class="tag">La phrase à retenir</span><p>Chacun est libre de ne pas conclure un contrat, mais personne ne peut <strong>rompre une négociation sans motif sérieux</strong>.</p></div>
+
+  <h3>3.3 Règles impératives ou supplétives ? (mandatory / non-mandatory)</h3>
+  <p>Toutes les règles du Code ne se valent pas face aux clauses du contrat.</p>
+  <div class="grid2">
+    <div class="card"><h4>Règle impérative (<em>mandatory provision</em>)</h4><p>Elle s'applique <strong>toujours</strong>, même si le contrat dit le contraire. Une clause contraire est sans effet. Les règles d'<strong>ordre public</strong> (<em>public policy</em>) sont impératives.</p><p>Ex. : la bonne foi (1104), l'ordre public (1162), les garanties de la construction (1792 et s.).</p></div>
+    <div class="card"><h4>Règle supplétive (<em>non-mandatory, default rule</em>)</h4><p>Elle s'applique <strong>seulement si les parties n'ont rien prévu d'autre</strong>. Elle « supplée » au silence du contrat.</p><p>Ex. : l'article 1583 sur le transfert de propriété, l'article 1195 sur l'imprévision.</p></div>
+  </div>
+  <div class="box ex"><span class="tag">Exemple : le droit de la consommation</span>
+    <p>Presque tout le droit de la consommation est impératif. Si un fabricant écrit dans son contrat avec un consommateur « ce produit n'est garanti en aucun cas » (même s'il tombe en panne une heure après l'achat), la clause est écartée, même si les deux parties l'ont signée. <strong>Ni le vendeur ni l'acheteur ne sont tenus par une clause qui n'a pas de valeur juridique.</strong> Autre exemple : une pharmacie ne peut pas vendre un médicament périmé, quel que soit le contrat.</p>
+  </div>
+  <div class="box def"><span class="tag">Et si 2 clauses sur 50 violent une règle impérative ?</span>
+    <p>En général, seules ces <strong>2 clauses disparaissent</strong> ; les 48 autres continuent de s'appliquer. Exception : si ces clauses étaient si importantes qu'elles ont été la raison même de conclure le contrat, alors c'est <strong>tout le contrat</strong> qui est nul (art. 1184). C'est rare.</p>
+  </div>
+  <p>Qui décide si une règle est impérative ? Le législateur, quand il le dit (« cette disposition est d'ordre public », « toute clause contraire est réputée non écrite »). S'il ne le dit pas, ce sont les <strong>juges</strong> qui tranchent.</p>
+  <div class="box ex"><span class="tag">L'exemple du cours : l'article 1583 et la clause de réserve de propriété</span>
+    <p><strong>Article 1583</strong> : la vente « est parfaite entre les parties, et la propriété est acquise de droit à l'acheteur à l'égard du vendeur, dès qu'on est convenu de la chose et du prix, quoique la chose n'ait pas encore été livrée ni le prix payé ».</p>
+    <p>Peter achète un ordinateur à la Fnac et paie 400 € par mois pendant 10 mois. <strong>Sans clause</strong> : Peter est propriétaire dès l'accord, même s'il n'a rien payé. Si Peter ne paie pas, la Fnac n'est qu'un créancier parmi d'autres.</p>
+    <p><strong>Avec une clause de réserve de propriété</strong> (<em>retention of title clause</em>) : la Fnac reste propriétaire jusqu'au <strong>paiement complet</strong>. Si Peter ne paie pas, elle peut récupérer l'ordinateur. C'est possible parce que l'article 1583 est <strong>supplétif</strong>. (Cette clause est prévue aux articles 2367 et suivants et doit être écrite au plus tard au jour de la livraison.)</p>
+  </div>
+  <div class="box ex"><span class="tag">Exemple du cours : l'incendie dans l'entrepôt</span>
+    <p>Le contrat est conclu aujourd'hui, mais la marchandise reste dans l'entrepôt du vendeur jusqu'à la livraison, prévue dans une semaine. Un incendie détruit l'entrepôt. Comme l'acheteur est devenu propriétaire dès la conclusion (1583), c'est en principe <strong>lui qui supporte la perte</strong> : être propriétaire, c'est aussi porter les <strong>risques</strong> de la chose. (Avec une clause de réserve de propriété, le vendeur reste propriétaire même s'il a reçu 10 % du prix.)</p>
+  </div>
+
+  <h3>3.4 D'où viennent les clauses d'un contrat ?</h3>
+  <p>Un contrat ne contient pas que ce que les parties ont écrit. Le cours distingue 5 sources :</p>
+  <div class="tbl"><table>
+    <tr><th>Source</th><th>Explication</th></tr>
+    <tr><td><strong>Express terms</strong> (clauses expresses)</td><td>Les mots choisis par les parties pour ce contrat précis. La forme la plus fidèle de leur volonté.</td></tr>
+    <tr><td><strong>Standard terms</strong> (conditions générales)</td><td>Des clauses préparées à l'avance par une entreprise pour tous ses contrats (CGV). Gain de temps, moins de risques.</td></tr>
+    <tr><td><strong>Implied terms in law</strong></td><td>Les règles impératives de la loi, qui s'imposent au contrat.</td></tr>
+    <tr><td><strong>Implied terms in fact</strong></td><td>Ce qui est évident pour les deux parties vu leur situation commune.</td></tr>
+    <tr><td><strong>Commercial usage</strong> (usages)</td><td>Les pratiques habituelles d'un secteur, présumées acceptées par des professionnels du même milieu (sauf si elles contredisent une règle impérative).</td></tr>
+  </table></div>
+  <h4>Deux façons d'arriver à un accord</h4>
+  <div class="grid2">
+    <div class="card"><h4>① « L'ancienne méthode »</h4><p>Les parties se rencontrent et discutent <strong>chaque clause</strong>, une par une. Idéal, mais très long. Aujourd'hui réservé aux gros contrats, ou aux négociations entre deux grandes entreprises (B2B).</p></div>
+    <div class="card"><h4>② Le contrat standard</h4><p>Un modèle déjà rédigé, appliqué à tous les clients, qu'on adapte au plus de quelques clauses. C'est la méthode dominante.</p></div>
+  </div>
+  <p>Pourquoi ? Les entreprises veulent <strong>stabilité et prévisibilité</strong> : les mêmes droits et obligations dans les milliers de contrats qu'elles concluent. <strong>Citroën</strong> veut vendre ses voitures aux mêmes conditions dans le nord et dans le sud, à une société ou à un particulier. Une <strong>banque</strong> qui accorde un prêt ou une garantie utilise son propre contrat : le client ne peut pas le changer.</p>
+  <div class="box trap"><span class="tag">Contrat type ou conditions générales ?</span>
+    <p>Le <strong>contrat type</strong> (<em>standard contract</em>) est rédigé par un <strong>tiers</strong> (une association professionnelle, la FIDIC) et proposé à A et B. Les <strong>conditions générales</strong> (<em>general conditions</em>) sont rédigées par <strong>l'entreprise elle-même</strong> : chaque grande entreprise a les siennes (les CGV de la Fnac).</p>
+  </div>
+  <h4>Conditions générales : l'article 1119</h4>
+  <div class="box law"><span class="tag">Article 1119</span>
+    <p>① Les conditions générales d'une partie n'ont d'effet sur l'autre que si elle les a <strong>connues et acceptées</strong>.</p>
+    <p>② Si les conditions générales des deux parties se contredisent, les clauses <strong>incompatibles sont sans effet</strong> (elles s'annulent toutes les deux).</p>
+    <p>③ Si conditions générales et <strong>conditions particulières</strong> se contredisent, les <strong>particulières l'emportent</strong>.</p>
+  </div>
+  <div class="box ex"><span class="tag">Exemple</span>
+    <p>Les CGV du fournisseur disent « paiement à 30 jours », les conditions générales d'achat du client disent « paiement à 60 jours » : les deux clauses sont sans effet, on applique la règle légale. Mais si le bon de commande signé (condition particulière) dit « paiement à 45 jours », c'est 45 jours : la clause négociée pour ce contrat précis exprime mieux la volonté des parties.</p>
+  </div>
+  <div class="box ex"><span class="tag">La « bataille des formulaires » (battle of the forms)</span>
+    <p>Les CG du vendeur A contiennent une <strong>clause de réserve de propriété</strong> (« le vendeur reste propriétaire jusqu'au paiement complet »). Les CG de l'acheteur B disent l'inverse (« l'acheteur devient propriétaire dès la conclusion »). Personne n'a vérifié avant de signer.</p>
+    <p>Les deux clauses sont incompatibles, donc <strong>sans effet</strong> (art. 1119 al. 2). On applique alors la loi : si le contrat est soumis au droit français, c'est l'article 1583, et <strong>l'acheteur devient propriétaire dès la conclusion</strong>. Le vendeur a perdu sa protection.</p>
+  </div>
+  <div class="box key"><span class="tag">À retenir</span>
+    <ul>
+      <li>Contrat = accord de volontés qui crée, modifie, transmet ou éteint des obligations (1101).</li>
+      <li>Liberté (1102), force obligatoire (1103), bonne foi (1104), limitées par l'ordre public.</li>
+      <li>Règle impérative = s'impose ; règle supplétive = s'applique si rien n'est prévu (ex. 1583).</li>
+      <li>Clause de réserve de propriété : le vendeur reste propriétaire jusqu'au paiement complet.</li>
+      <li>Art. 1119 : CG incompatibles = sans effet ; conditions particulières &gt; conditions générales.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ PARTIE 4 ============ -->
+<section class="part" id="p4">
+  <div class="part-head"><span class="part-num">4</span><div><div class="eyebrow">Chapter 2 · Making of contract</div><h2>Former un contrat</h2></div></div>
+
+  <h3>4.1 La négociation (art. 1112 et 1112-1)</h3>
+  <p>Les négociations sont <strong>libres</strong> : on peut les commencer, les mener et les rompre librement. Mais elles doivent respecter la <strong>bonne foi</strong>.</p>
+  <div class="box law"><span class="tag">Article 1112</span>
+    <p>Si une partie commet une <strong>faute</strong> pendant les négociations (par exemple, rompre brutalement après avoir fait croire que tout était conclu), elle doit réparer le préjudice. Mais la réparation <strong>ne peut pas couvrir la perte des avantages attendus</strong> du contrat qui n'a pas été conclu.</p>
+  </div>
+  <div class="box ex"><span class="tag">Exemple</span>
+    <p>Pendant 8 mois, B fait croire à A que le contrat est quasi signé, A engage des frais d'étude. B rompt sans raison la veille de la signature. A peut obtenir le remboursement de ses frais, mais <strong>pas</strong> le bénéfice qu'il aurait fait si le contrat avait été signé.</p>
+  </div>
+  <h4>Le devoir d'information (art. 1112-1)</h4>
+  <p>Celui qui connaît une information <strong>déterminante</strong> pour le consentement de l'autre doit la lui donner, si l'autre l'ignore légitimement ou fait confiance à son cocontractant. Exemple du cours : un vendeur sait que son terrain ne sera plus constructible dans 3 mois ; il doit le dire à l'acheteur.</p>
+  <p>Exception importante : ce devoir <strong>ne porte pas sur l'estimation de la valeur</strong> de la prestation. Un acheteur n'a pas à dire au vendeur « votre tableau vaut en fait bien plus cher ».</p>
+
+  <h3>4.2 L'offre et l'acceptation (art. 1113 à 1122)</h3>
+  <div class="box law"><span class="tag">Article 1113</span>
+    <blockquote>« Le contrat est formé par la rencontre d'une offre et d'une acceptation par lesquelles les parties manifestent leur volonté de s'engager. Cette volonté peut résulter d'une déclaration ou d'un comportement non équivoque de son auteur. »</blockquote>
+    <p>On peut donc s'engager par écrit, oralement, mais aussi par un <strong>comportement clair</strong> (je tends l'argent au boulanger qui me tend le pain). Prudence : un comportement sans ambiguïté suffit à conclure.</p>
+  </div>
+  <figure>
+    <div class="scroll">
+    <svg viewBox="0 0 640 250" width="100%" style="min-width:500px" role="img" aria-label="Les trois réponses possibles à une offre">
+      <g font-size="12.5" text-anchor="middle" fill="var(--ink)">
+        <rect x="230" y="10" width="180" height="56" rx="12" fill="var(--rose)"/>
+        <text x="320" y="34" fill="#fff" font-weight="700">OFFRE (art. 1114)</text>
+        <text x="320" y="53" fill="#fff" font-size="11.5">précise, ferme, éléments essentiels</text>
+        <path d="M280 66L110 120M320 66V120M360 66L530 120" stroke="var(--rose)" stroke-width="2.5"/>
+        <rect x="20" y="122" width="180" height="56" rx="12" fill="var(--blush)"/>
+        <text x="110" y="146" font-weight="700" fill="var(--rose-deep)">« Non merci »</text>
+        <text x="110" y="165">refus</text>
+        <rect x="230" y="122" width="180" height="56" rx="12" fill="var(--blush)"/>
+        <text x="320" y="146" font-weight="700" fill="var(--rose-deep)">« Oui, mais… »</text>
+        <text x="320" y="165">contre-offre (art. 1118 al. 3)</text>
+        <rect x="440" y="122" width="180" height="56" rx="12" fill="var(--blush)"/>
+        <text x="530" y="146" font-weight="700" fill="var(--rose-deep)">« Oui, d'accord »</text>
+        <text x="530" y="165">acceptation pure et simple</text>
+        <text x="110" y="205" fill="var(--ko)" font-weight="700">Pas de contrat</text>
+        <text x="320" y="205" fill="var(--plum)" font-weight="700">Nouvelle offre :</text>
+        <text x="320" y="222" fill="var(--plum)">on continue à négocier</text>
+        <text x="530" y="205" fill="var(--ok)" font-weight="700">CONTRAT FORMÉ ✓</text>
+        <text x="530" y="222" font-size="11.5">dès que l'acceptation parvient</text>
+        <text x="530" y="238" font-size="11.5">à l'auteur de l'offre (art. 1121)</text>
+      </g>
+    </svg></div>
+    <figcaption>Les trois scénarios du cours après une offre.</figcaption>
+  </figure>
+  <div class="tbl"><table>
+    <tr><th>Article</th><th>Règle</th></tr>
+    <tr><td><span class="art">1114</span></td><td>L'offre contient les <strong>éléments essentiels</strong> du contrat et la volonté d'être lié si elle est acceptée. Sinon, ce n'est qu'une invitation à négocier.</td></tr>
+    <tr><td><span class="art">1118</span></td><td>L'acceptation est la volonté d'être lié <strong>dans les termes de l'offre</strong>. Une acceptation qui modifie l'offre n'est pas une acceptation : c'est une <strong>contre-offre</strong>.</td></tr>
+    <tr><td><span class="art">1120</span></td><td>« Le <strong>silence ne vaut pas acceptation</strong>, à moins qu'il n'en résulte autrement de la loi, des usages, des relations d'affaires ou de circonstances particulières. »</td></tr>
+    <tr><td><span class="art">1121</span></td><td>Le contrat est conclu quand l'acceptation <strong>parvient</strong> à l'auteur de l'offre, et au lieu où elle lui parvient. Offre faite de Paris, acceptée à Bordeaux : contrat conclu à <strong>Paris</strong>.</td></tr>
+    <tr><td><span class="art">1122</span></td><td>La loi ou le contrat peuvent prévoir un <strong>délai de réflexion</strong> (on ne peut pas accepter avant son expiration) ou un <strong>délai de rétractation</strong> (on peut revenir sur son consentement après).</td></tr>
+  </table></div>
+  <div class="box ex"><span class="tag">Exemple : les CD de Beethoven (art. 1114)</span>
+    <p>Je t'écris : « J'ai 50 CD de Beethoven à vendre, ça t'intéresse ? » Tu réponds « oui », mais je les ai déjà vendus à quelqu'un d'autre. Tu ne peux pas dire que j'ai violé un contrat : je n'avais pas donné de <strong>prix</strong>, élément essentiel de la vente. Ce n'était pas une offre, seulement une <strong>invitation à négocier</strong>. (Dans un échange, le prix n'est pas un élément essentiel : l'offre pourrait être valable sans prix.)</p>
+  </div>
+  <div class="box ex"><span class="tag">Exemple : « on dîne ensemble ce soir ? »</span>
+    <p>Si je te propose de dîner ce soir puis annule deux heures après, il n'y a aucune violation de contrat : je n'ai jamais exprimé la <strong>volonté d'être liée juridiquement</strong>. Ce n'est pas une offre au sens de l'article 1114. Une offre doit réunir <strong>2 conditions</strong> : les éléments essentiels + la volonté d'être lié en cas d'acceptation.</p>
+  </div>
+  <div class="box ex"><span class="tag">Exemple : l'offre à 5 éléments (art. 1118)</span>
+    <p>A envoie à B une offre en 5 points : prix, qualité, quantité, lieu et date de livraison. Si B accepte les 5, le contrat est formé. Si B n'en accepte que 4, ou accepte les 5 mais <strong>ajoute un 6<sup>e</sup></strong> (« en cas de litige, le tribunal de Paris sera compétent » : une clause attributive de juridiction), il n'y a <strong>pas de contrat</strong> : c'est une contre-offre. Et si A accepte l'idée d'un 6<sup>e</sup> point mais propose Bordeaux au lieu de Paris, toujours pas d'accord, donc toujours pas de contrat.</p>
+    <p>De même, « on va réfléchir », « on vous recontacte » ne sont <strong>pas</strong> des acceptations : il faut une volonté claire d'être lié aux termes de l'offre.</p>
+  </div>
+  <div class="box ex"><span class="tag">Exemple : le silence</span>
+    <p>Un fournisseur t'envoie un colis avec « si vous ne le renvoyez pas sous 8 jours, vous l'avez acheté ». Ton silence ne vaut pas acceptation. En revanche, entre deux entreprises qui travaillent ensemble depuis des années, où chaque bon de commande non contesté a toujours été livré et payé, le silence peut valoir acceptation (relations d'affaires).</p>
+  </div>
+  <p>Pourquoi cette différence ? Le <strong>Code civil (1804)</strong> pense aux contrats entre particuliers : entre eux, le silence n'est jamais une acceptation. Le <strong>Code de commerce (1807)</strong> contient des contrats spéciaux, mais les règles générales (formation, exécution) restent celles du Code civil. Entre entreprises (B2B), des <strong>usages</strong> se sont développés : par exemple, chaque fin de mois, le vendeur envoie sa facture sans qu'on la lui réclame, parce que c'est l'habitude entre eux.</p>
+
+  <h3>4.3 Le contrat conclu par voie électronique (art. 1125 à 1127-6)</h3>
+  <ul>
+    <li><span class="art">1125</span> La voie électronique peut servir à proposer des clauses ou des informations sur des biens ou services.</li>
+    <li><span class="art">1126</span> Les informations demandées pour conclure le contrat peuvent être envoyées par e-mail si le destinataire a accepté ce moyen.</li>
+    <li><span class="art">1127-1</span> Le professionnel qui vend en ligne doit mettre ses conditions à disposition de façon à permettre leur <strong>conservation et reproduction</strong>. L'auteur de l'offre reste engagé tant qu'elle est accessible en ligne par son fait.</li>
+    <li><span class="art">1127-2</span> Le contrat n'est valablement conclu que si le destinataire a pu <strong>vérifier sa commande et son prix total</strong>, et corriger ses erreurs, avant de confirmer (le fameux « double clic »).</li>
+  </ul>
+  <div class="box trap"><span class="tag">Piège : le droit de rétractation</span>
+    <p>Le délai de <strong>14 jours</strong> pour changer d'avis ne vient pas du Code civil mais du <strong>Code de la consommation</strong>. Il ne joue qu'entre un <strong>professionnel et un consommateur</strong>, pour les contrats <strong>à distance</strong> (en ligne, par téléphone) ou <strong>hors établissement</strong> (démarchage à domicile). Pas entre deux entreprises, et pas pour un achat en magasin.</p>
+  </div>
+
+  <h3>4.4 La forme du contrat (art. 1172)</h3>
+  <div class="box law"><span class="tag">Article 1172</span>
+    <p>« Les contrats sont par principe <strong>consensuels</strong>. Par exception, la validité des contrats <strong>solennels</strong> est subordonnée à l'observation de formes déterminées par la loi à défaut de laquelle le contrat est nul, sauf possible régularisation. En outre, la loi subordonne la formation de certains contrats à la <strong>remise d'une chose</strong>. »</p>
+  </div>
+  <div class="grid3">
+    <div class="card"><h4>Consensuel</h4><p>Le <strong>seul accord</strong> suffit, même oral. C'est le principe. Acheter une baguette, c'est un contrat.</p></div>
+    <div class="card"><h4>Solennel</h4><p>Il faut un écrit, parfois un notaire, sinon le contrat est nul. Ex. : l'<strong>hypothèque</strong> (acte notarié), le contrat de mariage.</p></div>
+    <div class="card"><h4>Réel</h4><p>Il se forme par la <strong>remise d'une chose</strong> (art. 1109). Ex. : le prêt entre particuliers, le dépôt.</p></div>
+  </div>
+  <p>Un contrat solennel conclu oralement est <strong>nul</strong> et sans effet, sauf si la loi permet de le régulariser. Exemples : la vente d'une maison et l'<strong>hypothèque</strong> passent par un <strong>notaire</strong>.</p>
+  <h4>Validité, preuve, opposabilité (art. 1173)</h4>
+  <div class="box law"><span class="tag">Article 1173</span>
+    <blockquote>« Les formes exigées aux fins de preuve ou d'opposabilité sont sans effet sur la validité des contrats. »</blockquote>
+  </div>
+  <div class="grid3">
+    <div class="card"><h4>Forme de validité</h4><p>Sans elle, le contrat est <strong>nul</strong> (contrat solennel).</p></div>
+    <div class="card"><h4>Forme de preuve</h4><p>Sans elle, le contrat existe, mais il est plus <strong>difficile à prouver</strong>.</p></div>
+    <div class="card"><h4>Forme d'opposabilité</h4><p>Sans elle, le contrat est valable entre les parties, mais les <strong>tiers</strong> peuvent l'ignorer.</p></div>
+  </div>
+  <div class="box ex"><span class="tag">Exemple d'opposabilité : la création d'une société</span>
+    <p>Cinq personnes signent les statuts de la société A. Le contrat est valable entre elles dès la signature. Mais la loi exige une <strong>publicité</strong> (immatriculation) pour que les tiers soient informés. À partir de là, le contrat leur est <strong>opposable</strong> : ils ne peuvent plus prétendre l'ignorer. Si l'associé B apporte 1 M€ à la société, cet argent appartient désormais à A ; les créanciers personnels de B ne peuvent plus le saisir, car la société est une personne distincte de ses associés.</p>
+  </div>
+  <div class="box ex"><span class="tag">Et la preuve d'un contrat oral ?</span>
+    <p>Elle peut se faire par <strong>témoins</strong>. Deux directeurs de sociétés A et B se mettent d'accord oralement lors d'une réunion : les personnes présentes pourront un jour être appelées au tribunal pour confirmer l'accord. (Attention : en matière civile, au-delà de 1 500 €, la loi exige en principe un écrit pour prouver contre un particulier ; entre commerçants, la preuve est libre.)</p>
+  </div>
+  <div class="box trap"><span class="tag">Le piège de la langue</span>
+    <p>99,9 % des contrats d'affaires sont écrits, car à l'oral on oublie et on confond. Mais l'écrit doit être <strong>clair</strong> : entre deux sociétés françaises, c'est assez facile (même langue, même culture). À l'international, deux sociétés rédigent souvent dans une langue qui n'est celle d'aucune des deux, et ne la maîtrisent pas à 100 %. L'ambiguïté apparaît : l'une dit « j'ai ce droit », l'autre « non » ; on finit au tribunal, ce qui coûte temps et argent. Il faut donc écrire, avec les bons mots, dans une langue que les deux parties maîtrisent.</p>
+  </div>
+  <p>Pourquoi écrit-on quand même presque tous les contrats d'affaires ? Pour la <strong>preuve</strong>, la <strong>clarté</strong> et pour éviter les litiges. Deux formes possibles : l'<strong>acte sous signature privée</strong> (rédigé et signé par les parties) ou l'<strong>acte authentique / notarié</strong> (<em>notarial deed</em>), rédigé par un notaire qui vérifie l'identité des parties : plus coûteux, mais preuve très forte.</p>
+
+  <h3>4.5 La structure d'un contrat d'affaires écrit</h3>
+  <figure>
+    <div class="flow">
+      <div class="step"><b>1. Les parties</b>Qui ? Personne physique, société à responsabilité limitée ou illimitée, représentant qui signe.</div>
+      <div class="step"><b>2. Le préambule</b>L'histoire de la relation, le contexte, les objectifs. Il aide à interpréter le contrat.</div>
+      <div class="step"><b>3. La qualification</b>Quel type de contrat ? Vente, fourniture, location, échange…</div>
+      <div class="step"><b>4. Les clauses de fond</b><em>Substantive clauses</em> : objet, prix, quantité, livraison, garanties, force majeure.</div>
+      <div class="step"><b>5. Le règlement des litiges</b>Négociation, médiation, tribunal choisi, arbitrage, loi applicable.</div>
+      <div class="step"><b>6. La signature</b>Par une personne capable ou le représentant légal de la société.</div>
+    </div>
+    <figcaption>Le plan type vu en cours. Le prof insiste : rédiger soigneusement (« qualitative drafting »), dans une langue que les deux parties maîtrisent, pour éviter les litiges.</figcaption>
+  </figure>
+  <div class="box ex"><span class="tag">Les contrats types (standard contracts)</span>
+    <p>Dans la construction internationale, on utilise souvent les contrats <strong>FIDIC</strong>, des modèles bien rédigés, disponibles en plusieurs langues. Le risque d'ambiguïté est faible, sauf quand les parties les modifient à la main : en ajoutant ou supprimant quelques mots, elles peuvent créer des incohérences et donc des litiges.</p>
+  </div>
+
+  <h3>4.6 Les classifications utiles (art. 1105 à 1111-1)</h3>
+  <div class="tbl"><table>
+    <tr><th>Critère</th><th>Catégorie 1</th><th>Catégorie 2</th></tr>
+    <tr><td>A-t-il un nom dans la loi ? <span class="art">1105</span></td><td><strong>Nommé</strong> : vente, bail, mandat, transport…</td><td><strong>Innommé</strong> : pas de régime spécial (ex. un contrat sur mesure mêlant plusieurs prestations). Les règles générales s'appliquent à tous.</td></tr>
+    <tr><td>Qui s'engage ? <span class="art">1106</span></td><td><strong>Synallagmatique</strong> : obligations réciproques (vente : livrer / payer). 99 % des contrats.</td><td><strong>Unilatéral</strong> : une seule partie s'engage (dépôt gratuit d'une valise : seul B doit la garder et la rendre).</td></tr>
+    <tr><td>Y a-t-il une contrepartie ? <span class="art">1107</span></td><td><strong>À titre onéreux</strong> : chacun reçoit quelque chose.</td><td><strong>À titre gratuit</strong> : l'un donne sans rien recevoir (donation).</td></tr>
+    <tr><td>Négocié ou imposé ? <span class="art">1110</span></td><td><strong>De gré à gré</strong> : clauses négociables.</td><td><strong>D'adhésion</strong> : clauses non négociables fixées à l'avance par l'une des parties (supermarché, abonnement téléphone).</td></tr>
+    <tr><td>Combien de temps ? <span class="art">1111-1</span></td><td><strong>À exécution instantanée</strong> : en une seule prestation (acheter un sandwich).</td><td><strong>À exécution successive</strong> : étalé dans le temps (bail, assurance, fourniture sur 10 ans).</td></tr>
+  </table></div>
+  <div class="box law"><span class="tag">Article 1105</span>
+    <blockquote>« Les contrats, qu'ils aient ou non une dénomination propre, sont soumis à des règles générales, qui sont l'objet du présent sous-titre. »</blockquote>
+    <p>Les <strong>contrats spéciaux</strong> (ou nommés : vente, échange, mandat, transport, prêt…) ont des règles propres, en plus des règles générales. Mais grâce à la liberté contractuelle, les parties peuvent aussi créer des <strong>contrats innommés</strong>, en mélangeant des clauses inspirées du mandat, du service, du prêt… C'est valable, à condition de respecter l'article 1128.</p>
+  </div>
+  <h4>La qualification : c'est le contenu qui compte, pas le titre</h4>
+  <p>Qualifier un contrat (<em>characterize</em>), c'est trouver sa catégorie juridique. C'est essentiel, car <strong>chaque catégorie a ses propres règles</strong>. Le juge regarde ce que le contrat contient vraiment, pas le titre écrit en haut (art. 12 du Code de procédure civile : il « doit donner ou restituer leur exacte qualification aux faits et actes litigieux »).</p>
+  <div class="grid2">
+    <div class="card"><h4>Vente</h4><p>Un bien contre <strong>un prix en argent</strong>. A paie 100 € à B pour un vélo.</p></div>
+    <div class="card"><h4>Échange</h4><p>Un bien contre <strong>un autre bien</strong>. 5 chevaux contre 4 zèbres, un vélo contre un scooter.</p></div>
+  </div>
+  <div class="box ex"><span class="tag">Exemples du cours</span>
+    <p>Un sandwich déjà préparé au supermarché = <strong>vente</strong> (le produit existe déjà). Un café préparé par le barista = selon le prof, <strong>contrat d'entreprise</strong> (un service : on fabrique pour toi). Un contrat appelé « location » en 2026 que le juge requalifie en « prêt » en 2028 : on applique les règles du prêt, et ce depuis la conclusion du contrat.</p>
+  </div>
+  <div class="box key"><span class="tag">À retenir</span>
+    <ul>
+      <li>Négociation libre mais de bonne foi ; la rupture fautive ne fait pas indemniser le gain espéré (1112).</li>
+      <li>Contrat = offre + acceptation conforme (1113) ; le silence ne vaut pas acceptation (1120).</li>
+      <li>Principe du <strong>consensualisme</strong> (1172) : pas besoin de signature, sauf contrat solennel.</li>
+      <li>Qualification = contenu réel, pas le titre ; vente (prix) ≠ échange (bien contre bien).</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ PARTIE 5 ============ -->
+<section class="part" id="p5">
+  <div class="part-head"><span class="part-num">5</span><div><div class="eyebrow">Validity of the contract</div><h2>Les 3 conditions de validité (art. 1128)</h2></div></div>
+  <div class="box law"><span class="tag">Article 1128 (à connaître par cœur)</span>
+    <blockquote>« Sont nécessaires à la validité d'un contrat : 1° Le consentement des parties ; 2° Leur capacité de contracter ; 3° Un contenu licite et certain. »</blockquote>
+  </div>
+  <figure>
+    <div class="scroll">
+    <svg viewBox="0 0 640 200" width="100%" style="min-width:480px" role="img" aria-label="Les trois conditions cumulatives de validité">
+      <g font-size="12.5" text-anchor="middle" fill="var(--ink)">
+        <rect x="15" y="15" width="180" height="95" rx="12" fill="var(--blush)"/>
+        <text x="105" y="42" font-weight="700" fill="var(--rose-deep)">① Consentement</text>
+        <text x="105" y="64">réel et sans vice</text><text x="105" y="84" font-size="11.5">erreur, dol, violence</text><text x="105" y="100" font-size="11.5">art. 1129 à 1144</text>
+        <text x="210" y="68" font-size="22" font-weight="800" fill="var(--rose)">+</text>
+        <rect x="230" y="15" width="180" height="95" rx="12" fill="var(--blush)"/>
+        <text x="320" y="42" font-weight="700" fill="var(--rose-deep)">② Capacité</text>
+        <text x="320" y="64">majeur, non protégé</text><text x="320" y="84" font-size="11.5">ou bien représenté</text><text x="320" y="100" font-size="11.5">art. 1145 à 1161</text>
+        <text x="425" y="68" font-size="22" font-weight="800" fill="var(--rose)">+</text>
+        <rect x="445" y="15" width="180" height="95" rx="12" fill="var(--blush)"/>
+        <text x="535" y="42" font-weight="700" fill="var(--rose-deep)">③ Contenu</text>
+        <text x="535" y="64">licite et certain</text><text x="535" y="84" font-size="11.5">ordre public, prestation</text><text x="535" y="100" font-size="11.5">art. 1162 à 1171</text>
+        <path d="M320 115V140" stroke="var(--rose)" stroke-width="3"/>
+        <rect x="170" y="142" width="300" height="48" rx="12" fill="var(--rose)"/>
+        <text x="320" y="164" fill="#fff" font-weight="700">= contrat valable → force obligatoire (1103)</text>
+        <text x="320" y="182" fill="#fff" font-size="11.5">une seule condition manque → nullité (1178)</text>
+      </g>
+    </svg></div>
+    <figcaption>Les conditions sont <strong>cumulatives</strong> (toutes les trois), pas alternatives.</figcaption>
+  </figure>
+
+  <h3>5.1 Le consentement et ses 3 vices</h3>
+  <p>Consentir, c'est dire oui. Ce oui doit exister, et il doit être <strong>libre et éclairé</strong>. Trois « vices » peuvent l'abîmer :</p>
+  <div class="box law"><span class="tag">Article 1130</span>
+    <blockquote>« L'erreur, le dol et la violence vicient le consentement lorsqu'ils sont de telle nature que, sans eux, l'une des parties n'aurait pas contracté ou aurait contracté à des conditions substantiellement différentes. Leur caractère déterminant s'apprécie eu égard aux personnes et aux circonstances dans lesquelles le consentement a été donné. »</blockquote>
+    <p>Le vice doit donc être <strong>déterminant</strong> : sans lui, on n'aurait pas signé, ou pas à ces conditions.</p>
+  </div>
+  <div class="tbl"><table>
+    <tr><th>Vice</th><th>Définition</th><th>Exemple</th><th>Attention</th></tr>
+    <tr><td><strong>Erreur</strong><br><em>mistake</em><br><span class="art">1132-1136</span></td><td>Je me trompe <strong>toute seule</strong> sur les <strong>qualités essentielles</strong> de la prestation (1133 : celles que les parties ont eues en vue) ou du cocontractant.</td><td>Je veux une table en bois massif et j'achète une table en plastique imitation bois.</td><td>Pas de nullité si l'erreur est <strong>inexcusable</strong> (grossière), ni si elle porte seulement sur la <strong>valeur</strong> (1136) ou sur mes motifs personnels (1135).</td></tr>
+    <tr><td><strong>Dol</strong><br><em>fraud</em><br><span class="art">1137-1139</span></td><td>L'autre me <strong>trompe volontairement</strong> : manœuvres, mensonges, ou <strong>silence</strong> intentionnel sur une information qu'il sait déterminante pour moi.</td><td>Le vendeur sait que la table est en plastique et me la présente comme du chêne massif.</td><td>Ne pas révéler son estimation de la valeur n'est pas un dol (1137 al. 3). Le dol peut venir du représentant, d'un salarié ou d'un tiers complice (1138).</td></tr>
+    <tr><td><strong>Violence</strong><br><em>duress</em><br><span class="art">1140-1143</span></td><td>Je m'engage sous la <strong>pression d'une contrainte</strong> qui me fait craindre un mal considérable pour moi, mes biens ou mes proches.</td><td>« Signe ou je m'en prends à ta famille. »</td><td>Menacer d'aller en justice n'est pas une violence, sauf abus (1141). L'abus de <strong>dépendance économique</strong> est aussi une violence (1143).</td></tr>
+  </table></div>
+  <p class="simple">Image simple : l'erreur, je me trompe ; le dol, on me trompe ; la violence, on me force.</p>
+  <div class="box ex"><span class="tag">Exemple : la machine à laver (art. 1130)</span>
+    <p>J'achète une machine à laver que je crois à 1 200 tours/minute ; elle tourne en fait à 1 000. Mon erreur ne compte que si je <strong>prouve</strong> que, sans elle, je n'aurais pas acheté, ou à des conditions vraiment différentes (par exemple 50 € moins cher).</p>
+    <p>Le juge apprécie <strong>in concreto</strong> : selon la personne et les circonstances (âge, niveau d'études, connaissances, usage prévu). Pour une laverie qui utilise la machine intensivement, 200 tours de différence, c'est énorme : l'erreur sera plus facilement jugée déterminante. Pour un particulier, beaucoup moins.</p>
+  </div>
+  <div class="box law"><span class="tag">Article 1131</span>
+    <p>« Les vices du consentement sont une cause de <strong>nullité relative</strong> du contrat. » Logique : ils ne concernent que l'intérêt de l'acheteur ou du vendeur, pas celui de toute la société. Seule la victime peut agir (voir partie 6).</p>
+  </div>
+  <h4>Zoom sur l'erreur (art. 1132 à 1136)</h4>
+  <ul>
+    <li><span class="art">1132</span> L'erreur de fait ou de droit, <strong>sauf si elle est inexcusable</strong>, est une cause de nullité si elle porte sur les <strong>qualités essentielles</strong> de la prestation ou du cocontractant.</li>
+    <li><span class="art">1133</span> Les qualités essentielles sont celles qui ont été <strong>expressément ou tacitement convenues</strong> et en considération desquelles les parties ont contracté. L'erreur peut porter sur la prestation de l'une <strong>ou de l'autre</strong> partie (l'acheteur comme le vendeur peut se tromper). Et <strong>l'acceptation d'un aléa</strong> sur une qualité exclut l'erreur sur cette qualité.</li>
+    <li><span class="art">1134</span> L'erreur sur les qualités essentielles du <strong>cocontractant</strong> n'est une cause de nullité que dans les contrats conclus <strong>en considération de la personne</strong> (<em>intuitu personae</em>).</li>
+  </ul>
+  <div class="grid2">
+    <div class="card"><h4>L'aléa : l'assureur</h4><p>Un assureur ne peut pas dire « je me suis trompé, ce client a trop d'accidents, j'annule ». L'assurance, c'est justement accepter l'incertitude : pas d'erreur possible sur ce point. Même chose pour l'acheteur d'un tableau « attribué à » un peintre, sans certitude.</p></div>
+    <div class="card"><h4>L'intuitu personae : le mandat</h4><p>Le mandant choisit son mandataire pour <strong>ses qualités personnelles</strong> (sa fiabilité). Si le mandataire meurt, le contrat ne passe pas à son fils : il prend fin, car le fils n'a pas les mêmes qualités.</p></div>
+  </div>
+  <h4>Zoom sur le dol (art. 1137 à 1139)</h4>
+  <p>Le dol peut être <strong>explicite</strong> (mensonge, manœuvres) ou <strong>implicite</strong> (silence). Exemple : je demande au vendeur si la table est bien en bois ; il fait semblant de ne pas entendre pour que je croie que oui. Il n'a rien dit, mais il m'a manipulée : c'est une <strong>réticence dolosive</strong>.</p>
+  <p><span class="art">1139</span> « L'erreur qui résulte d'un dol est <strong>toujours excusable</strong> ; elle est une cause de nullité alors même qu'elle porterait sur la valeur de la prestation ou sur un simple motif. »</p>
+  <h4>Zoom sur la violence (art. 1140 et 1141)</h4>
+  <p>La violence, c'est la <strong>peur</strong> d'un mal considérable pour soi, ses biens, ou ses <strong>proches</strong> (pas seulement la famille : des amis aussi). Elle peut être physique ou psychologique.</p>
+  <div class="box ex"><span class="tag">Exemple : Peter et Charles (art. 1141)</span>
+    <p>Peter dit à Charles : « Si tu ne signes pas, je porte plainte contre toi. » Ce n'est <strong>pas</strong> une violence : agir en justice est légal. Mais si Peter <strong>ment</strong> sur la sanction (« tu risques 10 ans de prison », alors que c'est 1 an, ou « la peine de mort ») pour obtenir un avantage manifestement excessif, la menace devient une violence.</p>
+  </div>
+  <h4>Le délai pour agir (art. 1144)</h4>
+  <p>Pour l'erreur et le dol, le délai court seulement à partir du jour où ils ont été <strong>découverts</strong> ; pour la violence, à partir du jour où elle a <strong>cessé</strong>. Ce délai est de <strong>5 ans</strong>. Exemple : j'achète aujourd'hui un produit sous l'effet d'un dol, je le découvre dans 3 ans : je peux encore agir, et j'ai 5 ans à partir de cette découverte.</p>
+  <div class="box trap"><span class="tag">Piège : déséquilibre ≠ vice du consentement</span>
+    <p>Payer trop cher n'est pas, à soi seul, une erreur (1136). En revanche, si le vendeur m'a <strong>menti</strong> pour obtenir ce prix, c'est un dol, et l'erreur provoquée par un dol est toujours prise en compte, même si elle porte sur la valeur (1139).</p>
+  </div>
+  <p>Qui doit prouver ? Celui qui invoque le vice : c'est la <strong>charge de la preuve</strong> (<em>burden of proof</em>). Le délai pour agir est de 5 ans à compter de la découverte de l'erreur ou du dol (ou de la fin de la violence).</p>
+
+  <h3>5.2 La capacité et la représentation</h3>
+  <p><span class="art">1145</span> « Toute personne physique peut contracter, sauf en cas d'<strong>incapacité</strong> prévue par la loi. » La capacité des personnes morales est limitée par les règles qui leur sont propres (leur objet social).</p>
+  <div class="grid2">
+    <div class="card"><h4>Les incapables (1146)</h4><p>Les <strong>mineurs non émancipés</strong> et les <strong>majeurs protégés</strong> (tutelle, curatelle). Le mineur peut quand même faire les <strong>actes courants</strong> (acheter un livre, un ticket de cinéma, art. 1148).</p></div>
+    <div class="card"><h4>La sanction</h4><p>Le contrat conclu par un incapable est atteint de <strong>nullité relative</strong> (1147) : seul l'incapable protégé (ou son représentant) peut la demander.</p></div>
+  </div>
+  <h4>La représentation : qui signe pour une société ?</h4>
+  <p>Une société ne peut pas tenir un stylo : elle agit toujours par un <strong>représentant</strong> (<em>representative</em>), son dirigeant ou une personne mandatée. Plus généralement, le représentant peut tenir ses pouvoirs de 3 sources (1153) : la <strong>loi</strong> (les parents pour leur enfant mineur), le <strong>juge</strong> (un tuteur), ou un <strong>contrat</strong> (un mandat donné à un agent, un avocat).</p>
+  <div class="tbl"><table>
+    <tr><th>Situation</th><th>Article</th><th>Qui est engagé ?</th></tr>
+    <tr><td>Le représentant agit <strong>dans la limite de ses pouvoirs</strong>, au nom du représenté</td><td><span class="art">1154</span></td><td><strong>Seul le représenté</strong> est engagé (pas le représentant).</td></tr>
+    <tr><td>Le représentant agit <strong>sans pouvoir ou au-delà</strong> de ses pouvoirs</td><td><span class="art">1156</span></td><td>L'acte est <strong>inopposable</strong> au représenté : il n'est pas engagé. Sauf si le tiers a <strong>légitimement cru</strong> aux pouvoirs (mandat apparent), ou si le représenté <strong>ratifie</strong> l'acte. Le tiers qui ignorait l'absence de pouvoir peut demander la nullité.</td></tr>
+    <tr><td>Le représentant <strong>détourne</strong> ses pouvoirs contre le représenté</td><td><span class="art">1157</span></td><td>Le représenté peut demander la <strong>nullité</strong> si le tiers savait ou ne pouvait pas ignorer le détournement.</td></tr>
+  </table></div>
+  <div class="box ex"><span class="tag">Exemple</span>
+    <p>A donne mandat à B pour acheter un camion à 50 000 € maximum. B en achète un à 80 000 € chez C. A n'est pas engagé, sauf s'il ratifie l'achat, ou si C avait de bonnes raisons de croire que B pouvait aller jusque-là (par exemple, A l'avait présenté comme son « directeur des achats avec pleins pouvoirs »).</p>
+  </div>
+  <div class="box ex"><span class="tag">Exemple du cours : les 1 000 ordinateurs (art. 1153)</span>
+    <p>Je te charge de signer pour moi l'achat de <strong>1 000 ordinateurs de catégorie A</strong>. Tu ne peux faire que ça : si tu en achètes 1 001, ou 1 000 de catégorie B, tu sors de ton mandat et, en principe, je ne suis pas engagée. Le représentant ne peut <strong>jamais dépasser</strong> les pouvoirs reçus.</p>
+  </div>
+  <div class="box def"><span class="tag">Article 1154 al. 2</span>
+    <p>Si le représentant dit agir pour le compte d'un autre mais contracte <strong>en son propre nom</strong>, c'est <strong>lui seul</strong> qui est engagé envers le cocontractant. C'est le cas du commissionnaire, qui achète en son nom pour le compte d'un client.</p>
+  </div>
+
+  <h3>5.3 Un contenu licite et certain</h3>
+  <div class="box law"><span class="tag">Article 1162</span>
+    <blockquote>« Le contrat ne peut déroger à l'ordre public ni par ses stipulations, ni par son but, que ce dernier ait été connu ou non par toutes les parties. »</blockquote>
+  </div>
+  <p><strong>Licite</strong> (<em>lawful</em>) = conforme à l'ordre public : on ne peut pas vendre de la drogue, ni conclure un contrat dont le but est illicite. Si Jane vend de la drogue à Emy qui ne paie pas, Jane ne peut pas aller au tribunal : le contrat est nul, il n'a aucune protection juridique.</p>
+  <div class="box ex"><span class="tag">Exemple du cours : le but illicite</span>
+    <p>A vend des armes à B. A pense qu'elles seront utilisées légalement ; seul B sait qu'elles serviront à un crime. Le contrat est quand même <strong>nul</strong> : il suffit que son <strong>but</strong> soit contraire à l'ordre public, même si une seule partie le connaissait (« que ce dernier ait été connu ou non par toutes les parties »).</p>
+    <p>L'ordre public, c'est l'intérêt général d'une société donnée : chaque pays a le sien (l'ordre public français, l'ordre public italien…).</p>
+  </div>
+  <p><strong>Certain</strong> (<em>certain</em>) = la prestation est <strong>possible</strong> et <strong>déterminée ou déterminable</strong> (1163). On ne peut pas s'engager sur le passé ni sur l'impossible. « Je te vends des marchandises » sans dire lesquelles, en quelle quantité : contenu incertain.</p>
+  <ul>
+    <li><span class="art">1163</span> La prestation peut être présente ou future, mais possible et déterminée ou déterminable (on peut fixer le prix par référence à un indice, par exemple).</li>
+    <li><span class="art">1166</span> Si la <strong>qualité</strong> n'est pas précisée, le débiteur doit fournir une qualité conforme aux <strong>attentes légitimes</strong> des parties, compte tenu de la nature de la prestation, des usages et du prix.</li>
+  </ul>
+
+  <div class="box ex"><span class="tag">Exemple : déterminé ou déterminable ? Le vin (art. 1163)</span>
+    <p>A, producteur de vin, signe avec B, propriétaire de restaurants à Paris, un contrat de fourniture sur <strong>5 ans</strong>. Impossible de savoir aujourd'hui le prix du vin dans 3 ans. Solutions :</p>
+    <ul><li>Prix <strong>déterminé</strong> pour les 6 premiers mois (1 € le litre), puis A et B se revoient tous les 6 mois pour fixer le suivant : le prix est <strong>déterminable</strong>.</li>
+    <li>Ou bien les parties désignent un <strong>tiers</strong> qui fixera le prix à chaque période.</li></ul>
+    <p><strong>Déterminé</strong> = fixé dès maintenant ; <strong>déterminable</strong> = pourra être fixé plus tard, selon une méthode prévue au contrat.</p>
+  </div>
+
+  <h3>5.4 Le déséquilibre du contrat : 1168, 1169, 1170, 1171</h3>
+  <p>Ces quatre articles reviennent sans cesse dans le cours. Le point de départ : <strong>la loi ne corrige pas les mauvaises affaires</strong>. Mais il y a des limites.</p>
+  <div class="tbl"><table>
+    <tr><th>Article</th><th>Règle</th><th>Sanction</th><th>Exemple</th></tr>
+    <tr><td><span class="art">1168</span><br>Principe</td><td>Dans un contrat synallagmatique, le <strong>défaut d'équivalence</strong> des prestations n'est <strong>pas</strong> une cause de nullité, sauf si la loi en dispose autrement.</td><td>Aucune : le contrat reste valable.</td><td>Peter paie 10 000 € un vélo qui vaut 100 € : il ne peut pas annuler pour ce seul motif. À lui de comparer les prix.</td></tr>
+    <tr><td><span class="art">1169</span><br>Exception</td><td>Un contrat à titre onéreux est <strong>nul</strong> si, au moment de sa formation, la contrepartie est <strong>illusoire</strong> (inexistante) ou <strong>dérisoire</strong> (ridiculement faible).</td><td><strong>Nullité du contrat entier</strong>, avec restitutions.</td><td>Vendre une entreprise pour 1 €, une maison pour 10 €. Pour le vélo, le juge peut se demander si 100 € contre 10 000 € est dérisoire, mais ce n'est pas automatique.</td></tr>
+    <tr><td><span class="art">1170</span><br>Clause</td><td>Toute clause qui <strong>prive de sa substance l'obligation essentielle</strong> du débiteur est <strong>réputée non écrite</strong>.</td><td><strong>Seule la clause</strong> disparaît, le reste du contrat tient.</td><td>L'arrêt <strong>Chronopost</strong> (ci-dessous).</td></tr>
+    <tr><td><span class="art">1171</span><br>Clause</td><td>Dans un <strong>contrat d'adhésion</strong>, toute clause <strong>non négociable</strong>, fixée à l'avance par une partie, qui crée un <strong>déséquilibre significatif</strong> entre les droits et obligations des parties est <strong>réputée non écrite</strong>. On ne juge ni l'objet principal ni le prix.</td><td><strong>Seule la clause</strong> disparaît.</td><td>Un abonnement où seul le prestataire peut résilier sans préavis et le client jamais.</td></tr>
+  </table></div>
+  <p>Attention : le contrat d'adhésion ne concerne pas que les consommateurs ; l'article 1171 s'applique aussi <strong>entre entreprises</strong>.</p>
+  <div class="box def"><span class="tag">Synallagmatique ou unilatéral ?</span>
+    <p><strong>Synallagmatique</strong> : chaque partie a des obligations envers l'autre (vente). <strong>Unilatéral</strong> : une seule partie s'engage (dépôt gratuit, promesse de récompense). L'article 1168 ne vise que les contrats synallagmatiques. Exemple du cours : j'achète 1 million d'euros un vélo en très mauvais état, sans erreur, dol ni violence : je ne peux pas faire annuler, j'ai simplement fait une très mauvaise affaire.</p>
+  </div>
+  <div class="box ex"><span class="tag">L'arrêt Chronopost (Cour de cassation, 22 octobre 1996)</span>
+    <p>Une société envoie par Chronopost un pli pour répondre à un appel d'offres, avec livraison promise le lendemain avant midi. Le pli arrive en retard, elle perd le marché. Chronopost invoque sa clause : en cas de retard, elle rembourse seulement le prix du transport.</p>
+    <p>La Cour de cassation écarte la clause : l'<strong>obligation essentielle</strong> de Chronopost, c'est justement de livrer <strong>à temps</strong>. Une clause qui réduit la sanction de cette obligation à presque rien la vide de sa substance. La clause est « réputée non écrite » et Chronopost doit indemniser selon les règles normales, pas seulement rembourser le transport.</p>
+    <p><strong>Combien ?</strong> Le client doit prouver son préjudice. S'il prouve qu'il aurait <strong>certainement</strong> obtenu le marché de 1 M€ avec une livraison à l'heure, il peut obtenir une forte indemnisation. S'il n'avait qu'une <strong>chance</strong> de l'obtenir, le juge n'indemnise que cette chance perdue, donc beaucoup moins.</p>
+    <p>En 2016, la réforme a inscrit ce principe dans l'<strong>article 1170</strong>. C'est l'exemple parfait d'une jurisprudence devenue loi.</p>
+  </div>
+  <div class="box ex"><span class="tag">Quelle est l'obligation essentielle ? L'exemple IKEA</span>
+    <p>Peter achète un lit IKEA. Obligations possibles : livrer le bon lit, complet (vis, boulons), au bon endroit ; transférer la propriété ; le monter, si c'était prévu. Selon le prof, l'essentiel est de <strong>livrer un lit conforme</strong> et d'en <strong>transférer la propriété</strong>. Le montage n'est pas forcément essentiel (Peter peut monter le lit lui-même), sauf si c'est le cœur du service acheté. L'article 1170 ne protège que l'obligation <strong>essentielle</strong>.</p>
+  </div>
+  <div class="box trap"><span class="tag">Piège : « nul » ou « réputé non écrit » ?</span>
+    <p><strong>Nul</strong> (1169, vices du consentement, incapacité) = tout le contrat tombe. <strong>Réputé non écrit</strong> (1170, 1171) = seule la clause est effacée, comme si elle n'avait jamais été écrite, et le contrat continue sans elle.</p>
+  </div>
+  <h4>D'autres règles impératives qui protègent l'équilibre</h4>
+  <ul>
+    <li><span class="art">1628</span> Même si la vente dit « sans garantie », le vendeur reste tenu de la garantie qui résulte de son <strong>fait personnel</strong> : toute convention contraire est nulle.</li>
+    <li><span class="art">1792-5</span> Dans la construction, toute clause qui exclut ou limite les garanties légales du constructeur (voir partie 9) est réputée non écrite.</li>
+  </ul>
+  <div class="box key"><span class="tag">À retenir</span>
+    <ul>
+      <li>Art. 1128 : <strong>consentement + capacité + contenu licite et certain</strong>, conditions cumulatives.</li>
+      <li>Vices : erreur (je me trompe), dol (on me trompe), violence (on me force), s'ils sont déterminants (1130).</li>
+      <li>Représentant dans ses pouvoirs → seul le représenté est engagé (1154) ; au-delà → inopposable sauf apparence ou ratification (1156).</li>
+      <li>1168 : déséquilibre = valable. 1169 : contrepartie illusoire ou dérisoire = nul. 1170 et 1171 : clause réputée non écrite.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ PARTIE 6 ============ -->
+<section class="part" id="p6">
+  <div class="part-head"><span class="part-num">6</span><div><div class="eyebrow">Nullity · art. 1178 à 1185</div><h2>La nullité : quand le contrat n'est pas valable</h2></div></div>
+  <div class="box law"><span class="tag">Article 1178</span>
+    <blockquote>« Un contrat qui ne remplit pas les conditions requises pour sa validité est nul. La nullité doit être prononcée par le juge, à moins que les parties ne la constatent d'un commun accord. Le contrat annulé est censé n'avoir jamais existé. Les prestations exécutées donnent lieu à restitution dans les conditions prévues aux articles 1352 à 1352-9. »</blockquote>
+    <p>Et la victime peut en plus demander des dommages-intérêts sur le fondement de la responsabilité extracontractuelle.</p>
+    <p>Pourquoi la responsabilité <strong>extracontractuelle</strong> (délictuelle) et pas contractuelle ? Parce que le droit des contrats ne s'applique qu'aux contrats <strong>valables</strong>.</p>
+  </div>
+  <figure>
+    <div class="flow">
+      <div class="step"><b>Une condition de 1128 manque</b>Ex. : dol prouvé.</div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>Qui déclare la nullité ?</b>Les deux parties d'accord, ou sinon le <strong>juge</strong>.</div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>Effet rétroactif</b>Le contrat est censé n'avoir <strong>jamais existé</strong>.</div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>Restitutions</b>Chacun rend ce qu'il a reçu.</div>
+    </div>
+    <figcaption>Le parcours d'une nullité.</figcaption>
+  </figure>
+  <h3>6.1 Nullité absolue ou relative (art. 1179 à 1181)</h3>
+  <div class="tbl"><table>
+    <tr><th></th><th>Nullité absolue <span class="art">1180</span></th><th>Nullité relative <span class="art">1181</span></th></tr>
+    <tr><td><strong>Quand ?</strong> <span class="art">1179</span></td><td>La règle violée protège l'<strong>intérêt général</strong>.</td><td>La règle violée protège un <strong>intérêt privé</strong>.</td></tr>
+    <tr><td><strong>Exemples</strong></td><td>Contenu illicite (vente de drogue), contraire à l'ordre public.</td><td>Vices du consentement, incapacité.</td></tr>
+    <tr><td><strong>Qui peut agir ?</strong></td><td><strong>Toute personne</strong> qui y a intérêt, et le ministère public.</td><td><strong>Seulement la partie protégée</strong> (la victime du dol, l'incapable).</td></tr>
+    <tr><td><strong>Confirmation possible ?</strong></td><td>Non.</td><td>Oui : la victime peut renoncer à agir et « confirmer » le contrat (1182).</td></tr>
+  </table></div>
+  <div class="box ex"><span class="tag">Exemple : 4 acheteurs (art. 1181 al. 3)</span>
+    <p>A, B, C et D achètent ensemble une table présentée comme en bois, qui est en plastique. A la trouve belle quand même et renonce à agir. Cela n'empêche pas B, C et D de demander la nullité : la renonciation de l'un <strong>n'engage pas les autres</strong>.</p>
+  </div>
+  <h3>6.2 Confirmer le contrat ou forcer l'autre à choisir (art. 1182 et 1183)</h3>
+  <div class="grid2">
+    <div class="card"><h4>La confirmation <span class="art">1182</span></h4><p>La personne qui pourrait demander la nullité y <strong>renonce</strong>. L'acte doit indiquer l'obligation et le vice concernés. Elle n'est possible <strong>qu'après</strong> la conclusion du contrat (et, pour la violence, après qu'elle a cessé). Exécuter volontairement le contrat en connaissant le vice vaut confirmation. Les droits des tiers restent protégés.</p></div>
+    <div class="card"><h4>L'action interrogatoire <span class="art">1183</span></h4><p>L'autre partie peut demander <strong>par écrit</strong> à la personne protégée de choisir : confirmer le contrat, ou agir en nullité <strong>dans les 6 mois</strong>. Sans action dans ce délai, le contrat est <strong>confirmé</strong>. But : sortir de l'incertitude. La cause de nullité doit avoir cessé.</p></div>
+  </div>
+  <h3>6.3 Nullité d'une clause ou de tout le contrat ? (art. 1184)</h3>
+  <p>Quand la cause de nullité ne touche qu'<strong>une ou plusieurs clauses</strong>, seules ces clauses sont nulles, <strong>sauf</strong> si elles ont été <strong>déterminantes</strong> de l'engagement des parties, ou d'une seule d'entre elles : alors tout le contrat tombe. C'est à la partie qui le prétend de le <strong>prouver</strong>.</p>
+  <div class="tbl"><table>
+    <tr><th>Type de clause</th><th>Effet</th></tr>
+    <tr><td><strong>Clause valable</strong></td><td>S'applique normalement.</td></tr>
+    <tr><td><strong>Clause nulle</strong> (contraire à la loi)</td><td>Disparaît ; peut entraîner la nullité de tout le contrat si elle était déterminante.</td></tr>
+    <tr><td><strong>Clause réputée non écrite</strong> (1170, 1171…)</td><td>Disparaît, mais le contrat est <strong>toujours maintenu</strong> (1184 al. 2). La loi la juge moins grave qu'une clause nulle.</td></tr>
+  </table></div>
+  <h3>6.4 Les restitutions (art. 1352 à 1352-9)</h3>
+  <p>Le but : remettre les parties dans la situation où elles étaient <strong>avant</strong> le contrat.</p>
+  <div class="box ex"><span class="tag">Exemple : un contrat de fourniture de 10 ans</span>
+    <p>Deux sociétés signent en 2020 un contrat de fourniture jusqu'en 2030. En 2026, le juge l'annule. Pendant 6 ans, le fournisseur a livré chaque mois et le client a payé chaque livraison. Que faire ?</p>
+  </div>
+  <div class="grid3">
+    <div class="card"><h4>Les biens</h4><p>On les rend <strong>en nature</strong> si possible. S'ils ont été consommés, revendus ou détruits : on rend leur <strong>valeur</strong>.</p></div>
+    <div class="card"><h4>L'argent</h4><p>Facile : l'argent est un <strong>bien fongible</strong> (un billet de 100 € en vaut un autre). On rend la même somme, pas les mêmes billets.</p></div>
+    <div class="card"><h4>Les services</h4><p>Impossible de « rendre » 6 ans de cours de piano ou une opération chirurgicale. La restitution se fait <strong>en valeur</strong>, estimée à la date où le service a été fourni (art. 1352-8).</p></div>
+  </div>
+  <div class="box key"><span class="tag">À retenir</span>
+    <ul>
+      <li>Nullité = sanction d'un problème au moment de la <strong>formation</strong>.</li>
+      <li>Prononcée par le juge ou constatée d'un commun accord ; <strong>rétroactive</strong> ; restitutions.</li>
+      <li>Absolue (intérêt général, tout intéressé) / relative (intérêt privé, seule la partie protégée).</li>
+      <li>Service rendu → restitution en valeur (1352-8).</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ PARTIE 7 ============ -->
+<section class="part" id="p7">
+  <div class="part-head"><span class="part-num">7</span><div><div class="eyebrow">Performance of contractual obligations</div><h2>Les effets du contrat</h2></div></div>
+
+  <h3>7.1 La force obligatoire en pratique (1103 et 1193)</h3>
+  <p>Conséquence directe de l'article 1103 : une seule volonté ne peut pas défaire ce que deux volontés ont fait.</p>
+  <div class="box law"><span class="tag">Article 1193</span>
+    <blockquote>« Les contrats ne peuvent être modifiés ou révoqués que du consentement mutuel des parties, ou pour les causes que la loi autorise. »</blockquote>
+  </div>
+  <div class="box ex"><span class="tag">Exemple</span>
+    <p>J'ai signé un contrat avec Jane. Jane ne peut pas, seule, décider de changer le prix ou d'arrêter le contrat parce que ça l'arrange. Il faut notre <strong>accord à toutes les deux</strong> (un avenant), ou une cause prévue par la loi (force majeure, imprévision…).</p>
+  </div>
+  <div class="box ex"><span class="tag">Exemple du cours : un contrat à 10</span>
+    <p>Un contrat lie 10 personnes. Si 9 veulent le modifier et 1 refuse, <strong>pas de modification</strong> : il faut l'unanimité. Mais dès la signature, les parties peuvent prévoir une <strong>clause</strong> qui autorise la modification à la majorité (7 contre 3 suffirait alors), ou même une clause qui permet à l'une d'elles de modifier seule. Enfin, la loi elle-même prévoit parfois une modification ou une révocation.</p>
+  </div>
+
+  <h3>7.2 Le contrat contient plus que ses clauses (art. 1194)</h3>
+  <div class="box law"><span class="tag">Article 1194</span>
+    <blockquote>« Les contrats obligent non seulement à ce qui y est exprimé, mais encore à toutes les suites que leur donnent l'équité, l'usage ou la loi. »</blockquote>
+  </div>
+  <div class="grid3">
+    <div class="card"><h4>L'équité (<em>fairness</em>)</h4><p>Le juge ajoute des obligations justes. Exemple célèbre : le transporteur de voyageurs n'a pas seulement à t'emmener à destination, il doit t'y emmener <strong>sain et sauf</strong> (obligation de sécurité, créée par la jurisprudence en 1911 sur le fondement de l'ancien art. 1135, devenu 1194).</p></div>
+    <div class="card"><h4>L'usage (<em>custom</em>)</h4><p>Les pratiques habituelles d'un secteur complètent le contrat entre professionnels de ce secteur.</p></div>
+    <div class="card"><h4>La loi (<em>law</em>)</h4><p>Les règles impératives s'appliquent même si elles ne sont pas écrites dans le contrat (ex. le droit de la consommation).</p></div>
+  </div>
+  <p class="simple">Retiens : on n'est pas lié seulement par les clauses. La volonté des parties n'a pas le dernier mot, la loi l'a.</p>
+  <div class="box def"><span class="tag">Judge-made law</span>
+    <p>L'obligation de sécurité est un bel exemple de <strong>droit créé par les juges</strong> (<em>judge-made law</em>) : une règle tirée des décisions passées, et non votée par le Parlement.</p>
+  </div>
+
+  <h3>7.3 L'interprétation du contrat (art. 1188 à 1192)</h3>
+  <p>Interpréter, c'est <strong>rendre clair ce qui ne l'est pas</strong>. Si deux parties ne sont pas d'accord sur le sens de l'article 10 de leur contrat, le juge tranche, avec une méthode fixée par le Code :</p>
+  <figure>
+    <div class="flow">
+      <div class="step"><b>La clause est claire ?</b>Alors <strong>on n'interprète pas</strong> : ce serait la dénaturer (1192).</div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>Sinon : intention commune</b>On cherche ce que les parties ont <strong>voulu ensemble</strong>, plutôt que le sens littéral (1188 al. 1).</div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>Introuvable ?</b>Le sens que lui donnerait une <strong>personne raisonnable</strong> placée dans la même situation (1188 al. 2).</div>
+    </div>
+    <figcaption>L'ordre de raisonnement du juge.</figcaption>
+  </figure>
+  <p>Devant le juge, c'est la partie qui invoque une intention commune qui doit la <strong>prouver</strong>. Et si le juge interprète une clause claire, il la <strong>dénature</strong> : sa décision peut être cassée.</p>
+  <div class="tbl"><table>
+    <tr><th>Article</th><th>Règle</th><th>En clair</th></tr>
+    <tr><td><span class="art">1189</span></td><td>Les clauses s'interprètent <strong>les unes par rapport aux autres</strong>, en respectant la cohérence de l'acte. Si plusieurs contrats servent une même opération, ils s'interprètent en fonction de celle-ci.</td><td>On lit le contrat comme un tout, pas phrase par phrase.</td></tr>
+    <tr><td><span class="art">1190</span></td><td>Dans le doute, le contrat <strong>de gré à gré</strong> s'interprète <strong>contre le créancier et en faveur du débiteur</strong> ; le contrat <strong>d'adhésion</strong> contre <strong>celui qui l'a proposé</strong>.</td><td>Le créancier est vu comme le plus fort : le doute profite au <strong>débiteur</strong> de l'obligation discutée, pour rééquilibrer. Dans l'adhésion, celui qui a rédigé seul assume les ambiguïtés.</td></tr>
+    <tr><td><span class="art">1191</span></td><td>Si une clause a deux sens, on préfère celui qui lui donne <strong>un effet</strong> plutôt que celui qui ne lui en donne aucun.</td><td>Une clause n'est pas écrite pour rien. Contrairement à 1190, cette règle ne protège <strong>aucune partie</strong> en particulier.</td></tr>
+    <tr><td><span class="art">1192</span></td><td>On ne peut pas interpréter les clauses <strong>claires et précises</strong> à peine de dénaturation.</td><td>Pas d'interprétation sans ambiguïté.</td></tr>
+  </table></div>
+
+  <h3>7.4 Le transfert de propriété et des risques (1196 et 1583)</h3>
+  <div class="box law"><span class="tag">Article 1196</span>
+    <p>Dans les contrats qui transfèrent la propriété, le transfert a lieu <strong>dès la conclusion du contrat</strong>. Il peut être retardé par la volonté des parties (clause de réserve de propriété), la nature des choses ou la loi. <strong>Le transfert de propriété entraîne celui des risques</strong> de la chose.</p>
+  </div>
+  <p>L'article 1196 est la règle <strong>générale</strong> (tous les contrats qui transfèrent un droit) ; l'article 1583 est la même idée appliquée à la <strong>vente</strong>. Retiens l'adage : <em>res perit domino</em>, la chose périt pour son propriétaire.</p>
+  <div class="box ex"><span class="tag">Exemple</span>
+    <p>J'achète un ordinateur à la Fnac, je le ramène chez moi, et il brûle dans un incendie de mon appartement. Je suis propriétaire, donc je supporte la perte : je ne peux rien réclamer à la Fnac.</p>
+  </div>
+  <div class="box trap"><span class="tag">Nuance pour les consommateurs</span>
+    <p>Quand un professionnel vend à un consommateur et doit livrer, le Code de la consommation dit que les risques ne passent au consommateur qu'au moment où il <strong>prend physiquement possession</strong> du bien. Si le colis est perdu par le livreur avant de t'arriver, c'est donc pour le vendeur.</p>
+  </div>
+
+  <h3>7.5 L'effet relatif du contrat (art. 1199 et 1205)</h3>
+  <div class="box law"><span class="tag">Article 1199</span>
+    <blockquote>« Le contrat ne crée d'obligations qu'entre les parties. Les tiers ne peuvent ni demander l'exécution du contrat ni se voir contraints de l'exécuter… »</blockquote>
+  </div>
+  <p>Un <strong>tiers</strong> (<em>third party</em>), c'est toute personne qui n'est pas partie au contrat. Le contrat entre A et B ne concerne qu'A et B. Exception : la <strong>stipulation pour autrui</strong> (1205) : une partie (le stipulant) fait promettre à l'autre (le promettant) d'exécuter une prestation au profit d'un <strong>tiers bénéficiaire</strong>. Exemple : l'assurance-vie, où l'assureur promet de verser le capital à tes enfants.</p>
+
+  <h3>7.6 Et si le débiteur n'exécute pas ? (art. 1217)</h3>
+  <p>Le créancier dispose de 5 sanctions, qu'il peut cumuler si elles sont compatibles :</p>
+  <div class="grid3">
+    <div class="card"><h4>Exception d'inexécution</h4><p>« Tu ne livres pas, je ne paie pas. »</p></div>
+    <div class="card"><h4>Exécution forcée</h4><p>Obtenir du juge qu'il ordonne l'exécution.</p></div>
+    <div class="card"><h4>Réduction du prix</h4><p>Si l'exécution est imparfaite.</p></div>
+    <div class="card"><h4>Résolution</h4><p>Mettre fin au contrat.</p></div>
+    <div class="card"><h4>Dommages-intérêts</h4><p>Réparer le préjudice (<em>damages</em>), sauf force majeure.</p></div>
+  </div>
+  <div class="box key"><span class="tag">À retenir</span>
+    <ul>
+      <li>Modification ou révocation : seulement d'un commun accord ou pour une cause légale (1193).</li>
+      <li>Le contrat oblige aussi à ce que donnent l'équité, l'usage, la loi (1194).</li>
+      <li>Interprétation : clause claire = pas d'interprétation (1192) ; sinon intention commune, puis personne raisonnable (1188).</li>
+      <li>Propriété et risques passent dès la conclusion (1196, 1583), sauf clause contraire.</li>
+      <li>Le contrat ne lie que les parties (1199), sauf stipulation pour autrui (1205).</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ PARTIE 8 ============ -->
+<section class="part" id="p8">
+  <div class="part-head"><span class="part-num">8</span><div><div class="eyebrow">Change of circumstances</div><h2>Le temps : imprévision et force majeure</h2></div></div>
+  <p>Un contrat instantané (acheter un sandwich) pose peu de problèmes : tout est fini en quelques secondes. Un contrat <strong>de longue durée</strong> (fourniture sur 10 ans, construction d'un hôpital, prêt sur 20 ans) est exposé à des <strong>changements de circonstances</strong> : guerre, pandémie, flambée des prix de l'énergie, mauvaises récoltes à cause du climat… Le Code prévoit deux mécanismes très différents.</p>
+
+  <h3>8.1 L'imprévision (art. 1195) : l'exécution devient ruineuse</h3>
+  <div class="box law"><span class="tag">Article 1195</span>
+    <p>« Si un changement de circonstances <strong>imprévisible</strong> lors de la conclusion du contrat rend l'exécution <strong>excessivement onéreuse</strong> pour une partie qui <strong>n'avait pas accepté d'en assumer le risque</strong>, celle-ci peut demander une <strong>renégociation</strong> du contrat à son cocontractant. Elle <strong>continue à exécuter</strong> ses obligations durant la renégociation. »</p>
+    <p>En cas de refus ou d'échec : les parties peuvent convenir de résoudre le contrat, ou demander ensemble au juge de l'adapter. À défaut d'accord dans un délai raisonnable, le juge peut, à la demande d'une partie, <strong>réviser</strong> le contrat ou y <strong>mettre fin</strong>.</p>
+  </div>
+  <figure>
+    <div class="flow">
+      <div class="step"><b>1. Changement imprévisible</b>Le prix de la matière première triple.</div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>2. Demande de renégociation</b>On continue d'exécuter pendant ce temps.</div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>3. Échec ?</b>Résolution amiable, ou adaptation par le juge à la demande commune.</div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>4. Toujours rien ?</b>Le juge peut réviser ou mettre fin au contrat.</div>
+    </div>
+    <figcaption>Les étapes de l'imprévision.</figcaption>
+  </figure>
+  <div class="box ex"><span class="tag">Exemple du cours : +40 % sur les matières premières</span>
+    <p>Contrat de fourniture de 5 ans. Les parties « sages » auraient prévu une clause d'adaptation ; elles ne l'ont pas fait. Au bout de 3 ans, le prix des matières premières augmente de 40 % : livrer coûte 40 % plus cher au fournisseur, son bénéfice s'effondre. L'exécution reste <strong>possible</strong>, mais elle est devenue <strong>excessivement onéreuse</strong>.</p>
+    <p><strong>Avant 2016</strong>, la Cour de cassation refusait la « théorie de l'imprévision » (célèbre arrêt <em>Canal de Craponne</em>, 1876) : tant pis pour le débiteur, il n'avait qu'à prévoir une clause. <strong>Depuis 2016</strong>, l'article 1195 lui permet de demander une renégociation.</p>
+    <p>Attention : l'autre partie <strong>n'est pas obligée</strong> d'accepter de renégocier, et même si elle accepte, rien ne garantit un accord. D'où la suite : résolution d'un commun accord, adaptation demandée ensemble au juge, ou, faute d'accord dans un délai raisonnable, révision ou fin du contrat par le juge à la demande d'une partie.</p>
+  </div>
+  <div class="box trap"><span class="tag">Piège : 1195 est supplétif</span>
+    <p>Les parties peuvent écarter l'article 1195 par une clause, et c'est très fréquent en B2B. Elles préfèrent souvent écrire leur propre <strong>clause de hardship</strong> (clause de renégociation) avec des seuils précis, par exemple : « si le prix des matières premières augmente de plus de 30 % sur 3 mois, les parties se rencontrent pour renégocier ». Ce seuil vient du contrat, pas de la loi.</p>
+  </div>
+
+  <h3>8.2 La force majeure (art. 1218) : l'exécution devient impossible</h3>
+  <div class="box law"><span class="tag">Article 1218</span>
+    <p>« Il y a force majeure en matière contractuelle lorsqu'un événement <strong>échappant au contrôle du débiteur</strong>, qui <strong>ne pouvait être raisonnablement prévu</strong> lors de la conclusion du contrat et dont <strong>les effets ne peuvent être évités par des mesures appropriées</strong>, <strong>empêche l'exécution</strong> de son obligation par le débiteur. »</p>
+    <p>Si l'empêchement est <strong>temporaire</strong> : l'exécution est <strong>suspendue</strong> (sauf si le retard justifie la résolution). S'il est <strong>définitif</strong> : le contrat est <strong>résolu de plein droit</strong> et les parties sont libérées.</p>
+  </div>
+  <figure>
+    <div class="scroll">
+    <svg viewBox="0 0 640 230" width="100%" style="min-width:500px" role="img" aria-label="Arbre de décision de la force majeure">
+      <g font-size="12.5" text-anchor="middle" fill="var(--ink)">
+        <rect x="20" y="20" width="180" height="56" rx="12" fill="var(--blush)"/>
+        <text x="110" y="44" font-weight="700" fill="var(--rose-deep)">① Hors de contrôle</text><text x="110" y="63">du débiteur ?</text>
+        <rect x="230" y="20" width="180" height="56" rx="12" fill="var(--blush)"/>
+        <text x="320" y="44" font-weight="700" fill="var(--rose-deep)">② Imprévisible</text><text x="320" y="63">à la signature ?</text>
+        <rect x="440" y="20" width="180" height="56" rx="12" fill="var(--blush)"/>
+        <text x="530" y="44" font-weight="700" fill="var(--rose-deep)">③ Effets inévitables</text><text x="530" y="63">malgré des mesures ?</text>
+        <path d="M200 48H228M410 48H438" stroke="var(--rose)" stroke-width="2.5"/>
+        <text x="214" y="40" font-size="11" fill="var(--ok)">oui</text><text x="424" y="40" font-size="11" fill="var(--ok)">oui</text>
+        <path d="M530 76V108" stroke="var(--ok)" stroke-width="2.5"/>
+        <text x="545" y="96" font-size="11" fill="var(--ok)">oui</text>
+        <rect x="445" y="110" width="185" height="66" rx="12" fill="var(--ok-bg)" stroke="var(--ok)"/>
+        <text x="537" y="132" font-weight="700" fill="var(--ok)">FORCE MAJEURE</text><text x="537" y="150" font-size="11.5">temporaire → suspension</text><text x="537" y="166" font-size="11.5">définitive → résolution</text>
+        <path d="M110 76V170M320 76V170M450 76L380 170" stroke="var(--ko)" stroke-width="2" stroke-dasharray="5 4"/>
+        <text x="95" y="125" font-size="11" fill="var(--ko)">non</text><text x="305" y="125" font-size="11" fill="var(--ko)">non</text><text x="402" y="120" font-size="11" fill="var(--ko)">non</text>
+        <rect x="20" y="172" width="400" height="48" rx="12" fill="var(--ko-bg)" stroke="var(--ko)"/>
+        <text x="220" y="193" font-weight="700" fill="var(--ko)">Pas de force majeure : le principe s'applique</text><text x="220" y="211" font-size="11.5">le débiteur doit exécuter, sinon il engage sa responsabilité</text>
+      </g>
+    </svg></div>
+    <figcaption>Il suffit qu'une seule condition manque pour qu'il n'y ait pas de force majeure.</figcaption>
+  </figure>
+  <div class="box ex"><span class="tag">Exemples</span>
+    <p><strong>Pas de force majeure :</strong> le pâtissier dont le vol est annulé pouvait prendre un autre transport (condition ③ manque). Une grève interne à l'entreprise du débiteur n'échappe en général pas à son contrôle (① manque). Un risque connu à la signature (une pandémie déjà en cours) n'est plus imprévisible (② manque).</p>
+    <p><strong>Force majeure possible :</strong> un incendie criminel détruit la seule usine capable de fabriquer la pièce, sans solution de remplacement.</p>
+  </div>
+
+  <div class="box ex"><span class="tag">Définir soi-même la force majeure</span>
+    <p>Les articles 1195 et 1218 sont tous les deux <strong>supplétifs</strong> : les parties peuvent prévoir leurs propres clauses de hardship et de force majeure, et même définir précisément ce qui sera une force majeure. Exemple de clause : « Un tremblement de terre est un cas de force majeure s'il dure plus de 5 secondes et atteint au moins 4 sur l'échelle de Richter. »</p>
+  </div>
+  <div class="box trap"><span class="tag">À l'examen</span>
+    <p>Cite les 3 conditions de l'article 1218 <strong>tel qu'il est rédigé depuis 2016</strong> : événement échappant au contrôle du débiteur, imprévisible, effets inévitables. Les anciens manuels parlent d'« extériorité » : ce critère a été remplacé.</p>
+  </div>
+
+  <h3>8.3 Imprévision ou force majeure ? Le tableau qui évite de tout mélanger</h3>
+  <div class="tbl"><table>
+    <tr><th></th><th>Imprévision <span class="art">1195</span></th><th>Force majeure <span class="art">1218</span></th></tr>
+    <tr><td><strong>Situation</strong></td><td>L'exécution reste <strong>possible</strong> mais devient <strong>excessivement coûteuse</strong>.</td><td>L'exécution est <strong>impossible</strong>.</td></tr>
+    <tr><td><strong>Exemple</strong></td><td>Le coût de l'énergie est multiplié par 4 : livrer reste possible mais ruineux.</td><td>L'usine est détruite, aucune alternative : livrer est impossible.</td></tr>
+    <tr><td><strong>Pendant ce temps</strong></td><td>On <strong>continue</strong> d'exécuter.</td><td>L'exécution est <strong>suspendue</strong> ou le contrat est résolu.</td></tr>
+    <tr><td><strong>Effet</strong></td><td>Renégociation, puis éventuellement révision ou fin par le juge.</td><td>Suspension (temporaire) ou résolution de plein droit (définitive). Pas de dommages-intérêts.</td></tr>
+    <tr><td><strong>Peut-on l'écarter ?</strong></td><td>Oui, règle supplétive.</td><td>Oui aussi, règle supplétive : les parties peuvent définir elles-mêmes les cas de force majeure.</td></tr>
+  </table></div>
+  <div class="box key"><span class="tag">À retenir</span>
+    <ul>
+      <li>Imprévision (1195) : imprévisible + excessivement onéreux + risque non accepté → renégocier, en continuant d'exécuter.</li>
+      <li>Force majeure (1218) : hors contrôle + imprévisible + inévitable + empêche l'exécution → suspension ou résolution.</li>
+      <li>Sans force majeure, le principe de force obligatoire (1103) s'applique : le débiteur est responsable.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ PARTIE 9 ============ -->
+<section class="part" id="p9">
+  <div class="part-head"><span class="part-num">9</span><div><div class="eyebrow">Chapter 3 · Main business contracts · aperçu</div><h2>Les grands contrats d'affaires</h2><div class="src">Ce chapitre n'est pas encore traité en détail dans tes documents : voici les bases pour t'y retrouver. Envoie-moi tes notes quand le prof l'aura fait, je compléterai.</div></div></div>
+  <div class="tbl"><table>
+    <tr><th>Contrat</th><th>Définition</th><th>Points clés</th></tr>
+    <tr><td><strong>Vente</strong><br><em>sale</em><br><span class="art">1582</span></td><td>L'un s'oblige à livrer une chose, l'autre à la payer.</td><td>Vendeur : <strong>délivrer</strong> et <strong>garantir</strong> (éviction, vices cachés, art. 1603 et 1641). Acheteur : <strong>payer</strong> et prendre livraison. Propriété transférée dès l'accord sur la chose et le prix (1583).</td></tr>
+    <tr><td><strong>Contrat d'entreprise</strong><br><em>service contract</em><br><span class="art">1710, 1787</span></td><td>L'un s'engage à <strong>faire un ouvrage ou un travail</strong> pour l'autre, contre un prix.</td><td>On paie un <strong>travail</strong>, pas un bien existant (réparateur, consultant, le barista du cours).</td></tr>
+    <tr><td><strong>Contrat de construction</strong><br><em>construction contract</em><br><span class="art">1792 et s.</span></td><td>Un contrat d'entreprise portant sur la construction d'un ouvrage.</td><td>Garanties légales <strong>impératives</strong> (1792-5) : <strong>parfait achèvement 1 an</strong> (1792-6), <strong>bon fonctionnement 2 ans</strong> pour les équipements (1792-3), <strong>décennale 10 ans</strong> pour la solidité de l'ouvrage (1792).</td></tr>
+    <tr><td><strong>Sous-traitance</strong><br><em>subcontracting</em><br>loi du 31 déc. 1975</td><td>L'entrepreneur principal confie à un sous-traitant tout ou partie du travail commandé par le client (maître de l'ouvrage).</td><td>Le sous-traitant doit être accepté par le client. S'il n'est pas payé, il a une <strong>action directe</strong> contre le client.</td></tr>
+    <tr><td><strong>Mandat</strong><br><em>agency</em><br><span class="art">1984</span></td><td>Une personne (le mandant) donne à une autre (le mandataire) le pouvoir de faire quelque chose <strong>en son nom</strong> et pour son compte.</td><td>C'est la <strong>représentation</strong> vue en 5.2 (1153 à 1157). Ex. : agent commercial, avocat, agent immobilier.</td></tr>
+  </table></div>
+  <div class="box trap"><span class="tag">Ne confonds pas</span>
+    <p><strong>Vente</strong> = j'achète une chose qui existe (ou existera). <strong>Contrat d'entreprise</strong> = je paie quelqu'un pour <strong>travailler</strong> pour moi. <strong>Mandat</strong> = je paie quelqu'un pour <strong>conclure des actes juridiques</strong> en mon nom.</p>
+  </div>
+</section>
+
+<!-- ============ PARTIE 10 ============ -->
+<section class="part" id="p10">
+  <div class="part-head"><span class="part-num">10</span><div><div class="eyebrow">Chapter 4 · Settlement of disputes</div><h2>Régler un litige</h2></div></div>
+  <p>Idéalement, il n'y a jamais de litige : un procès coûte cher, prend du temps et abîme la relation commerciale. C'est pour ça qu'on soigne la rédaction et qu'on prévoit une <strong>clause de règlement des litiges</strong> (<em>dispute resolution clause</em>). Deux grandes familles :</p>
+  <figure>
+    <div class="scroll">
+    <svg viewBox="0 0 640 270" width="100%" style="min-width:520px" role="img" aria-label="Modes de règlement des litiges">
+      <g font-size="12.5" text-anchor="middle" fill="var(--ink)">
+        <rect x="220" y="8" width="200" height="40" rx="10" fill="var(--rose)"/>
+        <text x="320" y="33" fill="#fff" font-weight="700">Un litige (dispute)</text>
+        <path d="M280 48L160 80M360 48L480 80" stroke="var(--rose)" stroke-width="2.5"/>
+        <rect x="20" y="82" width="280" height="52" rx="12" fill="var(--blush)"/>
+        <text x="160" y="104" font-weight="700" fill="var(--rose-deep)">NON JURIDICTIONNEL</text>
+        <text x="160" y="122" font-size="11.5">personne n'impose de décision : les parties décident</text>
+        <rect x="340" y="82" width="280" height="52" rx="12" fill="var(--plum)"/>
+        <text x="480" y="104" font-weight="700" fill="#fff">JURIDICTIONNEL</text>
+        <text x="480" y="122" font-size="11.5" fill="#fff">un tiers tranche et sa décision s'impose</text>
+        <rect x="20" y="146" width="88" height="70" rx="10" fill="var(--paper)" stroke="var(--line)"/>
+        <text x="64" y="172" font-weight="700">Négociation</text><text x="64" y="192" font-size="11">entre parties</text><text x="64" y="206" font-size="11">seules</text>
+        <rect x="116" y="146" width="88" height="70" rx="10" fill="var(--paper)" stroke="var(--line)"/>
+        <text x="160" y="172" font-weight="700">Médiation</text><text x="160" y="192" font-size="11">un tiers</text><text x="160" y="206" font-size="11">facilite</text>
+        <rect x="212" y="146" width="88" height="70" rx="10" fill="var(--paper)" stroke="var(--line)"/>
+        <text x="256" y="172" font-weight="700">Conciliation</text><text x="256" y="192" font-size="11">un tiers</text><text x="256" y="206" font-size="11">propose</text>
+        <rect x="340" y="146" width="135" height="70" rx="10" fill="var(--paper)" stroke="var(--line)"/>
+        <text x="407" y="170" font-weight="700">Juge de l'État</text><text x="407" y="190" font-size="11">tribunal, appel,</text><text x="407" y="204" font-size="11">cassation</text>
+        <rect x="485" y="146" width="135" height="70" rx="10" fill="var(--paper)" stroke="var(--line)"/>
+        <text x="552" y="170" font-weight="700">Arbitrage</text><text x="552" y="190" font-size="11">justice privée,</text><text x="552" y="204" font-size="11">arbitre choisi</text>
+        <text x="160" y="250" font-size="11.5" fill="var(--rose-deep)">Accord trouvé → souvent une transaction (art. 2044)</text>
+        <text x="480" y="250" font-size="11.5" fill="var(--plum)">Jugement ou sentence arbitrale</text>
+      </g>
+    </svg></div>
+    <figcaption>Si les modes amiables échouent, on passe au juge (ou à l'arbitre si les deux parties l'ont accepté).</figcaption>
+  </figure>
+
+  <h3>10.1 Les modes non juridictionnels (amiables)</h3>
+  <div class="tbl"><table>
+    <tr><th>Mode</th><th>Qui intervient ?</th><th>Rôle du tiers</th></tr>
+    <tr><td><strong>Négociation</strong></td><td>Personne : les parties discutent seules (parfois des heures), en toute confidentialité.</td><td>Aucun tiers.</td></tr>
+    <tr><td><strong>Médiation</strong></td><td>Un médiateur choisi par les parties.</td><td>Il <strong>facilite</strong> le dialogue et aide à identifier le problème, sans imposer de solution.</td></tr>
+    <tr><td><strong>Conciliation</strong></td><td>Un conciliateur.</td><td>Comme le médiateur, mais il <strong>propose en plus un projet d'accord</strong>. Si les parties l'acceptent et le signent, il devient leur accord.</td></tr>
+  </table></div>
+  <p>Quand un accord est trouvé, on le formalise souvent par une <strong>transaction</strong> (<em>settlement agreement</em>) : un contrat écrit par lequel les parties, par des <strong>concessions réciproques</strong>, mettent fin au litige ou l'évitent (art. 2044).</p>
+
+  <h3>10.2 Les modes juridictionnels</h3>
+  <h4>Les tribunaux de l'État (court litigation)</h4>
+  <p>Le juge « tranche le litige conformément aux règles de droit qui lui sont applicables » (art. 12 du Code de procédure civile). Celui qui attaque est le <strong>demandeur</strong> (<em>claimant</em>), celui qui se défend le <strong>défendeur</strong> (<em>defendant / respondent</em>). On peut saisir le juge sans l'accord de l'autre partie. Trois niveaux :</p>
+  <figure>
+    <div class="flow">
+      <div class="step"><b>1<sup>re</sup> instance</b><em>Trial court</em>. Tribunal judiciaire, ou tribunal de commerce (aujourd'hui des activités économiques dans certaines villes) entre commerçants.</div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>Appel</b><em>Court of appeal</em>. La cour d'appel rejuge toute l'affaire, faits et droit.</div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="step"><b>Cassation</b><em>Supreme court</em>. La Cour de cassation vérifie seulement que le <strong>droit</strong> a été bien appliqué, elle ne rejuge pas les faits.</div>
+    </div>
+  </figure>
+  <h4>L'arbitrage (arbitration)</h4>
+  <p>Une <strong>justice privée</strong> : les parties confient leur litige à un ou plusieurs <strong>arbitres</strong> qu'elles choisissent, qui ne sont pas des juges de l'État (ça peut être un ingénieur, un expert du secteur). L'arbitre rend une <strong>sentence</strong> qui s'impose aux parties, en appliquant le droit. Il faut l'accord des deux parties, en général par une <strong>clause compromissoire</strong> dans le contrat.</p>
+  <div class="pm">
+    <div class="plus"><h4>Avantages</h4><ul><li>Plus rapide</li><li>Confidentiel</li><li>On choisit un arbitre expert du domaine</li><li>Neutre dans les contrats internationaux</li></ul></div>
+    <div class="minus"><h4>Inconvénients</h4><ul><li>Coûteux (on paie les arbitres)</li><li>Recours limités contre la sentence</li><li>Pour la faire exécuter de force, il faut l'<em>exequatur</em> d'un juge de l'État</li></ul></div>
+  </div>
+  <div class="box key"><span class="tag">À retenir</span>
+    <ul>
+      <li>Non juridictionnel : négociation (seuls), médiation (tiers facilite), conciliation (tiers propose).</li>
+      <li>Juridictionnel : juge de l'État (3 niveaux) ou arbitre (privé, choisi, sentence obligatoire).</li>
+      <li>La transaction (2044) met fin au litige par des concessions réciproques.</li>
+    </ul>
+  </div>
+</section>
+
+
+<!-- ============ GLOSSAIRE ============ -->
+<section class="part" id="glossaire">
+  <div class="part-head"><span class="part-num">Aa</span><div><div class="eyebrow">Le cours est en anglais</div><h2>Glossaire FR / EN</h2></div></div>
+  <h3>Le contrat</h3>
+  <dl class="glo">
+    <dt>Contrat · contract</dt><dd>Accord de volontés qui crée, modifie, transmet ou éteint des obligations (1101).</dd>
+    <dt>Partie · party</dt><dd>Personne qui conclut le contrat. Tiers = <em>third party</em>.</dd>
+    <dt>Cocontractant · co-contractor, counterparty</dt><dd>L'autre partie au contrat.</dd>
+    <dt>Créancier / débiteur · creditor / debtor</dt><dd>Celui qui peut exiger / celui qui doit.</dd>
+    <dt>Clause · clause, term, provision</dt><dd>Une stipulation du contrat.</dd>
+    <dt>Conditions générales · standard terms, general conditions</dt><dd>Clauses préparées à l'avance pour tous les contrats d'une entreprise.</dd>
+    <dt>Conditions particulières · special conditions</dt><dd>Clauses propres à un contrat précis ; elles l'emportent (1119).</dd>
+    <dt>Liberté contractuelle · freedom of contract</dt><dd>Art. 1102.</dd>
+    <dt>Force obligatoire · binding force, binding nature</dt><dd>Art. 1103, <em>pacta sunt servanda</em>.</dd>
+    <dt>Bonne foi · good faith</dt><dd>Art. 1104.</dd>
+    <dt>Ordre public · public policy</dt><dd>Règles d'intérêt général auxquelles on ne peut pas déroger (1162).</dd>
+    <dt>Règle impérative · mandatory provision/rule</dt><dd>S'impose malgré toute clause contraire.</dd>
+    <dt>Règle supplétive · non-mandatory, default rule</dt><dd>S'applique si les parties n'ont rien prévu.</dd>
+    <dt>Réputé non écrit · deemed unwritten</dt><dd>La clause est effacée, le contrat reste.</dd>
+    <dt>Contrat d'adhésion · adhesion contract, standard form contract</dt><dd>Clauses non négociables fixées par une partie (1110).</dd>
+    <dt>Contrat synallagmatique · synallagmatic / bilateral contract</dt><dd>Obligations réciproques (1106).</dd>
+    <dt>À titre onéreux / gratuit · onerous / gratuitous, for consideration / free</dt><dd>Avec ou sans contrepartie (1107).</dd>
+    <dt>Qualifier un contrat · to characterize a contract</dt><dd>Trouver sa catégorie juridique.</dd>
+    <dt>Préambule · preamble</dt><dd>Contexte de la relation, aide à interpréter.</dd>
+    <dt>Clauses de fond · substantive clauses</dt><dd>Objet, prix, livraison, garanties, force majeure.</dd>
+  </dl>
+  <h3>Formation et validité</h3>
+  <dl class="glo">
+    <dt>Offre / acceptation · offer / acceptance</dt><dd>Leur rencontre forme le contrat (1113).</dd>
+    <dt>Contre-offre · counter-offer</dt><dd>Acceptation non conforme = nouvelle offre (1118).</dd>
+    <dt>Négociation · negotiation</dt><dd>Recherche d'un accord, pas encore de contrat (1112).</dd>
+    <dt>Consentement · consent</dt><dd>1<sup>re</sup> condition de validité (1128).</dd>
+    <dt>Vices du consentement · defects of consent; vitiate consent</dt><dd>Erreur, dol, violence (1130).</dd>
+    <dt>Erreur · mistake</dt><dd>Je me trompe (1132).</dd>
+    <dt>Dol · fraud (misrepresentation)</dt><dd>On me trompe volontairement (1137).</dd>
+    <dt>Violence · duress</dt><dd>On me force (1140).</dd>
+    <dt>Capacité · capacity</dt><dd>Aptitude à contracter (1145).</dd>
+    <dt>Représentant · representative, agent</dt><dd>Celui qui agit au nom d'un autre (1153).</dd>
+    <dt>Licite et certain · lawful and certain</dt><dd>3<sup>e</sup> condition de validité.</dd>
+    <dt>Contrepartie dérisoire / illusoire · insignificant / illusory counterpart</dt><dd>Cause de nullité (1169).</dd>
+    <dt>Nullité · nullity; nul = void</dt><dd>Sanction d'un contrat mal formé (1178).</dd>
+    <dt>Annuler · to annul, set aside</dt><dd>Faire déclarer nul.</dd>
+    <dt>Restitution · restitution</dt><dd>Rendre ce qu'on a reçu (1352 et s.).</dd>
+    <dt>Bien fongible · fungible good</dt><dd>Remplaçable par un équivalent (l'argent).</dd>
+    <dt>Acte notarié · notarial deed</dt><dd>Acte rédigé et authentifié par un notaire.</dd>
+    <dt>Acte sous signature privée · private written agreement</dt><dd>Écrit rédigé et signé par les parties seules.</dd>
+    <dt>Charge de la preuve · burden of proof</dt><dd>Qui doit prouver.</dd>
+  </dl>
+  <h3>Effets, temps et litiges</h3>
+  <dl class="glo">
+    <dt>Transfert de propriété · transfer of title/ownership</dt><dd>Dès la conclusion (1196, 1583).</dd>
+    <dt>Clause de réserve de propriété · retention of title clause</dt><dd>Le vendeur reste propriétaire jusqu'au paiement complet.</dd>
+    <dt>Interprétation · interpretation</dt><dd>Art. 1188 à 1192.</dd>
+    <dt>Intention commune · common intention</dt><dd>1<sup>er</sup> critère d'interprétation (1188).</dd>
+    <dt>Effet relatif · privity of contract</dt><dd>Le contrat ne lie que les parties (1199).</dd>
+    <dt>Stipulation pour autrui · third-party beneficiary contract</dt><dd>Art. 1205.</dd>
+    <dt>Inexécution · non-performance, breach of contract</dt><dd>Sanctions de l'art. 1217.</dd>
+    <dt>Dommages-intérêts · damages</dt><dd>Somme qui répare le préjudice (<em>harm, loss</em>).</dd>
+    <dt>Imprévision · hardship, change of circumstances</dt><dd>Art. 1195.</dd>
+    <dt>Force majeure · force majeure</dt><dd>Art. 1218.</dd>
+    <dt>Contrat de fourniture · supply contract</dt><dd>Livraisons répétées dans le temps. Fournisseur = <em>supplier</em>.</dd>
+    <dt>Responsabilité délictuelle · tort law, civil liability</dt><dd>Art. 1240 : faute + dommage + lien.</dd>
+    <dt>Faute · fault, negligence</dt><dd>Comportement fautif, négligence, imprudence.</dd>
+    <dt>Concurrence déloyale · unfair competition</dt><dd>Cas typique de responsabilité délictuelle.</dd>
+    <dt>Règlement des litiges · dispute resolution, settlement of disputes</dt><dd>Amiable ou juridictionnel.</dd>
+    <dt>Trancher un litige · to settle a dispute</dt><dd>Ce que fait le juge ou l'arbitre.</dd>
+    <dt>Demandeur / défendeur · claimant / defendant, respondent</dt><dd>Celui qui agit / celui qui se défend.</dd>
+    <dt>Médiation / conciliation · mediation / conciliation</dt><dd>Le tiers facilite / propose.</dd>
+    <dt>Arbitrage · arbitration</dt><dd>Justice privée ; décision = sentence (<em>award</em>).</dd>
+    <dt>Transaction · settlement agreement</dt><dd>Concessions réciproques qui mettent fin au litige (2044).</dd>
+    <dt>Jurisprudence · case law</dt><dd>Ensemble des décisions sur une question.</dd>
+    <dt>Destinataires · addressees</dt><dd>Les personnes visées par une règle.</dd>
+    <dt>Promulguer · to enact</dt><dd>Rendre une loi applicable.</dd>
+    <dt>Abroger · to repeal</dt><dd>Supprimer une règle.</dd>
+    <dt>Siège social · registered office</dt><dd>Fixe la nationalité de la société.</dd>
+    <dt>Succursale / filiale · branch / subsidiary</dt><dd>Sans / avec personnalité juridique.</dd>
+  </dl>
+</section>
+
+<!-- ============ QUIZ ============ -->
+<section class="part" id="quiz">
+  <div class="part-head"><span class="part-num">?</span><div><div class="eyebrow">Entraînement</div><h2>Quiz corrigé</h2></div></div>
+  <p>61 questions qui suivent l'ordre de la fiche. Clique sur une réponse : la bonne s'affiche en vert avec l'explication.</p>
+  <div class="scorebar" role="status" aria-live="polite"><span>Score : <b id="score">0</b> / <span id="total">0</span> · <span id="done">0</span> répondues</span><button type="button" id="reset">Recommencer</button></div>
+  <div class="quiz" id="quizbox"></div>
+  <div class="box key result" id="result"><span class="tag">Ton résultat</span><p id="resultText"></p></div>
+</section>
+</main>
+</div>
+
+<script>
+const Q=[
+ {q:"Quelle est la différence entre « law » et « rights » ?",o:["Ce sont des synonymes","Law = l'ensemble des règles d'un pays (droit objectif) ; rights = les prérogatives que ces règles donnent aux personnes (droits subjectifs)","Law = les lois votées ; rights = la jurisprudence","Law = le droit français ; rights = le droit européen"],a:1,e:"Le droit objectif (law) est la source des droits subjectifs (rights) : il les crée et fixe leurs limites, comme l'article 544 pour la propriété."},
+ {q:"Les trois prérogatives du propriétaire sont :",o:["Usus, fructus, abusus","Acheter, vendre, louer","Offre, acceptation, signature","Consentement, capacité, contenu"],a:0,e:"Usus = utiliser la chose, fructus = en percevoir les fruits (loyers), abusus = en disposer (vendre, détruire)."},
+ {q:"Un règlement européen :",o:["Doit être transposé par chaque État","Ne fixe qu'un résultat à atteindre","Est obligatoire dans tous ses éléments et directement applicable dans tous les États membres","N'a aucune valeur en France"],a:2,e:"Art. 288 TFUE. C'est la directive qui fixe un résultat et laisse aux États le choix de la forme et des moyens (transposition)."},
+ {q:"Pourquoi dit-on qu'en France la jurisprudence n'est pas une véritable source du droit ?",o:["Parce que les juges n'appliquent jamais la loi","Parce qu'une décision ne tranche qu'un litige entre des parties précises et que le juge ne peut pas poser de règle générale","Parce que la Cour de cassation n'existe plus","Parce qu'elle est toujours contraire à la loi"],a:1,e:"Le juge tranche le litige entre A et B. Mais en pratique, la jurisprudence de la Cour de cassation est très suivie et inspire la loi (Chronopost → art. 1170)."},
+ {q:"Dans l'article 1240 (« Tout fait quelconque de l'homme, qui cause à autrui un dommage, oblige celui par la faute duquel il est arrivé à le réparer »), quel est l'effet juridique ?",o:["Le dommage causé à autrui","La faute","L'obligation de réparer","Le fait de l'homme"],a:2,e:"Structure dualiste : le fait (un fait fautif qui cause un dommage) entraîne l'effet (l'obligation de réparer)."},
+ {q:"Quelles sont, dans l'ordre, les 3 étapes du cas pratique ?",o:["Règle, faits, conclusion","Faits qualifiés juridiquement, règle de droit, application et conclusion","Conclusion, règle, faits","Introduction, développement, conclusion"],a:1,e:"On analyse et qualifie les faits, on énonce la règle et ses conditions, puis on applique la règle aux faits pour conclure (syllogisme juridique)."},
+ {q:"Quelle affirmation est juste ?",o:["Une entreprise a toujours la personnalité juridique","Une succursale est une société distincte","Une filiale a sa propre personnalité juridique mais est contrôlée par la société mère","Une société peut avoir plusieurs nationalités"],a:2,e:"L'entreprise est une notion économique ; la succursale n'a pas de personnalité juridique ; une société a une seule nationalité, celle de son siège."},
+ {q:"Dans une société à responsabilité limitée, si la société ne peut pas payer ses dettes :",o:["Les créanciers saisissent les biens personnels des associés","Les créanciers ne peuvent se payer que sur les biens de la société","Les associés vont en prison","Le contrat est nul"],a:1,e:"C'est tout l'intérêt de la responsabilité limitée : le patrimoine personnel des associés est protégé."},
+ {q:"Selon l'article 1100, les obligations naissent :",o:["Uniquement des contrats","Des actes juridiques, des faits juridiques ou de l'autorité seule de la loi","Uniquement de la loi","Des décisions de justice seulement"],a:1,e:"Le contrat est un acte juridique ; un accident causant un dommage est un fait juridique ; l'obligation de payer l'impôt vient de la loi."},
+ {q:"L'article 2284 signifie que :",o:["Le débiteur répond de ses dettes sur tous ses biens, présents et à venir","Le débiteur peut devenir l'esclave du créancier","Seuls les biens immobiliers peuvent être saisis","Le créancier doit toujours accepter un délai"],a:0,e:"On répond de ses dettes avec son patrimoine entier (meubles et immeubles, présents et futurs), pas avec sa personne."},
+ {q:"L'article 1101 définit le contrat comme un accord de volontés destiné à :",o:["Créer des obligations uniquement","Créer, modifier, transmettre ou éteindre des obligations","Régler un litige","Créer une société"],a:1,e:"Les 4 fonctions : créer (acheter un café), modifier (avenant), transmettre (cession de contrat), éteindre (contrat qui met fin au précédent)."},
+ {q:"Deux sociétés négocient depuis 6 mois. L'une rompt les discussions. Que dit le droit ?",o:["Elle a violé le contrat (art. 1103)","Elle est libre de rompre, mais si la rupture est fautive elle répare le préjudice, sans compenser le gain espéré du contrat","Elle doit obligatoirement signer","Elle doit verser tout le bénéfice que l'autre aurait fait"],a:1,e:"Négocier n'est pas contracter : pas de force obligatoire. Mais la rupture fautive engage sa responsabilité (art. 1112), sans indemniser la perte des avantages attendus du contrat."},
+ {q:"Laquelle de ces libertés N'est PAS citée par l'article 1102 ?",o:["Contracter ou ne pas contracter","Choisir son cocontractant","Déroger aux règles d'ordre public","Déterminer le contenu et la forme du contrat"],a:2,e:"Art. 1102 al. 2 : la liberté contractuelle ne permet pas de déroger aux règles qui intéressent l'ordre public."},
+ {q:"Que dit l'article 1103 ?",o:["Les contrats légalement formés tiennent lieu de loi à ceux qui les ont faits","Toute personne peut contracter","Le silence vaut acceptation","Le juge peut modifier librement les contrats"],a:0,e:"C'est la force obligatoire du contrat (pacta sunt servanda). Le mot clé : « légalement formés », donc valables selon l'article 1128."},
+ {q:"Quelle est la différence entre un contrat et un « gentleman's agreement » ?",o:["Aucune","Le contrat est juridiquement obligatoire ; le gentleman's agreement repose seulement sur la parole d'honneur, la loi n'intervient pas","Le gentleman's agreement est plus protecteur","Le contrat n'est obligatoire qu'entre particuliers"],a:1,e:"Grâce à l'article 1103, le créancier d'un contrat valable peut obtenir l'aide du juge. Avec un gentleman's agreement, si l'autre ne tient pas parole, on n'a rien pour aller au tribunal."},
+ {q:"Le ministère des Transports abandonne sans raison un projet après qu'une entreprise a dépensé 1 M€ en études pour son devis. Que dit l'article 1104 ?",o:["Le ministère est obligé de signer le contrat","Le ministère pouvait ne pas conclure, mais rompre la négociation sans motif sérieux est contraire à la bonne foi : l'entreprise peut demander le remboursement de ses frais","Rien, la bonne foi ne s'applique qu'à l'exécution","L'entreprise peut réclamer tout le bénéfice qu'elle aurait fait"],a:1,e:"Depuis 2016, la bonne foi s'applique aussi à la négociation, et c'est une règle d'ordre public. On est libre de ne pas conclure, pas de rompre sans motif sérieux (une baisse de budget imprévisible en serait un)."},
+ {q:"Une règle supplétive (non-mandatory) :",o:["S'applique toujours, même contre une clause contraire","S'applique seulement si les parties n'ont rien prévu d'autre","Est une règle d'ordre public","Ne s'applique qu'aux consommateurs"],a:1,e:"Elle « supplée » au silence du contrat. Exemple : l'article 1583, que les parties peuvent écarter par une clause de réserve de propriété."},
+ {q:"Peter achète un ordinateur payé en 10 mensualités. Le contrat contient une clause de réserve de propriété. Quand Peter devient-il propriétaire ?",o:["Dès l'accord sur la chose et le prix","À la livraison","Au paiement complet du prix","Jamais"],a:2,e:"Sans clause, il serait propriétaire dès l'accord (art. 1583). La clause retarde le transfert jusqu'au paiement complet pour protéger le vendeur."},
+ {q:"Les conditions générales de vente du fournisseur et les conditions générales d'achat du client se contredisent sur le délai de paiement. Selon l'article 1119 :",o:["Les CGV du vendeur l'emportent","Celles de l'acheteur l'emportent","Les clauses incompatibles sont sans effet","Le contrat est nul"],a:2,e:"Les clauses incompatibles s'annulent. Mais si une condition particulière a été négociée, elle l'emporte sur les conditions générales."},
+ {q:"Les CG du vendeur prévoient une réserve de propriété, celles de l'acheteur disent que la propriété passe dès la conclusion. Le contrat est soumis au droit français. Qui est propriétaire à la conclusion ?",o:["Le vendeur, grâce à sa clause","L'acheteur : les deux clauses incompatibles sont sans effet, on applique l'article 1583","Personne avant le paiement","Le juge décide librement"],a:1,e:"C'est la « bataille des formulaires » (art. 1119 al. 2). Les clauses contradictoires s'annulent et la règle supplétive (1583) s'applique : transfert dès l'accord sur la chose et le prix."},
+ {q:"A propose à B de lui vendre 100 tonnes à 50 €/t. B répond : « D'accord, mais à 45 €/t. » Juridiquement, la réponse de B est :",o:["Une acceptation : le contrat est formé à 50 €","Une acceptation : le contrat est formé à 45 €","Une contre-offre, il n'y a pas encore de contrat","Un silence"],a:2,e:"L'acceptation non conforme à l'offre est dépourvue d'effet, sauf à constituer une offre nouvelle (art. 1118 al. 3). C'est maintenant à A d'accepter ou non."},
+ {q:"« J'ai 50 CD de Beethoven à vendre, ça t'intéresse ? » Tu réponds oui, mais je les ai déjà vendus. Y a-t-il violation d'un contrat ?",o:["Oui, l'offre a été acceptée","Non : sans prix (élément essentiel de la vente), ce n'était pas une offre mais une invitation à négocier","Oui, car le silence vaut acceptation","Non, car la vente de CD est interdite"],a:1,e:"Article 1114 : l'offre doit contenir les éléments essentiels du contrat et la volonté d'être lié. Sinon, il y a seulement invitation à entrer en négociation."},
+ {q:"B accepte les 5 éléments de l'offre de A, mais ajoute une clause « tribunal de Paris compétent en cas de litige ». Le contrat est-il formé ?",o:["Oui, sur les 5 éléments","Oui, avec les 6 éléments","Non : ajouter un élément, c'est faire une contre-offre ; il n'y a pas de rencontre d'une offre et d'une acceptation identiques","Oui, si A se tait"],a:2,e:"L'acceptation doit être identique à l'offre (art. 1113 et 1118). Et si A répond « d'accord pour un tribunal, mais Bordeaux », toujours pas de contrat."},
+ {q:"En principe, le silence vaut-il acceptation ?",o:["Oui, toujours","Non, sauf si la loi, les usages, les relations d'affaires ou des circonstances particulières en décident autrement","Oui, entre consommateurs","Seulement pour les contrats en ligne"],a:1,e:"Article 1120."},
+ {q:"Un contrat de vente conclu oralement, sans aucune signature, est-il valable ?",o:["Non, il faut toujours une signature","Oui : les contrats sont par principe consensuels, l'échange des consentements suffit","Seulement devant notaire","Seulement s'il porte sur moins de 1 500 €"],a:1,e:"Article 1172. La signature sert surtout à prouver. Seuls les contrats solennels (hypothèque, par exemple) exigent une forme pour être valables."},
+ {q:"La publicité (immatriculation) d'une nouvelle société est une forme exigée pour :",o:["La validité du contrat de société entre les associés","L'opposabilité aux tiers : sans elle le contrat reste valable entre les parties (art. 1173)","La preuve uniquement","Rien du tout"],a:1,e:"Article 1173 : les formes exigées pour la preuve ou l'opposabilité sont sans effet sur la validité. Après publicité, les tiers ne peuvent plus ignorer l'existence de la société."},
+ {q:"Un contrat s'intitule « contrat de location », mais son contenu correspond en réalité à un prêt. Que fait le juge ?",o:["Il applique les règles de la location puisque c'est le titre","Il requalifie le contrat en prêt et applique les règles du prêt","Il annule le contrat","Il refuse de juger"],a:1,e:"La qualification dépend du contenu réel, pas du titre. Le juge doit restituer leur exacte qualification aux actes (art. 12 CPC)."},
+ {q:"Je donne mon vélo contre le scooter de Paul. C'est :",o:["Une vente","Un échange","Un contrat d'entreprise","Un mandat"],a:1,e:"Vente = un bien contre de l'argent. Échange = un bien contre un autre bien."},
+ {q:"Les 3 conditions de validité de l'article 1128 sont :",o:["Offre, acceptation, signature","Consentement, capacité, contenu licite et certain","Écrit, notaire, prix","Bonne foi, liberté, force obligatoire"],a:1,e:"Elles sont cumulatives : si une seule manque, le contrat peut être annulé (art. 1178)."},
+ {q:"Le vendeur sait que la table est en plastique et la présente volontairement comme du chêne massif. Quel vice du consentement ?",o:["Erreur spontanée","Dol","Violence","Aucun"],a:1,e:"Le dol, c'est obtenir le consentement par des manœuvres ou des mensonges (art. 1137). L'erreur, c'est quand on se trompe tout seul."},
+ {q:"Pour qu'un vice du consentement entraîne la nullité, il faut qu'il soit :",o:["Écrit dans le contrat","Déterminant : sans lui, la partie n'aurait pas contracté ou à des conditions substantiellement différentes","Commis par un notaire","Découvert le jour même"],a:1,e:"Art. 1130 : le caractère déterminant s'apprécie selon les personnes et les circonstances."},
+ {q:"Pour savoir si une erreur sur la vitesse d'une machine à laver (1 000 au lieu de 1 200 tours) est déterminante, le juge regarde :",o:["Uniquement le prix","La personne et les circonstances : une laverie qui l'utilise intensivement sera plus facilement protégée qu'un particulier","Seulement le texte du contrat","Rien : une erreur ne compte jamais"],a:1,e:"Appréciation in concreto (art. 1130) : âge, connaissances, niveau d'études, usage prévu. Et c'est à l'acheteur de prouver le caractère déterminant."},
+ {q:"Les vices du consentement entraînent :",o:["Une nullité absolue","Une nullité relative (art. 1131)","Une simple réduction du prix","Aucune sanction"],a:1,e:"Ils ne concernent que l'intérêt de la partie trompée ou contrainte, pas l'intérêt général : seule la victime peut agir, et elle peut aussi confirmer le contrat."},
+ {q:"Un assureur découvre que son client a beaucoup plus d'accidents que prévu. Peut-il faire annuler le contrat pour erreur ?",o:["Oui, toujours","Non : l'assurance repose sur un aléa accepté, et l'acceptation d'un aléa exclut l'erreur sur ce point (art. 1133)","Oui, si le client est de bonne foi","Seulement devant un arbitre"],a:1,e:"Article 1133 al. 3 : l'acceptation d'un aléa sur une qualité de la prestation exclut l'erreur relative à cette qualité."},
+ {q:"L'erreur sur les qualités essentielles du cocontractant permet la nullité :",o:["Dans tous les contrats","Seulement dans les contrats conclus en considération de la personne (intuitu personae), comme le mandat","Jamais","Seulement dans la vente"],a:1,e:"Article 1134. Dans un mandat, on choisit le mandataire pour ses qualités personnelles : à sa mort, le contrat ne passe pas à son fils."},
+ {q:"J'ai acheté un produit sous l'effet d'un dol et je ne le découvre que 3 ans plus tard. Puis-je encore agir en nullité ?",o:["Non, il est trop tard","Oui : pour l'erreur et le dol, le délai de 5 ans ne court qu'à partir de la découverte (art. 1144)","Seulement si le vendeur est d'accord","Oui, mais seulement pendant 1 mois"],a:1,e:"Pour la violence, le délai court à partir du jour où elle a cessé."},
+ {q:"L'acheteur sait que le tableau qu'il achète vaut bien plus que le prix demandé, et ne dit rien. Est-ce un dol ?",o:["Oui, toujours","Non : ne pas révéler son estimation de la valeur de la prestation n'est pas un dol","Oui, si le prix est inférieur à 1 000 €","Non, car le dol n'existe qu'entre professionnels"],a:1,e:"Article 1137 al. 3. Le devoir d'information (1112-1) ne porte pas non plus sur l'estimation de la valeur."},
+ {q:"Menacer son cocontractant d'aller en justice s'il ne paie pas, est-ce une violence ?",o:["Oui, toujours","Non, sauf si la voie de droit est détournée de son but ou utilisée pour obtenir un avantage manifestement excessif","Oui, si la menace est écrite","Non, la violence n'existe pas en droit des contrats"],a:1,e:"Article 1141."},
+ {q:"A donne mandat à B d'acheter un camion jusqu'à 50 000 €. B l'achète 80 000 €. En principe :",o:["A est engagé quoi qu'il arrive","L'acte est inopposable à A, sauf s'il le ratifie ou si le vendeur a légitimement cru aux pouvoirs de B","B devient automatiquement propriétaire et A n'a rien à voir","Le contrat est nul d'une nullité absolue"],a:1,e:"Article 1156 : le représentant a dépassé ses pouvoirs. Le représenté n'est pas engagé, sauf mandat apparent ou ratification."},
+ {q:"A vend des armes à B en pensant qu'elles seront utilisées légalement ; seul B sait qu'elles serviront à un crime. Le contrat est-il valable ?",o:["Oui, car A ne connaissait pas le but","Non : un contrat ne peut déroger à l'ordre public par son but, que ce but ait été connu ou non par toutes les parties (art. 1162)","Oui, sauf si le prix est trop bas","Seulement si un juge le confirme"],a:1,e:"Article 1162 : il suffit que le but soit illicite, même si une seule partie le connaissait."},
+ {q:"Contrat de fourniture de vin sur 5 ans : prix fixé pour les 6 premiers mois, puis renégocié tous les 6 mois. Le prix est :",o:["Indéterminé, le contrat est nul","Déterminé puis déterminable : le contrat est valable (art. 1163)","Illicite","Réputé non écrit"],a:1,e:"La prestation doit être déterminée ou déterminable. Le prix peut aussi être fixé plus tard par un tiers désigné par les parties."},
+ {q:"Peter paie 10 000 € un vélo qui vaut 100 €, sans avoir été trompé. Selon le principe de l'article 1168 :",o:["Le contrat est nul","Le défaut d'équivalence des prestations n'est pas, en soi, une cause de nullité","Le juge baisse automatiquement le prix","La clause de prix est réputée non écrite"],a:1,e:"La loi ne corrige pas les mauvaises affaires. Peter pourrait seulement tenter l'article 1169 (contrepartie dérisoire) ou prouver un vice du consentement."},
+ {q:"Une entreprise est vendue pour 1 € alors qu'elle vaut des millions. Quel article permet d'obtenir la nullité ?",o:["Art. 1168","Art. 1169 : contrepartie illusoire ou dérisoire","Art. 1170","Art. 1194"],a:1,e:"Le contrat à titre onéreux est nul si, lors de sa formation, la contrepartie convenue est illusoire ou dérisoire. Sanction : nullité de tout le contrat."},
+ {q:"Dans l'arrêt Chronopost, la clause limitant l'indemnisation du retard au prix du transport a été :",o:["Appliquée","Écartée, car elle vidait de sa substance l'obligation essentielle de livrer à temps","Déclarée valable car signée","Transformée en force majeure"],a:1,e:"Ce principe est devenu l'article 1170 : la clause est réputée non écrite. Le reste du contrat reste valable."},
+ {q:"Quelle est la différence entre « nul » et « réputé non écrit » ?",o:["Aucune","Nul = tout le contrat disparaît ; réputé non écrit = seule la clause est effacée, le contrat continue","Nul = seule la clause disparaît ; réputé non écrit = tout le contrat disparaît","Réputé non écrit ne concerne que les contrats oraux"],a:1,e:"1169 entraîne la nullité du contrat ; 1170 et 1171 rendent seulement la clause « réputée non écrite »."},
+ {q:"L'article 1171 (déséquilibre significatif) s'applique :",o:["Seulement aux consommateurs","Aux clauses non négociables, fixées à l'avance, dans un contrat d'adhésion, y compris entre professionnels","À tous les contrats négociés","Uniquement au prix"],a:1,e:"Et l'appréciation du déséquilibre ne porte ni sur l'objet principal du contrat ni sur l'adéquation du prix."},
+ {q:"Un contrat est annulé en 2026 après 6 ans d'exécution. Quel est l'effet de la nullité ?",o:["Il prend fin seulement pour l'avenir","Il est censé n'avoir jamais existé, et les parties se restituent ce qu'elles ont reçu","Rien ne change","Seul le juge garde les sommes"],a:1,e:"La nullité est rétroactive (art. 1178). Les biens se restituent en nature ou en valeur, l'argent par la même somme, les services en valeur (1352-8)."},
+ {q:"Qui peut demander une nullité relative (par exemple pour dol) ?",o:["Tout intéressé et le ministère public","Seulement la partie que la règle protège (la victime)","Seulement le juge","N'importe quel tiers"],a:1,e:"Art. 1181. La nullité absolue (intérêt général) peut, elle, être demandée par tout intéressé et le ministère public (1180)."},
+ {q:"A, B, C et D ont acheté ensemble une table en plastique présentée comme en bois. A renonce à agir. B, C et D peuvent-ils encore demander la nullité ?",o:["Non, la renonciation de A vaut pour tous","Oui : la renonciation de l'un n'empêche pas les autres d'agir (art. 1181 al. 3)","Seulement avec l'accord de A","Non, car c'est une nullité absolue"],a:1,e:"La nullité pour erreur ou dol est relative ; chaque personne protégée garde son propre droit d'agir."},
+ {q:"Le cocontractant demande par écrit à la victime d'un dol (découvert, terminé) de choisir : confirmer ou agir. Si elle ne fait rien :",o:["Elle peut agir pendant 5 ans","Au bout de 6 mois sans action en nullité, le contrat est réputé confirmé (art. 1183)","Le contrat est automatiquement nul","Le juge décide à sa place"],a:1,e:"C'est l'action interrogatoire : elle oblige la personne protégée à se décider, pour sortir de l'incertitude."},
+ {q:"Une clause nulle (contraire à la loi) figure dans un contrat de 50 clauses. En principe :",o:["Tout le contrat est nul","Seule la clause est nulle, sauf si elle a été déterminante de l'engagement des parties ou de l'une d'elles (art. 1184)","Le contrat est réputé n'avoir jamais existé","La clause s'applique quand même"],a:1,e:"Et quand la loi dit qu'une clause est réputée non écrite, le contrat est toujours maintenu."},
+ {q:"Dans un contrat de gré à gré, une clause est ambiguë. Selon l'article 1190, dans le doute, on l'interprète :",o:["Toujours en faveur de l'acheteur","Contre le créancier et en faveur du débiteur","En faveur de celui qui l'a rédigée","Au hasard"],a:1,e:"Et dans un contrat d'adhésion, contre celui qui l'a proposé. Mais avant tout, on cherche l'intention commune des parties (1188), et une clause claire ne s'interprète pas (1192)."},
+ {q:"Un transporteur emmène un voyageur à destination, mais celui-ci est blessé pendant le trajet. Le contrat ne disait rien sur la sécurité. Sur quel article la victime peut-elle s'appuyer ?",o:["Art. 1194 : le contrat oblige aussi aux suites que lui donnent l'équité, l'usage ou la loi","Art. 1168","Art. 1583","Art. 1218"],a:0,e:"La jurisprudence a déduit de l'équité une obligation de sécurité : le transporteur doit conduire le voyageur sain et sauf."},
+ {q:"Un contrat lie 10 personnes, sans clause particulière. 9 veulent le modifier, 1 refuse. Que se passe-t-il ?",o:["La majorité l'emporte","Pas de modification : il faut le consentement mutuel de toutes les parties (art. 1193), sauf clause prévoyant la majorité","Le juge tranche","Le contrat est nul"],a:1,e:"Les parties peuvent prévoir dès la signature une clause de modification à la majorité, ou même une modification unilatérale."},
+ {q:"Un fournisseur lié par un contrat de 10 ans voit le coût de l'énergie multiplié par 4, imprévisiblement. Livrer reste possible mais ruineux. Quel mécanisme ?",o:["Force majeure : le contrat est suspendu","Imprévision (1195) : il peut demander une renégociation, en continuant d'exécuter","Nullité pour erreur","Aucun : il doit exécuter sans rien pouvoir demander"],a:1,e:"L'exécution n'est pas impossible, elle est excessivement onéreuse : c'est l'imprévision, sauf si le contrat a écarté l'article 1195."},
+ {q:"Avant la réforme de 2016, que décidait la Cour de cassation face à un changement de circonstances rendant le contrat ruineux ?",o:["Elle révisait toujours le contrat","Elle refusait l'imprévision : le débiteur devait exécuter, tant pis s'il n'avait pas prévu de clause","Elle annulait le contrat","Elle appliquait la force majeure"],a:1,e:"C'était la solution de l'arrêt Canal de Craponne (1876). L'article 1195 a changé cela en 2016. Et l'autre partie n'est toujours pas obligée d'accepter la renégociation."},
+ {q:"Les parties peuvent-elles écrire dans leur contrat qu'un séisme de plus de 5 secondes et d'au moins 4 sur l'échelle de Richter est un cas de force majeure ?",o:["Non, seule la loi définit la force majeure","Oui : les articles 1195 et 1218 sont supplétifs, les parties peuvent définir leurs propres cas de hardship et de force majeure","Seulement devant notaire","Seulement en droit de la consommation"],a:1,e:"Ce sont des règles non impératives. Beaucoup de contrats internationaux contiennent leurs propres clauses de force majeure et de hardship."},
+ {q:"Quelles sont les 3 conditions de la force majeure selon l'article 1218 actuel ?",o:["Extérieur, irrésistible, imprévisible","Échappant au contrôle du débiteur, raisonnablement imprévisible lors de la conclusion, effets inévitables par des mesures appropriées","Coûteux, rare, international","Écrit, prouvé, accepté"],a:1,e:"Depuis 2016, l'ancien critère d'extériorité est remplacé par « échappant au contrôle du débiteur ». Les 3 conditions sont cumulatives."},
+ {q:"Le pâtissier ne livre pas son gâteau à Nice parce que son vol est annulé, alors qu'il pouvait prendre un train. Force majeure ?",o:["Oui, l'annulation d'un vol est toujours un cas de force majeure","Non : les effets de l'événement pouvaient être évités par des mesures appropriées","Oui, si le gâteau est cher","Non, car la force majeure n'existe pas en droit français"],a:1,e:"La 3e condition de l'article 1218 manque. Pas de force majeure, donc le principe de force obligatoire s'applique : le pâtissier est responsable."},
+ {q:"Médiation et conciliation : quelle est la différence vue en cours ?",o:["Aucune","Le médiateur facilite le dialogue ; le conciliateur propose en plus un projet d'accord","Le médiateur rend une décision obligatoire","Le conciliateur est toujours un juge"],a:1,e:"Les deux sont des modes non juridictionnels : aucun tiers n'impose sa décision. Si un accord est trouvé, on peut le formaliser par une transaction (art. 2044)."},
+ {q:"L'arbitrage est :",o:["Un mode amiable sans décision","Une justice privée : un arbitre choisi par les parties rend une sentence qui s'impose à elles","Le nom de la Cour de cassation","Une forme de négociation"],a:1,e:"C'est un mode juridictionnel, comme le juge de l'État, mais privé. Il suppose l'accord des deux parties, souvent par une clause compromissoire."}
+];
+const box=document.getElementById('quizbox');
+let score=0,done=0;
+document.getElementById('total').textContent=Q.length;
+function render(){
+  box.innerHTML='';score=0;done=0;update();
+  document.getElementById('result').classList.remove('on');
+  Q.forEach((item,i)=>{
+    const d=document.createElement('div');d.className='q';
+    const h=document.createElement('h4');h.textContent=item.q;d.appendChild(h);
+    const opts=document.createElement('div');opts.className='opts';
+    item.o.forEach((t,j)=>{
+      const b=document.createElement('button');b.type='button';
+      b.textContent=String.fromCharCode(65+j)+'. '+t;
+      b.addEventListener('click',()=>answer(i,j,opts,d));
+      opts.appendChild(b);
+    });
+    d.appendChild(opts);box.appendChild(d);
+  });
+}
+function answer(i,j,opts,d){
+  const item=Q[i];const btns=opts.querySelectorAll('button');
+  btns.forEach(b=>b.disabled=true);
+  btns[item.a].classList.add('right');
+  const ok=j===item.a;
+  if(!ok)btns[j].classList.add('wrong');else score++;
+  done++;
+  const ex=document.createElement('div');ex.className='expl';
+  ex.innerHTML=(ok?'<b class="v">Bonne réponse.</b> ':'<b class="x">Pas tout à fait.</b> La bonne réponse est '+String.fromCharCode(65+item.a)+'. ');
+  ex.appendChild(document.createTextNode(item.e));
+  d.appendChild(ex);update();
+  if(done===Q.length){
+    const r=document.getElementById('result');const t=document.getElementById('resultText');
+    const pct=score/Q.length;
+    t.textContent=score+' / '+Q.length+'. '+(pct>=.85?'Excellent, tu maîtrises le cours. Relis juste les explications des erreurs.':pct>=.6?'Bonne base. Relis les encadrés « À retenir » des parties où tu as fait des erreurs, puis recommence.':'Pas de panique, c\'est normal en partant de zéro. Relis une partie à la fois, puis refais le quiz.');
+    r.classList.add('on');
+  }
+}
+function update(){document.getElementById('score').textContent=score;document.getElementById('done').textContent=done}
+document.getElementById('reset').addEventListener('click',()=>{render();document.getElementById('quiz').scrollIntoView({behavior:'smooth'})});
+render();
+</script>
