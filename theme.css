@@ -1,0 +1,83 @@
+/* Thème « éditorial » : ivoire, chocolat, serif fine + capitales espacées.
+   Chargé après le style du planning : ne change que l'apparence. */
+:root{
+  --bg:#F7F3EE; --surface:#FFFFFF; --surface2:#EFE8E0; --line:#E2D9CF;
+  --fg:#1F1713; --muted:#857669; --accent:#3A2A21; --accent-ink:#F7F3EE; --accent-soft:#E7DDD2;
+  --good:#5E7A55; --warn:#B07A3E; --bad:#A3473C;
+  --shadow:0 10px 30px -18px rgba(40,25,15,.45);
+  --f-display:"Instrument Serif","Bodoni Moda",Didot,Georgia,serif;
+  --f-body:"Jost",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --r:4px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#17110E; --surface:#211915; --surface2:#2C221D; --line:#3D3029;
+  --fg:#F3ECE4; --muted:#B3A395; --accent:#E9DFD3; --accent-ink:#1F1713; --accent-soft:#3A2D26;
+  --good:#9CB98F; --warn:#D9A66A; --bad:#D98478; --shadow:0 10px 30px -18px rgba(0,0,0,.8); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#17110E; --surface:#211915; --surface2:#2C221D; --line:#3D3029;
+  --fg:#F3ECE4; --muted:#B3A395; --accent:#E9DFD3; --accent-ink:#1F1713; --accent-soft:#3A2D26;
+  --good:#9CB98F; --warn:#D9A66A; --bad:#D98478; --shadow:0 10px 30px -18px rgba(0,0,0,.8); color-scheme:dark}
+
+body{font-weight:400;letter-spacing:.005em}
+/* Titres : grande serif fine, comme un logo de magazine */
+.brand{justify-content:center!important;position:relative;padding-block:14px 8px!important}
+.brand h1{font-family:var(--f-display)!important;font-size:2.1rem!important;font-weight:400!important;letter-spacing:-.01em!important;line-height:1}
+.brand h1 span{color:inherit!important;font-style:italic}
+.brand .iconbtn{position:absolute;right:0;top:50%;transform:translateY(-50%)}
+.card h2,.sec-title,.hero .hello,.sheet h2,.empty .big,details.card>summary{font-family:var(--f-display)!important;font-weight:400!important;letter-spacing:-.005em}
+.card h2,.sec-title{font-size:1.45rem!important}
+.hero .hello{font-size:2rem!important}
+/* Bandeau fin sous le titre */
+header.top{background:color-mix(in srgb,var(--bg) 94%,transparent)!important}
+.edito-bar{background:var(--accent);color:var(--accent-ink);text-align:center;font-size:.62rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;padding:7px 16px}
+/* Onglets en capitales espacées */
+.tabs button,.seg button,.segx button,.parts button,.pill,.chipc{text-transform:uppercase;letter-spacing:.14em;font-size:.68rem!important;font-weight:600!important}
+.tabs button{border-radius:0!important;padding:10px 2px!important;border-bottom:1.5px solid transparent!important}
+.tabs button[aria-selected="true"]{background:transparent!important;color:var(--fg)!important;box-shadow:none!important;border-bottom-color:var(--fg)!important}
+.parts button small,.segx button small{letter-spacing:.05em;text-transform:none}
+/* Coins nets, ombres douces */
+.card,.hero,.q,.task,.banner,.sheet,.kpi,.li,.op,.expl,.script,.note,.advice,details.subj,.parts,.seg,.segx,.mcell,.chip,.toast{border-radius:4px!important}
+.seg button,.segx button,.parts button{border-radius:2px!important}
+.sheet{border-radius:8px 8px 0 0!important}
+.hero{background:var(--surface)!important;border:1px solid var(--line)!important;box-shadow:var(--shadow)}
+.card{box-shadow:0 1px 0 var(--line)}
+/* Boutons rectangulaires chocolat, comme « Book my level up → » */
+.xbtn,.fab{border-radius:0!important;letter-spacing:.16em;text-transform:uppercase;font-size:.72rem!important;font-weight:600!important;box-shadow:none!important}
+.xbtn{padding:13px 20px!important}
+.xbtn.sm{padding:10px 14px!important;font-size:.66rem!important}
+.xbtn:not(.alt)::after{content:" →"}
+.xbtn.alt{border:1px solid var(--fg)!important;background:transparent!important}
+.fab{border-radius:50%!important;font-size:1.6rem!important;letter-spacing:0}
+.play{border-radius:0!important;border-color:var(--fg)!important;color:var(--fg)!important;text-transform:uppercase;letter-spacing:.14em;font-size:.66rem!important}
+.play.on{background:var(--fg)!important;color:var(--bg)!important}
+.lnk{color:var(--fg)!important;text-transform:uppercase;letter-spacing:.12em;font-size:.68rem!important;font-weight:600}
+.round,.iconbtn{border-color:var(--line)!important}
+/* Étiquettes de section en petites capitales */
+details.subj h3,.kpi span,.fld{letter-spacing:.06em}
+h3.small{text-transform:uppercase;letter-spacing:.16em;font-size:.66rem!important;font-weight:600}
+.kpi b{font-family:var(--f-display);font-weight:400;font-size:1.6rem!important}
+.kpi.big b{font-size:2.4rem!important;color:var(--fg)!important}
+.kpi.big{background:var(--surface2)!important}
+.scorebox .big{color:var(--fg)!important;font-size:3rem!important}
+.ring .pct,.ring2 .c b{font-family:var(--f-display);font-weight:400!important;font-size:1.7rem!important}
+.q .num{background:var(--fg)!important;color:var(--bg)!important;border-radius:0!important;font-size:.7rem!important}
+.op .l{color:var(--fg)!important}
+.op.sel{background:var(--accent-soft)!important;border-color:var(--fg)!important}
+.tag{border-radius:0!important;text-transform:uppercase;letter-spacing:.08em;font-size:.64rem!important}
+.trend{border-radius:0!important;text-transform:uppercase;letter-spacing:.1em;font-size:.68rem!important}
+.presets button{border-radius:0!important}
+.stepper button{border-radius:0!important}
+/* Barre du bas */
+.bnav{background:color-mix(in srgb,var(--bg) 96%,transparent)!important;border-top:1px solid var(--line)}
+.bnav button{border-radius:0!important;text-transform:uppercase;letter-spacing:.16em;font-size:.58rem!important;font-weight:600!important;gap:5px!important;padding:8px 2px 4px!important}
+.bnav button .ic svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.3}
+.bnav button[aria-selected="true"]{background:transparent!important;color:var(--fg)!important}
+.bnav button[aria-selected="true"] span:last-child{border-bottom:1.5px solid var(--fg);padding-bottom:2px}
+.chart .ln{stroke:var(--fg)!important;stroke-width:1.6!important}
+.chart .pt{stroke:var(--fg)!important}
+.chart .ar{fill:color-mix(in srgb,var(--fg) 7%,transparent)!important}
+.chart text.v{font-weight:500}
+details.subj{border-left-width:3px!important}
+.ring svg circle:first-child,.ring2 svg circle:first-child{stroke:var(--surface2)!important}
+.q .scene{border-radius:2px!important}
+.chipc{text-transform:none!important;letter-spacing:.02em!important;font-size:.78rem!important;font-weight:500!important;border-radius:0!important}

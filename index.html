@@ -1,7 +1,7 @@
-<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="Planning"><meta name="theme-color" content="#FFF6F9"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="apple-touch-icon.png"><link rel="icon" href="icon-192.png"><style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}[hidden]{display:none!important}</style><link rel="stylesheet" href="extra.css?v=1"></head><body><title>Planning de Marlène</title>
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="Planning"><meta name="theme-color" content="#F7F3EE"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="apple-touch-icon.png"><link rel="icon" href="icon-192.png"><style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}[hidden]{display:none!important}</style><link rel="stylesheet" href="extra.css?v=2"></head><body><title>Planning de Marlène</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Yeseva+One&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Jost:wght@300;400;500;600&display=swap">
 <style>
 /* Layout : une colonne mobile-first, en-tête collant avec 4 onglets, feuilles qui glissent du bas pour éditer */
 :root{
@@ -211,11 +211,13 @@ td.n,th.n{text-align:right}
 .sync{font-size:.75rem;color:var(--muted);text-align:center}
 .note{font-size:.84rem;color:var(--muted);background:var(--surface2);padding:10px 12px;border-radius:12px}
 </style>
+<link rel="stylesheet" href="theme.css?v=2">
 
 <header class="top">
+  <div class="edito-bar">L3 Commerce international · 2026 — 2027</div>
   <div class="wrap">
     <div class="brand">
-      <h1>Planning de <span>Marlène</span> ✿</h1>
+      <h1><span>Planning</span> MARLÈNE</h1>
       <button class="iconbtn" id="btn-settings" data-act="settings" aria-label="Réglages et catégories">⚙︎</button>
     </div>
     <nav class="tabs" role="tablist">
@@ -881,14 +883,14 @@ document.addEventListener("contextmenu",e=>{if(e.target.closest("[data-drag]"))e
 rebuild();initView();render();
 })();
 </script>
-<section class="pane" id="pane-anglais" hidden><header class="top x"><div class="wrap"><div class="brand"><h1>Tests d'<span>anglais</span> ✿</h1></div></div></header><main class="wrap" id="en-main"></main></section>
-<section class="pane" id="pane-cours" hidden><header class="top x"><div class="wrap"><div class="brand"><h1>Mes <span>cours</span> ✿</h1></div></div></header><main class="wrap" id="cours-main"></main></section>
-<section class="pane" id="pane-sport" hidden><header class="top x"><div class="wrap"><div class="brand"><h1>Mon <span>sport</span> ✿</h1></div></div></header><main class="wrap" id="sport-main"></main></section>
+<section class="pane" id="pane-anglais" hidden><header class="top x"><div class="edito-bar">L3 Commerce international · 2026 — 2027</div><div class="wrap"><div class="brand"><h1><span>Tests</span> ENGLISH</h1></div></div></header><main class="wrap" id="en-main"></main></section>
+<section class="pane" id="pane-cours" hidden><header class="top x"><div class="edito-bar">L3 Commerce international · 2026 — 2027</div><div class="wrap"><div class="brand"><h1><span>Mes</span> COURS</h1></div></div></header><main class="wrap" id="cours-main"></main></section>
+<section class="pane" id="pane-sport" hidden><header class="top x"><div class="edito-bar">L3 Commerce international · 2026 — 2027</div><div class="wrap"><div class="brand"><h1><span>Mon</span> SPORT</h1></div></div></header><main class="wrap" id="sport-main"></main></section>
 <nav class="bnav" role="tablist" aria-label="Espaces de l'appli">
-  <button role="tab" data-pane="planning" aria-selected="true"><span class="ic">🗓️</span><span>Planning</span></button>
-  <button role="tab" data-pane="anglais" aria-selected="false"><span class="ic">🇬🇧</span><span>Anglais</span></button>
-  <button role="tab" data-pane="cours" aria-selected="false"><span class="ic">📚</span><span>Mes cours</span></button>
-  <button role="tab" data-pane="sport" aria-selected="false"><span class="ic">💪</span><span>Sport</span></button>
+  <button role="tab" data-pane="planning" aria-selected="true"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/></svg></span><span>Planning</span></button>
+  <button role="tab" data-pane="anglais" aria-selected="false"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H8l-4 3z"/><path d="M8.5 10h7M8.5 13h4.5"/></svg></span><span>Anglais</span></button>
+  <button role="tab" data-pane="cours" aria-selected="false"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5c3-1.5 5.5-1.5 8 .5 2.5-2 5-2 8-.5V19c-3-1.5-5.5-1.5-8 .5-2.5-2-5-2-8-.5z"/><path d="M12 6v13.5"/></svg></span><span>Mes cours</span></button>
+  <button role="tab" data-pane="sport" aria-selected="false"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h2M19 12h2M7 8.5v7M17 8.5v7M5 10v4M19 10v4M7 12h10"/></svg></span><span>Sport</span></button>
 </nav>
-<script src="anglais-bank-1.js?v=1"></script><script src="anglais-bank-2.js?v=1"></script><script src="anglais-bank-3.js?v=1"></script><script src="cours-pdf.js?v=1"></script><script src="extra.js?v=1"></script>
+<script src="anglais-bank-1.js?v=2"></script><script src="anglais-bank-2.js?v=2"></script><script src="anglais-bank-3.js?v=2"></script><script src="cours-pdf.js?v=2"></script><script src="extra.js?v=2"></script>
 </body></html>
