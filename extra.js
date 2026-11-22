@@ -327,6 +327,27 @@ $("#pane-sport").addEventListener("click",e=>{
   if(a==="delses"){if(!b.dataset.sure){b.dataset.sure="1";b.textContent="Supprimer ?";b.style.color="var(--bad)";b.style.fontSize=".75rem";return;}SP.ses=SP.ses.filter(s=>String(s.id)!==b.dataset.id);saveSP();renderSport();return;}
 });
 
+/* ===================== Sauvegarde / restauration ===================== */
+const BK_KEYS=k=>k==="planningMarlene.v1"||k.startsWith("marlene")||k==="todo-marlene-v1";
+function openBackup(){
+  const lay=document.createElement("div");lay.className="back";
+  lay.innerHTML='<div class="sheet" role="dialog" aria-label="Mes données"><h2>Mes données</h2><p class="small muted" style="margin:0">Tout est enregistré sur ce téléphone. Fais une sauvegarde avant de supprimer ou réinstaller l\'appli : tu pourras tout restaurer ensuite. (Les PDF ajoutés dans « Mes cours » ne sont pas inclus.)</p><button class="xbtn" data-b="save">Sauvegarder mes données</button><label class="xbtn alt filebtn" style="text-align:center">Restaurer une sauvegarde<input type="file" accept=".json,application/json" data-b="load"></label><button class="xbtn alt" data-b="close">Fermer</button></div>';
+  document.body.appendChild(lay);
+  lay.addEventListener("click",async e=>{if(e.target===lay){lay.remove();return;}const b=e.target.closest("[data-b]");if(!b)return;
+    if(b.dataset.b==="close")lay.remove();
+    if(b.dataset.b==="save"){const data={};for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(BK_KEYS(k))data[k]=localStorage.getItem(k);}
+      const txt=JSON.stringify({app:"marlene",date:new Date().toISOString(),data});const name="sauvegarde-appli-"+today()+".json";
+      const file=new File([txt],name,{type:"application/json"});
+      if(navigator.canShare&&navigator.canShare({files:[file]})){try{await navigator.share({files:[file],title:name});toast("Sauvegarde prête : enregistre-la dans Fichiers");}catch(err){}}
+      else{const a=document.createElement("a");a.href=URL.createObjectURL(file);a.download=name;document.body.appendChild(a);a.click();a.remove();toast("Sauvegarde téléchargée");}}
+  });
+  lay.addEventListener("change",async e=>{const inp=e.target.closest('input[data-b="load"]');if(!inp||!inp.files[0])return;
+    try{const o=JSON.parse(await inp.files[0].text());if(!o||o.app!=="marlene"||!o.data)throw 0;Object.keys(o.data).forEach(k=>{if(BK_KEYS(k))localStorage.setItem(k,o.data[k]);});toast("Données restaurées");setTimeout(()=>location.reload(),900);}
+    catch(err){toast("Ce fichier n'est pas une sauvegarde de l'appli.");}});
+}
+document.addEventListener("click",e=>{if(e.target.closest("[data-backup]"))openBackup();});
+if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js").catch(()=>{});
+
 /* Un nouveau jour pendant que l'appli est ouverte : on passe au test du jour */
 let lastDay=today();
 document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"&&today()!==lastDay){if(enDate===lastDay)enDate=today();lastDay=today();if(pane!=="planning")showPane(pane);}});

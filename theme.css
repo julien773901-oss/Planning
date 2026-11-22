@@ -81,3 +81,4 @@ details.subj{border-left-width:3px!important}
 .ring svg circle:first-child,.ring2 svg circle:first-child{stroke:var(--surface2)!important}
 .q .scene{border-radius:2px!important}
 .chipc{text-transform:none!important;letter-spacing:.02em!important;font-size:.78rem!important;font-weight:500!important;border-radius:0!important}
+.back .sheet .xbtn{width:100%}
